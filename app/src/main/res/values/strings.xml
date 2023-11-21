@@ -1,0 +1,4 @@
+<resources>
+    <!--These are strings unique to Tic-Tac-Toe-->
+    <string name="app_name">Forbidden-Island</string>
+</resources>
