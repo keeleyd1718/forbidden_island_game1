@@ -32,10 +32,10 @@ public class DumbComputerPlayer extends GameComputerPlayer {
 
                 //dumb ai only does 1 random action
                 if(randomNum == 1){
-                    game.sendAction(new FiMoveAction(this, selection));
+                    //game.sendAction(new FiMoveAction(this, selection));
                 }
                 else if(randomNum == 2){
-                    game.sendAction(new FiShoreUpAction(this));
+                    //game.sendAction(new FiShoreUpAction(this, selection));
                 }
                 else if(randomNum == 3){
                     game.sendAction(new FiCaptureTreasureAction(this));

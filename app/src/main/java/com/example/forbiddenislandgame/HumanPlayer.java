@@ -59,7 +59,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
     private boolean moveButtonClicked = false;
     private boolean shoreUpButtonClicked = false;
-    Color gameGreen = new Color(63, B3->179, 66);
+    int gameGreen = Color.rgb(63, 179, 66);
 
     /**
      * constructor
@@ -85,8 +85,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
         if(info instanceof FiGameState){
             FiGameState gameState = (FiGameState) info;
-            //this.floodViewTextView.setText(""+gameState.getFloodMeter());
-            //drawing happens here
 
             //changing the text on a button to show where the pawns are
             Tile.TileName t = gameState.getPlayerLocation();
@@ -164,6 +162,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                     break;
                 case SHADOW_CAVE:
                     b = this.SHADOW_CAVE;
+
                     break;
                 default:
                     b = null;
@@ -173,37 +172,31 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 b.setText(gameState.getPlayerTurn() + "'s pawn");
             }
 
+            //for the shore up method
+            if(gameState.getTileValue() == Tile.Value.FLOODED){
+                gameState.setTileValue(Tile.Value.NORMAL);
+                b.setBackgroundColor(gameGreen);//normal
+            }
 
+            //for the draw flood card method; changing whatever tiles are drawn
+            if(gameState.getTileValue() == Tile.Value.NORMAL){
+                gameState.setTileValue(Tile.Value.FLOODED);
+                b.setBackgroundColor(Color.BLUE);//flooded
+            }
+            else if(gameState.getTileValue() == Tile.Value.FLOODED){
+                gameState.setTileValue(Tile.Value.SUNK);
+                b.setBackgroundColor(Color.GRAY);//sunk
+            }
 
-            /*changing the color of a button
+            //this.floodViewTextView.setText(""+gameState.getFloodMeter());
+            //drawing happens here
             //b.setBackgroundColor(gameGreen);//normal
-            //Tile.TileName t = gameState.getPlayerLocation();//tilename
-            //Button b = null;
-            Button a = null;
-            switch(t)
-            {
-                case ABANDONED_CLIFFS:
-                    a = this.ABANDONED_CLIFFS;
-                    break;
-                default:
-                    a = null;
-            }
-            if(v.Value.NORMAL){
-                a.setValue(Tile.Value.FLOODED);
-                a.setBackgroundColor(Color.BLUE);//flooded
-            }
-            else if(a != null && t.Value.FLOODED){
-                a.setValue(Tile.Value.SUNK);
-                a.setBackgroundColor(Color.GRAY);//sunk
-            }*/
         }
     }
 
     @Override
     public void onClick(View view) {
         //will decide what move the player made
-        //will call game.sendAction
-
         if(view.getId() == R.id.quitButton){
             game.sendAction(new FiGameOverAction(this));
         }
@@ -228,91 +221,117 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             game.sendAction(new FiCaptureTreasureAction(this));
         }
         Tile.TileName selection;
+        Tile.Value sel;
         switch(view.getId()){
             case R.id.ABANDONED_CLIFFS:
                 selection = Tile.TileName.ABANDONED_CLIFFS;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.BRONZE_GATE:
                 selection = Tile.TileName.BRONZE_GATE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.BREAKERS_BRIDGE:
                 selection = Tile.TileName.BREAKERS_BRIDGE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.COPPER_GATE:
                 selection = Tile.TileName.COPPER_GATE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.CORAL_PALACE:
                 selection = Tile.TileName.CORAL_PALACE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.CRIMSON_FOREST:
                 selection = Tile.TileName.CRIMSON_FOREST;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.DECEPTION_DUNES:
                 selection = Tile.TileName.DECEPTION_DUNES;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.EMBER_CAVE:
                 selection = Tile.TileName.EMBER_CAVE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.FOOLS_LANDING:
                 selection = Tile.TileName.FOOLS_LANDING;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.GOLD_GATE:
                 selection = Tile.TileName.GOLD_GATE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.IRON_GATE:
                 selection = Tile.TileName.IRON_GATE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.HOWLING_GARDEN:
                 selection = Tile.TileName.HOWLING_GARDEN;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.MISTY_MARSH:
                 selection = Tile.TileName.MISTY_MARSH;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.MOON_TEMPLE:
                 selection = Tile.TileName.MOON_TEMPLE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.SILVER_GATE:
                 selection = Tile.TileName.SILVER_GATE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.SUN_TEMPLE:
                 selection = Tile.TileName.SUN_TEMPLE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.PHANTOM_ROCK:
                 selection = Tile.TileName.PHANTOM_ROCK;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.WHISPERING_GARDENS:
                 selection = Tile.TileName.WHISPERING_GARDENS;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.WATCHTOWER:
                 selection = Tile.TileName.WATCHTOWER;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.TWILIGHT_HOLLOW:
                 selection = Tile.TileName.TWILIGHT_HOLLOW;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.TIDAL_PALACE:
                 selection = Tile.TileName.TIDAL_PALACE;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.OBSERVATORY:
                 selection = Tile.TileName.OBSERVATORY;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.LOST_LAGOON:
                 selection = Tile.TileName.LOST_LAGOON;
+                sel = Tile.Value.NORMAL;
                 break;
             case R.id.SHADOW_CAVE:
                 selection = Tile.TileName.SHADOW_CAVE;
+                sel = Tile.Value.NORMAL;
                 break;
             default:
                 selection = Tile.TileName.NONE;
+                sel = Tile.Value.NONE;
         }
         if(moveButtonClicked && selection != Tile.TileName.NONE)
         {
             moveButtonClicked = false;
             game.sendAction(new FiMoveAction(this, selection));
         }
-        else if(shoreUpButtonClicked && selection != Tile.TileName.NONE)
+        else if(shoreUpButtonClicked && selection != Tile.TileName.NONE && sel != Tile.Value.NONE)
         {
             shoreUpButtonClicked = false;
-            game.sendAction(new FiShoreUpAction(this, selection));
+            game.sendAction(new FiShoreUpAction(this, selection, sel));
         }
         view.invalidate();
     }

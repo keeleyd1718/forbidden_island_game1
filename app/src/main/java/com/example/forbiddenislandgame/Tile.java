@@ -16,6 +16,7 @@ public class Tile {
         NORMAL,
         FLOODED,
         SUNK,
+        NONE
     }//Value
 
     // Enum for the names of the tiles

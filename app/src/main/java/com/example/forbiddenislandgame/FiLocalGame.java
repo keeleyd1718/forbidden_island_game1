@@ -1,14 +1,10 @@
 package com.example.forbiddenislandgame;
 
-import android.app.ActivityManager;
-import android.graphics.Color;
-
 import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
 import com.example.actions.FiEndTurnAction;
 import com.example.actions.FiGameOverAction;
-import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
 import com.example.actions.FiShoreUpAction;
 import com.example.game.GameFramework.LocalGame;
@@ -68,21 +64,12 @@ public class FiLocalGame extends LocalGame {
                 }
             }
             else if (action instanceof FiDrawFloodAction) {
-                if(gs.getPlayerTurn() == 1){
-                    gs.drawFlood(gs.getHumanPlayerHand());
-                    return true;
+                gs.drawFlood(gs.getDrawnFloodCards());
+                if(gs.getDrawnFloodCards().size() > 0){
+                    //if there are any flood cards in the drawn flood cards arraylist flip those tiles over
                 }
-                else if(gs.getPlayerTurn() == 2){
-                    gs.drawFlood(gs.getDumbAiHand());
-                    return true;
-                }
-                else if(gs.getPlayerTurn() == 3){
-                    gs.drawFlood(gs.getSmartAiHand());
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                gs.emptyDrawnFloodCards();
+                return true;
             }
             else if (action instanceof FiMoveAction) {
                 FiMoveAction a = (FiMoveAction) action;
@@ -92,14 +79,15 @@ public class FiLocalGame extends LocalGame {
             }
             else if (action instanceof FiShoreUpAction) {
                 FiShoreUpAction a = (FiShoreUpAction) action;
-                Tile.value v = a.getValue();
-                gs.shoreUp(gs.getPlayerTurn(), v);
+                Tile.TileName t = a.getTileName();
+                Tile.Value v = a.getValue();
+                gs.shoreUp(gs.getPlayerTurn(), t, v);
                 return true;
             }
-            else if (action instanceof FiGiveCardAction) {
-                gs.giveCard(gs.getPlayerTurn(), , );
-                return true;
-            }
+            //else if (action instanceof FiGiveCardAction) {
+              //  gs.giveCard(gs.getPlayerTurn(), , );
+               // return true;
+            //}
             else if (action instanceof FiCaptureTreasureAction) {
                 if(gs.getPlayerTurn() == 1){
                     gs.captureTreasure(gs.getHumanPlayerHand());
