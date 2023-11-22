@@ -131,6 +131,7 @@ public class FiGameState extends GameState {
         this.treasureDeck = new ArrayList<>();
         this.discardTreasureDeck = new ArrayList<>();
         this.floodDeck = new ArrayList<>();
+        this.drawnFloodCards = new ArrayList<>();
         this.discardFloodDeck = new ArrayList<>();
         this.humanPlayerHand = new ArrayList<>();
         this.dumbAiHand = new ArrayList<>();
