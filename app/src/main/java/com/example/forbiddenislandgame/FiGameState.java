@@ -218,26 +218,6 @@ public class FiGameState extends GameState {
             result += "Player 3's Turn";
         }
 
-        /*for (int i = 0; i < 24; i++) {
-            String board1 = "";
-            switch (board[i].getValue()) {
-                case EMPTY: {
-                    board1 = "Tile: Empty";
-                    break;
-                }
-                case FLOODED: {
-                    board1 = "Full";
-                    break;
-                }
-                case SUNK: {
-                    board1 = "Flooded";
-                    break;
-                }
-            }
-            result += " " + board1;
-        }*/
-
-
         return "Turn = "+playerTurn+
                 " Flood = "+floodMeter+
                 " Remaining Actions = "+actionsRemaining+
@@ -254,7 +234,7 @@ public class FiGameState extends GameState {
                 " Player 3's Fire Crystal Cards = "+numFireCrystalCards3+
                 " Player 3's Wind Statue Cards = "+numWindStatueCards3+
                 " Player 3's Ocean Chalice Cards = "+numOceanChaliceCards3+
-                " Action Choices = "+actionChoices;
+                " Action Choices = "+actionChoices + result;
     }
 
     //action methods
@@ -341,57 +321,168 @@ public class FiGameState extends GameState {
     }
 
     //If a player has 4 of the same treasure cards and they are the correct tile they can choose to capture a treasure
-    public boolean captureTreasure(ArrayList<TreasureCards> a){//
+    public boolean captureTreasure(int playerTurn, ArrayList<TreasureCards> a){//
         if(actionsRemaining < 1){
             return false;
         }
-            if(a.contains(numEarthStoneCards1 >= 4)){ //&& they are on correct tile
-                a.remove(1);//earth stone cards
-                a.remove(2);
-                a.remove(3);
-                a.remove(4);
+        if(playerTurn == 1) {
+            if (a.contains(numEarthStoneCards1 >= 4)) { //&& they are on correct tile
+                int count = 0;
+                if (a.contains(TreasureCards.EARTH_STONE)) {
+                    a.remove(TreasureCards.EARTH_STONE);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE2)) {
+                    a.remove(TreasureCards.EARTH_STONE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE3)) {
+                    a.remove(TreasureCards.EARTH_STONE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE4)) {
+                    a.remove(TreasureCards.EARTH_STONE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.EARTH_STONE5)) {
+                        a.remove(TreasureCards.EARTH_STONE5);
+                    }
+                }
                 numEarthStoneCards1 -= 4;
                 treasureCount++;
                 actionsRemaining--;
                 return true;
             }
-            else if(a.contains(numFireCrystalCards1 >= 4)){ //&& they are on correct tile
-                a.remove(5);//fire crystal cards
-                a.remove(6);
-                a.remove(7);
-                a.remove(8);
+            else if (a.contains(numFireCrystalCards1 >= 4)) { //&& they are on correct tile
+                int count = 0;
+                if (a.contains(TreasureCards.FIRE_CRYSTAL1)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL2)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL3)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL4)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.FIRE_CRYSTAL5)) {
+                        a.remove(TreasureCards.FIRE_CRYSTAL5);
+                    }
+                }
                 numFireCrystalCards1 -= 4;
                 treasureCount++;
                 actionsRemaining--;
                 return true;
             }
-            else if(a.contains(numWindStatueCards1 >= 4)){ //&& they are on correct tile
-                a.remove(13);//wind statue cards
-                a.remove(14);
-                a.remove(15);
-                a.remove(16);
+            else if (a.contains(numWindStatueCards1 >= 4)) { //&& they are on correct tile
+                int count = 0;
+                if (a.contains(TreasureCards.WIND_STATUE1)) {
+                    a.remove(TreasureCards.WIND_STATUE1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE2)) {
+                    a.remove(TreasureCards.WIND_STATUE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE3)) {
+                    a.remove(TreasureCards.WIND_STATUE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE4)) {
+                    a.remove(TreasureCards.WIND_STATUE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.WIND_STATUE5)) {
+                        a.remove(TreasureCards.WIND_STATUE5);
+                    }
+                }
                 numWindStatueCards1 -= 4;
                 treasureCount++;
                 actionsRemaining--;
                 return true;
-            }
-            else if(a.contains(numOceanChaliceCards1 >= 4)){ //&& they are on correct tile
-                a.remove(20);//ocean chalice cards
-                a.remove(21);
-                a.remove(22);
-                a.remove(23);
+            } else if (a.contains(numOceanChaliceCards1 >= 4)) { //&& they are on correct tile
+                int count = 0;
+                if (a.contains(TreasureCards.OCEAN_CHALICE1)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE2)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE3)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE4)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.OCEAN_CHALICE5)) {
+                        a.remove(TreasureCards.OCEAN_CHALICE5);
+                    }
+                }
                 numOceanChaliceCards1 -= 4;
                 treasureCount++;
                 actionsRemaining--;
                 return true;
             }
+        }
         return false;
     }//end of captureTreasure
 
     public void drawTreasure(ArrayList<TreasureCards> a) {
-        //deals two treasure cards to whosoever turn it is
-            a.add(treasureDeck.remove(0));
-            a.add(treasureDeck.remove(0));
+        //drawing a treasure card and adding it to the player's hand whose turn it is
+        TreasureCards card1 = treasureDeck.remove(0);
+        a.add(card1);
+
+        //increasing the floodMeter count or num treasure card counts if that card is drawn
+        if(card1.equals(TreasureCards.WATERS_RISE1) || card1.equals(TreasureCards.WATERS_RISE2) || card1.equals(TreasureCards.WATERS_RISE3)){
+            floodMeter++;
+        }
+        else if(card1.equals(TreasureCards.EARTH_STONE) || card1.equals(TreasureCards.EARTH_STONE2) || card1.equals(TreasureCards.EARTH_STONE3) || card1.equals(TreasureCards.EARTH_STONE4) || card1.equals(TreasureCards.EARTH_STONE5)){
+            numEarthStoneCards1++;
+        }
+        else if(card1.equals(TreasureCards.FIRE_CRYSTAL1) || card1.equals(TreasureCards.FIRE_CRYSTAL2) || card1.equals(TreasureCards.FIRE_CRYSTAL3) || card1.equals(TreasureCards.FIRE_CRYSTAL4) || card1.equals(TreasureCards.FIRE_CRYSTAL5)){
+            numFireCrystalCards1++;
+        }
+        else if(card1.equals(TreasureCards.WIND_STATUE1) || card1.equals(TreasureCards.WIND_STATUE2) || card1.equals(TreasureCards.WIND_STATUE3) || card1.equals(TreasureCards.WIND_STATUE4) || card1.equals(TreasureCards.WIND_STATUE5)){
+            numWindStatueCards1++;
+        }
+        else if(card1.equals(TreasureCards.OCEAN_CHALICE1) || card1.equals(TreasureCards.OCEAN_CHALICE2) || card1.equals(TreasureCards.OCEAN_CHALICE3) || card1.equals(TreasureCards.OCEAN_CHALICE4) || card1.equals(TreasureCards.OCEAN_CHALICE5)){
+            numOceanChaliceCards1++;
+        }
+
+        //drawing a second treasure card and adding it to the player's hand whose turn it is
+        TreasureCards card2 = treasureDeck.remove(0);
+        a.add(card2);
+
+        //increasing the floodMeter count or num treasure card counts if that card is drawn
+        if(card2.equals(TreasureCards.WATERS_RISE1) || card2.equals(TreasureCards.WATERS_RISE2) || card2.equals(TreasureCards.WATERS_RISE3)){
+            floodMeter++;
+        }
+        else if(card2.equals(TreasureCards.EARTH_STONE) || card2.equals(TreasureCards.EARTH_STONE2) || card2.equals(TreasureCards.EARTH_STONE3) || card2.equals(TreasureCards.EARTH_STONE4) || card2.equals(TreasureCards.EARTH_STONE5)){
+            numEarthStoneCards1++;
+        }
+        else if(card2.equals(TreasureCards.FIRE_CRYSTAL1) || card2.equals(TreasureCards.FIRE_CRYSTAL2) || card2.equals(TreasureCards.FIRE_CRYSTAL3) || card2.equals(TreasureCards.FIRE_CRYSTAL4) || card2.equals(TreasureCards.FIRE_CRYSTAL5)){
+            numFireCrystalCards1++;
+        }
+        else if(card2.equals(TreasureCards.WIND_STATUE1) || card2.equals(TreasureCards.WIND_STATUE2) || card2.equals(TreasureCards.WIND_STATUE3) || card2.equals(TreasureCards.WIND_STATUE4) || card2.equals(TreasureCards.WIND_STATUE5)){
+            numWindStatueCards1++;
+        }
+        else if(card2.equals(TreasureCards.OCEAN_CHALICE1) || card2.equals(TreasureCards.OCEAN_CHALICE2) || card2.equals(TreasureCards.OCEAN_CHALICE3) || card2.equals(TreasureCards.OCEAN_CHALICE4) || card2.equals(TreasureCards.OCEAN_CHALICE5)){
+            numOceanChaliceCards1++;
+        }
     } // end of drawTreasure
 
     public void drawFlood(ArrayList<FloodCards> a) {
@@ -428,7 +519,7 @@ public class FiGameState extends GameState {
     public int getNumPlayers(){return this.numPlayers;}
     public int getActionsRemaining(){return this.actionsRemaining;}
     public int getTreasureCount(){return this.treasureCount;}
-    public int getNumberOfCardsInHand(ArrayList<Integer> a) {
+    public int getNumberOfCardsInHand(ArrayList<TreasureCards> a) {
         return a.size();
     }
     public ArrayList<TreasureCards> getHumanPlayerHand(){return this.humanPlayerHand;}

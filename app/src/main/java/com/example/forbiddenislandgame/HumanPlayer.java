@@ -1,9 +1,9 @@
 package com.example.forbiddenislandgame;
 
 import android.graphics.Color;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDrawFloodAction;
@@ -13,14 +13,13 @@ import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
 import com.example.actions.FiShoreUpAction;
 import com.example.game.GameFramework.GameMainActivity;
-import com.example.game.GameFramework.actionMessage.GameOverAckAction;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.players.GameHumanPlayer;
 
 public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener {
     private int layoutId;
     // all the buttons on the ui that can be pressed
-    private SurfaceView floodView = null;
+    private TextView floodView = null;
     private Button quitButton = null;
     private Button deckButton = null;
     private Button drawTreasureButton = null;
@@ -54,9 +53,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button MISTY_MARSH = null;
     private Button BREAKERS_BRIDGE = null;
     private Button HOWLING_GARDEN = null;
-
     private GameMainActivity myActivity;
-
     private boolean moveButtonClicked = false;
     private boolean shoreUpButtonClicked = false;
     int gameGreen = Color.rgb(63, 179, 66);
@@ -77,11 +74,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         //return myActivity.findViewbyId(R.id.top_gui_layout);
     }
 
-    //our view in the model/view/controller sense
-    //in charge of the user interface
+    //our view in the model/view/controller sense; in charge of the user interface
     public void receiveInfo(GameInfo info){
-        //should decide what move to make
-        //just needs to update the user interface
+        //should decide what move to make; just needs to update the user interface; drawing happens here
 
         if(info instanceof FiGameState){
             FiGameState gameState = (FiGameState) info;
@@ -188,9 +183,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 b.setBackgroundColor(Color.GRAY);//sunk
             }
 
-            //this.floodViewTextView.setText(""+gameState.getFloodMeter());
-            //drawing happens here
-            //b.setBackgroundColor(gameGreen);//normal
+            this.floodView.setText("Flood Meter: "+gameState.getFloodMeter());
         }
     }
 
@@ -333,7 +326,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             shoreUpButtonClicked = false;
             game.sendAction(new FiShoreUpAction(this, selection, sel));
         }
-        view.invalidate();
     }
 
     @Override
@@ -345,7 +337,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         activity.setContentView(R.layout.activity_main);
 
         //initializing action buttons
-        this.floodView = (android.view.SurfaceView)activity.findViewById(R.id.floodView);
+        this.floodView = activity.findViewById(R.id.floodView);
         this.quitButton = (Button)activity.findViewById(R.id.quitButton);
         this.deckButton = (Button)activity.findViewById(R.id.deckButton);
         this.drawTreasureButton = (Button)activity.findViewById(R.id.drawTreasureButton);
@@ -354,6 +346,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.shoreUpButton = (Button)activity.findViewById(R.id.shoreUpButton);
         this.giveCardButton = (Button)activity.findViewById(R.id.giveCardButton);
         this.captureTreasureButton = (Button)activity.findViewById(R.id.captureTreasureButton);
+
         //initializing tile buttons
         this.FOOLS_LANDING = (Button)activity.findViewById(R.id.FOOLS_LANDING);
         this.BRONZE_GATE = (Button)activity.findViewById(R.id.BRONZE_GATE);

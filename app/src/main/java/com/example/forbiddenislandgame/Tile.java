@@ -58,18 +58,12 @@ public class Tile {
 
 
 
-    ////////////////////////////
-    // --- GETTER METHODS --- //
-    ////////////////////////////
+    //getter methods
     public Value getValue() {return value;}//getValue
     public TileName getTileName() {return tileName;}//getTilename
 
 
-    ////////////////////////////
-    // --- SETTER METHODS --- //
-    ////////////////////////////
-
-
+    //setter methods
     public void setValue(Value value) {this.value = value;} //set Tile Value
     public void setTileName(TileName tileName) {this.tileName = tileName;} //set Tile Name
 

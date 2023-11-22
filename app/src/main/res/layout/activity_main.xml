@@ -30,18 +30,11 @@
                 android:background="#009688"
                 android:text="Treasure Deck" />
 
-            <Button
-                android:id="@+id/floodMeter"
-                android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:background="#009688"
-                android:text="Flood Meter" />
-
-            <SurfaceView
+            <TextView
                 android:id="@+id/floodView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#004496" />
+                android:text="Flood Meter: 0" />
 
         </LinearLayout>
 
