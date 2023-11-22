@@ -340,6 +340,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.floodView = activity.findViewById(R.id.floodView);
         this.quitButton = (Button)activity.findViewById(R.id.quitButton);
         this.deckButton = (Button)activity.findViewById(R.id.deckButton);
+        this.discardButton = (Button)activity.findViewById(R.id.discard);
         this.drawTreasureButton = (Button)activity.findViewById(R.id.drawTreasureButton);
         this.drawFloodButton = (Button)activity.findViewById(R.id.drawFloodButton);
         this.moveButton = (Button)activity.findViewById(R.id.moveButton);
