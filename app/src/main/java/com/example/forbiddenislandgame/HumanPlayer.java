@@ -81,8 +81,12 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         if(info instanceof FiGameState){
             FiGameState gameState = (FiGameState) info;
 
+            ABANDONED_CLIFFS.setText("player 1's pawn");
+            DECEPTION_DUNES.setText("player 2's pawn");
+            OBSERVATORY.setText("player 3's pawn");
+
             //changing the text on a button to show where the pawns are
-            Tile.TileName t = gameState.getPlayerLocation();
+            Tile.TileName t = gameState.getPlayer1Location();
             Button b = null;
             switch(t)
             {
@@ -157,7 +161,172 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                     break;
                 case SHADOW_CAVE:
                     b = this.SHADOW_CAVE;
+                    break;
+                default:
+                    b = null;
+            }
+            if(b != null)
+            {
+                b.setText(gameState.getPlayerTurn() + "'s pawn");
+            }
 
+            Tile.TileName t2 = gameState.getPlayer2Location();
+            switch(t2)
+            {
+                case ABANDONED_CLIFFS:
+                    b = this.ABANDONED_CLIFFS;
+                    break;
+                case BRONZE_GATE:
+                    b = this.BRONZE_GATE;
+                    break;
+                case BREAKERS_BRIDGE:
+                    b = this.BREAKERS_BRIDGE;
+                    break;
+                case COPPER_GATE:
+                    b = this.COPPER_GATE;
+                    break;
+                case CORAL_PALACE:
+                    b = this.CORAL_PALACE;
+                    break;
+                case CRIMSON_FOREST:
+                    b = this.CRIMSON_FOREST;
+                    break;
+                case DECEPTION_DUNES:
+                    b = this.DECEPTION_DUNES;
+                    break;
+                case EMBER_CAVE:
+                    b = this.EMBER_CAVE;
+                    break;
+                case FOOLS_LANDING:
+                    b = this.FOOLS_LANDING;
+                    break;
+                case GOLD_GATE:
+                    b = this.GOLD_GATE;
+                    break;
+                case IRON_GATE:
+                    b = this.IRON_GATE;
+                    break;
+                case HOWLING_GARDEN:
+                    b = this.HOWLING_GARDEN;
+                    break;
+                case MISTY_MARSH:
+                    b = this.MISTY_MARSH;
+                    break;
+                case MOON_TEMPLE:
+                    b = this.MOON_TEMPLE;
+                    break;
+                case SILVER_GATE:
+                    b = this.SILVER_GATE;
+                    break;
+                case SUN_TEMPLE:
+                    b = this.SUN_TEMPLE;
+                    break;
+                case PHANTOM_ROCK:
+                    b = this.PHANTOM_ROCK;
+                    break;
+                case WHISPERING_GARDENS:
+                    b = this.WHISPERING_GARDENS;
+                    break;
+                case WATCHTOWER:
+                    b = this.WATCHTOWER;
+                    break;
+                case TWILIGHT_HOLLOW:
+                    b = this.TWILIGHT_HOLLOW;
+                    break;
+                case TIDAL_PALACE:
+                    b = this.TIDAL_PALACE;
+                    break;
+                case OBSERVATORY:
+                    b = this.OBSERVATORY;
+                    break;
+                case LOST_LAGOON:
+                    b = this.LOST_LAGOON;
+                    break;
+                case SHADOW_CAVE:
+                    b = this.SHADOW_CAVE;
+                    break;
+                default:
+                    b = null;
+            }
+            if(b != null)
+            {
+                b.setText(gameState.getPlayerTurn() + "'s pawn");
+            }
+
+            Tile.TileName t3 = gameState.getPlayer3Location();
+            switch(t3)
+            {
+                case ABANDONED_CLIFFS:
+                    b = this.ABANDONED_CLIFFS;
+                    break;
+                case BRONZE_GATE:
+                    b = this.BRONZE_GATE;
+                    break;
+                case BREAKERS_BRIDGE:
+                    b = this.BREAKERS_BRIDGE;
+                    break;
+                case COPPER_GATE:
+                    b = this.COPPER_GATE;
+                    break;
+                case CORAL_PALACE:
+                    b = this.CORAL_PALACE;
+                    break;
+                case CRIMSON_FOREST:
+                    b = this.CRIMSON_FOREST;
+                    break;
+                case DECEPTION_DUNES:
+                    b = this.DECEPTION_DUNES;
+                    break;
+                case EMBER_CAVE:
+                    b = this.EMBER_CAVE;
+                    break;
+                case FOOLS_LANDING:
+                    b = this.FOOLS_LANDING;
+                    break;
+                case GOLD_GATE:
+                    b = this.GOLD_GATE;
+                    break;
+                case IRON_GATE:
+                    b = this.IRON_GATE;
+                    break;
+                case HOWLING_GARDEN:
+                    b = this.HOWLING_GARDEN;
+                    break;
+                case MISTY_MARSH:
+                    b = this.MISTY_MARSH;
+                    break;
+                case MOON_TEMPLE:
+                    b = this.MOON_TEMPLE;
+                    break;
+                case SILVER_GATE:
+                    b = this.SILVER_GATE;
+                    break;
+                case SUN_TEMPLE:
+                    b = this.SUN_TEMPLE;
+                    break;
+                case PHANTOM_ROCK:
+                    b = this.PHANTOM_ROCK;
+                    break;
+                case WHISPERING_GARDENS:
+                    b = this.WHISPERING_GARDENS;
+                    break;
+                case WATCHTOWER:
+                    b = this.WATCHTOWER;
+                    break;
+                case TWILIGHT_HOLLOW:
+                    b = this.TWILIGHT_HOLLOW;
+                    break;
+                case TIDAL_PALACE:
+                    b = this.TIDAL_PALACE;
+                    break;
+                case OBSERVATORY:
+                    b = this.OBSERVATORY;
+                    break;
+                case LOST_LAGOON:
+                    b = this.LOST_LAGOON;
+                    break;
+                case SHADOW_CAVE:
+                    b = this.SHADOW_CAVE;
                     break;
                 default:
                     b = null;
@@ -348,7 +517,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.captureTreasureButton = (Button)activity.findViewById(R.id.captureTreasureButton);
 
         //initializing tile buttons
-        this.FOOLS_LANDING = (Button)activity.findViewById(R.id.FOOLS_LANDING);
+        this.FOOLS_LANDING = activity.findViewById(R.id.FOOLS_LANDING);
         this.BRONZE_GATE = (Button)activity.findViewById(R.id.BRONZE_GATE);
         this.GOLD_GATE = (Button)activity.findViewById(R.id.GOLD_GATE);
         this.CORAL_PALACE = (Button)activity.findViewById(R.id.CORAL_PALACE);

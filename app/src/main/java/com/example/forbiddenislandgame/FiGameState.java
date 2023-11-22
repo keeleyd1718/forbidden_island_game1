@@ -37,7 +37,9 @@ public class FiGameState extends GameState {
     int numFireCrystalCards3;
     int numWindStatueCards3;
     int numOceanChaliceCards3;
-    Tile.TileName playerLocation;
+    Tile.TileName player1Location;
+    Tile.TileName player2Location;
+    Tile.TileName player3Location;
     Tile.Value tileValue;
 
     //enum for treasure deck
@@ -153,6 +155,9 @@ public class FiGameState extends GameState {
         numWindStatueCards3 = 0;
         numOceanChaliceCards3 = 0;
         actionChoices = 1; // defaults to move
+        player1Location = Tile.TileName.ABANDONED_CLIFFS;
+        player2Location = Tile.TileName.DECEPTION_DUNES;
+        player3Location = Tile.TileName.OBSERVATORY;
 
         //adding the treasure cards enum values to the treasure deck arraylist
         TreasureCards values[] = TreasureCards.values();
@@ -197,7 +202,9 @@ public class FiGameState extends GameState {
         this.numWindStatueCards3 = other.numWindStatueCards3;
         this.numOceanChaliceCards3 = other.numOceanChaliceCards3;
         this.actionChoices = other.actionChoices;
-        this.playerLocation = other.playerLocation;
+        this.player1Location = other.player1Location;
+        this.player2Location = other.player2Location;
+        this.player3Location = other.player3Location;
     }
 
     /**
@@ -250,7 +257,15 @@ public class FiGameState extends GameState {
             return false;
         }
         else{
-            playerLocation = t;
+            if(playerTurn == 1){
+                player1Location = t;
+            }
+            else if (playerTurn == 2){
+                player2Location = t;
+            }
+            else if (playerTurn == 3){
+                player3Location = t;
+            }
             actionsRemaining--;
             return true;
         }
@@ -263,7 +278,7 @@ public class FiGameState extends GameState {
             return false;
         }
         else{
-            playerLocation = t;
+            player1Location = t;
             tileValue = v;
             actionsRemaining--;
             return true;
@@ -526,6 +541,8 @@ public class FiGameState extends GameState {
     public ArrayList<TreasureCards> getDumbAiHand(){return this.dumbAiHand;}
     public ArrayList<TreasureCards> getSmartAiHand(){return this.smartAiHand;}
     public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
-    public Tile.TileName getPlayerLocation(){return this.playerLocation;}
+    public Tile.TileName getPlayer1Location(){return this.player1Location;}
+    public Tile.TileName getPlayer2Location(){return this.player2Location;}
+    public Tile.TileName getPlayer3Location(){return this.player3Location;}
     public Tile.Value getTileValue(){return this.tileValue;}
 }
