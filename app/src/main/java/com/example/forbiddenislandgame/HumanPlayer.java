@@ -86,7 +86,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             OBSERVATORY.setText("player 3's pawn");
 
             //changing the text on a button to show where the pawns are
-            Tile.TileName t = gameState.getPlayer1Location();
+            FiGameState.TileName t = gameState.getPlayer1Location();
             Button b = null;
             switch(t)
             {
@@ -170,7 +170,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 b.setText(gameState.getPlayerTurn() + "'s pawn");
             }
 
-            Tile.TileName t2 = gameState.getPlayer2Location();
+            FiGameState.TileName t2 = gameState.getPlayer2Location();
             switch(t2)
             {
                 case ABANDONED_CLIFFS:
@@ -253,7 +253,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 b.setText(gameState.getPlayerTurn() + "'s pawn");
             }
 
-            Tile.TileName t3 = gameState.getPlayer3Location();
+            FiGameState.TileName t3 = gameState.getPlayer3Location();
             switch(t3)
             {
                 case ABANDONED_CLIFFS:
@@ -337,18 +337,18 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             }
 
             //for the shore up method
-            if(gameState.getTileValue() == Tile.Value.FLOODED){
-                gameState.setTileValue(Tile.Value.NORMAL);
+            if(gameState.getTileValue() == FiGameState.Value.FLOODED){
+                gameState.setTileValue(FiGameState.Value.NORMAL);
                 b.setBackgroundColor(gameGreen);//normal
             }
 
             //for the draw flood card method; changing whatever tiles are drawn
-            if(gameState.getTileValue() == Tile.Value.NORMAL){
-                gameState.setTileValue(Tile.Value.FLOODED);
+            if(gameState.getTileValue() == FiGameState.Value.NORMAL){
+                gameState.setTileValue(FiGameState.Value.FLOODED);
                 b.setBackgroundColor(Color.BLUE);//flooded
             }
-            else if(gameState.getTileValue() == Tile.Value.FLOODED){
-                gameState.setTileValue(Tile.Value.SUNK);
+            else if(gameState.getTileValue() == FiGameState.Value.FLOODED){
+                gameState.setTileValue(FiGameState.Value.SUNK);
                 b.setBackgroundColor(Color.GRAY);//sunk
             }
 
@@ -382,115 +382,115 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         else if(view.getId() == R.id.captureTreasureButton){
             game.sendAction(new FiCaptureTreasureAction(this));
         }
-        Tile.TileName selection;
-        Tile.Value sel;
+        FiGameState.TileName selection;
+        FiGameState.Value sel;
         switch(view.getId()){
             case R.id.ABANDONED_CLIFFS:
-                selection = Tile.TileName.ABANDONED_CLIFFS;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.ABANDONED_CLIFFS;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.BRONZE_GATE:
-                selection = Tile.TileName.BRONZE_GATE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.BRONZE_GATE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.BREAKERS_BRIDGE:
-                selection = Tile.TileName.BREAKERS_BRIDGE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.BREAKERS_BRIDGE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.COPPER_GATE:
-                selection = Tile.TileName.COPPER_GATE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.COPPER_GATE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.CORAL_PALACE:
-                selection = Tile.TileName.CORAL_PALACE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.CORAL_PALACE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.CRIMSON_FOREST:
-                selection = Tile.TileName.CRIMSON_FOREST;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.CRIMSON_FOREST;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.DECEPTION_DUNES:
-                selection = Tile.TileName.DECEPTION_DUNES;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.DECEPTION_DUNES;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.EMBER_CAVE:
-                selection = Tile.TileName.EMBER_CAVE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.EMBER_CAVE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.FOOLS_LANDING:
-                selection = Tile.TileName.FOOLS_LANDING;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.FOOLS_LANDING;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.GOLD_GATE:
-                selection = Tile.TileName.GOLD_GATE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.GOLD_GATE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.IRON_GATE:
-                selection = Tile.TileName.IRON_GATE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.IRON_GATE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.HOWLING_GARDEN:
-                selection = Tile.TileName.HOWLING_GARDEN;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.HOWLING_GARDEN;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.MISTY_MARSH:
-                selection = Tile.TileName.MISTY_MARSH;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.MISTY_MARSH;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.MOON_TEMPLE:
-                selection = Tile.TileName.MOON_TEMPLE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.MOON_TEMPLE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.SILVER_GATE:
-                selection = Tile.TileName.SILVER_GATE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.SILVER_GATE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.SUN_TEMPLE:
-                selection = Tile.TileName.SUN_TEMPLE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.SUN_TEMPLE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.PHANTOM_ROCK:
-                selection = Tile.TileName.PHANTOM_ROCK;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.PHANTOM_ROCK;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.WHISPERING_GARDENS:
-                selection = Tile.TileName.WHISPERING_GARDENS;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.WHISPERING_GARDENS;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.WATCHTOWER:
-                selection = Tile.TileName.WATCHTOWER;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.WATCHTOWER;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.TWILIGHT_HOLLOW:
-                selection = Tile.TileName.TWILIGHT_HOLLOW;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.TWILIGHT_HOLLOW;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.TIDAL_PALACE:
-                selection = Tile.TileName.TIDAL_PALACE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.TIDAL_PALACE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.OBSERVATORY:
-                selection = Tile.TileName.OBSERVATORY;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.OBSERVATORY;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.LOST_LAGOON:
-                selection = Tile.TileName.LOST_LAGOON;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.LOST_LAGOON;
+                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.SHADOW_CAVE:
-                selection = Tile.TileName.SHADOW_CAVE;
-                sel = Tile.Value.NORMAL;
+                selection = FiGameState.TileName.SHADOW_CAVE;
+                sel = FiGameState.Value.NORMAL;
                 break;
             default:
-                selection = Tile.TileName.NONE;
-                sel = Tile.Value.NONE;
+                selection = FiGameState.TileName.NONE;
+                sel = FiGameState.Value.NONE;
         }
-        if(moveButtonClicked && selection != Tile.TileName.NONE)
+        if(moveButtonClicked && selection != FiGameState.TileName.NONE)
         {
             moveButtonClicked = false;
             game.sendAction(new FiMoveAction(this, selection));
         }
-        else if(shoreUpButtonClicked && selection != Tile.TileName.NONE && sel != Tile.Value.NONE)
+        else if(shoreUpButtonClicked && selection != FiGameState.TileName.NONE && sel != FiGameState.Value.NONE)
         {
             shoreUpButtonClicked = false;
             game.sendAction(new FiShoreUpAction(this, selection, sel));

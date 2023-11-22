@@ -112,14 +112,14 @@ public class FiLocalGame extends LocalGame {
             }
             else if (action instanceof FiMoveAction) {
                 FiMoveAction a = (FiMoveAction) action;
-                Tile.TileName t = a.getTileName();
+                FiGameState.TileName t = a.getTileName();
                 gs.move(gs.getPlayerTurn(), t);
                 return true;
             }
             else if (action instanceof FiShoreUpAction) {
                 FiShoreUpAction a = (FiShoreUpAction) action;
-                Tile.TileName t = a.getTileName();
-                Tile.Value v = a.getValue();
+                FiGameState.TileName t = a.getTileName();
+                FiGameState.Value v = a.getValue();
                 gs.shoreUp(gs.getPlayerTurn(), t, v);
                 return true;
             }

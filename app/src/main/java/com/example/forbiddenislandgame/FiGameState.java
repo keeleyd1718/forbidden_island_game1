@@ -4,7 +4,6 @@ import com.example.game.GameFramework.infoMessage.GameState;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Objects;
 
 public class FiGameState extends GameState {
     //instance variables  need to go over if we need all of them
@@ -37,10 +36,12 @@ public class FiGameState extends GameState {
     int numFireCrystalCards3;
     int numWindStatueCards3;
     int numOceanChaliceCards3;
-    Tile.TileName player1Location;
-    Tile.TileName player2Location;
-    Tile.TileName player3Location;
-    Tile.Value tileValue;
+    TileName player1Location;
+    TileName player2Location;
+    TileName player3Location;
+    Value tileValue;
+    private TileName tileName;
+    private Value value;
 
     //enum for treasure deck
     public enum TreasureCards {
@@ -126,6 +127,42 @@ public class FiGameState extends GameState {
         HOWLING_GARDEN
     }
 
+    public enum Value {
+        NORMAL,
+        FLOODED,
+        SUNK,
+        NONE
+    }//Value
+
+    // Enum for the names of the tiles
+    public enum TileName {
+        FOOLS_LANDING,//none
+        BRONZE_GATE,//none
+        GOLD_GATE,//none
+        CORAL_PALACE,//ocean chalice
+        SUN_TEMPLE,//earth stone
+        SILVER_GATE,//none
+        PHANTOM_ROCK,//none
+        WATCHTOWER,//none
+        COPPER_GATE,//none
+        ABANDONED_CLIFFS,//none
+        WHISPERING_GARDENS,//wind statue
+        SHADOW_CAVE,//fire crystal
+        LOST_LAGOON,//none
+        MOON_TEMPLE,//earth stone
+        DECEPTION_DUNES,//none
+        TWILIGHT_HOLLOW,//none
+        EMBER_CAVE,//fire crystal
+        TIDAL_PALACE,//ocean chalice
+        OBSERVATORY,//none
+        IRON_GATE,//none
+        CRIMSON_FOREST,//none
+        MISTY_MARSH,//none
+        BREAKERS_BRIDGE,//none
+        HOWLING_GARDEN,//wind statue
+        NONE;
+    }
+
     /** Default constructor for the game state */
     public FiGameState(){
         this.treasureDeck = new ArrayList<>();
@@ -156,9 +193,11 @@ public class FiGameState extends GameState {
         numWindStatueCards3 = 0;
         numOceanChaliceCards3 = 0;
         actionChoices = 1; // defaults to move
-        player1Location = Tile.TileName.ABANDONED_CLIFFS;
-        player2Location = Tile.TileName.DECEPTION_DUNES;
-        player3Location = Tile.TileName.OBSERVATORY;
+        player1Location = TileName.ABANDONED_CLIFFS;
+        player2Location = TileName.DECEPTION_DUNES;
+        player3Location = TileName.OBSERVATORY;
+        this.value = Value.NORMAL;
+        this.tileName = tileName;
 
         //adding the treasure cards enum values to the treasure deck arraylist
         TreasureCards values[] = TreasureCards.values();
@@ -185,6 +224,7 @@ public class FiGameState extends GameState {
         this.discardTreasureDeck = other.discardTreasureDeck;
         this.floodDeck = other.floodDeck;
         this.discardFloodDeck = other.discardFloodDeck;
+        this.drawnFloodCards= other.drawnFloodCards;
         this.humanPlayerHand = other.humanPlayerHand;
         this.dumbAiHand = other.dumbAiHand;
         this.smartAiHand = other.smartAiHand;
@@ -252,7 +292,7 @@ public class FiGameState extends GameState {
     //each method should require that the player id of the player who is taking that action be passed in as the first parameter, might need other parameters
 
     //A player can move to any of the 4 adjacent tiles around them (not diagonally)
-    public boolean move(int playerTurn, Tile.TileName t){//takes tile to move to and player whose turn it is
+    public boolean move(int playerTurn, TileName t){//takes tile to move to and player whose turn it is
         // check if tile is empty
         if(actionsRemaining < 1){
             return false;
@@ -273,7 +313,7 @@ public class FiGameState extends GameState {
     }
 
     //A player can flip over any of the 4 adjacent tiles or the tile they are on if it has been flipped to flooded previously
-    public boolean shoreUp(int playerTurn, Tile.TileName t, Tile.Value v) {//
+    public boolean shoreUp(int playerTurn, TileName t, Value v) {//
         // if the shore up is 5 or greater return or no actions
         if(actionsRemaining < 1){
             return false;
@@ -522,7 +562,7 @@ public class FiGameState extends GameState {
     public void setTreasureCount(int treasureCount) {
         this.treasureCount = treasureCount;
     }
-    public void setTileValue(Tile.Value tileValue){this.tileValue = tileValue;}
+    public void setTileValue(Value tileValue){this.tileValue = tileValue;}
     public void emptyDrawnFloodCards(){
         for(int i = 0; i < drawnFloodCards.size(); i++){
             drawnFloodCards.remove(i);
@@ -542,8 +582,8 @@ public class FiGameState extends GameState {
     public ArrayList<TreasureCards> getDumbAiHand(){return this.dumbAiHand;}
     public ArrayList<TreasureCards> getSmartAiHand(){return this.smartAiHand;}
     public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
-    public Tile.TileName getPlayer1Location(){return this.player1Location;}
-    public Tile.TileName getPlayer2Location(){return this.player2Location;}
-    public Tile.TileName getPlayer3Location(){return this.player3Location;}
-    public Tile.Value getTileValue(){return this.tileValue;}
+    public TileName getPlayer1Location(){return this.player1Location;}
+    public TileName getPlayer2Location(){return this.player2Location;}
+    public TileName getPlayer3Location(){return this.player3Location;}
+    public Value getTileValue(){return this.tileValue;}
 }
