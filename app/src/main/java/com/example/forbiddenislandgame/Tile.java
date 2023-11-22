@@ -4,19 +4,16 @@ public class Tile {
     // Instance Variables //
     private TileName tileName;
     private Value value;
-    private int level;
 
-
-    /** Tile Cst */
+    /** Tile Default Cst */
     public Tile(TileName tileName) {
-        this.value = Value.EMPTY;
+        this.value = Value.NORMAL;
         this.tileName = tileName;
-        this.level = 0;
     }
 
     // set Tile value
     public enum Value {
-        EMPTY,
+        NORMAL,
         FLOODED,
         SUNK,
     }//Value
@@ -46,7 +43,8 @@ public class Tile {
         CRIMSON_FOREST,//none
         MISTY_MARSH,//none
         BREAKERS_BRIDGE,//none
-        HOWLING_GARDEN//wind statue
+        HOWLING_GARDEN,//wind statue
+        NONE;
     }
 
 
@@ -54,8 +52,7 @@ public class Tile {
      * Reverts tile back to its "empty state"
      */
     public void revertTile() {
-        setValue(Value.EMPTY);
-        setLevel(0);
+        setValue(Value.NORMAL);
     }//revertTile
 
 
@@ -64,7 +61,6 @@ public class Tile {
     // --- GETTER METHODS --- //
     ////////////////////////////
     public Value getValue() {return value;}//getValue
-    public int getLevel(int level) {return level;} //get Tile Level
     public TileName getTileName() {return tileName;}//getTilename
 
 
@@ -74,7 +70,6 @@ public class Tile {
 
 
     public void setValue(Value value) {this.value = value;} //set Tile Value
-    public void setLevel(int level) {this.level = level;} //set Tile Level
     public void setTileName(TileName tileName) {this.tileName = tileName;} //set Tile Name
 
 

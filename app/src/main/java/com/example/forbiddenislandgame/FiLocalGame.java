@@ -85,16 +85,15 @@ public class FiLocalGame extends LocalGame {
                 }
             }
             else if (action instanceof FiMoveAction) {
-                gs.move(gs.getPlayerTurn(), );//fix or remove tile
+                FiMoveAction a = (FiMoveAction) action;
+                Tile.TileName t = a.getTileName();
+                gs.move(gs.getPlayerTurn(), t);
                 return true;
             }
             else if (action instanceof FiShoreUpAction) {
-                gs.shoreUp(gs.getPlayerTurn());//fix or remove tile
-                /*changing the color of a button
-                Color gameGreen = new Color(63, B3->179?, 66);//normal
-                FOOLS_LANDING.setBackgroundColor(gameGreen);//normal
-                FOOLS_LANDING.setBackgroundColor(Color.BLUE);//flooded
-                button.setBackgroundColor(Color.GRAY);//sunk*/
+                FiShoreUpAction a = (FiShoreUpAction) action;
+                Tile.value v = a.getValue();
+                gs.shoreUp(gs.getPlayerTurn(), v);
                 return true;
             }
             else if (action instanceof FiGiveCardAction) {

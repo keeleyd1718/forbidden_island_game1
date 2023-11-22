@@ -1,11 +1,8 @@
 package com.example.forbiddenislandgame;
 
-import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
-import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
-import com.example.actions.FiShoreUpAction;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.players.GameComputerPlayer;
 
@@ -29,26 +26,26 @@ public class SmartComputerPlayer extends GameComputerPlayer {
             if(this.playerNum == gameState.getPlayerTurn()){//checking if it is dumb ai's turn
                 game.sendAction(new FiDrawTreasureAction(this));//if it is then draw two cards from the treasure deck
                 while (gameState.getActionsRemaining() < 4) {
-                    if(gameState.getTreasureCount() == 4){
+                    /*if(gameState.getTreasureCount() == 4){
                         //move towards fools landing tile
-                        game.sendAction(new FiMoveAction(this));
+                        game.sendAction(new FiMoveAction(this, selection));
                     }
-                    if(/*check if holding 4 cards*/){
-                        if(/*check if cards are same*/){
-                            game.sendAction(/*draw treasure*/);
+                    if(/*check if holding 4 cards){
+                        if(/*check if cards are same){
+                            game.sendAction(/*draw treasure);
                         }
                         else if(gameState.getActionChoices() <4){
                             //looks for and attempts to move towards tile with the card the hand has the most of
                         }
                     }
-                    else if(/*check if human player has 4 cards*/){
-                        if(/*check if cards are same*/){
-                            if(/*check if card is in treasure deck*/) {
-                                game.sendAction(/*give card*/);
+                    else if(/*check if human player has 4 cards){
+                        if(/*check if cards are same){
+                            if(/*check if card is in treasure deck) {
+                                game.sendAction(/*give card);
                                 gameState.setActionChoices(gameState.getActionChoices()+1);
                             }
                         }
-                    }
+                    }*/
                 }
 
                 game.sendAction(new FiDrawFloodAction(this));//then the dumb ai draws two flood cards

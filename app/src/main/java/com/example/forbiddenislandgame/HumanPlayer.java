@@ -1,5 +1,6 @@
 package com.example.forbiddenislandgame;
 
+import android.graphics.Color;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
@@ -57,8 +58,8 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private GameMainActivity myActivity;
 
     private boolean moveButtonClicked = false;
-
-    //private ArrayList<>
+    private boolean shoreUpButtonClicked = false;
+    Color gameGreen = new Color(63, B3->179, 66);
 
     /**
      * constructor
@@ -86,9 +87,116 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             FiGameState gameState = (FiGameState) info;
             //this.floodViewTextView.setText(""+gameState.getFloodMeter());
             //drawing happens here
-            //.setText("p1 pawn");
-        }
 
+            //changing the text on a button to show where the pawns are
+            Tile.TileName t = gameState.getPlayerLocation();
+            Button b = null;
+            switch(t)
+            {
+                case ABANDONED_CLIFFS:
+                    b = this.ABANDONED_CLIFFS;
+                    break;
+                case BRONZE_GATE:
+                    b = this.BRONZE_GATE;
+                    break;
+                case BREAKERS_BRIDGE:
+                    b = this.BREAKERS_BRIDGE;
+                    break;
+                case COPPER_GATE:
+                    b = this.COPPER_GATE;
+                    break;
+                case CORAL_PALACE:
+                    b = this.CORAL_PALACE;
+                    break;
+                case CRIMSON_FOREST:
+                    b = this.CRIMSON_FOREST;
+                    break;
+                case DECEPTION_DUNES:
+                    b = this.DECEPTION_DUNES;
+                    break;
+                case EMBER_CAVE:
+                    b = this.EMBER_CAVE;
+                    break;
+                case FOOLS_LANDING:
+                    b = this.FOOLS_LANDING;
+                    break;
+                case GOLD_GATE:
+                    b = this.GOLD_GATE;
+                    break;
+                case IRON_GATE:
+                    b = this.IRON_GATE;
+                    break;
+                case HOWLING_GARDEN:
+                    b = this.HOWLING_GARDEN;
+                    break;
+                case MISTY_MARSH:
+                    b = this.MISTY_MARSH;
+                    break;
+                case MOON_TEMPLE:
+                    b = this.MOON_TEMPLE;
+                    break;
+                case SILVER_GATE:
+                    b = this.SILVER_GATE;
+                    break;
+                case SUN_TEMPLE:
+                    b = this.SUN_TEMPLE;
+                    break;
+                case PHANTOM_ROCK:
+                    b = this.PHANTOM_ROCK;
+                    break;
+                case WHISPERING_GARDENS:
+                    b = this.WHISPERING_GARDENS;
+                    break;
+                case WATCHTOWER:
+                    b = this.WATCHTOWER;
+                    break;
+                case TWILIGHT_HOLLOW:
+                    b = this.TWILIGHT_HOLLOW;
+                    break;
+                case TIDAL_PALACE:
+                    b = this.TIDAL_PALACE;
+                    break;
+                case OBSERVATORY:
+                    b = this.OBSERVATORY;
+                    break;
+                case LOST_LAGOON:
+                    b = this.LOST_LAGOON;
+                    break;
+                case SHADOW_CAVE:
+                    b = this.SHADOW_CAVE;
+                    break;
+                default:
+                    b = null;
+            }
+            if(b != null)
+            {
+                b.setText(gameState.getPlayerTurn() + "'s pawn");
+            }
+
+
+
+            /*changing the color of a button
+            //b.setBackgroundColor(gameGreen);//normal
+            //Tile.TileName t = gameState.getPlayerLocation();//tilename
+            //Button b = null;
+            Button a = null;
+            switch(t)
+            {
+                case ABANDONED_CLIFFS:
+                    a = this.ABANDONED_CLIFFS;
+                    break;
+                default:
+                    a = null;
+            }
+            if(v.Value.NORMAL){
+                a.setValue(Tile.Value.FLOODED);
+                a.setBackgroundColor(Color.BLUE);//flooded
+            }
+            else if(a != null && t.Value.FLOODED){
+                a.setValue(Tile.Value.SUNK);
+                a.setBackgroundColor(Color.GRAY);//sunk
+            }*/
+        }
     }
 
     @Override
@@ -110,7 +218,8 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             return;
         }
         else if(view.getId() == R.id.shoreUpButton){
-            game.sendAction(new FiShoreUpAction(this));
+            shoreUpButtonClicked = true;
+            return;
         }
         else if(view.getId() == R.id.giveCardButton){
             game.sendAction(new FiGiveCardAction(this));
@@ -193,12 +302,17 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 selection = Tile.TileName.SHADOW_CAVE;
                 break;
             default:
-                selection = ;
+                selection = Tile.TileName.NONE;
         }
-        if(moveButtonClicked)
+        if(moveButtonClicked && selection != Tile.TileName.NONE)
         {
             moveButtonClicked = false;
             game.sendAction(new FiMoveAction(this, selection));
+        }
+        else if(shoreUpButtonClicked && selection != Tile.TileName.NONE)
+        {
+            shoreUpButtonClicked = false;
+            game.sendAction(new FiShoreUpAction(this, selection));
         }
         view.invalidate();
     }
