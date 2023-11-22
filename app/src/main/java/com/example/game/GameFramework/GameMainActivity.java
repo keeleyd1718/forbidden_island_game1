@@ -30,7 +30,7 @@ import com.example.game.GameFramework.gameConfiguration.GameConfig;
 import com.example.game.GameFramework.gameConfiguration.GamePlayerType;
 import com.example.game.GameFramework.infoMessage.GameState;
 import com.example.game.GameFramework.players.GamePlayer;
-import com.example.game.GameFramework.utilities.IPCoder;
+//import com.example.game.GameFramework.utilities.IPCoder;
 import com.example.game.GameFramework.utilities.Logger;
 import com.example.game.GameFramework.utilities.MessageBox;
 import com.example.game.GameFramework.utilities.Saving;
@@ -139,10 +139,10 @@ public abstract class GameMainActivity extends Activity implements
      *            "upibmg.egr.up.edu")
      * @return the ProxyGame object that was created
      */
-    private ProxyGame createRemoteGame(String hostName) {
+    /*private ProxyGame createRemoteGame(String hostName) {
         int portNum = getPortNumber();
         return ProxyGame.create(portNum, hostName);
-    }
+    }*/
 
     /*
      * ====================================================================
@@ -335,13 +335,13 @@ public abstract class GameMainActivity extends Activity implements
         }
 
         // create the game if it's remote
-        if (!config.isLocal()) { // remote game
+        /*if (!config.isLocal()) { // remote game
             game = createRemoteGame(config.getIpCode());
             // verify we have a game
             if (game == null) {
                 return getString(R.string.Game_Server_Error_Msg);
             }
-        }
+        }*/
 
         // if there is more than one player that requires a GUI, abort
         if (requiresGuiCount >= 2) {
@@ -506,10 +506,10 @@ public abstract class GameMainActivity extends Activity implements
         v.setOnClickListener(this);
 
 
-        String ipCode = IPCoder.encodeLocalIP();
+        /*String ipCode = IPCoder.encodeLocalIP();
         String ipAddress = IPCoder.getLocalIpAddress();
         TextView ipText = (TextView)findViewById(R.id.ipCodeLabel);
-        ipText.setText(ipText.getText()+ipCode+" ("+ipAddress+") ");
+        ipText.setText(ipText.getText()+ipCode+" ("+ipAddress+") ");*/
 
     }// initStarterGui
 

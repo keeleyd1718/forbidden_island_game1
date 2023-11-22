@@ -7,7 +7,7 @@ import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.infoMessage.GameState;
 import com.example.game.GameFramework.players.GamePlayer;
-import com.example.game.GameFramework.utilities.IPCoder;
+//import com.example.game.GameFramework.utilities.IPCoder;
 import com.example.game.GameFramework.utilities.NetworkObjectPasser;
 import com.example.game.GameFramework.utilities.Logger;
 
@@ -47,7 +47,7 @@ public class ProxyGame implements Game {
      * 			the IP code of the server where the game is hosted
      * @return
      */
-    public static ProxyGame create(int portNum, String ipCode) {
+    /*public static ProxyGame create(int portNum, String ipCode) {
         // create the game object
         ProxyGame rtnVal = new ProxyGame(portNum, ipCode);
 
@@ -60,7 +60,7 @@ public class ProxyGame implements Game {
         else {
             return null;
         }
-    }
+    }*/
 
     /**
      * ProxyGame constructor (private)
@@ -71,7 +71,7 @@ public class ProxyGame implements Game {
      * 		the IP code of the remote site to where the actual
      *  	game is running
      */
-    private ProxyGame(int portNum, String ipCode) {
+    /*private ProxyGame(int portNum, String ipCode) {
 
         // set instance variables to their initial values
         player = null;
@@ -119,7 +119,7 @@ public class ProxyGame implements Game {
                 }
             }
         };
-    }
+    }*/
 
     /**
      * Method used by player to send an action to this Game object.

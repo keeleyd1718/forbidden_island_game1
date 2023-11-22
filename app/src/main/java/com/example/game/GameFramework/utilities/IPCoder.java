@@ -1,4 +1,4 @@
-package com.example.game.GameFramework.utilities;
+/*package com.example.game.GameFramework.utilities;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -13,9 +13,9 @@ import java.util.Enumeration;
  * @version July 2013
  *
  */
-public class IPCoder {
+/*public class IPCoder {
     //Tag for logging
-    private static final String TAG = "IPCoder";
+    /*private static final String TAG = "IPCoder";
     /**
      * gets the IP address of the current device
      *
@@ -23,7 +23,7 @@ public class IPCoder {
      * 		the IP address of the current device, or and error message if
      * 		an IP address cannot be determined
      */
-    public static String getLocalIpAddress() {
+    /*public static String getLocalIpAddress() {
         try {
             // loop through the device's network interfaces and internet address until one is found
             // that is a well-formed UP address; return it when found
@@ -39,7 +39,7 @@ public class IPCoder {
                 }
             }
         } catch (SocketException ex) {
-            //Log.e("IPCoder"/*this.toString()*/, ex.toString());
+            //Log.e("IPCoder"/*this.toString()*//*, ex.toString());
             Logger.log(TAG, ""+ex.toString(), Logger.ERROR);
         }
         return "Unable to determine IP address";
@@ -52,7 +52,7 @@ public class IPCoder {
      * 		a long value that represents the current IP address as an integer, or -1
      * 		if the IP address could not be determined
      */
-    public static long getLocalIpAddressAsNumber() {
+    /*public static long getLocalIpAddressAsNumber() {
         // the value we're building
         long val = -1;
 
@@ -85,7 +85,7 @@ public class IPCoder {
     }
 
     // helper string, which are our base-36 "digits"
-    private static String codes = "0123456789abcdefghijklmnopqrstuvwxyz";
+    /*private static String codes = "0123456789abcdefghijklmnopqrstuvwxyz";
 
     /**
      * Encodes the local IP address as base-36 number, converted to a string
@@ -94,7 +94,7 @@ public class IPCoder {
      * 		the encoded number-string, or "*invalid*" if the conversion could not
      * 		be done
      */
-    public static String encodeLocalIP() {
+    /*public static String encodeLocalIP() {
 
         // get the numeric value we want to convert
         long val = getLocalIpAddressAsNumber();
@@ -127,7 +127,7 @@ public class IPCoder {
      * 		the decoded IP, or "*invalid*" if not a valid coded (or already
      * 		decoded) IP code
      */
-    public static String decodeIp(String codedIp) {
+    /*public static String decodeIp(String codedIp) {
 
         // case-fold, so that we handle both upper- and lower-case
         codedIp = codedIp.toLowerCase();
@@ -160,3 +160,4 @@ public class IPCoder {
     }
 
 }
+*/
