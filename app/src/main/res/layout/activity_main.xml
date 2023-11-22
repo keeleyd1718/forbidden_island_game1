@@ -433,7 +433,15 @@
                         android:layout_weight="1"
                         android:background="#6E9FB5"
                         android:text="Capture" />
+
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/discard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Discard" />
             </LinearLayout>
 
         </LinearLayout>
