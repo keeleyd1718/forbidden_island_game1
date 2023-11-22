@@ -502,7 +502,7 @@ public class FiGameState extends GameState {
 
     public void drawFlood(ArrayList<FloodCards> a) {
         //deals flood cards up to the number on the flood meter to the drawn flood deck to immediately slip the tiles over
-        for(int i = 0; i <= floodMeter; i++) {
+        for(int i = 0; i < floodMeter; i++) {
             a.add(floodDeck.remove(0));
         }
     }//end of drawFlood

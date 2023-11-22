@@ -21,25 +21,27 @@ public class MainActivity extends GameMainActivity{
     @Override
     public GameConfig createDefaultConfig() {
         //Define the allowed player types
-        ArrayList<GamePlayerType> playerTypes = new ArrayList<>();
+        ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
         //Adds the human and computer types
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
                 return new HumanPlayer(name, R.layout.activity_main);
             }});
-        playerTypes.add(new GamePlayerType("Smart AI Player") {
-            public GamePlayer createPlayer(String name) {return new DumbComputerPlayer(name);
-            }});
         playerTypes.add(new GamePlayerType("Base AI Player") {
-            public GamePlayer createPlayer(String name) {return new DumbComputerPlayer(name);
+            public GamePlayer createPlayer(String name) {
+                return new DumbComputerPlayer(name);
+            }});
+        playerTypes.add(new GamePlayerType("Smart AI Player") {
+            public GamePlayer createPlayer(String name) {
+                return new SmartComputerPlayer(name);
             }});
 
         // Create a game configuration class for Forbidden Island:
-        GameConfig defaultConfig = new GameConfig(playerTypes, 2, 2, "Forbidden Island", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 3, 3, "Forbidden Island", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
-        defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
-
+        defaultConfig.addPlayer("Base AI Player", 1); // player 2: a computer player
+        defaultConfig.addPlayer("Smart AI Player", 2); // player 2: a computer player
         return defaultConfig;
     }
 
