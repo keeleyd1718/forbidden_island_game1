@@ -52,21 +52,15 @@ public class Tile {
     /**
      * Reverts tile back to its "empty state"
      */
-    public void revertTile() {
+    /*public void revertTile() {
         setValue(Value.NORMAL);
     }//revertTile
-
-
 
     //getter methods
     public Value getValue() {return value;}//getValue
     public TileName getTileName() {return tileName;}//getTilename
 
-
     //setter methods
     public void setValue(Value value) {this.value = value;} //set Tile Value
-    public void setTileName(TileName tileName) {this.tileName = tileName;} //set Tile Name
-
-
-
+    public void setTileName(TileName tileName) {this.tileName = tileName;} //set Tile Name*/
 }//Tile
