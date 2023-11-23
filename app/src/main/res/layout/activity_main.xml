@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -22,24 +23,25 @@
                 android:layout_height="45dp"
                 android:background="#FF0000"
                 android:text="Quit"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="6sp" />
 
             <Button
                 android:id="@+id/floodDeck"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="#009688"
                 android:text="Flood Deck"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="6sp" />
 
             <Button
+                android:id="@+id/treasureDeck"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:background="#009688"
                 android:text="Treasure Deck"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="6sp" />
 
             <TextView
@@ -66,6 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
 
                 <ImageView
@@ -81,6 +84,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="FOOLS_LANDING" />
 
@@ -90,6 +94,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="BRONZE_GATE" />
 
@@ -105,6 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
             </LinearLayout>
 
@@ -126,6 +132,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="GOLD_GATE" />
 
@@ -135,6 +142,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="CORAL_PALACE" />
 
@@ -144,6 +152,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="SUN_TEMPLE" />
 
@@ -153,6 +162,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="SILVER_GATE" />
 
@@ -175,6 +185,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="PHANTOM_ROCK" />
 
@@ -184,6 +195,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="WATCHTOWER" />
 
@@ -193,6 +205,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="COPPER_GATE" />
 
@@ -202,6 +215,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="ABANDONED_CLIFFS" />
 
@@ -211,6 +225,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="WHISPERING_GARDENS" />
 
@@ -220,6 +235,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="SHADOW_CAVE" />
 
@@ -236,6 +252,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="LOST_LAGOON" />
 
@@ -245,6 +262,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="MOON_TEMPLE" />
 
@@ -254,6 +272,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="DECEPTION_DUNES" />
 
@@ -263,6 +282,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="TWILIGHT_HOLLOW" />
 
@@ -272,6 +292,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="EMBER_CAVE" />
 
@@ -281,6 +302,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="TIDAL_PALACE" />
 
@@ -304,6 +326,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="OBSERVATORY" />
 
@@ -313,6 +336,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="IRON_GATE" />
 
@@ -322,6 +346,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="CRIMSON_FOREST" />
 
@@ -331,6 +356,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="MISTY_MARSH" />
 
@@ -352,6 +378,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
 
                 <ImageView
@@ -367,6 +394,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="BREAKERS_BRIDGE" />
 
@@ -376,6 +404,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textColor="#000000"
                     android:textSize="4sp"
                     android:text="HOWLING_GARDEN" />
 
@@ -391,6 +420,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
             </LinearLayout>
         </LinearLayout>
@@ -416,6 +446,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                    android:textColor="#000000"
                         android:textSize="5sp"
                         android:text="Draw Treasure" />
 
@@ -425,6 +456,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                    android:textColor="#000000"
                         android:textSize="6sp"
                         android:text="Draw Flood" />
 
@@ -441,6 +473,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                    android:textColor="#000000"
                         android:textSize="6sp"
                         android:text="Move" />
 
@@ -450,6 +483,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                    android:textColor="#000000"
+                        
                         android:textSize="6sp"
                         android:text="Shore Up" />
                 </LinearLayout>
@@ -465,6 +500,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                    android:textColor="#000000"
                         android:textSize="6sp"
                         android:text="Give Card" />
 
@@ -474,6 +510,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                    android:textColor="#000000"
                         android:textSize="5sp"
                         android:text="Capture Treasure" />
 
@@ -484,8 +521,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="Discard"
+                    android:textColor="#000000"
                     android:textSize="6sp"
-                    android:text="Discard" />
+                    app:iconTint="#000000" />
             </LinearLayout>
 
         </LinearLayout>
