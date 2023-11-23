@@ -64,8 +64,8 @@ public class FiGameState extends GameState {
         OCEAN_CHALICE4,
         OCEAN_CHALICE5,
         SANDBAG1,
-        SANDBAG2,
-        HELICOPTER_LIFT1,
+        SANDBAG2,//can shore up a tile by discarding instead of using an action to shore up
+        HELICOPTER_LIFT1,//needed for end of game to win
         HELICOPTER_LIFT2,
         HELICOPTER_LIFT3,
         WATERS_RISE1,
@@ -380,8 +380,14 @@ public class FiGameState extends GameState {
         if(actionsRemaining < 1){
             return false;
         }
-        //removing four earth stone cards from the player's hand and capturing the treasure if they are on the correct tile
-        if(playerTurn == 1 && (t.equals(TileName.MOON_TEMPLE) || t.equals(TileName.SUN_TEMPLE))) {
+        //create boolean variables to check if the player is on one of the correct tiles
+        boolean earthStoneTile = t.equals(TileName.MOON_TEMPLE) || t.equals(TileName.SUN_TEMPLE);
+        boolean fireCrystalTile = (t.equals(TileName.SHADOW_CAVE) || t.equals(TileName.EMBER_CAVE));
+        boolean oceanChaliceTile = (t.equals(TileName.CORAL_PALACE) || t.equals(TileName.TIDAL_PALACE));
+        boolean windStatueTile = (t.equals(TileName.HOWLING_GARDEN) || t.equals(TileName.WHISPERING_GARDENS));
+
+        //removing four earth stone cards from the player's hand and capturing the treasure
+        if(playerTurn == 1 && earthStoneTile) {
             if (a.contains(numEarthStoneCards1 >= 4)) {
                 int count = 0;
                 if (a.contains(TreasureCards.EARTH_STONE)) {
@@ -411,7 +417,7 @@ public class FiGameState extends GameState {
                 return true;
             }
         }
-        else if(playerTurn == 1 && (t.equals(TileName.SHADOW_CAVE) || t.equals(TileName.EMBER_CAVE))) {
+        else if(playerTurn == 1 && fireCrystalTile) {
             if (a.contains(numFireCrystalCards1 >= 4)) {
                 int count = 0;
                 if (a.contains(TreasureCards.FIRE_CRYSTAL1)) {
@@ -441,7 +447,7 @@ public class FiGameState extends GameState {
                 return true;
             }
         }
-        else if(playerTurn == 1 && (t.equals(TileName.HOWLING_GARDEN) || t.equals(TileName.WHISPERING_GARDENS))) {
+        else if(playerTurn == 1 && windStatueTile) {
             if (a.contains(numWindStatueCards1 >= 4)) {
                 int count = 0;
                 if (a.contains(TreasureCards.WIND_STATUE1)) {
@@ -471,7 +477,7 @@ public class FiGameState extends GameState {
                 return true;
             }
         }
-        else if(playerTurn == 1 && (t.equals(TileName.CORAL_PALACE) || t.equals(TileName.TIDAL_PALACE))) {
+        else if(playerTurn == 1 && oceanChaliceTile) {
             if (a.contains(numOceanChaliceCards1 >= 4)) {
                 int count = 0;
                 if (a.contains(TreasureCards.OCEAN_CHALICE1)) {
@@ -501,6 +507,246 @@ public class FiGameState extends GameState {
                 return true;
             }
         }
+        else if(playerTurn == 2 && earthStoneTile) {
+            if (a.contains(numEarthStoneCards2 >= 4)) {
+                int count = 0;
+                if (a.contains(TreasureCards.EARTH_STONE)) {
+                    a.remove(TreasureCards.EARTH_STONE);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE2)) {
+                    a.remove(TreasureCards.EARTH_STONE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE3)) {
+                    a.remove(TreasureCards.EARTH_STONE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE4)) {
+                    a.remove(TreasureCards.EARTH_STONE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.EARTH_STONE5)) {
+                        a.remove(TreasureCards.EARTH_STONE5);
+                    }
+                }
+                numEarthStoneCards2 -= 4;
+                treasureCount++;
+                actionsRemaining--;
+                return true;
+            }
+        }
+        else if(playerTurn == 2 && fireCrystalTile) {
+            if (a.contains(numFireCrystalCards2 >= 4)) {
+                int count = 0;
+                if (a.contains(TreasureCards.FIRE_CRYSTAL1)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL2)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL3)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL4)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.FIRE_CRYSTAL5)) {
+                        a.remove(TreasureCards.FIRE_CRYSTAL5);
+                    }
+                }
+                numFireCrystalCards2 -= 4;
+                treasureCount++;
+                actionsRemaining--;
+                return true;
+            }
+        }
+        else if(playerTurn == 2 && windStatueTile) {
+            if (a.contains(numWindStatueCards2 >= 4)) {
+                int count = 0;
+                if (a.contains(TreasureCards.WIND_STATUE1)) {
+                    a.remove(TreasureCards.WIND_STATUE1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE2)) {
+                    a.remove(TreasureCards.WIND_STATUE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE3)) {
+                    a.remove(TreasureCards.WIND_STATUE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE4)) {
+                    a.remove(TreasureCards.WIND_STATUE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.WIND_STATUE5)) {
+                        a.remove(TreasureCards.WIND_STATUE5);
+                    }
+                }
+                numWindStatueCards2 -= 4;
+                treasureCount++;
+                actionsRemaining--;
+                return true;
+            }
+        }
+        else if(playerTurn == 2 && oceanChaliceTile) {
+            if (a.contains(numOceanChaliceCards2 >= 4)) {
+                int count = 0;
+                if (a.contains(TreasureCards.OCEAN_CHALICE1)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE2)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE3)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE4)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.OCEAN_CHALICE5)) {
+                        a.remove(TreasureCards.OCEAN_CHALICE5);
+                    }
+                }
+                numOceanChaliceCards2 -= 4;
+                treasureCount++;
+                actionsRemaining--;
+                return true;
+            }
+        }
+        else if(playerTurn == 3 && earthStoneTile) {
+            if (a.contains(numEarthStoneCards3 >= 4)) {
+                int count = 0;
+                if (a.contains(TreasureCards.EARTH_STONE)) {
+                    a.remove(TreasureCards.EARTH_STONE);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE2)) {
+                    a.remove(TreasureCards.EARTH_STONE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE3)) {
+                    a.remove(TreasureCards.EARTH_STONE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.EARTH_STONE4)) {
+                    a.remove(TreasureCards.EARTH_STONE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.EARTH_STONE5)) {
+                        a.remove(TreasureCards.EARTH_STONE5);
+                    }
+                }
+                numEarthStoneCards3 -= 4;
+                treasureCount++;
+                actionsRemaining--;
+                return true;
+            }
+        }
+        else if(playerTurn == 3 && fireCrystalTile) {
+            if (a.contains(numFireCrystalCards3 >= 4)) {
+                int count = 0;
+                if (a.contains(TreasureCards.FIRE_CRYSTAL1)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL2)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL3)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.FIRE_CRYSTAL4)) {
+                    a.remove(TreasureCards.FIRE_CRYSTAL4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.FIRE_CRYSTAL5)) {
+                        a.remove(TreasureCards.FIRE_CRYSTAL5);
+                    }
+                }
+                numFireCrystalCards3 -= 4;
+                treasureCount++;
+                actionsRemaining--;
+                return true;
+            }
+        }
+        else if((playerTurn == 3) && windStatueTile) {
+            if (a.contains(numWindStatueCards3 >= 4)) {
+                int count = 0;
+                if (a.contains(TreasureCards.WIND_STATUE1)) {
+                    a.remove(TreasureCards.WIND_STATUE1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE2)) {
+                    a.remove(TreasureCards.WIND_STATUE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE3)) {
+                    a.remove(TreasureCards.WIND_STATUE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.WIND_STATUE4)) {
+                    a.remove(TreasureCards.WIND_STATUE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.WIND_STATUE5)) {
+                        a.remove(TreasureCards.WIND_STATUE5);
+                    }
+                }
+                numWindStatueCards3 -= 4;
+                treasureCount++;
+                actionsRemaining--;
+                return true;
+            }
+        }
+        else if(playerTurn == 3 && oceanChaliceTile) {
+            if (a.contains(numOceanChaliceCards3 >= 4)) {
+                int count = 0;
+                if (a.contains(TreasureCards.OCEAN_CHALICE1)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE1);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE2)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE2);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE3)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE3);
+                    count++;
+                }
+                if (a.contains(TreasureCards.OCEAN_CHALICE4)) {
+                    a.remove(TreasureCards.OCEAN_CHALICE4);
+                    count++;
+                }
+                if (count != 4) {
+                    if (a.contains(TreasureCards.OCEAN_CHALICE5)) {
+                        a.remove(TreasureCards.OCEAN_CHALICE5);
+                    }
+                }
+                numOceanChaliceCards3 -= 4;
+                treasureCount++;
+                actionsRemaining--;
+                return true;
+            }
+        }
         return false;
     }//end of captureTreasure
 
@@ -514,16 +760,48 @@ public class FiGameState extends GameState {
             floodMeter++;
         }
         else if(card1.equals(TreasureCards.EARTH_STONE) || card1.equals(TreasureCards.EARTH_STONE2) || card1.equals(TreasureCards.EARTH_STONE3) || card1.equals(TreasureCards.EARTH_STONE4) || card1.equals(TreasureCards.EARTH_STONE5)){
-            numEarthStoneCards1++;
+            if(a.equals(humanPlayerHand)){
+                numEarthStoneCards1++;
+            }
+            else if(a.equals(dumbAiHand)){
+                numEarthStoneCards2++;
+            }
+            else if(a.equals(smartAiHand)){
+                numEarthStoneCards3++;
+            }
         }
         else if(card1.equals(TreasureCards.FIRE_CRYSTAL1) || card1.equals(TreasureCards.FIRE_CRYSTAL2) || card1.equals(TreasureCards.FIRE_CRYSTAL3) || card1.equals(TreasureCards.FIRE_CRYSTAL4) || card1.equals(TreasureCards.FIRE_CRYSTAL5)){
-            numFireCrystalCards1++;
+            if(a.equals(humanPlayerHand)){
+                numFireCrystalCards1++;
+            }
+            else if(a.equals(dumbAiHand)){
+                numFireCrystalCards2++;
+            }
+            else if(a.equals(smartAiHand)){
+                numFireCrystalCards3++;
+            }
         }
         else if(card1.equals(TreasureCards.WIND_STATUE1) || card1.equals(TreasureCards.WIND_STATUE2) || card1.equals(TreasureCards.WIND_STATUE3) || card1.equals(TreasureCards.WIND_STATUE4) || card1.equals(TreasureCards.WIND_STATUE5)){
-            numWindStatueCards1++;
+            if(a.equals(humanPlayerHand)){
+                numWindStatueCards1++;
+            }
+            else if(a.equals(dumbAiHand)){
+                numWindStatueCards2++;
+            }
+            else if(a.equals(smartAiHand)){
+                numWindStatueCards3++;
+            }
         }
         else if(card1.equals(TreasureCards.OCEAN_CHALICE1) || card1.equals(TreasureCards.OCEAN_CHALICE2) || card1.equals(TreasureCards.OCEAN_CHALICE3) || card1.equals(TreasureCards.OCEAN_CHALICE4) || card1.equals(TreasureCards.OCEAN_CHALICE5)){
-            numOceanChaliceCards1++;
+            if(a.equals(humanPlayerHand)){
+                numOceanChaliceCards1++;
+            }
+            else if(a.equals(dumbAiHand)){
+                numOceanChaliceCards2++;
+            }
+            else if(a.equals(smartAiHand)){
+                numOceanChaliceCards3++;
+            }
         }
 
         //drawing a second treasure card and adding it to the player's hand whose turn it is
@@ -535,16 +813,48 @@ public class FiGameState extends GameState {
             floodMeter++;
         }
         else if(card2.equals(TreasureCards.EARTH_STONE) || card2.equals(TreasureCards.EARTH_STONE2) || card2.equals(TreasureCards.EARTH_STONE3) || card2.equals(TreasureCards.EARTH_STONE4) || card2.equals(TreasureCards.EARTH_STONE5)){
-            numEarthStoneCards1++;
+            if(a.equals(humanPlayerHand)){
+                numEarthStoneCards1++;
+            }
+            else if(a.equals(dumbAiHand)){
+                numEarthStoneCards2++;
+            }
+            else if(a.equals(smartAiHand)){
+                numEarthStoneCards3++;
+            }
         }
         else if(card2.equals(TreasureCards.FIRE_CRYSTAL1) || card2.equals(TreasureCards.FIRE_CRYSTAL2) || card2.equals(TreasureCards.FIRE_CRYSTAL3) || card2.equals(TreasureCards.FIRE_CRYSTAL4) || card2.equals(TreasureCards.FIRE_CRYSTAL5)){
-            numFireCrystalCards1++;
+            if(a.equals(humanPlayerHand)){
+                numFireCrystalCards1++;
+            }
+            else if(a.equals(dumbAiHand)){
+                numFireCrystalCards2++;
+            }
+            else if(a.equals(smartAiHand)){
+                numFireCrystalCards3++;
+            }
         }
         else if(card2.equals(TreasureCards.WIND_STATUE1) || card2.equals(TreasureCards.WIND_STATUE2) || card2.equals(TreasureCards.WIND_STATUE3) || card2.equals(TreasureCards.WIND_STATUE4) || card2.equals(TreasureCards.WIND_STATUE5)){
-            numWindStatueCards1++;
+            if(a.equals(humanPlayerHand)){
+                numWindStatueCards1++;
+            }
+            else if(a.equals(dumbAiHand)){
+                numWindStatueCards2++;
+            }
+            else if(a.equals(smartAiHand)){
+                numWindStatueCards3++;
+            }
         }
         else if(card2.equals(TreasureCards.OCEAN_CHALICE1) || card2.equals(TreasureCards.OCEAN_CHALICE2) || card2.equals(TreasureCards.OCEAN_CHALICE3) || card2.equals(TreasureCards.OCEAN_CHALICE4) || card2.equals(TreasureCards.OCEAN_CHALICE5)){
-            numOceanChaliceCards1++;
+            if(a.equals(humanPlayerHand)){
+                numOceanChaliceCards1++;
+            }
+            else if(a.equals(dumbAiHand)){
+                numOceanChaliceCards2++;
+            }
+            else if(a.equals(smartAiHand)){
+                numOceanChaliceCards3++;
+            }
         }
     }//end of drawTreasure
 
