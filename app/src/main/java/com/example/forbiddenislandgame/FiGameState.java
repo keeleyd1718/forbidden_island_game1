@@ -20,9 +20,13 @@ public class FiGameState extends GameState {
     int floodMeter;//keeps track of the flood meter level
     int actionsRemaining;//can have up to 3 per turn
     int actionChoices;// which of 4 actions they choose: move, shore up, capture treasure, give card
+    static int playerChosen;//to use for giveCard method
 
     //treasure deck instance variables
-    int treasureCount;
+    int earthStoneTreasureCount;
+    int fireCrystalTreasureCount;
+    int windStatueTreasureCount;
+    int oceanChaliceTreasureCount;
     int numEarthStoneCards1;
     int numFireCrystalCards1;
     int numWindStatueCards1;
@@ -172,7 +176,11 @@ public class FiGameState extends GameState {
         numPlayers = 3;//starts with 3 players: human player, dumb ai, smart ai
         floodMeter = 0;
         actionsRemaining = 3;
-        treasureCount = 0;
+        playerChosen = 0;
+        earthStoneTreasureCount = 0;
+        fireCrystalTreasureCount = 0;
+        windStatueTreasureCount = 0;
+        oceanChaliceTreasureCount = 0;
         //treasure card counts for player 1
         numEarthStoneCards1 = 0;
         numFireCrystalCards1 = 0;
@@ -231,7 +239,11 @@ public class FiGameState extends GameState {
         this.dumbAiHand = other.dumbAiHand;
         this.smartAiHand = other.smartAiHand;
         this.actionsRemaining = other.actionsRemaining;
-        this.treasureCount = other.treasureCount;
+        this.playerChosen = other.playerChosen;
+        this.earthStoneTreasureCount = other.earthStoneTreasureCount;
+        this.fireCrystalTreasureCount = other.fireCrystalTreasureCount;
+        this.windStatueTreasureCount = other.windStatueTreasureCount;
+        this.oceanChaliceTreasureCount = other.oceanChaliceTreasureCount;
         this.numEarthStoneCards1 = other.numEarthStoneCards1;
         this.numFireCrystalCards1 = other.numFireCrystalCards1;
         this.numWindStatueCards1 = other.numWindStatueCards1;
@@ -271,7 +283,6 @@ public class FiGameState extends GameState {
         return "Turn = "+playerTurn+
                 " Flood = "+floodMeter+
                 " Remaining Actions = "+actionsRemaining+
-                " Treasure Count = "+treasureCount+
                 " Player 1's Earth Stone Cards = "+numEarthStoneCards1+
                 " Player 1's Fire Crystal Cards = "+numFireCrystalCards1+
                 " Player 1's Wind Statue Cards = "+numWindStatueCards1+
@@ -328,7 +339,7 @@ public class FiGameState extends GameState {
 
     //Choose a player to give a treasure card to
     public boolean giveCard(int playerTurn, int playerId, TreasureCards card){ //player's whose turn it is, player to give card to, card to give away
-        if(actionsRemaining < 1){
+        if(actionsRemaining < 1 || playerId == 0){
             return false;
         }
         //choose card from array, remove, and add to another player's hand array
@@ -376,6 +387,28 @@ public class FiGameState extends GameState {
         }
     }//end of giveCard
 
+    public boolean discard(int playerTurn, TreasureCards card) {
+        if(actionsRemaining < 1){
+            return false;
+        }
+        if(playerTurn == 1){
+            humanPlayerHand.remove(card);
+            discardTreasureDeck.add(card);
+            return true;
+        }
+        else if (playerTurn == 2){
+            dumbAiHand.remove(card);
+            discardTreasureDeck.add(card);
+            return true;
+        }
+        else if(playerTurn == 3){
+            smartAiHand.remove(card);
+            discardTreasureDeck.add(card);
+            return true;
+        }
+        return false;
+    }//end of discard
+
     public boolean captureTreasure(int playerTurn, ArrayList<TreasureCards> a, TileName t){
         if(actionsRemaining < 1){
             return false;
@@ -412,7 +445,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numEarthStoneCards1 -= 4;
-                treasureCount++;
+                earthStoneTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -442,7 +475,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numFireCrystalCards1 -= 4;
-                treasureCount++;
+                fireCrystalTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -472,7 +505,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numWindStatueCards1 -= 4;
-                treasureCount++;
+                windStatueTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -502,7 +535,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numOceanChaliceCards1 -= 4;
-                treasureCount++;
+                oceanChaliceTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -532,7 +565,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numEarthStoneCards2 -= 4;
-                treasureCount++;
+                earthStoneTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -562,7 +595,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numFireCrystalCards2 -= 4;
-                treasureCount++;
+                fireCrystalTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -592,7 +625,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numWindStatueCards2 -= 4;
-                treasureCount++;
+                windStatueTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -622,7 +655,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numOceanChaliceCards2 -= 4;
-                treasureCount++;
+                oceanChaliceTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -652,7 +685,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numEarthStoneCards3 -= 4;
-                treasureCount++;
+                earthStoneTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -682,7 +715,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numFireCrystalCards3 -= 4;
-                treasureCount++;
+                fireCrystalTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -712,7 +745,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numWindStatueCards3 -= 4;
-                treasureCount++;
+                windStatueTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -742,7 +775,7 @@ public class FiGameState extends GameState {
                     }
                 }
                 numOceanChaliceCards3 -= 4;
-                treasureCount++;
+                oceanChaliceTreasureCount++;
                 actionsRemaining--;
                 return true;
             }
@@ -751,6 +784,14 @@ public class FiGameState extends GameState {
     }//end of captureTreasure
 
     public void drawTreasure(ArrayList<TreasureCards> a) {
+        //check if the treasure deck is empty and is so add the cards from the discard pile back into the treasure deck
+        if(treasureDeck.isEmpty()){
+            for(int i = 0; i < discardTreasureDeck.size(); i++){
+                treasureDeck.add(getDiscardTreasureDeck().get(i));
+            }
+            Collections.shuffle(treasureDeck);
+        }
+
         //drawing a treasure card and adding it to the player's hand whose turn it is
         TreasureCards card1 = treasureDeck.remove(0);
         a.add(card1);
@@ -758,6 +799,8 @@ public class FiGameState extends GameState {
         //increasing the floodMeter count or num treasure card counts if that card is drawn
         if(card1.equals(TreasureCards.WATERS_RISE1) || card1.equals(TreasureCards.WATERS_RISE2) || card1.equals(TreasureCards.WATERS_RISE3)){
             floodMeter++;
+            a.remove(card1);
+            discardTreasureDeck.add(card1);
         }
         else if(card1.equals(TreasureCards.EARTH_STONE) || card1.equals(TreasureCards.EARTH_STONE2) || card1.equals(TreasureCards.EARTH_STONE3) || card1.equals(TreasureCards.EARTH_STONE4) || card1.equals(TreasureCards.EARTH_STONE5)){
             if(a.equals(humanPlayerHand)){
@@ -811,6 +854,8 @@ public class FiGameState extends GameState {
         //increasing the floodMeter count or num treasure card counts if that card is drawn
         if(card2.equals(TreasureCards.WATERS_RISE1) || card2.equals(TreasureCards.WATERS_RISE2) || card2.equals(TreasureCards.WATERS_RISE3)){
             floodMeter++;
+            a.remove(card2);
+            discardTreasureDeck.add(card2);
         }
         else if(card2.equals(TreasureCards.EARTH_STONE) || card2.equals(TreasureCards.EARTH_STONE2) || card2.equals(TreasureCards.EARTH_STONE3) || card2.equals(TreasureCards.EARTH_STONE4) || card2.equals(TreasureCards.EARTH_STONE5)){
             if(a.equals(humanPlayerHand)){
@@ -859,9 +904,17 @@ public class FiGameState extends GameState {
     }//end of drawTreasure
 
     public void drawFlood(ArrayList<FloodCards> a) {
+        //check if the flood deck is empty and is so add the cards from the discard pile back into the flood deck
+        if(floodDeck.isEmpty()){
+            for(int i = 0; i < discardFloodDeck.size(); i++){
+                floodDeck.add(getDiscardFloodDeck().get(i));
+            }
+            Collections.shuffle(floodDeck);
+        }
         //deals flood cards up to the number on the flood meter to the drawn flood deck to immediately slip the tiles over
         for(int i = 0; i < floodMeter; i++) {
-            a.add(floodDeck.remove(0));
+            FloodCards card = floodDeck.remove(0);
+            a.add(card);
         }
     }//end of drawFlood
 
@@ -870,7 +923,7 @@ public class FiGameState extends GameState {
     public void setActionsRemaining(int actionsRemaining) {this.actionsRemaining = actionsRemaining;}
     public void emptyDrawnFloodCards(){
         for(int i = 0; i < drawnFloodCards.size(); i++){
-            drawnFloodCards.remove(i);
+            discardFloodDeck.add(drawnFloodCards.remove(i));
         }
     }
 
@@ -884,7 +937,10 @@ public class FiGameState extends GameState {
     public ArrayList<TreasureCards> getDumbAiHand(){return this.dumbAiHand;}
     public ArrayList<TreasureCards> getSmartAiHand(){return this.smartAiHand;}
     public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
+    public ArrayList<FloodCards> getDiscardFloodDeck(){return this.discardFloodDeck;}
+    public ArrayList<TreasureCards> getDiscardTreasureDeck(){return this.discardTreasureDeck;}
     public TileName getPlayer1Location(){return this.player1Location;}
     public TileName getPlayer2Location(){return this.player2Location;}
     public TileName getPlayer3Location(){return this.player3Location;}
+    public int getPlayerChosen(){return this.playerChosen;}
 }

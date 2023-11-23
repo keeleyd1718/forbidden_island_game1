@@ -1,6 +1,7 @@
 package com.example.forbiddenislandgame;
 
 import com.example.actions.FiCaptureTreasureAction;
+import com.example.actions.FiDiscardAction;
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
 import com.example.actions.FiEndTurnAction;
@@ -31,44 +32,34 @@ public class FiLocalGame extends LocalGame {
     If both of each the Temples, Caves, Palaces, or Gardens tiles sink before their treasure is collected the game is lost
     If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost
     */
-    protected String checkIfGameOver(){
-        /*If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost
-        if(t instanceof Tile)
-        {
-            if(t.getTileName().equals("FOOLS_LANDING") && t.getValue() == Tile.Value.SUNK)
-            {
-                return "Game Over! You lost because Fools Landing has sunken!";
+    protected String checkIfGameOver() {
+        //If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost
+        //need to do still or not include this part of the game
+
+        if (gs.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.SUNK)) {
+            return "Game Over! You lost because Fools Landing sunk!";
+        }
+        if (gs.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.SUNK)) { //Ocean Chalice Tiles
+            if ((gs.oceanChaliceTreasureCount != 1)) {
+                return "Game Over! You lost because your Ocean tiles sunk before you collected the treasure!";
             }
-            if(t.getTileName().equals("CORAL_PALACE") || t.getTileName().equals("TIDAL_PALACE")) //Ocean Tiles
-            {
-                if(t.getValue() == Tile.Value.SUNK)
-                {
-                    return "Game Over! You lost because your Ocean tiles sunk before you collected the treasure!";
-                }
+        }
+        if (gs.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.SUNK)) { //Fire Crystal Tiles
+            if ((gs.fireCrystalTreasureCount != 1)) {
+                return "Game Over! You lost because your Fire Crystal tiles sunk before you collected the treasure!";
             }
-            if(t.getTileName().equals("EMBER_CAVE") || t.getTileName().equals("SHADOW_CAVE")) //Fire Crystal
-            {
-                if(t.getValue() == Tile.Value.SUNK)
-                {
-                    return "Game Over! You lost because your Fire Crystal tiles sunk before you collected the treasure!";
-                }
+        }
+        if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)) { //Earth Stone Tiles
+            if ((gs.earthStoneTreasureCount != 1)) {
+                return "Game Over! You lost because your Earth Stone tiles sunk before you collected the treasure!";
             }
-            if(t.getTileName().equals("MOON_TEMPLE") || t.getTileName().equals("SUN_TEMPLE")) //Earth Stones
-            {
-                if (t.getValue() == Tile.Value.SUNK) {
-                    return "Game Over! You lost because your Earth Stone tiles sunk before you collected the treasure!";
-                }
-                if (t.getTileName().equals("WHISPERING_GARDENS") || t.getTileName().equals("HOWLING_GARDEN")) //Wind Statues
-                {
-                    if (t.getValue() == Tile.Value.SUNK) {
-                        return "Game Over! You lost because your Wind Statue tiles sunk before you collected the treasure!";
-                    }
-                } else {
-                    return "You clicked the quit button. Bye!";
-                }
+        }
+        if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)) { //Wind Statues
+            if ((gs.windStatueTreasureCount != 1)) {
+                return "Game Over! You lost because your Wind Statue tiles sunk before you collected the treasure!";
             }
-        }*/
-        return null;
+        }
+        return "You clicked the quit button. Bye!";
     }
 
     protected void sendUpdatedStateTo(GamePlayer p){
@@ -320,12 +311,12 @@ public class FiLocalGame extends LocalGame {
             else if (action instanceof FiGiveCardAction) {
                 FiGiveCardAction a = (FiGiveCardAction) action;
                 FiGameState.TreasureCards t = a.getTreasureCardName();
-                gs.giveCard(gs.getPlayerTurn(), gs.getPlayerTurn() + 1, t);
+                gs.giveCard(gs.getPlayerTurn(), gs.getPlayerChosen(), t);
                 return true;
             }
             else if (action instanceof FiCaptureTreasureAction) {
                 if(gs.getPlayerTurn() == 1){
-                    gs.captureTreasure(1, gs.getHumanPlayerHand(), gs.getPlayer1Location());
+                    gs.captureTreasure(gs.getPlayerTurn(), gs.getHumanPlayerHand(), gs.getPlayer1Location());
                     return true;
                 }
                 else if(gs.getPlayerTurn() == 2){
@@ -339,6 +330,27 @@ public class FiLocalGame extends LocalGame {
                 else{
                     return false;
                 }
+            }
+            else if (action instanceof FiDiscardAction) {
+                //add the card the player chose to discard to the discard treasure deck
+                FiDiscardAction a = (FiDiscardAction) action;
+                FiGameState.TreasureCards t = a.getTreasureCardName();
+                if(gs.getPlayerTurn() == 1){
+                    if(gs.getHumanPlayerHand().size() > 5){
+                        gs.discard(gs.getPlayerTurn(), t);
+                    }
+                }
+                else if(gs.getPlayerTurn() == 2){
+                    if(gs.getDumbAiHand().size() > 5){
+                        gs.discard(gs.getPlayerTurn(), t);
+                    }
+                }
+                else if(gs.getPlayerTurn() == 3){
+                    if(gs.getSmartAiHand().size() > 5){
+                        gs.discard(gs.getPlayerTurn(), t);
+                    }
+                }
+                gs.discard(gs.getPlayerTurn(), t);
             }
             else if (action instanceof FiEndTurnAction) {
                 if (gs.numPlayers > 2) {

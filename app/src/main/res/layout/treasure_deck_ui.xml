@@ -16,53 +16,283 @@
             android:layout_height="57dp"
             android:background="#F10000"
             android:text="Back"
-            android:textSize="34sp" />
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Treasure Deck"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/EARTH_STONE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="EARTH_STONE" />
+
+            <Button
+                android:id="@+id/EARTH_STONE2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="EARTH_STONE2" />
+
+            <Button
+                android:id="@+id/EARTH_STONE3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="EARTH_STONE3" />
+
+            <Button
+                android:id="@+id/EARTH_STONE4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="EARTH_STONE4" />
+
+            <Button
+                android:id="@+id/EARTH_STONE5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="EARTH_STONE5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/FIRE_CRYSTAL1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="FIRE_CRYSTAL1" />
+
+            <Button
+                android:id="@+id/FIRE_CRYSTAL2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="FIRE_CRYSTAL2" />
+
+            <Button
+                android:id="@+id/FIRE_CRYSTAL3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="FIRE_CRYSTAL3" />
+
+            <Button
+                android:id="@+id/FIRE_CRYSTAL4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="FIRE_CRYSTAL4" />
+
+            <Button
+                android:id="@+id/FIRE_CRYSTAL5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="FIRE_CRYSTAL5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/OCEAN_CHALICE1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="OCEAN_CHALICE1" />
+
+            <Button
+                android:id="@+id/OCEAN_CHALICE2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="OCEAN_CHALICE2" />
+
+            <Button
+                android:id="@+id/OCEAN_CHALICE3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="OCEAN_CHALICE3" />
+
+            <Button
+                android:id="@+id/OCEAN_CHALICE4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="OCEAN_CHALICE4" />
+
+            <Button
+                android:id="@+id/OCEAN_CHALICE5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="OCEAN_CHALICE5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/WIND_STATUE1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="WIND_STATUE1" />
+
+            <Button
+                android:id="@+id/WIND_STATUE2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="WIND_STATUE2" />
+
+            <Button
+                android:id="@+id/WIND_STATUE3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="WIND_STATUE3" />
+
+            <Button
+                android:id="@+id/WIND_STATUE4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="WIND_STATUE4" />
+
+            <Button
+                android:id="@+id/WIND_STATUE5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:text="WIND_STATUE5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/SANDBAG1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#000000"
+                android:text="SANDBAG1"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/SANDBAG2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#000000"
+                android:text="SANDBAG2"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/HELICOPTER_LIFT1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#000000"
+                android:text="HELICOPTER_LIFT1"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/HELICOPTER_LIFT2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#000000"
+                android:text="HELICOPTER_LIFT2"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/HELICOPTER_LIFT3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#000000"
+                android:text="HELICOPTER_LIFT3"
+                android:textSize="10sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/card1"
+                android:id="@+id/giveCardToP1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#000000"
-                android:text="Button" />
+                android:background="#9C27B0"
+                android:text="Give Card To P1" />
 
             <Button
-                android:id="@+id/card2"
+                android:id="@+id/giveCardToP2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#000000"
-                android:text="Button" />
+                android:background="#9C27B0"
+                android:text="Give Card To P2" />
 
             <Button
-                android:id="@+id/card3"
+                android:id="@+id/giveCardToP3"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#000000"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/card4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#000000"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/card5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#000000"
-                android:text="Button" />
+                android:background="#9C27B0"
+                android:text="Give Card To P3" />
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

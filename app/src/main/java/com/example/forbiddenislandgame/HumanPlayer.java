@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.actions.FiCaptureTreasureAction;
+import com.example.actions.FiDiscardAction;
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
 import com.example.actions.FiGameOverAction;
@@ -53,9 +54,39 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button MISTY_MARSH = null;
     private Button BREAKERS_BRIDGE = null;
     private Button HOWLING_GARDEN = null;
+    private Button giveCardToP1 = null;
+    private Button giveCardToP2 = null;
+    private Button giveCardToP3 = null;
+    private Button EARTH_STONE = null;
+    private Button EARTH_STONE2 = null;
+    private Button EARTH_STONE3 = null;
+    private Button EARTH_STONE4 = null;
+    private Button EARTH_STONE5 = null;
+    private Button FIRE_CRYSTAL1 = null;
+    private Button FIRE_CRYSTAL2 = null;
+    private Button FIRE_CRYSTAL3 = null;
+    private Button FIRE_CRYSTAL4 = null;
+    private Button FIRE_CRYSTAL5 = null;
+    private Button WIND_STATUE1 = null;
+    private Button WIND_STATUE2 = null;
+    private Button WIND_STATUE3 = null;
+    private Button WIND_STATUE4 = null;
+    private Button WIND_STATUE5 = null;
+    private Button OCEAN_CHALICE1 = null;
+    private Button OCEAN_CHALICE2 = null;
+    private Button OCEAN_CHALICE3 = null;
+    private Button OCEAN_CHALICE4 = null;
+    private Button OCEAN_CHALICE5 = null;
+    private Button SANDBAG1 = null;
+    private Button SANDBAG2 = null;
+    private Button HELICOPTER_LIFT1 = null;
+    private Button HELICOPTER_LIFT2 = null;
+    private Button HELICOPTER_LIFT3 = null;
     private GameMainActivity myActivity;
     private boolean moveButtonClicked = false;
     private boolean shoreUpButtonClicked = false;
+    private boolean discardButtonClicked = false;
+    private boolean giveCardButtonClicked = false;
     int gameGreen = Color.rgb(63, 179, 66);
 
     /**
@@ -533,6 +564,10 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         else if(view.getId() == R.id.drawFloodButton){
             game.sendAction(new FiDrawFloodAction(this));
         }
+        else if(view.getId() == R.id.discard){
+            discardButtonClicked = true;
+            return;
+        }
         else if(view.getId() == R.id.moveButton){
             moveButtonClicked = true;
             return;
@@ -542,123 +577,198 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             return;
         }
         else if(view.getId() == R.id.giveCardButton){
-            game.sendAction(new FiGiveCardAction(this));
+            if(view.getId() == R.id.giveCardToP1){
+                FiGameState.playerChosen = 1;
+            }
+            else if(view.getId() == R.id.giveCardToP2){
+                FiGameState.playerChosen = 2;
+            }
+            else if(view.getId() == R.id.giveCardToP3){
+                FiGameState.playerChosen = 3;
+            }
+            giveCardButtonClicked = true;
+            return;
         }
         else if(view.getId() == R.id.captureTreasureButton){
             game.sendAction(new FiCaptureTreasureAction(this));
         }
         FiGameState.TileName selection;
-        FiGameState.Value sel;
         switch(view.getId()){
             case R.id.ABANDONED_CLIFFS:
                 selection = FiGameState.TileName.ABANDONED_CLIFFS;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.BRONZE_GATE:
                 selection = FiGameState.TileName.BRONZE_GATE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.BREAKERS_BRIDGE:
                 selection = FiGameState.TileName.BREAKERS_BRIDGE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.COPPER_GATE:
                 selection = FiGameState.TileName.COPPER_GATE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.CORAL_PALACE:
                 selection = FiGameState.TileName.CORAL_PALACE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.CRIMSON_FOREST:
                 selection = FiGameState.TileName.CRIMSON_FOREST;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.DECEPTION_DUNES:
                 selection = FiGameState.TileName.DECEPTION_DUNES;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.EMBER_CAVE:
                 selection = FiGameState.TileName.EMBER_CAVE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.FOOLS_LANDING:
                 selection = FiGameState.TileName.FOOLS_LANDING;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.GOLD_GATE:
                 selection = FiGameState.TileName.GOLD_GATE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.IRON_GATE:
                 selection = FiGameState.TileName.IRON_GATE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.HOWLING_GARDEN:
                 selection = FiGameState.TileName.HOWLING_GARDEN;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.MISTY_MARSH:
                 selection = FiGameState.TileName.MISTY_MARSH;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.MOON_TEMPLE:
                 selection = FiGameState.TileName.MOON_TEMPLE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.SILVER_GATE:
                 selection = FiGameState.TileName.SILVER_GATE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.SUN_TEMPLE:
                 selection = FiGameState.TileName.SUN_TEMPLE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.PHANTOM_ROCK:
                 selection = FiGameState.TileName.PHANTOM_ROCK;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.WHISPERING_GARDENS:
                 selection = FiGameState.TileName.WHISPERING_GARDENS;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.WATCHTOWER:
                 selection = FiGameState.TileName.WATCHTOWER;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.TWILIGHT_HOLLOW:
                 selection = FiGameState.TileName.TWILIGHT_HOLLOW;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.TIDAL_PALACE:
                 selection = FiGameState.TileName.TIDAL_PALACE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.OBSERVATORY:
                 selection = FiGameState.TileName.OBSERVATORY;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.LOST_LAGOON:
                 selection = FiGameState.TileName.LOST_LAGOON;
-                sel = FiGameState.Value.NORMAL;
                 break;
             case R.id.SHADOW_CAVE:
                 selection = FiGameState.TileName.SHADOW_CAVE;
-                sel = FiGameState.Value.NORMAL;
                 break;
             default:
                 selection = FiGameState.TileName.NONE;
-                sel = FiGameState.Value.NONE;
+        }
+        //code for when a player chooses a card to discard and for the give card method
+        FiGameState.TreasureCards sel;
+        switch(view.getId()){
+            case R.id.WIND_STATUE1:
+                sel = FiGameState.TreasureCards.WIND_STATUE1;
+                break;
+            case R.id.WIND_STATUE2:
+                sel = FiGameState.TreasureCards.WIND_STATUE2;
+                break;
+            case R.id.WIND_STATUE3:
+                sel = FiGameState.TreasureCards.WIND_STATUE3;
+                break;
+            case R.id.WIND_STATUE4:
+                sel = FiGameState.TreasureCards.WIND_STATUE4;
+                break;
+            case R.id.WIND_STATUE5:
+                sel = FiGameState.TreasureCards.WIND_STATUE5;
+                break;
+            case R.id.EARTH_STONE:
+                sel = FiGameState.TreasureCards.EARTH_STONE;
+                break;
+            case R.id.EARTH_STONE2:
+                sel = FiGameState.TreasureCards.EARTH_STONE2;
+                break;
+            case R.id.EARTH_STONE3:
+                sel = FiGameState.TreasureCards.EARTH_STONE3;
+                break;
+            case R.id.EARTH_STONE4:
+                sel = FiGameState.TreasureCards.EARTH_STONE4;
+                break;
+            case R.id.EARTH_STONE5:
+                sel = FiGameState.TreasureCards.EARTH_STONE5;
+                break;
+            case R.id.FIRE_CRYSTAL1:
+                sel = FiGameState.TreasureCards.FIRE_CRYSTAL1;
+                break;
+            case R.id.FIRE_CRYSTAL2:
+                sel = FiGameState.TreasureCards.FIRE_CRYSTAL2;
+                break;
+            case R.id.FIRE_CRYSTAL3:
+                sel = FiGameState.TreasureCards.FIRE_CRYSTAL3;
+                break;
+            case R.id.FIRE_CRYSTAL4:
+                sel = FiGameState.TreasureCards.FIRE_CRYSTAL4;
+                break;
+            case R.id.FIRE_CRYSTAL5:
+                sel = FiGameState.TreasureCards.FIRE_CRYSTAL5;
+                break;
+            case R.id.OCEAN_CHALICE1:
+                sel = FiGameState.TreasureCards.OCEAN_CHALICE1;
+                break;
+            case R.id.OCEAN_CHALICE2:
+                sel = FiGameState.TreasureCards.OCEAN_CHALICE2;
+                break;
+            case R.id.OCEAN_CHALICE3:
+                sel = FiGameState.TreasureCards.OCEAN_CHALICE3;
+                break;
+            case R.id.OCEAN_CHALICE4:
+                sel = FiGameState.TreasureCards.OCEAN_CHALICE4;
+                break;
+            case R.id.OCEAN_CHALICE5:
+                sel = FiGameState.TreasureCards.OCEAN_CHALICE5;
+                break;
+            case R.id.SANDBAG1:
+                sel = FiGameState.TreasureCards.SANDBAG1;
+                break;
+            case R.id.SANDBAG2:
+                sel = FiGameState.TreasureCards.SANDBAG2;
+                break;
+            case R.id.HELICOPTER_LIFT1:
+                sel = FiGameState.TreasureCards.HELICOPTER_LIFT1;
+                break;
+            case R.id.HELICOPTER_LIFT2:
+                sel = FiGameState.TreasureCards.HELICOPTER_LIFT2;
+                break;
+            case R.id.HELICOPTER_LIFT3:
+                sel = FiGameState.TreasureCards.HELICOPTER_LIFT3;
+                break;
+            default:
+                sel = FiGameState.TreasureCards.WATERS_RISE1;
+        }
+        if(discardButtonClicked && sel != FiGameState.TreasureCards.WATERS_RISE1)
+        {
+            discardButtonClicked = false;
+            game.sendAction(new FiDiscardAction(this, sel));
+        }
+        else if(giveCardButtonClicked && sel != FiGameState.TreasureCards.WATERS_RISE1)
+        {
+            giveCardButtonClicked = false;
+            game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, sel));
         }
         if(moveButtonClicked && selection != FiGameState.TileName.NONE)
         {
             moveButtonClicked = false;
             game.sendAction(new FiMoveAction(this, selection));
         }
-        else if(shoreUpButtonClicked && selection != FiGameState.TileName.NONE && sel != FiGameState.Value.NONE)
+        else if(shoreUpButtonClicked && selection != FiGameState.TileName.NONE)
         {
             shoreUpButtonClicked = false;
-            game.sendAction(new FiShoreUpAction(this, selection, sel));
+            game.sendAction(new FiShoreUpAction(this, selection));
         }
     }
 
@@ -684,29 +794,62 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
         //initializing tile buttons
         this.FOOLS_LANDING = activity.findViewById(R.id.FOOLS_LANDING);
-        this.BRONZE_GATE = (Button)activity.findViewById(R.id.BRONZE_GATE);
-        this.GOLD_GATE = (Button)activity.findViewById(R.id.GOLD_GATE);
-        this.CORAL_PALACE = (Button)activity.findViewById(R.id.CORAL_PALACE);
-        this.SUN_TEMPLE = (Button)activity.findViewById(R.id.SUN_TEMPLE);
-        this.SILVER_GATE = (Button)activity.findViewById(R.id.SILVER_GATE);
-        this.PHANTOM_ROCK = (Button)activity.findViewById(R.id.PHANTOM_ROCK);
-        this.WATCHTOWER = (Button)activity.findViewById(R.id.WATCHTOWER);
-        this.COPPER_GATE = (Button)activity.findViewById(R.id.COPPER_GATE);
-        this.ABANDONED_CLIFFS = (Button)activity.findViewById(R.id.ABANDONED_CLIFFS);
-        this.WHISPERING_GARDENS = (Button)activity.findViewById(R.id.WHISPERING_GARDENS);
-        this.SHADOW_CAVE = (Button)activity.findViewById(R.id.SHADOW_CAVE);
-        this.LOST_LAGOON = (Button)activity.findViewById(R.id.LOST_LAGOON);
-        this.MOON_TEMPLE = (Button)activity.findViewById(R.id.MOON_TEMPLE);
-        this.DECEPTION_DUNES = (Button)activity.findViewById(R.id.DECEPTION_DUNES);
-        this.TWILIGHT_HOLLOW = (Button)activity.findViewById(R.id.TWILIGHT_HOLLOW);
-        this.EMBER_CAVE = (Button)activity.findViewById(R.id.EMBER_CAVE);
-        this.TIDAL_PALACE = (Button)activity.findViewById(R.id.TIDAL_PALACE);
-        this.OBSERVATORY = (Button)activity.findViewById(R.id.OBSERVATORY);
-        this.IRON_GATE = (Button)activity.findViewById(R.id.IRON_GATE);
-        this.CRIMSON_FOREST = (Button)activity.findViewById(R.id.CRIMSON_FOREST);
-        this.MISTY_MARSH = (Button)activity.findViewById(R.id.MISTY_MARSH);
-        this.BREAKERS_BRIDGE = (Button)activity.findViewById(R.id.BREAKERS_BRIDGE);
-        this.HOWLING_GARDEN = (Button)activity.findViewById(R.id.HOWLING_GARDEN);
+        this.BRONZE_GATE = activity.findViewById(R.id.BRONZE_GATE);
+        this.GOLD_GATE = activity.findViewById(R.id.GOLD_GATE);
+        this.CORAL_PALACE = activity.findViewById(R.id.CORAL_PALACE);
+        this.SUN_TEMPLE = activity.findViewById(R.id.SUN_TEMPLE);
+        this.SILVER_GATE = activity.findViewById(R.id.SILVER_GATE);
+        this.PHANTOM_ROCK = activity.findViewById(R.id.PHANTOM_ROCK);
+        this.WATCHTOWER = activity.findViewById(R.id.WATCHTOWER);
+        this.COPPER_GATE = activity.findViewById(R.id.COPPER_GATE);
+        this.ABANDONED_CLIFFS = activity.findViewById(R.id.ABANDONED_CLIFFS);
+        this.WHISPERING_GARDENS = activity.findViewById(R.id.WHISPERING_GARDENS);
+        this.SHADOW_CAVE = activity.findViewById(R.id.SHADOW_CAVE);
+        this.LOST_LAGOON = activity.findViewById(R.id.LOST_LAGOON);
+        this.MOON_TEMPLE = activity.findViewById(R.id.MOON_TEMPLE);
+        this.DECEPTION_DUNES = activity.findViewById(R.id.DECEPTION_DUNES);
+        this.TWILIGHT_HOLLOW = activity.findViewById(R.id.TWILIGHT_HOLLOW);
+        this.EMBER_CAVE = activity.findViewById(R.id.EMBER_CAVE);
+        this.TIDAL_PALACE = activity.findViewById(R.id.TIDAL_PALACE);
+        this.OBSERVATORY = activity.findViewById(R.id.OBSERVATORY);
+        this.IRON_GATE = activity.findViewById(R.id.IRON_GATE);
+        this.CRIMSON_FOREST = activity.findViewById(R.id.CRIMSON_FOREST);
+        this.MISTY_MARSH = activity.findViewById(R.id.MISTY_MARSH);
+        this.BREAKERS_BRIDGE = activity.findViewById(R.id.BREAKERS_BRIDGE);
+        this.HOWLING_GARDEN = activity.findViewById(R.id.HOWLING_GARDEN);
+
+        //layout resource for treasure deck gui
+        activity.setContentView(R.layout.treasure_deck_ui);
+
+        //initializing buttons used for treasure deck ui
+        this.giveCardToP1 = activity.findViewById(R.id.giveCardToP1);
+        this.giveCardToP2 = activity.findViewById(R.id.giveCardToP2);
+        this.giveCardToP3 = activity.findViewById(R.id.giveCardToP3);
+        this.EARTH_STONE = activity.findViewById(R.id.EARTH_STONE);
+        this.EARTH_STONE2  = activity.findViewById(R.id.EARTH_STONE2);
+        this.EARTH_STONE3 = activity.findViewById(R.id.EARTH_STONE3);
+        this.EARTH_STONE4 = activity.findViewById(R.id.EARTH_STONE4);
+        this.EARTH_STONE5 = activity.findViewById(R.id.EARTH_STONE5);
+        this.FIRE_CRYSTAL1 = activity.findViewById(R.id.FIRE_CRYSTAL1);
+        this.FIRE_CRYSTAL2 = activity.findViewById(R.id.FIRE_CRYSTAL2);
+        this.FIRE_CRYSTAL3 = activity.findViewById(R.id.FIRE_CRYSTAL3);
+        this.FIRE_CRYSTAL4 = activity.findViewById(R.id.FIRE_CRYSTAL4);
+        this.FIRE_CRYSTAL5 = activity.findViewById(R.id.FIRE_CRYSTAL5);
+        this.WIND_STATUE1 = activity.findViewById(R.id.WIND_STATUE1);
+        this.WIND_STATUE2 = activity.findViewById(R.id.WIND_STATUE2);
+        this.WIND_STATUE3 = activity.findViewById(R.id.WIND_STATUE3);
+        this.WIND_STATUE4 = activity.findViewById(R.id.WIND_STATUE4);
+        this.WIND_STATUE5 = activity.findViewById(R.id.WIND_STATUE5);
+        this.OCEAN_CHALICE1 = activity.findViewById(R.id.OCEAN_CHALICE1);
+        this.OCEAN_CHALICE2 = activity.findViewById(R.id.OCEAN_CHALICE2);
+        this.OCEAN_CHALICE3 = activity.findViewById(R.id.OCEAN_CHALICE3);
+        this.OCEAN_CHALICE4 = activity.findViewById(R.id.OCEAN_CHALICE4);
+        this.OCEAN_CHALICE5 = activity.findViewById(R.id.OCEAN_CHALICE5);
+        this.SANDBAG1 = activity.findViewById(R.id.SANDBAG1);
+        this.SANDBAG2 = activity.findViewById(R.id.SANDBAG2);
+        this.HELICOPTER_LIFT1 = activity.findViewById(R.id.HELICOPTER_LIFT1);
+        this.HELICOPTER_LIFT2 = activity.findViewById(R.id.HELICOPTER_LIFT2);
+        this.HELICOPTER_LIFT3 = activity.findViewById(R.id.HELICOPTER_LIFT3);
 
         //if an action button is pressed call the onClickListener method
         quitButton.setOnClickListener(this);

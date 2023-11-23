@@ -41,7 +41,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                     game.sendAction(new FiCaptureTreasureAction(this));
                 }
                 else {
-                    game.sendAction(new FiGiveCardAction(this));
+                    //game.sendAction(new FiGiveCardAction(this));
                 }
                 game.sendAction(new FiDrawFloodAction(this));//then the dumb ai draws two flood cards
             }
