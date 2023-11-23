@@ -1,5 +1,6 @@
 package com.example.actions;
 
+import com.example.forbiddenislandgame.FiGameState;
 import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.players.GamePlayer;
 
@@ -12,4 +13,5 @@ public class FiCaptureTreasureAction extends GameAction {
     public FiCaptureTreasureAction(GamePlayer player) {
         super(player);
     }
+
 }

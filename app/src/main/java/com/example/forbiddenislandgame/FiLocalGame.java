@@ -103,11 +103,206 @@ public class FiLocalGame extends LocalGame {
                 }
             }
             else if (action instanceof FiDrawFloodAction) {
-                gs.drawFlood(gs.getDrawnFloodCards());
-                if(gs.getDrawnFloodCards().size() > 0){
-                    //if there are any flood cards in the drawn flood cards arraylist flip those tiles over
+                gs.drawFlood(gs.getDrawnFloodCards());//call the drawFlood method on the drawnFloodCards array
+                //if there are any flood cards in the drawn flood cards arraylist go through each element and change those tiles value to flooded or sunk depending on what the values were
+                for(int i = 0; i < gs.getDrawnFloodCards().size(); i++){
+                    if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.ABANDONED_CLIFFS) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.ABANDONED_CLIFFS1)){
+                        if(gs.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.FOOLS_LANDING1) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.FOOLS_LANDING)){
+                        if(gs.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.FOOLS_LANDING, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.FOOLS_LANDING, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.BRONZE_GATE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.BRONZE_GATE1)){
+                        if(gs.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.BRONZE_GATE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.BRONZE_GATE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.GOLD_GATE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.GOLD_GATE1)){
+                        if(gs.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.GOLD_GATE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.GOLD_GATE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.CORAL_PALACE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.CORAL_PALACE1)){
+                        if(gs.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.CORAL_PALACE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.CORAL_PALACE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.SUN_TEMPLE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.SUN_TEMPLE1)){
+                        if(gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.SUN_TEMPLE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.SUN_TEMPLE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.SILVER_GATE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.SILVER_GATE1)){
+                        if(gs.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.SILVER_GATE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.SILVER_GATE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.PHANTOM_ROCK) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.PHANTOM_ROCK1)){
+                        if(gs.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.PHANTOM_ROCK, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.PHANTOM_ROCK, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.WATCHTOWER) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.WATCHTOWER1)){
+                        if(gs.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.WATCHTOWER, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.WATCHTOWER, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.COPPER_GATE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.COPPER_GATE1)){
+                        if(gs.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.COPPER_GATE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.COPPER_GATE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.WHISPERING_GARDENS) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.WHISPERING_GARDENS1)){
+                        if(gs.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.WHISPERING_GARDENS, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.WHISPERING_GARDENS, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.SHADOW_CAVE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.SHADOW_CAVE1)){
+                        if(gs.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.SHADOW_CAVE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.SHADOW_CAVE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.LOST_LAGOON) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.LOST_LAGOON1)){
+                        if(gs.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.LOST_LAGOON, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.LOST_LAGOON, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.MOON_TEMPLE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.MOON_TEMPLE1)){
+                        if(gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.MOON_TEMPLE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.MOON_TEMPLE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.DECEPTION_DUNES) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.DECEPTION_DUNES1)){
+                        if(gs.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.DECEPTION_DUNES, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.DECEPTION_DUNES, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.TWILIGHT_HOLLOW) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.TWILIGHT_HOLLOW1)){
+                        if(gs.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.TWILIGHT_HOLLOW, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.TWILIGHT_HOLLOW, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.EMBER_CAVE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.EMBER_CAVE1)){
+                        if(gs.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.EMBER_CAVE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.EMBER_CAVE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.TIDAL_PALACE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.TIDAL_PALACE1)){
+                        if(gs.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.TIDAL_PALACE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.TIDAL_PALACE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.OBSERVATORY) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.OBSERVATORY1)){
+                        if(gs.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.OBSERVATORY, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.OBSERVATORY, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.IRON_GATE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.IRON_GATE1)){
+                        if(gs.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.IRON_GATE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.IRON_GATE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.CRIMSON_FOREST) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.CRIMSON_FOREST1)){
+                        if(gs.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.CRIMSON_FOREST, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.CRIMSON_FOREST, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.MISTY_MARSH) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.MISTY_MARSH1)){
+                        if(gs.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.MISTY_MARSH, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.MISTY_MARSH, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.BREAKERS_BRIDGE) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.BREAKERS_BRIDGE1)){
+                        if(gs.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.BREAKERS_BRIDGE, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.BREAKERS_BRIDGE, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.HOWLING_GARDEN) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.HOWLING_GARDEN1)){
+                        if(gs.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.NORMAL)){
+                            gs.map.put(FiGameState.TileName.HOWLING_GARDEN, FiGameState.Value.FLOODED);
+                        }
+                        else if(gs.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.FLOODED)){
+                            gs.map.put(FiGameState.TileName.HOWLING_GARDEN, FiGameState.Value.SUNK);
+                        }
+                    }
+                    else{
+                        return false;
+                    }
                 }
-                gs.emptyDrawnFloodCards();
+                gs.emptyDrawnFloodCards();//empty the array of drawn flood cards
                 return true;
             }
             else if (action instanceof FiMoveAction) {
@@ -119,8 +314,7 @@ public class FiLocalGame extends LocalGame {
             else if (action instanceof FiShoreUpAction) {
                 FiShoreUpAction a = (FiShoreUpAction) action;
                 FiGameState.TileName t = a.getTileName();
-                FiGameState.Value v = a.getValue();
-                gs.shoreUp(gs.getPlayerTurn(), t, v);
+                gs.shoreUp(gs.getPlayerTurn(), t);
                 return true;
             }
             else if (action instanceof FiGiveCardAction) {
@@ -131,15 +325,15 @@ public class FiLocalGame extends LocalGame {
             }
             else if (action instanceof FiCaptureTreasureAction) {
                 if(gs.getPlayerTurn() == 1){
-                    gs.captureTreasure(1, gs.getHumanPlayerHand());
+                    gs.captureTreasure(1, gs.getHumanPlayerHand(), gs.getPlayer1Location());
                     return true;
                 }
                 else if(gs.getPlayerTurn() == 2){
-                    gs.captureTreasure(2, gs.getDumbAiHand());
+                    gs.captureTreasure(2, gs.getDumbAiHand(), gs.getPlayer2Location());
                     return true;
                 }
                 else if(gs.getPlayerTurn() == 3){
-                    gs.captureTreasure(3, gs.getSmartAiHand());
+                    gs.captureTreasure(3, gs.getSmartAiHand(), gs.getPlayer3Location());
                     return true;
                 }
                 else{
@@ -150,18 +344,23 @@ public class FiLocalGame extends LocalGame {
                 if (gs.numPlayers > 2) {
                     if (gs.getPlayerTurn() == 1) {
                         gs.setPlayerTurn(2);
+                        gs.setActionsRemaining(3);
                     } else if (gs.getPlayerTurn() == 2) {
                         gs.setPlayerTurn(3);
+                        gs.setActionsRemaining(3);
                     } else if (gs.getPlayerTurn() == 3) {
                         gs.setPlayerTurn(1);
+                        gs.setActionsRemaining(3);
                     }
                 }
                 else {
                     if (gs.getPlayerTurn() == 1) {
                         gs.setPlayerTurn(2);
+                        gs.setActionsRemaining(3);
                     }
                     else if (gs.getPlayerTurn() == 2) {
                         gs.setPlayerTurn(1);
+                        gs.setActionsRemaining(3);
                     }
                 }
                 return true;
