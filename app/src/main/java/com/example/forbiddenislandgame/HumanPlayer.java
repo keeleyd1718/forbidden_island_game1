@@ -13,6 +13,7 @@ import com.example.actions.FiGameOverAction;
 import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
 import com.example.actions.FiShoreUpAction;
+import com.example.actions.FiSkipTurnAction;
 import com.example.game.GameFramework.GameMainActivity;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.players.GameHumanPlayer;
@@ -54,7 +55,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button MISTY_MARSH = null;
     private Button BREAKERS_BRIDGE = null;
     private Button HOWLING_GARDEN = null;
-    private Button giveCardToP1 = null;
     private Button giveCardToP2 = null;
     private Button giveCardToP3 = null;
     private Button EARTH_STONE = null;
@@ -82,6 +82,13 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button HELICOPTER_LIFT1 = null;
     private Button HELICOPTER_LIFT2 = null;
     private Button HELICOPTER_LIFT3 = null;
+    private Button playerCard1 = null;
+    private Button playerCard2 = null;
+    private Button playerCard3 = null;
+    private Button playerCard4 = null;
+    private Button playerCard5 = null;
+    private Button playerCard6 = null;
+
     private GameMainActivity myActivity;
     private boolean moveButtonClicked = false;
     private boolean shoreUpButtonClicked = false;
@@ -116,6 +123,18 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             ABANDONED_CLIFFS.setText("player 1");
             DECEPTION_DUNES.setText("player 2");
             OBSERVATORY.setText("player 3");
+
+            //set the text of the buttons to what is in human player's hand
+            if(gameState.getHumanPlayerHand().size() >= 5){
+                playerCard1.setText("" + gameState.getHumanPlayerHand().get(0));
+                playerCard2.setText("" + gameState.getHumanPlayerHand().get(1));
+                playerCard3.setText("" + gameState.getHumanPlayerHand().get(2));
+                playerCard4.setText("" + gameState.getHumanPlayerHand().get(3));
+                playerCard5.setText("" + gameState.getHumanPlayerHand().get(4));
+                if(gameState.getHumanPlayerHand().size() > 5){
+                    playerCard6.setText("" + gameState.getHumanPlayerHand().get(5));
+                }
+            }
 
             //set the tile player's must be on to capture certain treasures
             CORAL_PALACE.setText("Ocean Chalice Treasure");
@@ -564,6 +583,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         else if(view.getId() == R.id.drawFloodButton){
             game.sendAction(new FiDrawFloodAction(this));
         }
+        else if(view.getId() == R.id.skipTurn){
+            game.sendAction(new FiSkipTurnAction(this));
+        }
         else if(view.getId() == R.id.discard){
             discardButtonClicked = true;
             return;
@@ -818,13 +840,20 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.BREAKERS_BRIDGE = activity.findViewById(R.id.BREAKERS_BRIDGE);
         this.HOWLING_GARDEN = activity.findViewById(R.id.HOWLING_GARDEN);
 
+        //initializing card hand buttons
+        this.playerCard1 = activity.findViewById(R.id.playerCard1);
+        this.playerCard2 = activity.findViewById(R.id.playerCard2);
+        this.playerCard3 = activity.findViewById(R.id.playerCard3);
+        this.playerCard4 = activity.findViewById(R.id.playerCard4);
+        this.playerCard5 = activity.findViewById(R.id.playerCard5);
+        this.playerCard6 = activity.findViewById(R.id.playerCard6);
+        this.giveCardToP2 = activity.findViewById(R.id.giveCardToP2);
+        this.giveCardToP3 = activity.findViewById(R.id.giveCardToP3);
+
         //layout resource for treasure deck gui
         activity.setContentView(R.layout.treasure_deck_ui);
 
         //initializing buttons used for treasure deck ui
-        this.giveCardToP1 = activity.findViewById(R.id.giveCardToP1);
-        this.giveCardToP2 = activity.findViewById(R.id.giveCardToP2);
-        this.giveCardToP3 = activity.findViewById(R.id.giveCardToP3);
         this.EARTH_STONE = activity.findViewById(R.id.EARTH_STONE);
         this.EARTH_STONE2  = activity.findViewById(R.id.EARTH_STONE2);
         this.EARTH_STONE3 = activity.findViewById(R.id.EARTH_STONE3);

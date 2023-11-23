@@ -4,11 +4,11 @@ import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDiscardAction;
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
-import com.example.actions.FiEndTurnAction;
 import com.example.actions.FiGameOverAction;
 import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
 import com.example.actions.FiShoreUpAction;
+import com.example.actions.FiSkipTurnAction;
 import com.example.game.GameFramework.LocalGame;
 import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.players.GamePlayer;
@@ -36,6 +36,23 @@ public class FiLocalGame extends LocalGame {
         //If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost
         //need to do still or not include this part of the game
 
+        if(gs.oceanChaliceTreasureCount == 1 && gs.fireCrystalTreasureCount == 1 && gs.windStatueTreasureCount == 1 && gs.earthStoneTreasureCount == 1){
+            if(gs.getPlayerTurn() == 1){
+                if((gs.getHumanPlayerHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getHumanPlayerHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getHumanPlayerHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayer1Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer2Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer3Location().equals(FiGameState.TileName.FOOLS_LANDING)){
+                    return "Congrats you have won the game!!";
+                }
+            }
+            else if(gs.getPlayerTurn() == 2){
+                if((gs.getDumbAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getDumbAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getDumbAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayer2Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer3Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer1Location().equals(FiGameState.TileName.FOOLS_LANDING)){
+                    return "Congrats you have won the game!!";
+                }
+            }
+            else if(gs.getPlayerTurn() == 3){
+                if((gs.getSmartAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getSmartAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getSmartAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayer3Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer2Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer1Location().equals(FiGameState.TileName.FOOLS_LANDING)){
+                    return "Congrats you have won the game!!";
+                }
+            }
+        }
         if (gs.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.SUNK)) {
             return "Game Over! You lost because Fools Landing sunk!";
         }
@@ -352,7 +369,7 @@ public class FiLocalGame extends LocalGame {
                 }
                 gs.discard(gs.getPlayerTurn(), t);
             }
-            else if (action instanceof FiEndTurnAction) {
+            else if (action instanceof FiSkipTurnAction) {
                 if (gs.numPlayers > 2) {
                     if (gs.getPlayerTurn() == 1) {
                         gs.setPlayerTurn(2);
