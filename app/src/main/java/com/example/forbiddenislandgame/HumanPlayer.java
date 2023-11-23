@@ -153,6 +153,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             {
                 case ABANDONED_CLIFFS:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.ABANDONED_CLIFFS;
                     if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -166,10 +167,10 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.ABANDONED_CLIFFS;
                     break;
                 case BRONZE_GATE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.BRONZE_GATE;
                     if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.BRONZE_GATE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -183,10 +184,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.BRONZE_GATE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.BRONZE_GATE;
+
                     break;
                 case BREAKERS_BRIDGE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.BREAKERS_BRIDGE;
                     if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.BREAKERS_BRIDGE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -200,10 +202,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.BREAKERS_BRIDGE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.BREAKERS_BRIDGE;
+
                     break;
                 case COPPER_GATE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.COPPER_GATE;
                     if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.COPPER_GATE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -217,10 +220,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.COPPER_GATE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.COPPER_GATE;
+
                     break;
                 case CORAL_PALACE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.CORAL_PALACE;
                     if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.CORAL_PALACE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -234,10 +238,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.CORAL_PALACE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.CORAL_PALACE;
+
                     break;
                 case CRIMSON_FOREST:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.CRIMSON_FOREST;
                     if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.CRIMSON_FOREST, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -251,10 +256,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.CRIMSON_FOREST, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.CRIMSON_FOREST;
+
                     break;
                 case DECEPTION_DUNES:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.DECEPTION_DUNES;
                     if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.DECEPTION_DUNES, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -268,10 +274,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.DECEPTION_DUNES, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.DECEPTION_DUNES;
+
                     break;
                 case EMBER_CAVE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.EMBER_CAVE;
                     if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.EMBER_CAVE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -285,10 +292,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.EMBER_CAVE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.EMBER_CAVE;
+
                     break;
                 case FOOLS_LANDING:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.FOOLS_LANDING;
                     if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.FOOLS_LANDING, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -302,10 +310,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.FOOLS_LANDING, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.FOOLS_LANDING;
+
                     break;
                 case GOLD_GATE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.GOLD_GATE;
                     if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.GOLD_GATE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -319,10 +328,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.GOLD_GATE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.GOLD_GATE;
+
                     break;
                 case IRON_GATE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.IRON_GATE;
                     if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.IRON_GATE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -336,10 +346,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.IRON_GATE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.IRON_GATE;
+
                     break;
                 case HOWLING_GARDEN:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.HOWLING_GARDEN;
                     if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.HOWLING_GARDEN, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -353,10 +364,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.HOWLING_GARDEN, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.HOWLING_GARDEN;
+
                     break;
                 case MISTY_MARSH:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.MISTY_MARSH;
                     if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.MISTY_MARSH, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -370,10 +382,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.MISTY_MARSH, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.MISTY_MARSH;
+
                     break;
                 case MOON_TEMPLE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.MOON_TEMPLE;
                     if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.MOON_TEMPLE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -387,10 +400,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.MOON_TEMPLE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.MOON_TEMPLE;
+
                     break;
                 case SILVER_GATE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.SILVER_GATE;
                     if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.SILVER_GATE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -404,10 +418,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.SILVER_GATE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.SILVER_GATE;
+
                     break;
                 case SUN_TEMPLE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.SUN_TEMPLE;
                     if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.SUN_TEMPLE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -421,10 +436,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.SUN_TEMPLE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.SUN_TEMPLE;
+
                     break;
                 case PHANTOM_ROCK:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.PHANTOM_ROCK;
                     if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.PHANTOM_ROCK, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -438,10 +454,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.PHANTOM_ROCK, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.PHANTOM_ROCK;
+
                     break;
                 case WHISPERING_GARDENS:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.WHISPERING_GARDENS;
                     if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.WHISPERING_GARDENS, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -455,10 +472,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.WHISPERING_GARDENS, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.WHISPERING_GARDENS;
+
                     break;
                 case WATCHTOWER:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.WATCHTOWER;
                     if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.WATCHTOWER, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -472,10 +490,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.WATCHTOWER, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.WATCHTOWER;
+
                     break;
                 case TWILIGHT_HOLLOW:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.TWILIGHT_HOLLOW;
                     if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.TWILIGHT_HOLLOW, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -489,10 +508,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.TWILIGHT_HOLLOW, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.TWILIGHT_HOLLOW;
+
                     break;
                 case TIDAL_PALACE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.TIDAL_PALACE;
                     if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.TIDAL_PALACE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -506,10 +526,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.TIDAL_PALACE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.TIDAL_PALACE;
+
                     break;
                 case OBSERVATORY:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.OBSERVATORY;
                     if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.OBSERVATORY, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -523,10 +544,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.OBSERVATORY, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.OBSERVATORY;
+
                     break;
                 case LOST_LAGOON:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.LOST_LAGOON;
                     if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.LOST_LAGOON, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -540,10 +562,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.LOST_LAGOON, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.LOST_LAGOON;
+
                     break;
                 case SHADOW_CAVE:
                     //for the draw flood card method; changing whatever tiles are drawn
+                    b = this.SHADOW_CAVE;
                     if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.NORMAL)){
                         gameState.map.put(FiGameState.TileName.SHADOW_CAVE, FiGameState.Value.FLOODED);
                         b.setBackgroundColor(Color.BLUE);//flooded
@@ -557,7 +580,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         gameState.map.put(FiGameState.TileName.SHADOW_CAVE, FiGameState.Value.NORMAL);
                         b.setBackgroundColor(gameGreen);//normal
                     }
-                    b = this.SHADOW_CAVE;
+
                     break;
                 default:
                     b = null;
