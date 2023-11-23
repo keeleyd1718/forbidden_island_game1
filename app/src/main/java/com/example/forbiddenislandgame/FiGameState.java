@@ -343,7 +343,7 @@ public class FiGameState extends GameState {
             return false;
         }
         //choose card from array, remove, and add to another player's hand array
-        if(playerTurn == 1) {
+        if(playerTurn == 1 && humanPlayerHand.contains(card)) {
             humanPlayerHand.remove(card);
             if(playerId == 2) {
                 dumbAiHand.add(card);
@@ -357,7 +357,7 @@ public class FiGameState extends GameState {
             actionsRemaining--;
             return true;
         }
-        else if(playerTurn == 2) {
+        else if(playerTurn == 2 && dumbAiHand.contains(card)) {
             dumbAiHand.remove(card);
             if(playerId == 1) {
                 humanPlayerHand.add(card);
@@ -371,7 +371,7 @@ public class FiGameState extends GameState {
             actionsRemaining--;
             return true;
         }
-        else {
+        else if(playerTurn == 3 && smartAiHand.contains(card)){
             smartAiHand.remove(card);
             if(playerId == 2) {
                 dumbAiHand.add(card);
@@ -385,12 +385,10 @@ public class FiGameState extends GameState {
             actionsRemaining--;
             return true;
         }
+        return false;
     }//end of giveCard
 
-    public boolean discard(int playerTurn, TreasureCards card) {
-        if(actionsRemaining < 1){
-            return false;
-        }
+    public boolean discard(int playerTurn, TreasureCards card){
         if(playerTurn == 1){
             humanPlayerHand.remove(card);
             discardTreasureDeck.add(card);
