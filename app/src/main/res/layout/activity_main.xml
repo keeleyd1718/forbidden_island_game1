@@ -19,22 +19,35 @@
             <Button
                 android:id="@+id/quitButton"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="45dp"
                 android:background="#FF0000"
-                android:text="Quit" />
+                android:text="Quit"
+                android:textColor="#FFFFFF"
+                android:textSize="6sp" />
 
             <Button
-                android:id="@+id/deckButton"
+                android:id="@+id/floodDeck"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="45dp"
                 android:background="#009688"
-                android:text="Treasure Deck" />
+                android:text="Flood Deck"
+                android:textColor="#FFFFFF"
+                android:textSize="6sp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#009688"
+                android:text="Treasure Deck"
+                android:textColor="#FFFFFF"
+                android:textSize="6sp" />
 
             <TextView
                 android:id="@+id/floodView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Flood Meter: 0" />
+                android:layout_height="wrap_content"
+                android:text="Flood Meter: 0"
+                android:textSize="10sp" />
 
         </LinearLayout>
 
@@ -68,6 +81,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="FOOLS_LANDING" />
 
                 <Button
@@ -76,6 +90,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="BRONZE_GATE" />
 
                 <ImageView
@@ -111,6 +126,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="GOLD_GATE" />
 
                 <Button
@@ -119,6 +135,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="CORAL_PALACE" />
 
                 <Button
@@ -127,6 +144,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="SUN_TEMPLE" />
 
                 <Button
@@ -135,6 +153,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="SILVER_GATE" />
 
                 <ImageView
@@ -156,6 +175,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="PHANTOM_ROCK" />
 
                 <Button
@@ -164,6 +184,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="WATCHTOWER" />
 
                 <Button
@@ -172,6 +193,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="COPPER_GATE" />
 
                 <Button
@@ -180,6 +202,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="ABANDONED_CLIFFS" />
 
                 <Button
@@ -188,6 +211,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="WHISPERING_GARDENS" />
 
                 <Button
@@ -196,6 +220,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="SHADOW_CAVE" />
 
             </LinearLayout>
@@ -211,6 +236,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="LOST_LAGOON" />
 
                 <Button
@@ -219,6 +245,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="MOON_TEMPLE" />
 
                 <Button
@@ -227,6 +254,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="DECEPTION_DUNES" />
 
                 <Button
@@ -235,6 +263,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="TWILIGHT_HOLLOW" />
 
                 <Button
@@ -243,6 +272,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="EMBER_CAVE" />
 
                 <Button
@@ -251,6 +281,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="TIDAL_PALACE" />
 
             </LinearLayout>
@@ -273,6 +304,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="OBSERVATORY" />
 
                 <Button
@@ -281,6 +313,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="IRON_GATE" />
 
                 <Button
@@ -289,6 +322,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="CRIMSON_FOREST" />
 
                 <Button
@@ -297,6 +331,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="MISTY_MARSH" />
 
                 <ImageView
@@ -332,6 +367,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="BREAKERS_BRIDGE" />
 
                 <Button
@@ -340,6 +376,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#63B366"
+                    android:textSize="4sp"
                     android:text="HOWLING_GARDEN" />
 
                 <ImageView
@@ -379,6 +416,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                        android:textSize="5sp"
                         android:text="Draw Treasure" />
 
                     <Button
@@ -387,6 +425,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                        android:textSize="6sp"
                         android:text="Draw Flood" />
 
                 </LinearLayout>
@@ -402,6 +441,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                        android:textSize="6sp"
                         android:text="Move" />
 
                     <Button
@@ -410,7 +450,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
-                        android:text=" Shore Up" />
+                        android:textSize="6sp"
+                        android:text="Shore Up" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -424,6 +465,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
+                        android:textSize="6sp"
                         android:text="Give Card" />
 
                     <Button
@@ -432,7 +474,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#6E9FB5"
-                        android:text="Capture" />
+                        android:textSize="5sp"
+                        android:text="Capture Treasure" />
 
                 </LinearLayout>
 
@@ -441,6 +484,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="6sp"
                     android:text="Discard" />
             </LinearLayout>
 

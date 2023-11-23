@@ -381,7 +381,7 @@ public class FiGameState extends GameState {
             return false;
         }
         //removing four earth stone cards from the player's hand and capturing the treasure if they are on the correct tile
-        if(playerTurn == 1 && t.equals(TileName.MOON_TEMPLE)) {
+        if(playerTurn == 1 && (t.equals(TileName.MOON_TEMPLE) || t.equals(TileName.SUN_TEMPLE))) {
             if (a.contains(numEarthStoneCards1 >= 4)) {
                 int count = 0;
                 if (a.contains(TreasureCards.EARTH_STONE)) {
@@ -411,7 +411,7 @@ public class FiGameState extends GameState {
                 return true;
             }
         }
-        else if(playerTurn == 1 && t.equals(TileName.SHADOW_CAVE)) {
+        else if(playerTurn == 1 && (t.equals(TileName.SHADOW_CAVE) || t.equals(TileName.EMBER_CAVE))) {
             if (a.contains(numFireCrystalCards1 >= 4)) {
                 int count = 0;
                 if (a.contains(TreasureCards.FIRE_CRYSTAL1)) {
@@ -441,7 +441,7 @@ public class FiGameState extends GameState {
                 return true;
             }
         }
-        else if(playerTurn == 1 && t.equals(TileName.HOWLING_GARDEN)) {
+        else if(playerTurn == 1 && (t.equals(TileName.HOWLING_GARDEN) || t.equals(TileName.WHISPERING_GARDENS))) {
             if (a.contains(numWindStatueCards1 >= 4)) {
                 int count = 0;
                 if (a.contains(TreasureCards.WIND_STATUE1)) {
@@ -471,7 +471,7 @@ public class FiGameState extends GameState {
                 return true;
             }
         }
-        else if(playerTurn == 1 && t.equals(TileName.CORAL_PALACE)) {
+        else if(playerTurn == 1 && (t.equals(TileName.CORAL_PALACE) || t.equals(TileName.TIDAL_PALACE))) {
             if (a.contains(numOceanChaliceCards1 >= 4)) {
                 int count = 0;
                 if (a.contains(TreasureCards.OCEAN_CHALICE1)) {

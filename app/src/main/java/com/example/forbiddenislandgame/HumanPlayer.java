@@ -82,26 +82,19 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             FiGameState gameState = (FiGameState) info;
 
             //setting the initial start places for the players
-            ABANDONED_CLIFFS.setText("player 1's pawn");
-            DECEPTION_DUNES.setText("player 2's pawn");
-            OBSERVATORY.setText("player 3's pawn");
-
-            /*use
-            CORAL_PALACE,//ocean chalice
-            SHADOW_CAVE,//fire crystal
-            MOON_TEMPLE,//earth stone
-            HOWLING_GARDEN,//wind statue
-
-            TIDAL_PALACE,//ocean chalice
-            SUN_TEMPLE,//earth stone
-            EMBER_CAVE,//fire crystal
-            WHISPERING_GARDENS,//wind statue*/
+            ABANDONED_CLIFFS.setText("player 1");
+            DECEPTION_DUNES.setText("player 2");
+            OBSERVATORY.setText("player 3");
 
             //set the tile player's must be on to capture certain treasures
             CORAL_PALACE.setText("Ocean Chalice Treasure");
+            TIDAL_PALACE.setText("Ocean Chalice Treasure");
             SHADOW_CAVE.setText("Fire Crystal Treasure");
+            EMBER_CAVE.setText("Fire Crystal Treasure");
             MOON_TEMPLE.setText("Earth Stone Treasure");
+            SUN_TEMPLE.setText("Earth Stone Treasure");
             HOWLING_GARDEN.setText("Wind Statue Treasure");
+            WHISPERING_GARDENS.setText("Wind Statue Treasure");
 
             //changing the text on a button to show where the pawns are
             FiGameState.TileName t = gameState.getPlayer1Location();
@@ -680,7 +673,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         //initializing action buttons
         this.floodView = activity.findViewById(R.id.floodView);
         this.quitButton = activity.findViewById(R.id.quitButton);
-        this.deckButton = activity.findViewById(R.id.deckButton);
+        this.deckButton = activity.findViewById(R.id.floodDeck);
         this.discardButton = activity.findViewById(R.id.discard);
         this.drawTreasureButton = activity.findViewById(R.id.drawTreasureButton);
         this.drawFloodButton = activity.findViewById(R.id.drawFloodButton);
