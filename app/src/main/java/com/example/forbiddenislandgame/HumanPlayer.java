@@ -125,9 +125,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             FiGameState gameState = (FiGameState) info;
 
             //setting the initial start places for the players
-            ABANDONED_CLIFFS.setText("player 1");
-            DECEPTION_DUNES.setText("player 2");
-            OBSERVATORY.setText("player 3");
+            ABANDONED_CLIFFS.setText("ABANDONED_CLIFFS" + System.getProperty("line.separator") + "player 1");
+            DECEPTION_DUNES.setText("DECEPTION_DUNES" + System.getProperty("line.separator") + "player 2");
+            OBSERVATORY.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
 
             //set the text of the buttons to what is in human player's hand
             //fix this depending on what cards on in the player's hand and make image buttons for the cards to display
@@ -143,14 +143,14 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             }
 
             //set the tile player's must be on to capture certain treasures
-            CORAL_PALACE.setText("Ocean Chalice Treasure");
-            TIDAL_PALACE.setText("Ocean Chalice Treasure");
-            SHADOW_CAVE.setText("Fire Crystal Treasure");
-            EMBER_CAVE.setText("Fire Crystal Treasure");
-            MOON_TEMPLE.setText("Earth Stone Treasure");
-            SUN_TEMPLE.setText("Earth Stone Treasure");
-            HOWLING_GARDEN.setText("Wind Statue Treasure");
-            WHISPERING_GARDENS.setText("Wind Statue Treasure");
+            CORAL_PALACE.setText("CORAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
+            TIDAL_PALACE.setText("TIDAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
+            SHADOW_CAVE.setText("SHADOW_CAVE" + System.getProperty("line.separator") + "Fire Crystal Treasure");
+            EMBER_CAVE.setText("EMBER_CAVE" + System.getProperty("line.separator") + "Fire Crystal Treasure");
+            MOON_TEMPLE.setText("MOON_TEMPLE" + System.getProperty("line.separator") + "Earth Stone Treasure");
+            SUN_TEMPLE.setText("SUN_TEMPLE" + System.getProperty("line.separator") + "Earth Stone Treasure");
+            HOWLING_GARDEN.setText("HOWLING_GARDEN" + System.getProperty("line.separator") + "Wind Statue Treasure");
+            WHISPERING_GARDENS.setText("WHISPERING_GARDENS" + System.getProperty("line.separator") + "Wind Statue Treasure");
 
             //changing the text on a button to show where the pawns are
             FiGameState.TileName t = gameState.getPlayer1Location();
@@ -593,7 +593,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             }
             if(b != null)
             {
-                b.setText(gameState.getPlayerTurn() + "'s pawn");
+                b.setText(System.getProperty("line.separator") + gameState.getPlayerTurn() + "'s pawn");
             }
 
             this.floodView.setText("Flood Meter: "+gameState.getFloodMeter());
