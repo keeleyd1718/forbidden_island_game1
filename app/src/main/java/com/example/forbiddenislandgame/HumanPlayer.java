@@ -57,6 +57,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button HOWLING_GARDEN = null;
     private Button giveCardToP2 = null;
     private Button giveCardToP3 = null;
+
+
+    //might delete these if we delete treasure ui
     private Button EARTH_STONE = null;
     private Button EARTH_STONE2 = null;
     private Button EARTH_STONE3 = null;
@@ -82,6 +85,8 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button HELICOPTER_LIFT1 = null;
     private Button HELICOPTER_LIFT2 = null;
     private Button HELICOPTER_LIFT3 = null;
+
+    //buttons for the player's hand
     private Button playerCard1 = null;
     private Button playerCard2 = null;
     private Button playerCard3 = null;
@@ -125,6 +130,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             OBSERVATORY.setText("player 3");
 
             //set the text of the buttons to what is in human player's hand
+            //fix this depending on what cards on in the player's hand and make image buttons for the cards to display
             if(gameState.getHumanPlayerHand().size() >= 5){
                 playerCard1.setText("" + gameState.getHumanPlayerHand().get(0));
                 playerCard2.setText("" + gameState.getHumanPlayerHand().get(1));
@@ -714,7 +720,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             default:
                 selection = FiGameState.TileName.NONE;
         }
+
         //code for when a player chooses a card to discard and for the give card method
+        //make a switch statement depending on what cards on in the players hand
         FiGameState.TreasureCards sel;
         switch(view.getId()){
             case R.id.WIND_STATUE1:
@@ -874,7 +882,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.giveCardToP3 = activity.findViewById(R.id.giveCardToP3);
 
         //layout resource for treasure deck gui
-        activity.setContentView(R.layout.treasure_deck_ui);
+        //activity.setContentView(R.layout.treasure_deck_ui);
 
         //initializing buttons used for treasure deck ui
         this.EARTH_STONE = activity.findViewById(R.id.EARTH_STONE);
