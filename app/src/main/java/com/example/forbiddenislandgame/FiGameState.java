@@ -74,7 +74,7 @@ public class FiGameState extends GameState {
         HELICOPTER_LIFT3,
         WATERS_RISE1,
         WATERS_RISE2,
-        WATERS_RISE3;
+        WATERS_RISE3
     }
     public enum FloodCards {//enum for flood deck
         FOOLS_LANDING1,
@@ -159,7 +159,7 @@ public class FiGameState extends GameState {
         MISTY_MARSH,//none
         BREAKERS_BRIDGE,//none
         HOWLING_GARDEN,//wind statue
-        NONE;
+        NONE
     }
 
     /** Default constructor for the game state */
@@ -797,7 +797,7 @@ public class FiGameState extends GameState {
         //increasing the floodMeter count or num treasure card counts if that card is drawn
         if(card1.equals(TreasureCards.WATERS_RISE1) || card1.equals(TreasureCards.WATERS_RISE2) || card1.equals(TreasureCards.WATERS_RISE3)){
             floodMeter++;
-            a.remove(card1);
+            //a.remove(card1);
             discardTreasureDeck.add(card1);
         }
         else if(card1.equals(TreasureCards.EARTH_STONE) || card1.equals(TreasureCards.EARTH_STONE2) || card1.equals(TreasureCards.EARTH_STONE3) || card1.equals(TreasureCards.EARTH_STONE4) || card1.equals(TreasureCards.EARTH_STONE5)){
@@ -852,7 +852,7 @@ public class FiGameState extends GameState {
         //increasing the floodMeter count or num treasure card counts if that card is drawn
         if(card2.equals(TreasureCards.WATERS_RISE1) || card2.equals(TreasureCards.WATERS_RISE2) || card2.equals(TreasureCards.WATERS_RISE3)){
             floodMeter++;
-            a.remove(card2);
+            //a.remove(card2);
             discardTreasureDeck.add(card2);
         }
         else if(card2.equals(TreasureCards.EARTH_STONE) || card2.equals(TreasureCards.EARTH_STONE2) || card2.equals(TreasureCards.EARTH_STONE3) || card2.equals(TreasureCards.EARTH_STONE4) || card2.equals(TreasureCards.EARTH_STONE5)){
@@ -931,12 +931,22 @@ public class FiGameState extends GameState {
     public int getNumPlayers(){return this.numPlayers;}
     public int getActionsRemaining(){return this.actionsRemaining;}
     public int getNumberOfCardsInHand(ArrayList<TreasureCards> a) {return a.size();}
+
+    public String getHand(ArrayList<TreasureCards> a) {
+        String str = "";
+        for(int i = 0; i < a.size(); i++){
+            str += a.get(i) + " ";
+        }
+        return str;
+    }
+
     public ArrayList<TreasureCards> getHumanPlayerHand(){return this.humanPlayerHand;}
     public ArrayList<TreasureCards> getDumbAiHand(){return this.dumbAiHand;}
     public ArrayList<TreasureCards> getSmartAiHand(){return this.smartAiHand;}
     public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
     public ArrayList<FloodCards> getDiscardFloodDeck(){return this.discardFloodDeck;}
     public ArrayList<TreasureCards> getDiscardTreasureDeck(){return this.discardTreasureDeck;}
+    public int getDiscardTreasureDeckSize(){return this.discardTreasureDeck.size();}
     public TileName getPlayer1Location(){return this.player1Location;}
     public TileName getPlayer2Location(){return this.player2Location;}
     public TileName getPlayer3Location(){return this.player3Location;}
