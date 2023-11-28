@@ -593,7 +593,8 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             }
             if(b != null)
             {
-                b.setText(System.getProperty("line.separator") + gameState.getPlayerTurn() + "'s pawn");
+                b.setTextSize(6);
+                b.setText(System.getProperty("line.separator") + "Player " + gameState.getPlayerTurn());
             }
 
             this.floodView.setText("Flood Meter: "+gameState.getFloodMeter());
