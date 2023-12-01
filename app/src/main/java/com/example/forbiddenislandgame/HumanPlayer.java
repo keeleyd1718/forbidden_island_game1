@@ -21,8 +21,11 @@ import com.example.game.GameFramework.players.GameHumanPlayer;
 
 public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener {
     private int layoutId;
-    // all the buttons on the ui that can be pressed
-    private TextView floodView = null;
+    private GameMainActivity myActivity;
+    int gameGreen = Color.rgb(63, 179, 66);//color for the tiles when they're normal
+    private TextView floodView = null;//to display the flood meter
+
+    // all the buttons on the ui that can be pressed; action buttons and tile buttons
     private Button quitButton = null;
     private Button deckButton = null;
     private Button drawTreasureButton = null;
@@ -56,6 +59,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button MISTY_MARSH = null;
     private Button BREAKERS_BRIDGE = null;
     private Button HOWLING_GARDEN = null;
+
+    //buttons to use for the give card action
+    private Button giveCardToP1 = null;
     private Button giveCardToP2 = null;
     private Button giveCardToP3 = null;
 
@@ -86,16 +92,15 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button HELICOPTER_LIFT1 = null;
     private Button HELICOPTER_LIFT2 = null;
     private Button HELICOPTER_LIFT3 = null;
+    private ImageButton[] playerCards = new ImageButton[6];//image buttons for the player's hand
+    private ImageButton[] treasures = new ImageButton[4];//image buttons for the treasures around the board
 
-    //buttons for the player's hand
-    private ImageButton[] playerCards = new ImageButton[6];
-    private ImageButton[] treasures = new ImageButton[4];
-
-    private GameMainActivity myActivity;
+    //keep track of if that button was clicked
     private boolean moveButtonClicked = false;
     private boolean shoreUpButtonClicked = false;
     private boolean discardButtonClicked = false;
     private boolean giveCardButtonClicked = false;
+    private boolean giveCardToP1Clicked = false;
     private boolean giveCardToP2Clicked = false;
     private boolean giveCardToP3Clicked = false;
 
@@ -108,8 +113,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     playerCardsClicked[3] = false;
     playerCardsClicked[4] = false;
     playerCardsClicked[5] = false;*/
-
-    int gameGreen = Color.rgb(63, 179, 66);
 
     /**
      * constructor
@@ -139,7 +142,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             DECEPTION_DUNES.setText("DECEPTION_DUNES" + System.getProperty("line.separator") + "player 2");
             OBSERVATORY.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
 
-            //set the image of the buttons to display what cards are in the player's hand
+            //set the image of the player card buttons to display what cards are in the player's hand
             for(int i = 0; i < gameState.getPlayerTurnHand(gameState.playerTurn).size(); i++){
                 FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(gameState.playerTurn).get(i);
 
@@ -184,439 +187,296 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
             //changing the text on a button to show where the pawns are
             FiGameState.TileName t = gameState.getPlayerLocation(gameState.getPlayerTurn());
-            Button b = null;
+            Button b;
             switch(t)
             {
                 case ABANDONED_CLIFFS:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.ABANDONED_CLIFFS;
                     if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);//normal
                     }
                     else if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);//flooded
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);//sunk
                     }
                     break;
                 case BRONZE_GATE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.BRONZE_GATE;
                     if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.BRONZE_GATE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.BRONZE_GATE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.BRONZE_GATE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case BREAKERS_BRIDGE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.BREAKERS_BRIDGE;
                     if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.BREAKERS_BRIDGE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.BREAKERS_BRIDGE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.BREAKERS_BRIDGE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case COPPER_GATE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.COPPER_GATE;
                     if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.COPPER_GATE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.COPPER_GATE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.COPPER_GATE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case CORAL_PALACE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.CORAL_PALACE;
                     if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.CORAL_PALACE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.CORAL_PALACE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.CORAL_PALACE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case CRIMSON_FOREST:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.CRIMSON_FOREST;
                     if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.CRIMSON_FOREST, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.CRIMSON_FOREST, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.CRIMSON_FOREST, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case DECEPTION_DUNES:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.DECEPTION_DUNES;
                     if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.DECEPTION_DUNES, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.DECEPTION_DUNES, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.DECEPTION_DUNES, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case EMBER_CAVE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.EMBER_CAVE;
                     if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.EMBER_CAVE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.EMBER_CAVE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.EMBER_CAVE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case FOOLS_LANDING:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.FOOLS_LANDING;
                     if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.FOOLS_LANDING, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.FOOLS_LANDING, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.FOOLS_LANDING, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case GOLD_GATE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.GOLD_GATE;
                     if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.GOLD_GATE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.GOLD_GATE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.GOLD_GATE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case IRON_GATE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.IRON_GATE;
                     if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.IRON_GATE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.IRON_GATE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.IRON_GATE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case HOWLING_GARDEN:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.HOWLING_GARDEN;
                     if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.HOWLING_GARDEN, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.HOWLING_GARDEN, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.HOWLING_GARDEN, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case MISTY_MARSH:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.MISTY_MARSH;
                     if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.MISTY_MARSH, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.MISTY_MARSH, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.MISTY_MARSH, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case MOON_TEMPLE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.MOON_TEMPLE;
                     if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.MOON_TEMPLE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.MOON_TEMPLE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.MOON_TEMPLE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case SILVER_GATE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.SILVER_GATE;
                     if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.SILVER_GATE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.SILVER_GATE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.SILVER_GATE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case SUN_TEMPLE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.SUN_TEMPLE;
                     if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.SUN_TEMPLE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.SUN_TEMPLE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.SUN_TEMPLE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case PHANTOM_ROCK:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.PHANTOM_ROCK;
                     if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.PHANTOM_ROCK, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.PHANTOM_ROCK, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.PHANTOM_ROCK, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case WHISPERING_GARDENS:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.WHISPERING_GARDENS;
                     if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.WHISPERING_GARDENS, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.WHISPERING_GARDENS, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.WHISPERING_GARDENS, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case WATCHTOWER:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.WATCHTOWER;
                     if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.WATCHTOWER, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.WATCHTOWER, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.WATCHTOWER, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case TWILIGHT_HOLLOW:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.TWILIGHT_HOLLOW;
                     if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.TWILIGHT_HOLLOW, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.TWILIGHT_HOLLOW, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.TWILIGHT_HOLLOW, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case TIDAL_PALACE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.TIDAL_PALACE;
                     if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.TIDAL_PALACE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.TIDAL_PALACE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.TIDAL_PALACE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case OBSERVATORY:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.OBSERVATORY;
                     if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.OBSERVATORY, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.OBSERVATORY, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.OBSERVATORY, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case LOST_LAGOON:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.LOST_LAGOON;
                     if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.LOST_LAGOON, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.LOST_LAGOON, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.LOST_LAGOON, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 case SHADOW_CAVE:
-                    //for the draw flood card method; changing whatever tiles are drawn
                     b = this.SHADOW_CAVE;
                     if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.NORMAL)){
-                        gameState.map.put(FiGameState.TileName.SHADOW_CAVE, FiGameState.Value.FLOODED);
-                        b.setBackgroundColor(Color.BLUE);//flooded
+                        b.setBackgroundColor(gameGreen);
                     }
                     else if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.FLOODED)){
-                        gameState.map.put(FiGameState.TileName.SHADOW_CAVE, FiGameState.Value.SUNK);
-                        b.setBackgroundColor(Color.GRAY);//sunk
+                        b.setBackgroundColor(Color.BLUE);
                     }
-                    //for the shore up method
                     else if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.SUNK)){
-                        gameState.map.put(FiGameState.TileName.SHADOW_CAVE, FiGameState.Value.NORMAL);
-                        b.setBackgroundColor(gameGreen);//normal
+                        b.setBackgroundColor(Color.GRAY);
                     }
-
                     break;
                 default:
                     b = null;
@@ -624,7 +484,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             if(b != null)
             {
                 b.setTextSize(6);
-                b.setText(System.getProperty("line.separator") + "Player " + gameState.getPlayerTurn());
+                b.setText(t + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn());
             }
 
             this.floodView.setText("Flood Meter: "+gameState.getFloodMeter());
@@ -723,6 +583,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             game.sendAction(new FiCaptureTreasureAction(this));
         }
 
+        //to know what tile they pressed for the move and shore up methods
         FiGameState.TileName selection;
         switch(view.getId()){
             case R.id.ABANDONED_CLIFFS:
@@ -806,18 +667,58 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         {
             for(int i = 0; i < playerCards.length; i++){
                 if(playerCardsClicked[i]) {
-                    game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.EARTH_STONE));//random for now
+                    if(playerCards[i].getBackground().equals(R.drawable.tc_waters_rise)){
+                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.WATERS_RISE1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_helicopter_lift)){
+                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.HELICOPTER_LIFT1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_sandbag)){
+                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.SANDBAG1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_earth_stone)){
+                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.EARTH_STONE));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_fire_crystal)){
+                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.FIRE_CRYSTAL1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_wind_statue)){
+                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.WIND_STATUE1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_ocean_chalice)){
+                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.OCEAN_CHALICE1));
+                    }
                     discardButtonClicked = false;
                     playerCardsClicked[i] = false;
                 }
             }
         }
-        //need to figure out how to know which card in the button they pressed to give away!!
+        //need to add other cards for which button they pressed to give that card away
         else if(giveCardButtonClicked)
         {
             for(int i = 0; i < playerCards.length; i++){
                 if(playerCardsClicked[i]) {
-                    game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.EARTH_STONE));//random for now
+                    if(playerCards[i].getBackground().equals(R.drawable.tc_waters_rise)){
+                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.WATERS_RISE1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_helicopter_lift)){
+                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.HELICOPTER_LIFT1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_sandbag)){
+                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.SANDBAG1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_earth_stone)){
+                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.EARTH_STONE));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_fire_crystal)){
+                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.FIRE_CRYSTAL1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_wind_statue)){
+                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.WIND_STATUE1));
+                    }
+                    else if(playerCards[i].getBackground().equals(R.drawable.tc_ocean_chalice)){
+                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.OCEAN_CHALICE1));
+                    }
                     giveCardButtonClicked = false;
                     playerCardsClicked[i] = false;
                 }
