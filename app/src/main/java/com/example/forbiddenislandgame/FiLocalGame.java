@@ -79,20 +79,25 @@ public class FiLocalGame extends LocalGame {
         return false;
     }
     protected boolean makeMove(GameAction action){
+        //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
         if(canMove(getPlayerIdx(action.getPlayer()))) {
-            //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
             if (action instanceof FiDrawTreasureAction) {
+                //call the drawTreasure method with the hand of the player whose turn it is
                 gs.drawTreasure(gs.getPlayerTurnHand(gs.playerTurn));
                 return true;
             }
             else if (action instanceof FiDrawFloodAction) {
-                gs.drawFlood(gs.getDrawnFloodCards());//call the drawFlood method on the drawnFloodCards array
-                //if there are any flood cards in the drawn flood cards arraylist go through each element and change those tiles value to flooded or sunk depending on what the values were
+                //call the drawFlood method on the drawnFloodCards arrayList
+                gs.drawFlood(gs.getDrawnFloodCards());
+
+                //if there are any flood cards in the drawnFloodCards arrayList go through each card and change those tiles value to flooded or sunk depending on what the values were before
                 for(int i = 0; i < gs.getDrawnFloodCards().size(); i++){
                     if(gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.ABANDONED_CLIFFS) || gs.getDrawnFloodCards().get(i).equals(FiGameState.FloodCards.ABANDONED_CLIFFS1)){
+                        //if the value of the tile was normal change it to flooded
                         if(gs.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.NORMAL)){
                             gs.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.FLOODED);
                         }
+                        //if the value of the tile was flooded change it to sunk
                         else if(gs.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.FLOODED)){
                             gs.map.put(FiGameState.TileName.ABANDONED_CLIFFS, FiGameState.Value.SUNK);
                         }
@@ -285,16 +290,17 @@ public class FiLocalGame extends LocalGame {
                         return false;
                     }
                 }
-                gs.emptyDrawnFloodCards();//empty the array of drawn flood cards
+                gs.emptyDrawnFloodCards();//empty the drawnFloodCards arrayList
                 return true;
             }
             else if (action instanceof FiMoveAction) {
-                FiMoveAction a = (FiMoveAction) action;
-                FiGameState.TileName t = a.getTileName();
-                gs.move(gs.getPlayerTurn(), t);
+                FiMoveAction a = (FiMoveAction) action;//create an instance of a move action
+                FiGameState.TileName t = a.getTileName();//get the tile the player pressed
+                gs.move(gs.getPlayerTurn(), t);//call the move() method
                 return true;
             }
             else if (action instanceof FiShoreUpAction) {
+                //same steps as the move action above
                 FiShoreUpAction a = (FiShoreUpAction) action;
                 FiGameState.TileName t = a.getTileName();
                 gs.shoreUp(gs.getPlayerTurn(), t);
@@ -302,8 +308,8 @@ public class FiLocalGame extends LocalGame {
             }
             else if (action instanceof FiGiveCardAction) {
                 FiGiveCardAction a = (FiGiveCardAction) action;
-                FiGameState.TreasureCards t = a.getTreasureCardName();
-                gs.giveCard(gs.getPlayerTurn(), gs.getPlayerChosen(), t);
+                FiGameState.TreasureCards t = a.getTreasureCardName();//get the card they want to give away
+                gs.giveCard(gs.getPlayerTurn(), gs.playerChosen, t);//call the giveCard() method to give the card (t) to the playerChosen
                 return true;
             }
             else if (action instanceof FiCaptureTreasureAction) {
@@ -311,7 +317,7 @@ public class FiLocalGame extends LocalGame {
                 return true;
             }
             else if (action instanceof FiDiscardAction) {
-                //add the card the player chose to discard to the discard treasure deck
+                //add the card the player chose to the discard treasure deck
                 FiDiscardAction a = (FiDiscardAction) action;
                 FiGameState.TreasureCards t = a.getTreasureCardName();
                 if(gs.getPlayerTurnHand(gs.playerTurn).size() > 5){
@@ -319,6 +325,7 @@ public class FiLocalGame extends LocalGame {
                 }
             }
             else if (action instanceof FiSkipTurnAction) {
+                //change whose turn it and reset their actionsRemaining back to 3 for their turn
                 if (gs.numPlayers > 2) {
                     if (gs.getPlayerTurn() == 1) {
                         gs.setPlayerTurn(2);

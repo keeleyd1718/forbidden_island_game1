@@ -697,7 +697,6 @@ public class FiGameState extends GameState {
     //getter methods
     public int getFloodMeter() {return this.floodMeter;}
     public int getPlayerTurn(){return this.playerTurn;}
-    public int getNumPlayers(){return this.numPlayers;}
     public int getActionsRemaining(){return this.actionsRemaining;}
     public int getNumberOfCardsInHand(ArrayList<TreasureCards> a) {return a.size();}
 
@@ -724,17 +723,13 @@ public class FiGameState extends GameState {
     public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
     public ArrayList<FloodCards> getDiscardFloodDeck(){return this.discardFloodDeck;}
     public ArrayList<TreasureCards> getDiscardTreasureDeck(){return this.discardTreasureDeck;}
-    public int getDiscardTreasureDeckSize(){return this.discardTreasureDeck.size();}
-    public TileName getPlayerLocation(int playerTurn){
-        if(playerTurn == 1){
+    public TileName getPlayerLocation(int playerTurn) {
+        if (playerTurn == 1) {
             return this.player1Location;
-        }
-        else if(playerTurn == 2){
+        } else if (playerTurn == 2) {
             return this.player2Location;
-        }
-        else{
+        } else {
             return this.player3Location;
         }
     }
-    public int getPlayerChosen(){return this.playerChosen;}
 }
