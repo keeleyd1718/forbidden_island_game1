@@ -96,6 +96,19 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private boolean shoreUpButtonClicked = false;
     private boolean discardButtonClicked = false;
     private boolean giveCardButtonClicked = false;
+    private boolean giveCardToP2Clicked = false;
+    private boolean giveCardToP3Clicked = false;
+
+    //to keep track of when the player's cards are pressed
+    private boolean[] playerCardsClicked = new boolean[6];
+
+    /*playerCardsClicked[0] = false;
+    playerCardsClicked[1] = false;
+    playerCardsClicked[2] = false;
+    playerCardsClicked[3] = false;
+    playerCardsClicked[4] = false;
+    playerCardsClicked[5] = false;*/
+
     int gameGreen = Color.rgb(63, 179, 66);
 
     /**
@@ -127,26 +140,28 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             OBSERVATORY.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
 
             //set the image of the buttons to display what cards are in the player's hand
-            for(int i = 0; i < gameState.getHumanPlayerHand().size(); i++){
-                if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WATERS_RISE1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WATERS_RISE2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WATERS_RISE3)){
+            for(int i = 0; i < gameState.getPlayerTurnHand(gameState.playerTurn).size(); i++){
+                FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(gameState.playerTurn).get(i);
+
+                if(tc.equals(FiGameState.TreasureCards.WATERS_RISE1) || tc.equals(FiGameState.TreasureCards.WATERS_RISE2) || tc.equals(FiGameState.TreasureCards.WATERS_RISE3)){
                     playerCards[i].setImageResource(R.drawable.tc_waters_rise);
                 }
-                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.SANDBAG1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.SANDBAG2)){
+                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
                     playerCards[i].setImageResource(R.drawable.tc_sandbag);
                 }
-                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
+                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
                     playerCards[i].setImageResource(R.drawable.tc_helicopter_lift);
                 }
-                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE3) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE4) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE5)){
+                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.EARTH_STONE) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
                     playerCards[i].setImageResource(R.drawable.tc_earth_stone);
                 }
-                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE3) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE4) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE5)){
+                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || tc.equals(FiGameState.TreasureCards.WIND_STATUE2) || tc.equals(FiGameState.TreasureCards.WIND_STATUE3) || tc.equals(FiGameState.TreasureCards.WIND_STATUE4) || tc.equals(FiGameState.TreasureCards.WIND_STATUE5)){
                     playerCards[i].setImageResource(R.drawable.tc_wind_statue);
                 }
-                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
+                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
                     playerCards[i].setImageResource(R.drawable.tc_fire_crystal);
                 }
-                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
+                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
                     playerCards[i].setImageResource(R.drawable.tc_ocean_chalice);
                 }
             }
@@ -168,7 +183,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             WHISPERING_GARDENS.setText("WHISPERING_GARDENS" + System.getProperty("line.separator") + "Wind Statue Treasure");
 
             //changing the text on a button to show where the pawns are
-            FiGameState.TileName t = gameState.getPlayer1Location();
+            FiGameState.TileName t = gameState.getPlayerLocation(gameState.getPlayerTurn());
             Button b = null;
             switch(t)
             {
@@ -643,6 +658,30 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             shoreUpButtonClicked = true;
             return;
         }
+        else if(view.getId() == R.id.playerCard1){
+            playerCardsClicked[0] = true;
+            return;
+        }
+        else if(view.getId() == R.id.playerCard2){
+            playerCardsClicked[1] = true;
+            return;
+        }
+        else if(view.getId() == R.id.playerCard3){
+            playerCardsClicked[2] = true;
+            return;
+        }
+        else if(view.getId() == R.id.playerCard4){
+            playerCardsClicked[3] = true;
+            return;
+        }
+        else if(view.getId() == R.id.playerCard5){
+            playerCardsClicked[4] = true;
+            return;
+        }
+        else if(view.getId() == R.id.playerCard6){
+            playerCardsClicked[5] = true;
+            return;
+        }
         else if(view.getId() == R.id.giveCardButton){
             if(view.getId() == R.id.giveCardToP1){
                 FiGameState.playerChosen = 1;
@@ -737,97 +776,34 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 selection = FiGameState.TileName.NONE;
         }
 
-        //code for when a player chooses a card to discard and for the give card method
-        //make a switch statement depending on what cards on in the players hand
-        FiGameState.TreasureCards sel;
-        switch(view.getId()){
-            case R.id.WIND_STATUE1:
-                sel = FiGameState.TreasureCards.WIND_STATUE1;
-                break;
-            case R.id.WIND_STATUE2:
-                sel = FiGameState.TreasureCards.WIND_STATUE2;
-                break;
-            case R.id.WIND_STATUE3:
-                sel = FiGameState.TreasureCards.WIND_STATUE3;
-                break;
-            case R.id.WIND_STATUE4:
-                sel = FiGameState.TreasureCards.WIND_STATUE4;
-                break;
-            case R.id.WIND_STATUE5:
-                sel = FiGameState.TreasureCards.WIND_STATUE5;
-                break;
-            case R.id.EARTH_STONE:
-                sel = FiGameState.TreasureCards.EARTH_STONE;
-                break;
-            case R.id.EARTH_STONE2:
-                sel = FiGameState.TreasureCards.EARTH_STONE2;
-                break;
-            case R.id.EARTH_STONE3:
-                sel = FiGameState.TreasureCards.EARTH_STONE3;
-                break;
-            case R.id.EARTH_STONE4:
-                sel = FiGameState.TreasureCards.EARTH_STONE4;
-                break;
-            case R.id.EARTH_STONE5:
-                sel = FiGameState.TreasureCards.EARTH_STONE5;
-                break;
-            case R.id.FIRE_CRYSTAL1:
-                sel = FiGameState.TreasureCards.FIRE_CRYSTAL1;
-                break;
-            case R.id.FIRE_CRYSTAL2:
-                sel = FiGameState.TreasureCards.FIRE_CRYSTAL2;
-                break;
-            case R.id.FIRE_CRYSTAL3:
-                sel = FiGameState.TreasureCards.FIRE_CRYSTAL3;
-                break;
-            case R.id.FIRE_CRYSTAL4:
-                sel = FiGameState.TreasureCards.FIRE_CRYSTAL4;
-                break;
-            case R.id.FIRE_CRYSTAL5:
-                sel = FiGameState.TreasureCards.FIRE_CRYSTAL5;
-                break;
-            case R.id.OCEAN_CHALICE1:
-                sel = FiGameState.TreasureCards.OCEAN_CHALICE1;
-                break;
-            case R.id.OCEAN_CHALICE2:
-                sel = FiGameState.TreasureCards.OCEAN_CHALICE2;
-                break;
-            case R.id.OCEAN_CHALICE3:
-                sel = FiGameState.TreasureCards.OCEAN_CHALICE3;
-                break;
-            case R.id.OCEAN_CHALICE4:
-                sel = FiGameState.TreasureCards.OCEAN_CHALICE4;
-                break;
-            case R.id.OCEAN_CHALICE5:
-                sel = FiGameState.TreasureCards.OCEAN_CHALICE5;
-                break;
-            case R.id.SANDBAG1:
-                sel = FiGameState.TreasureCards.SANDBAG1;
-                break;
-            case R.id.SANDBAG2:
-                sel = FiGameState.TreasureCards.SANDBAG2;
-                break;
-            case R.id.HELICOPTER_LIFT1:
-                sel = FiGameState.TreasureCards.HELICOPTER_LIFT1;
-                break;
-            case R.id.HELICOPTER_LIFT2:
-                sel = FiGameState.TreasureCards.HELICOPTER_LIFT2;
-                break;
-            case R.id.HELICOPTER_LIFT3:
-                sel = FiGameState.TreasureCards.HELICOPTER_LIFT3;
-                break;
-            default:
-                sel = FiGameState.TreasureCards.WATERS_RISE1;
-        }
-        if(discardButtonClicked && sel != FiGameState.TreasureCards.WATERS_RISE1)
+        //need to figure out how to know which card in the button they pressed to give away!!
+        if(discardButtonClicked)
         {
-            discardButtonClicked = false;
-            game.sendAction(new FiDiscardAction(this, sel));
+            for(int i = 0; i < playerCards.length; i++){
+                if(playerCardsClicked[i]) {
+                    game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.EARTH_STONE));//random for now
+                    discardButtonClicked = false;
+                    playerCardsClicked[i] = false;
+                }
+            }
         }
-        else if(giveCardButtonClicked && sel != FiGameState.TreasureCards.WATERS_RISE1)
+        //need to figure out how to know which card in the button they pressed to give away!!
+        else if(giveCardButtonClicked)
         {
-            giveCardButtonClicked = false;
-            game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, sel));
+            for(int i = 0; i < playerCards.length; i++){
+                if(playerCardsClicked[i]) {
+                    if(giveCardToP2Clicked){
+                        game.sendAction(new FiGiveCardAction(this, 2, FiGameState.TreasureCards.EARTH_STONE));//random for now
+                        giveCardButtonClicked = false;
+                        playerCardsClicked[i] = false;
+                    }
+                    else{
+                        game.sendAction(new FiGiveCardAction(this, 3, FiGameState.TreasureCards.EARTH_STONE));//random for now
+                        giveCardButtonClicked = false;
+                        playerCardsClicked[i] = false;
+                    }
+                }
+            }
         }
         if(moveButtonClicked && selection != FiGameState.TileName.NONE)
         {

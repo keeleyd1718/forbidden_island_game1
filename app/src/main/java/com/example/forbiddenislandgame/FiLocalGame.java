@@ -36,43 +36,31 @@ public class FiLocalGame extends LocalGame {
         //If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost
         //need to do still or not include this part of the game
 
-        if(gs.oceanChaliceTreasureCount == 1 && gs.fireCrystalTreasureCount == 1 && gs.windStatueTreasureCount == 1 && gs.earthStoneTreasureCount == 1){
-            if(gs.getPlayerTurn() == 1){
-                if((gs.getHumanPlayerHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getHumanPlayerHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getHumanPlayerHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayer1Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer2Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer3Location().equals(FiGameState.TileName.FOOLS_LANDING)){
+        if(gs.oceanChaliceTreasure && gs.fireCrystalTreasure && gs.windStatueTreasure && gs.earthStoneTreasure){
+            if((gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayerLocation(1).equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayerLocation(2).equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayerLocation(3).equals(FiGameState.TileName.FOOLS_LANDING)){
                     return "Congrats you have won the game!!";
                 }
-            }
-            else if(gs.getPlayerTurn() == 2){
-                if((gs.getDumbAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getDumbAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getDumbAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayer2Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer3Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer1Location().equals(FiGameState.TileName.FOOLS_LANDING)){
-                    return "Congrats you have won the game!!";
-                }
-            }
-            else if(gs.getPlayerTurn() == 3){
-                if((gs.getSmartAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getSmartAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getSmartAiHand().contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayer3Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer2Location().equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayer1Location().equals(FiGameState.TileName.FOOLS_LANDING)){
-                    return "Congrats you have won the game!!";
-                }
-            }
         }
         if (gs.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.SUNK)) {
             return "Game Over! You lost because Fools Landing sunk!";
         }
         if (gs.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.SUNK)) { //Ocean Chalice Tiles
-            if ((gs.oceanChaliceTreasureCount != 1)) {
+            if ((!gs.oceanChaliceTreasure)) {
                 return "Game Over! You lost because your Ocean tiles sunk before you collected the treasure!";
             }
         }
         if (gs.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.SUNK)) { //Fire Crystal Tiles
-            if ((gs.fireCrystalTreasureCount != 1)) {
+            if ((!gs.fireCrystalTreasure)) {
                 return "Game Over! You lost because your Fire Crystal tiles sunk before you collected the treasure!";
             }
         }
         if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)) { //Earth Stone Tiles
-            if ((gs.earthStoneTreasureCount != 1)) {
+            if ((!gs.earthStoneTreasure)) {
                 return "Game Over! You lost because your Earth Stone tiles sunk before you collected the treasure!";
             }
         }
         if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)) { //Wind Statues
-            if ((gs.windStatueTreasureCount != 1)) {
+            if ((!gs.windStatueTreasure)) {
                 return "Game Over! You lost because your Wind Statue tiles sunk before you collected the treasure!";
             }
         }
@@ -94,21 +82,8 @@ public class FiLocalGame extends LocalGame {
         if(canMove(getPlayerIdx(action.getPlayer()))) {
             //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
             if (action instanceof FiDrawTreasureAction) {
-                if(gs.getPlayerTurn() == 1){
-                    gs.drawTreasure(gs.getHumanPlayerHand());
-                    return true;
-                }
-                else if(gs.getPlayerTurn() == 2){
-                    gs.drawTreasure(gs.getDumbAiHand());
-                    return true;
-                }
-                else if(gs.getPlayerTurn() == 3){
-                    gs.drawTreasure(gs.getSmartAiHand());
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                gs.drawTreasure(gs.getPlayerTurnHand(gs.playerTurn));
+                return true;
             }
             else if (action instanceof FiDrawFloodAction) {
                 gs.drawFlood(gs.getDrawnFloodCards());//call the drawFlood method on the drawnFloodCards array
@@ -332,52 +307,28 @@ public class FiLocalGame extends LocalGame {
                 return true;
             }
             else if (action instanceof FiCaptureTreasureAction) {
-                if(gs.getPlayerTurn() == 1){
-                    gs.captureTreasure(gs.getPlayerTurn(), gs.getHumanPlayerHand(), gs.getPlayer1Location());
-                    return true;
-                }
-                else if(gs.getPlayerTurn() == 2){
-                    gs.captureTreasure(2, gs.getDumbAiHand(), gs.getPlayer2Location());
-                    return true;
-                }
-                else if(gs.getPlayerTurn() == 3){
-                    gs.captureTreasure(3, gs.getSmartAiHand(), gs.getPlayer3Location());
-                    return true;
-                }
-                else{
-                    return false;
-                }
+                gs.captureTreasure(gs.getPlayerTurn(), gs.getPlayerTurnHand(gs.playerTurn), gs.getPlayerLocation(gs.getPlayerTurn()));
+                return true;
             }
             else if (action instanceof FiDiscardAction) {
                 //add the card the player chose to discard to the discard treasure deck
                 FiDiscardAction a = (FiDiscardAction) action;
                 FiGameState.TreasureCards t = a.getTreasureCardName();
-                if(gs.getPlayerTurn() == 1){
-                    if(gs.getHumanPlayerHand().size() > 5){
+                if(gs.getPlayerTurnHand(gs.playerTurn).size() > 5){
                         gs.discard(gs.getPlayerTurn(), t);
-                    }
                 }
-                else if(gs.getPlayerTurn() == 2){
-                    if(gs.getDumbAiHand().size() > 5){
-                        gs.discard(gs.getPlayerTurn(), t);
-                    }
-                }
-                else if(gs.getPlayerTurn() == 3){
-                    if(gs.getSmartAiHand().size() > 5){
-                        gs.discard(gs.getPlayerTurn(), t);
-                    }
-                }
-                gs.discard(gs.getPlayerTurn(), t);
             }
             else if (action instanceof FiSkipTurnAction) {
                 if (gs.numPlayers > 2) {
                     if (gs.getPlayerTurn() == 1) {
                         gs.setPlayerTurn(2);
                         gs.setActionsRemaining(3);
-                    } else if (gs.getPlayerTurn() == 2) {
+                    }
+                    else if (gs.getPlayerTurn() == 2) {
                         gs.setPlayerTurn(3);
                         gs.setActionsRemaining(3);
-                    } else if (gs.getPlayerTurn() == 3) {
+                    }
+                    else if (gs.getPlayerTurn() == 3) {
                         gs.setPlayerTurn(1);
                         gs.setActionsRemaining(3);
                     }
