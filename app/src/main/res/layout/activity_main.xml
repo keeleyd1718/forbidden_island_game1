@@ -431,59 +431,54 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <Button
+                <ImageButton
                     android:id="@+id/playerCard1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Empty"
-                    android:textColor="#000000"
-                    android:textSize="8sp" />
+                    android:contentDescription="NULL"
+                    android:src="@android:drawable/btn_star" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/playerCard2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Empty"
-                    android:textColor="#000000"
-                    android:textSize="8sp" />
+                    android:contentDescription="NULL"
+                    android:src="@android:drawable/btn_star" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/playerCard3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Empty"
-                    android:textColor="#000000"
-                    android:textSize="8sp" />
+                    android:contentDescription="NULL"
+                    android:src="@android:drawable/btn_star" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/playerCard4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Empty"
-                    android:textColor="#000000"
-                    android:textSize="8sp" />
+                    android:contentDescription="NULL"
+                    android:src="@android:drawable/btn_star" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/playerCard5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Empty"
-                    android:textColor="#000000"
-                    android:textSize="8sp" />
+                    android:contentDescription="NULL"
+                    android:src="@android:drawable/btn_star" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/playerCard6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Empty"
-                    android:textColor="#000000"
-                    android:textSize="8sp" />
+                    android:contentDescription="NULL"
+                    android:src="@android:drawable/btn_star" />
+
             </LinearLayout>
 
         </LinearLayout>

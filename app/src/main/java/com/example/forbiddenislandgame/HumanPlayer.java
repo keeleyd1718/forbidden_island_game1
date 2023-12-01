@@ -3,6 +3,7 @@ package com.example.forbiddenislandgame;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.actions.FiCaptureTreasureAction;
@@ -87,12 +88,8 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button HELICOPTER_LIFT3 = null;
 
     //buttons for the player's hand
-    private Button playerCard1 = null;
-    private Button playerCard2 = null;
-    private Button playerCard3 = null;
-    private Button playerCard4 = null;
-    private Button playerCard5 = null;
-    private Button playerCard6 = null;
+    private ImageButton[] playerCards = new ImageButton[6];
+    private ImageButton[] treasures = new ImageButton[4];
 
     private GameMainActivity myActivity;
     private boolean moveButtonClicked = false;
@@ -129,18 +126,36 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             DECEPTION_DUNES.setText("DECEPTION_DUNES" + System.getProperty("line.separator") + "player 2");
             OBSERVATORY.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
 
-            //set the text of the buttons to what is in human player's hand
-            //fix this depending on what cards on in the player's hand and make image buttons for the cards to display
-            if(gameState.getHumanPlayerHand().size() >= 5){
-                playerCard1.setText("" + gameState.getHumanPlayerHand().get(0));
-                playerCard2.setText("" + gameState.getHumanPlayerHand().get(1));
-                playerCard3.setText("" + gameState.getHumanPlayerHand().get(2));
-                playerCard4.setText("" + gameState.getHumanPlayerHand().get(3));
-                playerCard5.setText("" + gameState.getHumanPlayerHand().get(4));
-                if(gameState.getHumanPlayerHand().size() > 5){
-                    playerCard6.setText("" + gameState.getHumanPlayerHand().get(5));
+            //set the image of the buttons to display what cards are in the player's hand
+            for(int i = 0; i < gameState.getHumanPlayerHand().size(); i++){
+                if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WATERS_RISE1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WATERS_RISE2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WATERS_RISE3)){
+                    playerCards[i].setImageResource(R.drawable.tc_waters_rise);
+                }
+                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.SANDBAG1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.SANDBAG2)){
+                    playerCards[i].setImageResource(R.drawable.tc_sandbag);
+                }
+                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
+                    playerCards[i].setImageResource(R.drawable.tc_helicopter_lift);
+                }
+                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE3) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE4) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.EARTH_STONE5)){
+                    playerCards[i].setImageResource(R.drawable.tc_earth_stone);
+                }
+                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE3) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE4) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.WIND_STATUE5)){
+                    playerCards[i].setImageResource(R.drawable.tc_wind_statue);
+                }
+                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
+                    playerCards[i].setImageResource(R.drawable.tc_fire_crystal);
+                }
+                else if(gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || gameState.getHumanPlayerHand().get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
+                    playerCards[i].setImageResource(R.drawable.tc_ocean_chalice);
                 }
             }
+
+            //display pictures of the treasures in the four corners of the board
+            treasures[0].setImageResource(R.drawable.earth_stone);
+            treasures[1].setImageResource(R.drawable.fire_crystal);
+            treasures[2].setImageResource(R.drawable.ocean_chalice);
+            treasures[3].setImageResource(R.drawable.wind_statue);
 
             //set the tile player's must be on to capture certain treasures
             CORAL_PALACE.setText("CORAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
@@ -873,12 +888,16 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.HOWLING_GARDEN = activity.findViewById(R.id.HOWLING_GARDEN);
 
         //initializing card hand buttons
-        this.playerCard1 = activity.findViewById(R.id.playerCard1);
-        this.playerCard2 = activity.findViewById(R.id.playerCard2);
-        this.playerCard3 = activity.findViewById(R.id.playerCard3);
-        this.playerCard4 = activity.findViewById(R.id.playerCard4);
-        this.playerCard5 = activity.findViewById(R.id.playerCard5);
-        this.playerCard6 = activity.findViewById(R.id.playerCard6);
+        playerCards[0] = activity.findViewById(R.id.playerCard1);
+        playerCards[1] = activity.findViewById(R.id.playerCard2);
+        playerCards[2] = activity.findViewById(R.id.playerCard3);
+        playerCards[3] = activity.findViewById(R.id.playerCard4);
+        playerCards[4] = activity.findViewById(R.id.playerCard5);
+        playerCards[5] = activity.findViewById(R.id.playerCard6);
+        treasures[0] = activity.findViewById(R.id.treasure1);
+        treasures[1] = activity.findViewById(R.id.treasure2);
+        treasures[2] = activity.findViewById(R.id.treasure3);
+        treasures[3] = activity.findViewById(R.id.treasure4);
         this.giveCardToP2 = activity.findViewById(R.id.giveCardToP2);
         this.giveCardToP3 = activity.findViewById(R.id.giveCardToP3);
 
@@ -922,5 +941,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         giveCardButton.setOnClickListener(this);
         discardButton.setOnClickListener(this);
         captureTreasureButton.setOnClickListener(this);
+        playerCards[0].setOnClickListener(this);
+        playerCards[1].setOnClickListener(this);
+        playerCards[2].setOnClickListener(this);
+        playerCards[3].setOnClickListener(this);
+        playerCards[4].setOnClickListener(this);
+        playerCards[5].setOnClickListener(this);
     }
 }
