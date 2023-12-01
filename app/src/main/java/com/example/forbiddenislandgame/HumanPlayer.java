@@ -633,7 +633,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        //will decide what move the player made
+        //will decide what move the player made based on the button they clicked
         if(view.getId() == R.id.quitButton){
             game.sendAction(new FiGameOverAction(this));
         }
@@ -647,6 +647,30 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             game.sendAction(new FiSkipTurnAction(this));
         }
         else if(view.getId() == R.id.discard){
+            if(view.getId() == R.id.playerCard1){
+                playerCardsClicked[0] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard2){
+                playerCardsClicked[1] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard3){
+                playerCardsClicked[2] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard4){
+                playerCardsClicked[3] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard5){
+                playerCardsClicked[4] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard6){
+                playerCardsClicked[5] = true;
+                return;
+            }
             discardButtonClicked = true;
             return;
         }
@@ -656,30 +680,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         }
         else if(view.getId() == R.id.shoreUpButton){
             shoreUpButtonClicked = true;
-            return;
-        }
-        else if(view.getId() == R.id.playerCard1){
-            playerCardsClicked[0] = true;
-            return;
-        }
-        else if(view.getId() == R.id.playerCard2){
-            playerCardsClicked[1] = true;
-            return;
-        }
-        else if(view.getId() == R.id.playerCard3){
-            playerCardsClicked[2] = true;
-            return;
-        }
-        else if(view.getId() == R.id.playerCard4){
-            playerCardsClicked[3] = true;
-            return;
-        }
-        else if(view.getId() == R.id.playerCard5){
-            playerCardsClicked[4] = true;
-            return;
-        }
-        else if(view.getId() == R.id.playerCard6){
-            playerCardsClicked[5] = true;
             return;
         }
         else if(view.getId() == R.id.giveCardButton){
@@ -692,12 +692,37 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             else if(view.getId() == R.id.giveCardToP3){
                 FiGameState.playerChosen = 3;
             }
+            if(view.getId() == R.id.playerCard1){
+                playerCardsClicked[0] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard2){
+                playerCardsClicked[1] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard3){
+                playerCardsClicked[2] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard4){
+                playerCardsClicked[3] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard5){
+                playerCardsClicked[4] = true;
+                return;
+            }
+            else if(view.getId() == R.id.playerCard6){
+                playerCardsClicked[5] = true;
+                return;
+            }
             giveCardButtonClicked = true;
             return;
         }
         else if(view.getId() == R.id.captureTreasureButton){
             game.sendAction(new FiCaptureTreasureAction(this));
         }
+
         FiGameState.TileName selection;
         switch(view.getId()){
             case R.id.ABANDONED_CLIFFS:
@@ -792,16 +817,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         {
             for(int i = 0; i < playerCards.length; i++){
                 if(playerCardsClicked[i]) {
-                    if(giveCardToP2Clicked){
-                        game.sendAction(new FiGiveCardAction(this, 2, FiGameState.TreasureCards.EARTH_STONE));//random for now
-                        giveCardButtonClicked = false;
-                        playerCardsClicked[i] = false;
-                    }
-                    else{
-                        game.sendAction(new FiGiveCardAction(this, 3, FiGameState.TreasureCards.EARTH_STONE));//random for now
-                        giveCardButtonClicked = false;
-                        playerCardsClicked[i] = false;
-                    }
+                    game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.EARTH_STONE));//random for now
+                    giveCardButtonClicked = false;
+                    playerCardsClicked[i] = false;
                 }
             }
         }

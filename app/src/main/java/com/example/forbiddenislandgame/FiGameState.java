@@ -176,7 +176,13 @@ public class FiGameState extends GameState {
         windStatueTreasure = false;
         oceanChaliceTreasure = false;
 
-        //treasure card counts for the players
+        //initialize the treasure card counts for the players
+        numEarthStoneCards = new int[numPlayers];
+        numFireCrystalCards = new int[numPlayers];
+        numWindStatueCards = new int[numPlayers];
+        numOceanChaliceCards = new int[numPlayers];
+
+        //set treasure card counts for the players to 0
         for(int i = 0; i < numPlayers; i++){
             numEarthStoneCards[i] = 0;
             numFireCrystalCards[i] = 0;
