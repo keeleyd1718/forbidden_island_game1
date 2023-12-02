@@ -10,11 +10,11 @@ import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDiscardAction;
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
+import com.example.actions.FiEndTurnAction;
 import com.example.actions.FiGameOverAction;
 import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
 import com.example.actions.FiShoreUpAction;
-import com.example.actions.FiSkipTurnAction;
 import com.example.game.GameFramework.GameMainActivity;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.players.GameHumanPlayer;
@@ -144,10 +144,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             for(int i = 0; i < gameState.getPlayerTurnHand(gameState.playerTurn).size(); i++){
                 FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(gameState.playerTurn).get(i);
 
-                if(tc.equals(FiGameState.TreasureCards.WATERS_RISE1) || tc.equals(FiGameState.TreasureCards.WATERS_RISE2) || tc.equals(FiGameState.TreasureCards.WATERS_RISE3)){
-                    playerCards[i].setImageResource(R.drawable.tc_waters_rise);
-                }
-                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
+                if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
                     playerCards[i].setImageResource(R.drawable.tc_sandbag);
                 }
                 else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
@@ -184,6 +181,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             WHISPERING_GARDENS.setText("WHISPERING_GARDENS" + System.getProperty("line.separator") + "Wind Statue Treasure");
 
             //changing the text on a button to show where the pawns are
+            //coloring the tiles the color of their value (normal = green, flooded = blue, sunk = gray)
             FiGameState.TileName t = gameState.getPlayerLocation(gameState.getPlayerTurn());
             Button b;
             switch(t)
@@ -502,32 +500,26 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             game.sendAction(new FiDrawFloodAction(this));
         }
         else if(view.getId() == R.id.skipTurn){
-            game.sendAction(new FiSkipTurnAction(this));
+            game.sendAction(new FiEndTurnAction(this));
         }
         else if(view.getId() == R.id.discard){
             if(view.getId() == R.id.playerCard1){
                 playerCardsClicked[0] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard2){
                 playerCardsClicked[1] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard3){
                 playerCardsClicked[2] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard4){
                 playerCardsClicked[3] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard5){
                 playerCardsClicked[4] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard6){
                 playerCardsClicked[5] = true;
-                return;
             }
             discardButtonClicked = true;
             return;
@@ -552,27 +544,21 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             }
             if(view.getId() == R.id.playerCard1){
                 playerCardsClicked[0] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard2){
                 playerCardsClicked[1] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard3){
                 playerCardsClicked[2] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard4){
                 playerCardsClicked[3] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard5){
                 playerCardsClicked[4] = true;
-                return;
             }
             else if(view.getId() == R.id.playerCard6){
                 playerCardsClicked[5] = true;
-                return;
             }
             giveCardButtonClicked = true;
             return;
@@ -666,10 +652,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             //go through the playerCardsClicked array to see what card the player pressed and send the discard action with the card in that place
             for(int i = 0; i < playerCards.length; i++){
                 if(playerCardsClicked[i]) {
-                    if(playerCards[i].getBackground().equals(R.drawable.tc_waters_rise)){
-                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.WATERS_RISE1));
-                    }
-                    else if(playerCards[i].getBackground().equals(R.drawable.tc_helicopter_lift)){
+                    if(playerCards[i].getBackground().equals(R.drawable.tc_helicopter_lift)){
                         game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.HELICOPTER_LIFT1));
                     }
                     else if(playerCards[i].getBackground().equals(R.drawable.tc_sandbag)){
@@ -699,10 +682,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             //go through the playerCardsClicked array to see what card the player pressed and send the discard action with the card in that place
             for(int i = 0; i < playerCards.length; i++){
                 if(playerCardsClicked[i]) {
-                    if(playerCards[i].getBackground().equals(R.drawable.tc_waters_rise)){
-                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.WATERS_RISE1));
-                    }
-                    else if(playerCards[i].getBackground().equals(R.drawable.tc_helicopter_lift)){
+                    if(playerCards[i].getBackground().equals(R.drawable.tc_helicopter_lift)){
                         game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.HELICOPTER_LIFT1));
                     }
                     else if(playerCards[i].getBackground().equals(R.drawable.tc_sandbag)){

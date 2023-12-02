@@ -4,11 +4,11 @@ import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDiscardAction;
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
+import com.example.actions.FiEndTurnAction;
 import com.example.actions.FiGameOverAction;
 import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
 import com.example.actions.FiShoreUpAction;
-import com.example.actions.FiSkipTurnAction;
 import com.example.game.GameFramework.LocalGame;
 import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.players.GamePlayer;
@@ -324,7 +324,7 @@ public class FiLocalGame extends LocalGame {
                         gs.discard(gs.getPlayerTurn(), t);
                 }
             }
-            else if (action instanceof FiSkipTurnAction) {
+            else if (action instanceof FiEndTurnAction) {
                 //change whose turn it and reset their actionsRemaining back to 3 for their turn
                 if (gs.numPlayers > 2) {
                     if (gs.getPlayerTurn() == 1) {

@@ -3,15 +3,16 @@ package com.example.forbiddenislandgame;
 import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
+import com.example.actions.FiEndTurnAction;
 import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
 import com.example.actions.FiShoreUpAction;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.players.GameComputerPlayer;
 
-public class DumbComputerPlayer extends GameComputerPlayer {
-    private FiGameState gameState;
+import java.util.Random;
 
+public class DumbComputerPlayer extends GameComputerPlayer {
     /**
      * constructor
      *
@@ -21,29 +22,50 @@ public class DumbComputerPlayer extends GameComputerPlayer {
         super(name);
     }
 
+    //dumb ai only does 1 random action
     protected void receiveInfo(GameInfo info){
-        //message gets the state from LocalGame and decides what move it's making
-        //needs to call game.sendAction at some point
+        //message gets the state from LocalGame and decides what move it's making; needs to call game.sendAction at some point
         if(info instanceof FiGameState) {
             FiGameState gameState = (FiGameState) info;
+            FiGameState.TileName t;
+
             if(this.playerNum == gameState.getPlayerTurn()){//checking if it is dumb ai's turn
                 game.sendAction(new FiDrawTreasureAction(this));//if it is then draw two cards from the treasure deck
-                int randomNum = (int) (Math.random() * 4);//generate a random 1-4
+                int randomNum = (int) (Math.random() * 4);//generate a random number 1-4
 
-                //dumb ai only does 1 random action
-                if(randomNum == 1){
-                    //game.sendAction(new FiMoveAction(this, selection));
+                if(randomNum == 1){//moves the dumb ai to a random tile
+                    //gets a random tile to move to from the enum list
+                    t = FiGameState.TileName.values()[new Random().nextInt(FiGameState.TileName.values().length)];
+
+                    //if the TileName enum value is randomly set to the TileName none they stay where they are
+                    if(t == FiGameState.TileName.NONE){
+                        t = gameState.getPlayerLocation(gameState.getPlayerTurn());
+                    }
+                    game.sendAction(new FiMoveAction(this, t));
                 }
-                else if(randomNum == 2){
-                    //game.sendAction(new FiShoreUpAction(this, selection));
+                else if(randomNum == 2){//shores up the tile they are on if it's possible
+                    t = gameState.getPlayerLocation(gameState.getPlayerTurn());
+                    game.sendAction(new FiShoreUpAction(this, t));
                 }
-                else if(randomNum == 3){
+                else if(randomNum == 3){//captures a treasure if they are able to
                     game.sendAction(new FiCaptureTreasureAction(this));
                 }
-                else {
-                    //game.sendAction(new FiGiveCardAction(this));
+                else{//sets player chosen to the player whose turn is next
+                    if(this.playerNum++ > gameState.numPlayers){
+                        gameState.setPlayerChosen(1);
+                    }
+                    else{
+                        gameState.setPlayerChosen(this.playerNum++);
+                    }
+
+                    //getting the first card in the dumb ai's hand
+                    FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(0);
+
+                    //gives the first card in the dumb ai's hand to the player whose turn it is next
+                    game.sendAction(new FiGiveCardAction(this, gameState.playerChosen, tc));
                 }
                 game.sendAction(new FiDrawFloodAction(this));//then the dumb ai draws two flood cards
+                game.sendAction(new FiEndTurnAction(this));//end their turn
             }
         }
     }

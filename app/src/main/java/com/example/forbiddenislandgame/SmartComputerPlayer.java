@@ -2,6 +2,7 @@ package com.example.forbiddenislandgame;
 
 import com.example.actions.FiDrawFloodAction;
 import com.example.actions.FiDrawTreasureAction;
+import com.example.actions.FiEndTurnAction;
 import com.example.actions.FiMoveAction;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.players.GameComputerPlayer;
@@ -49,6 +50,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                 }
 
                 game.sendAction(new FiDrawFloodAction(this));//then the dumb ai draws two flood cards
+                game.sendAction(new FiEndTurnAction(this));//end their turn
             }
         }
     }

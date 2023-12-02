@@ -687,6 +687,7 @@ public class FiGameState extends GameState {
 
     //setter methods
     public void setPlayerTurn(int playerTurn){this.playerTurn = playerTurn;}
+    public void setPlayerChosen(int playerChosen){this.playerChosen = playerChosen;}
     public void setActionsRemaining(int actionsRemaining) {this.actionsRemaining = actionsRemaining;}
     public void emptyDrawnFloodCards(){
         for(int i = 0; i < drawnFloodCards.size(); i++){
