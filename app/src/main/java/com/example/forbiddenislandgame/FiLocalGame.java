@@ -26,43 +26,30 @@ public class FiLocalGame extends LocalGame {
         super.start(players);
     }
 
-    //check if the game is over. if it is return the name of the winner
-    /*
-    If the Fools’ Landing tile sinks the game is lost.
-    If both of each the Temples, Caves, Palaces, or Gardens tiles sink before their treasure is collected the game is lost
-    If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost
-    */
+    //check if the game is over. if it is return the name of the winner (our game is a team game)
     protected String checkIfGameOver() {
-        //If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost
-        //need to do still or not include this part of the game
+        //If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost (need to do still or not include this part of the game)
 
+        //the game is won if all 4 treasures have been captured, the player whose turn it is has a helicopter lift card and they are on the FOOLS_LANDING tile
         if(gs.oceanChaliceTreasure && gs.fireCrystalTreasure && gs.windStatueTreasure && gs.earthStoneTreasure){
-            if((gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayerLocation(1).equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayerLocation(2).equals(FiGameState.TileName.FOOLS_LANDING) && gs.getPlayerLocation(3).equals(FiGameState.TileName.FOOLS_LANDING)){
-                    return "Congrats you have won the game!!";
+            if((gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT1)) || (gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT2)) || (gs.getPlayerTurnHand(gs.playerTurn).contains(FiGameState.TreasureCards.HELICOPTER_LIFT3)) && gs.getPlayerLocation(gs.getPlayerTurn()).equals(FiGameState.TileName.FOOLS_LANDING)){
+                    return "Congrats you guys have won the game!!";
                 }
         }
         if (gs.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.SUNK)) {
             return "Game Over! You lost because Fools Landing sunk!";
         }
-        if (gs.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.SUNK)) { //Ocean Chalice Tiles
-            if ((!gs.oceanChaliceTreasure)) {
-                return "Game Over! You lost because your Ocean tiles sunk before you collected the treasure!";
-            }
+        if (gs.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.SUNK) && (!gs.oceanChaliceTreasure)) { //Ocean Chalice Tiles
+            return "Game Over! You lost because your Ocean tiles sunk before you collected the treasure!";
         }
-        if (gs.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.SUNK)) { //Fire Crystal Tiles
-            if ((!gs.fireCrystalTreasure)) {
-                return "Game Over! You lost because your Fire Crystal tiles sunk before you collected the treasure!";
-            }
+        if (gs.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.SUNK) && (!gs.fireCrystalTreasure)){ //Fire Crystal Tiles
+            return "Game Over! You lost because your Fire Crystal tiles sunk before you collected the treasure!";
         }
-        if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)) { //Earth Stone Tiles
-            if ((!gs.earthStoneTreasure)) {
-                return "Game Over! You lost because your Earth Stone tiles sunk before you collected the treasure!";
-            }
+        if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK) && (!gs.earthStoneTreasure)) { //Earth Stone Tiles
+            return "Game Over! You lost because your Earth Stone tiles sunk before you collected the treasure!";
         }
-        if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)) { //Wind Statues
-            if ((!gs.windStatueTreasure)) {
-                return "Game Over! You lost because your Wind Statue tiles sunk before you collected the treasure!";
-            }
+        if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK) && (!gs.windStatueTreasure)) { //Wind Statues
+            return "Game Over! You lost because your Wind Statue tiles sunk before you collected the treasure!";
         }
         return "You clicked the quit button. Bye!";
     }

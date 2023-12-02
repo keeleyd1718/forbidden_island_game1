@@ -379,7 +379,7 @@ public class FiGameState extends GameState {
             discardTreasureDeck.add(card);
             return true;
         }
-        else if (playerTurn == 2){
+        else if(playerTurn == 2){
             dumbAiHand.remove(card);
             discardTreasureDeck.add(card);
             return true;
@@ -674,16 +674,18 @@ public class FiGameState extends GameState {
         //check if the flood deck is empty and is so add the cards from the discard pile back into the flood deck
         if(floodDeck.isEmpty()){
             for(int i = 0; i < discardFloodDeck.size(); i++){
-                floodDeck.add(getDiscardFloodDeck().get(i));
+                FloodCards card = getDiscardFloodDeck().get(i);
+                floodDeck.add(card);
             }
             Collections.shuffle(floodDeck);
         }
-        //deals flood cards up to the number on the flood meter to the drawn flood deck to immediately slip the tiles over
+        //deals flood cards up to the number on the flood meter to the drawnFloodDeck which immediately flips the tiles over
         for(int i = 0; i < floodMeter; i++) {
-            FloodCards card = floodDeck.remove(0);
-            a.add(card);
+            FloodCards card = floodDeck.remove(i);//remove the top card from the flood deck
+            a.add(card);//add that card to the drawnFloodCards array which should be passed in
         }
     }//end of drawFlood
+
 
     //setter methods
     public void setPlayerTurn(int playerTurn){this.playerTurn = playerTurn;}
@@ -700,6 +702,9 @@ public class FiGameState extends GameState {
     public int getPlayerTurn(){return this.playerTurn;}
     public int getActionsRemaining(){return this.actionsRemaining;}
     public int getNumberOfCardsInHand(ArrayList<TreasureCards> a) {return a.size();}
+    public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
+    public ArrayList<FloodCards> getDiscardFloodDeck(){return this.discardFloodDeck;}
+    public ArrayList<TreasureCards> getDiscardTreasureDeck(){return this.discardTreasureDeck;}
 
     public String getHand(ArrayList<TreasureCards> a) {
         String str = "";
@@ -709,8 +714,7 @@ public class FiGameState extends GameState {
         return str;
     }
 
-    //get the hand of whoever's turn it is
-    public ArrayList<TreasureCards> getPlayerTurnHand(int playerTurn){
+    public ArrayList<TreasureCards> getPlayerTurnHand(int playerTurn){//get the hand of whoever's turn it is
         if(playerTurn == 1){
             return this.humanPlayerHand;
         }
@@ -721,9 +725,6 @@ public class FiGameState extends GameState {
             return this.smartAiHand;
         }
     }
-    public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
-    public ArrayList<FloodCards> getDiscardFloodDeck(){return this.discardFloodDeck;}
-    public ArrayList<TreasureCards> getDiscardTreasureDeck(){return this.discardTreasureDeck;}
     public TileName getPlayerLocation(int playerTurn) {
         if (playerTurn == 1) {
             return this.player1Location;
