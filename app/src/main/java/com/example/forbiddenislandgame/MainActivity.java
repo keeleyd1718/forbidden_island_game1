@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import com.example.game.GameFramework.GameMainActivity;
 import com.example.game.GameFramework.LocalGame;
-import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.gameConfiguration.GameConfig;
 import com.example.game.GameFramework.gameConfiguration.GamePlayerType;
 import com.example.game.GameFramework.infoMessage.GameState;
@@ -40,8 +39,8 @@ public class MainActivity extends GameMainActivity{
         // Create a game configuration class for Forbidden Island:
         GameConfig defaultConfig = new GameConfig(playerTypes, 3, 3, "Forbidden Island", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
-        defaultConfig.addPlayer("Base AI Player", 1); // player 2: a computer player
-        defaultConfig.addPlayer("Smart AI Player", 2); // player 2: a computer player
+        defaultConfig.addPlayer("Base AI Player", 1); // player 2: a dumb computer player
+        defaultConfig.addPlayer("Smart AI Player", 2); // player 3: a smart computer player
         return defaultConfig;
     }
 

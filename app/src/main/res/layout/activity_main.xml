@@ -26,23 +26,36 @@
                 android:textColor="#000000"
                 android:textSize="6sp" />
 
-            <Button
-                android:id="@+id/floodDeck"
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#009688"
-                android:text="Flood Deck"
-                android:textColor="#000000"
-                android:textSize="6sp" />
+                android:layout_height="wrap_content"
+                android:text="Give Card to:"
+                android:textSize="12sp" />
 
             <Button
-                android:id="@+id/treasureDeck"
+                android:id="@+id/giveCardToP1"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="#009688"
-                android:text="Treasure Deck"
+                android:text="Player 1"
                 android:textColor="#000000"
-                android:textSize="6sp" />
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/giveCardToP2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Player 2"
+                android:textColor="#000000"
+                android:textSize="8sp" />
+
+            <Button
+                android:id="@+id/giveCardToP3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="Player 3"
+                android:textColor="#000000"
+                android:textSize="8sp" />
 
             <TextView
                 android:id="@+id/floodView"
@@ -50,6 +63,48 @@
                 android:layout_height="wrap_content"
                 android:text="Flood Meter: 0"
                 android:textSize="10sp" />
+
+            <ImageButton
+                android:id="@+id/player3Card1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="NULL"
+                android:src="@android:drawable/btn_star" />
+
+            <ImageButton
+                android:id="@+id/player3Card2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="NULL"
+                android:src="@android:drawable/btn_star" />
+
+            <ImageButton
+                android:id="@+id/player3Card3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="NULL"
+                android:src="@android:drawable/btn_star" />
+
+            <ImageButton
+                android:id="@+id/player3Card4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="NULL"
+                android:src="@android:drawable/btn_star" />
+
+            <ImageButton
+                android:id="@+id/player3Card5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="NULL"
+                android:src="@android:drawable/btn_star" />
+
+            <ImageButton
+                android:id="@+id/player3Card6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="NULL"
+                android:src="@android:drawable/btn_star" />
 
         </LinearLayout>
 
@@ -434,7 +489,7 @@
                 <ImageButton
                     android:id="@+id/playerCard1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_weight="1"
                     android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
@@ -442,7 +497,7 @@
                 <ImageButton
                     android:id="@+id/playerCard2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
                     android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
@@ -597,37 +652,7 @@
                         android:text="Skip Turn"
                         android:textColor="#000000"
                         android:textSize="6sp" />
-                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Give Card to:" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/giveCardToP2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="P2"
-                        android:textColor="#000000"
-                        android:textSize="10sp" />
-
-                    <Button
-                        android:id="@+id/giveCardToP3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="P3"
-                        android:textColor="#000000"
-                        android:textSize="10sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -635,13 +660,65 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/giveCardToP1"
+                    <ImageButton
+                        android:id="@+id/player2Card1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:contentDescription="NULL"
+                        android:src="@android:drawable/btn_star" />
+
+                    <ImageButton
+                        android:id="@+id/player2Card2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_weight="1"
+                        android:contentDescription="NULL"
+                        android:src="@android:drawable/btn_star" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/player2Card3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="P1"
-                        android:textColor="#000000" />
+                        android:contentDescription="NULL"
+                        android:src="@android:drawable/btn_star" />
+
+                    <ImageButton
+                        android:id="@+id/player2Card4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:contentDescription="NULL"
+                        android:src="@android:drawable/btn_star" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/player2Card5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:contentDescription="NULL"
+                        android:src="@android:drawable/btn_star" />
+
+                    <ImageButton
+                        android:id="@+id/player2Card6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:contentDescription="NULL"
+                        android:src="@android:drawable/btn_star" />
                 </LinearLayout>
 
             </LinearLayout>
