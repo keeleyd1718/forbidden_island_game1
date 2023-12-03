@@ -41,7 +41,7 @@ public class FiGameState extends GameState {
     HashMap<TileName, Value> map;//hashmap to hold the tile names and tile values (normal, flooded or sunk)
 
     public enum TreasureCards {//enum for treasure deck
-        EARTH_STONE,
+        EARTH_STONE1,
         EARTH_STONE2,
         EARTH_STONE3,
         EARTH_STONE4,
@@ -284,12 +284,10 @@ public class FiGameState extends GameState {
     }
 
     //action methods
-    //should all have boolean return value
-    //false if illegal move for the current game state
+    //should all have boolean return value; false if illegal move for the current game state
     //modify the game state to reflect a given player has taken that action
     //each method should require that the player id of the player who is taking that action be passed in as the first parameter, might need other parameters
 
-    //A player can move to any of the 4 adjacent tiles around them (not diagonally)
     public boolean move(int playerTurn, TileName t){//takes tile to move to and player whose turn it is
         // check if tile is empty
         if(actionsRemaining < 1){
@@ -409,9 +407,9 @@ public class FiGameState extends GameState {
                     int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
-                    if (a.contains(TreasureCards.EARTH_STONE)) {
-                        discardTreasureDeck.add(TreasureCards.EARTH_STONE);
-                        a.remove(TreasureCards.EARTH_STONE);
+                    if (a.contains(TreasureCards.EARTH_STONE1)) {
+                        discardTreasureDeck.add(TreasureCards.EARTH_STONE1);
+                        a.remove(TreasureCards.EARTH_STONE1);
                         count++;
                     }
                     if (a.contains(TreasureCards.EARTH_STONE2)) {
@@ -569,7 +567,7 @@ public class FiGameState extends GameState {
             a.remove(card1);
             discardTreasureDeck.add(card1);
         }
-        else if(card1.equals(TreasureCards.EARTH_STONE) || card1.equals(TreasureCards.EARTH_STONE2) || card1.equals(TreasureCards.EARTH_STONE3) || card1.equals(TreasureCards.EARTH_STONE4) || card1.equals(TreasureCards.EARTH_STONE5)){
+        else if(card1.equals(TreasureCards.EARTH_STONE1) || card1.equals(TreasureCards.EARTH_STONE2) || card1.equals(TreasureCards.EARTH_STONE3) || card1.equals(TreasureCards.EARTH_STONE4) || card1.equals(TreasureCards.EARTH_STONE5)){
             if(a.equals(humanPlayerHand)){
                 numEarthStoneCards[0]++;
             }
@@ -624,7 +622,7 @@ public class FiGameState extends GameState {
             a.remove(card2);
             discardTreasureDeck.add(card2);
         }
-        else if(card2.equals(TreasureCards.EARTH_STONE) || card2.equals(TreasureCards.EARTH_STONE2) || card2.equals(TreasureCards.EARTH_STONE3) || card2.equals(TreasureCards.EARTH_STONE4) || card2.equals(TreasureCards.EARTH_STONE5)){
+        else if(card2.equals(TreasureCards.EARTH_STONE1) || card2.equals(TreasureCards.EARTH_STONE2) || card2.equals(TreasureCards.EARTH_STONE3) || card2.equals(TreasureCards.EARTH_STONE4) || card2.equals(TreasureCards.EARTH_STONE5)){
             if(a.equals(humanPlayerHand)){
                 numEarthStoneCards[0]++;
             }

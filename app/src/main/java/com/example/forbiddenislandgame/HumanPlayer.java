@@ -150,7 +150,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
                     playerCards[i].setImageResource(R.drawable.tc_helicopter_lift);
                 }
-                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.EARTH_STONE) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
+                else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.EARTH_STONE1) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
                     playerCards[i].setImageResource(R.drawable.tc_earth_stone);
                 }
                 else if(gameState.getPlayerTurnHand(gameState.playerTurn).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || tc.equals(FiGameState.TreasureCards.WIND_STATUE2) || tc.equals(FiGameState.TreasureCards.WIND_STATUE3) || tc.equals(FiGameState.TreasureCards.WIND_STATUE4) || tc.equals(FiGameState.TreasureCards.WIND_STATUE5)){
@@ -659,7 +659,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.SANDBAG1));
                     }
                     else if(playerCards[i].getBackground().equals(R.drawable.tc_earth_stone)){
-                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.EARTH_STONE));
+                        game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.EARTH_STONE1));
                     }
                     else if(playerCards[i].getBackground().equals(R.drawable.tc_fire_crystal)){
                         game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.FIRE_CRYSTAL1));
@@ -689,7 +689,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                         game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.SANDBAG1));
                     }
                     else if(playerCards[i].getBackground().equals(R.drawable.tc_earth_stone)){
-                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.EARTH_STONE));
+                        game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.EARTH_STONE1));
                     }
                     else if(playerCards[i].getBackground().equals(R.drawable.tc_fire_crystal)){
                         game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.FIRE_CRYSTAL1));
