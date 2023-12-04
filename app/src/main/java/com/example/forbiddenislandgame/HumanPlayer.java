@@ -27,7 +27,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
     // all the buttons on the ui that can be pressed; action buttons and tile buttons
     private Button quitButton = null;
-    private Button deckButton = null;
+    private Button skipTurnButton = null;
     private Button drawTreasureButton = null;
     private Button drawFloodButton = null;
     private Button discardButton = null;
@@ -64,34 +64,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button giveCardToP1 = null;
     private Button giveCardToP2 = null;
     private Button giveCardToP3 = null;
-
-
-    //might delete these if we delete treasure ui
-    private Button EARTH_STONE = null;
-    private Button EARTH_STONE2 = null;
-    private Button EARTH_STONE3 = null;
-    private Button EARTH_STONE4 = null;
-    private Button EARTH_STONE5 = null;
-    private Button FIRE_CRYSTAL1 = null;
-    private Button FIRE_CRYSTAL2 = null;
-    private Button FIRE_CRYSTAL3 = null;
-    private Button FIRE_CRYSTAL4 = null;
-    private Button FIRE_CRYSTAL5 = null;
-    private Button WIND_STATUE1 = null;
-    private Button WIND_STATUE2 = null;
-    private Button WIND_STATUE3 = null;
-    private Button WIND_STATUE4 = null;
-    private Button WIND_STATUE5 = null;
-    private Button OCEAN_CHALICE1 = null;
-    private Button OCEAN_CHALICE2 = null;
-    private Button OCEAN_CHALICE3 = null;
-    private Button OCEAN_CHALICE4 = null;
-    private Button OCEAN_CHALICE5 = null;
-    private Button SANDBAG1 = null;
-    private Button SANDBAG2 = null;
-    private Button HELICOPTER_LIFT1 = null;
-    private Button HELICOPTER_LIFT2 = null;
-    private Button HELICOPTER_LIFT3 = null;
 
     private ImageButton[] playerCards = new ImageButton[6];//image buttons for the player's hand
     private ImageButton[] treasures = new ImageButton[4];//image buttons for the treasures around the board
@@ -728,7 +700,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         //initializing action buttons
         this.floodView = activity.findViewById(R.id.floodView);
         this.quitButton = activity.findViewById(R.id.quitButton);
-        this.deckButton = activity.findViewById(R.id.giveCardToP1);
+        this.skipTurnButton = activity.findViewById(R.id.skipTurn);
         this.discardButton = activity.findViewById(R.id.discard);
         this.drawTreasureButton = activity.findViewById(R.id.drawTreasureButton);
         this.drawFloodButton = activity.findViewById(R.id.drawFloodButton);
@@ -780,41 +752,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         treasures[2] = activity.findViewById(R.id.treasure3);
         treasures[3] = activity.findViewById(R.id.treasure4);
 
-        //delete below lines if we get rid of treasure ui
-        //layout resource for treasure deck gui
-        //activity.setContentView(R.layout.treasure_deck_ui);
-
-        //initializing buttons used for treasure deck ui
-        this.EARTH_STONE = activity.findViewById(R.id.EARTH_STONE);
-        this.EARTH_STONE2  = activity.findViewById(R.id.EARTH_STONE2);
-        this.EARTH_STONE3 = activity.findViewById(R.id.EARTH_STONE3);
-        this.EARTH_STONE4 = activity.findViewById(R.id.EARTH_STONE4);
-        this.EARTH_STONE5 = activity.findViewById(R.id.EARTH_STONE5);
-        this.FIRE_CRYSTAL1 = activity.findViewById(R.id.FIRE_CRYSTAL1);
-        this.FIRE_CRYSTAL2 = activity.findViewById(R.id.FIRE_CRYSTAL2);
-        this.FIRE_CRYSTAL3 = activity.findViewById(R.id.FIRE_CRYSTAL3);
-        this.FIRE_CRYSTAL4 = activity.findViewById(R.id.FIRE_CRYSTAL4);
-        this.FIRE_CRYSTAL5 = activity.findViewById(R.id.FIRE_CRYSTAL5);
-        this.WIND_STATUE1 = activity.findViewById(R.id.WIND_STATUE1);
-        this.WIND_STATUE2 = activity.findViewById(R.id.WIND_STATUE2);
-        this.WIND_STATUE3 = activity.findViewById(R.id.WIND_STATUE3);
-        this.WIND_STATUE4 = activity.findViewById(R.id.WIND_STATUE4);
-        this.WIND_STATUE5 = activity.findViewById(R.id.WIND_STATUE5);
-        this.OCEAN_CHALICE1 = activity.findViewById(R.id.OCEAN_CHALICE1);
-        this.OCEAN_CHALICE2 = activity.findViewById(R.id.OCEAN_CHALICE2);
-        this.OCEAN_CHALICE3 = activity.findViewById(R.id.OCEAN_CHALICE3);
-        this.OCEAN_CHALICE4 = activity.findViewById(R.id.OCEAN_CHALICE4);
-        this.OCEAN_CHALICE5 = activity.findViewById(R.id.OCEAN_CHALICE5);
-        this.SANDBAG1 = activity.findViewById(R.id.SANDBAG1);
-        this.SANDBAG2 = activity.findViewById(R.id.SANDBAG2);
-        this.HELICOPTER_LIFT1 = activity.findViewById(R.id.HELICOPTER_LIFT1);
-        this.HELICOPTER_LIFT2 = activity.findViewById(R.id.HELICOPTER_LIFT2);
-        this.HELICOPTER_LIFT3 = activity.findViewById(R.id.HELICOPTER_LIFT3);
-        //delete above lines if we get rid of treasure ui
-
         //if an action button is pressed call the onClickListener method
         quitButton.setOnClickListener(this);
-        deckButton.setOnClickListener(this);
+        skipTurnButton.setOnClickListener(this);
         drawTreasureButton.setOnClickListener(this);
         drawFloodButton.setOnClickListener(this);
         moveButton.setOnClickListener(this);
@@ -831,5 +771,31 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         playerCards[3].setOnClickListener(this);
         playerCards[4].setOnClickListener(this);
         playerCards[5].setOnClickListener(this);
+
+        //call the onClickListener when tile buttons are clicked
+        FOOLS_LANDING.setOnClickListener(this);
+        BRONZE_GATE.setOnClickListener(this);
+        GOLD_GATE.setOnClickListener(this);
+        CORAL_PALACE.setOnClickListener(this);
+        SUN_TEMPLE.setOnClickListener(this);
+        SILVER_GATE.setOnClickListener(this);
+        PHANTOM_ROCK.setOnClickListener(this);
+        WATCHTOWER.setOnClickListener(this);
+        COPPER_GATE.setOnClickListener(this);
+        ABANDONED_CLIFFS.setOnClickListener(this);
+        WHISPERING_GARDENS.setOnClickListener(this);
+        SHADOW_CAVE.setOnClickListener(this);
+        LOST_LAGOON.setOnClickListener(this);
+        MOON_TEMPLE.setOnClickListener(this);
+        DECEPTION_DUNES.setOnClickListener(this);
+        TWILIGHT_HOLLOW.setOnClickListener(this);
+        EMBER_CAVE.setOnClickListener(this);
+        TIDAL_PALACE.setOnClickListener(this);
+        OBSERVATORY.setOnClickListener(this);
+        IRON_GATE.setOnClickListener(this);
+        CRIMSON_FOREST.setOnClickListener(this);
+        MISTY_MARSH.setOnClickListener(this);
+        BREAKERS_BRIDGE.setOnClickListener(this);
+        HOWLING_GARDEN.setOnClickListener(this);
     }
 }
