@@ -79,7 +79,7 @@
                 <ImageButton
                     android:id="@+id/treasure1"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
@@ -121,7 +121,7 @@
                 <ImageButton
                     android:id="@+id/treasure2"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
@@ -389,7 +389,7 @@
                 <ImageButton
                     android:id="@+id/treasure3"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:contentDescription="NULL"
                     android:src="@android:drawable/btn_star" />
