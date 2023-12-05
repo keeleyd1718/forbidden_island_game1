@@ -1,6 +1,7 @@
 package com.example.forbiddenislandgame;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import com.example.actions.FiShoreUpAction;
 import com.example.game.GameFramework.GameMainActivity;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.players.GameHumanPlayer;
+import com.example.game.GameFramework.utilities.Logger;
 
 public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener {
     private int layoutId;
@@ -105,7 +107,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     //our view in the model/view/controller sense; in charge of the user interface
     public void receiveInfo(GameInfo info){
         //should decide what move to make; just needs to update the user interface; drawing happens here
-
+        Log.e("zzz recieve", "msg");
         if(info instanceof FiGameState){
             FiGameState gameState = (FiGameState) info;
 
@@ -588,10 +590,14 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
             floodView.setText("Flood Meter: "+gameState.getFloodMeter());
         }
+        else {
+            Log.e("zzz recieve", "iother msg");
+        }
     }
 
     @Override
     public void onClick(View view) {
+        Log.e("zzz onClick", "clicked! "+view.getId());
         //will decide what move the player made based on the button they clicked
         if(view.getId() == R.id.quitButton){
             game.sendAction(new FiGameOverAction(this));

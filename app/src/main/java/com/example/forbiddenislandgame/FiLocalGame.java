@@ -1,5 +1,7 @@
 package com.example.forbiddenislandgame;
 
+import android.util.Log;
+
 import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDiscardAction;
 import com.example.actions.FiDrawFloodAction;
@@ -12,6 +14,7 @@ import com.example.actions.FiShoreUpAction;
 import com.example.game.GameFramework.LocalGame;
 import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.players.GamePlayer;
+import com.example.game.GameFramework.utilities.Logger;
 
 public class FiLocalGame extends LocalGame {
 
@@ -51,7 +54,7 @@ public class FiLocalGame extends LocalGame {
         if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK) && (!gs.windStatueTreasure)) { //Wind Statues
             return "Game Over! You lost because your Wind Statue tiles sunk before you collected the treasure!";
         }
-        return "You clicked the quit button. Bye!";
+        return null;
     }
 
     protected void sendUpdatedStateTo(GamePlayer p){
@@ -66,6 +69,7 @@ public class FiLocalGame extends LocalGame {
         return false;
     }
     protected boolean makeMove(GameAction action){
+        Log.e("zzz makeMove", "recieved move!");
         //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
         if(canMove(getPlayerIdx(action.getPlayer()))) {
             if (action instanceof FiDrawTreasureAction) {
@@ -314,26 +318,26 @@ public class FiLocalGame extends LocalGame {
             else if (action instanceof FiEndTurnAction) {
                 //change whose turn it and reset their actionsRemaining back to 3 for their turn
                 if (gs.numPlayers > 2) {
-                    if (gs.getPlayerTurn() == 1) {
+                    if (gs.getPlayerTurn() == 0) {
+                        gs.setPlayerTurn(1);
+                        gs.setActionsRemaining(3);
+                    }
+                    else if (gs.getPlayerTurn() == 1) {
                         gs.setPlayerTurn(2);
                         gs.setActionsRemaining(3);
                     }
                     else if (gs.getPlayerTurn() == 2) {
-                        gs.setPlayerTurn(3);
-                        gs.setActionsRemaining(3);
-                    }
-                    else if (gs.getPlayerTurn() == 3) {
-                        gs.setPlayerTurn(1);
+                        gs.setPlayerTurn(0);
                         gs.setActionsRemaining(3);
                     }
                 }
                 else {
-                    if (gs.getPlayerTurn() == 1) {
-                        gs.setPlayerTurn(2);
+                    if (gs.getPlayerTurn() == 0) {
+                        gs.setPlayerTurn(1);
                         gs.setActionsRemaining(3);
                     }
-                    else if (gs.getPlayerTurn() == 2) {
-                        gs.setPlayerTurn(1);
+                    else if (gs.getPlayerTurn() == 1) {
+                        gs.setPlayerTurn(0);
                         gs.setActionsRemaining(3);
                     }
                 }
