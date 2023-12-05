@@ -203,298 +203,81 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             WHISPERING_GARDENS.setText("WHISPERING_GARDENS" + System.getProperty("line.separator") + "Wind Statue Treasure");
 
             //changing the text on a button to show where the pawns are
-            //coloring the tiles the color of their value (normal = green, flooded = blue, sunk = gray)
             FiGameState.TileName t = gameState.getPlayerLocation(gameState.getPlayerTurn());
             Button b;
             switch(t)
             {
                 case ABANDONED_CLIFFS:
-                    b = this.ABANDONED_CLIFFS;
-                    if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);//normal
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);//flooded
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);//sunk
-                    }
+                    b = ABANDONED_CLIFFS;
                     break;
                 case BRONZE_GATE:
-                    b = this.BRONZE_GATE;
-                    if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = BRONZE_GATE;
                     break;
                 case BREAKERS_BRIDGE:
-                    b = this.BREAKERS_BRIDGE;
-                    if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = BREAKERS_BRIDGE;
                     break;
                 case COPPER_GATE:
-                    b = this.COPPER_GATE;
-                    if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = COPPER_GATE;
                     break;
                 case CORAL_PALACE:
-                    b = this.CORAL_PALACE;
-                    if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = CORAL_PALACE;
                     break;
                 case CRIMSON_FOREST:
-                    b = this.CRIMSON_FOREST;
-                    if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = CRIMSON_FOREST;
                     break;
                 case DECEPTION_DUNES:
-                    b = this.DECEPTION_DUNES;
-                    if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = DECEPTION_DUNES;
                     break;
                 case EMBER_CAVE:
-                    b = this.EMBER_CAVE;
-                    if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = EMBER_CAVE;
                     break;
                 case FOOLS_LANDING:
-                    b = this.FOOLS_LANDING;
-                    if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = FOOLS_LANDING;
                     break;
                 case GOLD_GATE:
-                    b = this.GOLD_GATE;
-                    if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = GOLD_GATE;
                     break;
                 case IRON_GATE:
-                    b = this.IRON_GATE;
-                    if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = IRON_GATE;
                     break;
                 case HOWLING_GARDEN:
-                    b = this.HOWLING_GARDEN;
-                    if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = HOWLING_GARDEN;
                     break;
                 case MISTY_MARSH:
-                    b = this.MISTY_MARSH;
-                    if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = MISTY_MARSH;
                     break;
                 case MOON_TEMPLE:
-                    b = this.MOON_TEMPLE;
-                    if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = MOON_TEMPLE;
                     break;
                 case SILVER_GATE:
-                    b = this.SILVER_GATE;
-                    if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = SILVER_GATE;
                     break;
                 case SUN_TEMPLE:
-                    b = this.SUN_TEMPLE;
-                    if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = SUN_TEMPLE;
                     break;
                 case PHANTOM_ROCK:
-                    b = this.PHANTOM_ROCK;
-                    if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = PHANTOM_ROCK;
                     break;
                 case WHISPERING_GARDENS:
-                    b = this.WHISPERING_GARDENS;
-                    if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = WHISPERING_GARDENS;
                     break;
                 case WATCHTOWER:
-                    b = this.WATCHTOWER;
-                    if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = WATCHTOWER;
                     break;
                 case TWILIGHT_HOLLOW:
-                    b = this.TWILIGHT_HOLLOW;
-                    if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = TWILIGHT_HOLLOW;
                     break;
                 case TIDAL_PALACE:
-                    b = this.TIDAL_PALACE;
-                    if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = TIDAL_PALACE;
                     break;
                 case OBSERVATORY:
-                    b = this.OBSERVATORY;
-                    if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = OBSERVATORY;
                     break;
                 case LOST_LAGOON:
-                    b = this.LOST_LAGOON;
-                    if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = LOST_LAGOON;
                     break;
                 case SHADOW_CAVE:
-                    b = this.SHADOW_CAVE;
-                    if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.NORMAL)){
-                        b.setBackgroundColor(gameGreen);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.FLOODED)){
-                        b.setBackgroundColor(Color.BLUE);
-                    }
-                    else if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.SUNK)){
-                        b.setBackgroundColor(Color.GRAY);
-                    }
+                    b = SHADOW_CAVE;
                     break;
                 default:
                     b = null;
@@ -505,7 +288,305 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 b.setText(t + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn());
             }
 
-            this.floodView.setText("Flood Meter: "+gameState.getFloodMeter());
+            //coloring the tiles the color of their value in the hashmap (normal = green, flooded = blue, sunk = gray)
+            for(FiGameState.TileName key : gameState.map.keySet()){
+                Button c;
+                switch(key)
+                {
+                    case ABANDONED_CLIFFS:
+                        c = ABANDONED_CLIFFS;
+                        if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);//normal
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);//flooded
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.ABANDONED_CLIFFS).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);//sunk
+                        }
+                        break;
+                    case BRONZE_GATE:
+                        c = BRONZE_GATE;
+                        if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.BRONZE_GATE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case BREAKERS_BRIDGE:
+                        c = BREAKERS_BRIDGE;
+                        if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.BREAKERS_BRIDGE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case COPPER_GATE:
+                        c = COPPER_GATE;
+                        if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.COPPER_GATE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case CORAL_PALACE:
+                        c = CORAL_PALACE;
+                        if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case CRIMSON_FOREST:
+                        c = CRIMSON_FOREST;
+                        if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.CRIMSON_FOREST).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case DECEPTION_DUNES:
+                        c = DECEPTION_DUNES;
+                        if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.DECEPTION_DUNES).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case EMBER_CAVE:
+                        c = EMBER_CAVE;
+                        if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case FOOLS_LANDING:
+                        c = FOOLS_LANDING;
+                        if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case GOLD_GATE:
+                        c = GOLD_GATE;
+                        if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.GOLD_GATE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case IRON_GATE:
+                        c = IRON_GATE;
+                        if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.IRON_GATE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case HOWLING_GARDEN:
+                        c = HOWLING_GARDEN;
+                        if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case MISTY_MARSH:
+                        c = MISTY_MARSH;
+                        if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.MISTY_MARSH).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case MOON_TEMPLE:
+                        c = MOON_TEMPLE;
+                        if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case SILVER_GATE:
+                        c = SILVER_GATE;
+                        if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.SILVER_GATE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case SUN_TEMPLE:
+                        c = SUN_TEMPLE;
+                        if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case PHANTOM_ROCK:
+                        c = PHANTOM_ROCK;
+                        if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.PHANTOM_ROCK).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case WHISPERING_GARDENS:
+                        c = WHISPERING_GARDENS;
+                        if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.WHISPERING_GARDENS).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case WATCHTOWER:
+                        c = WATCHTOWER;
+                        if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.WATCHTOWER).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case TWILIGHT_HOLLOW:
+                        c = TWILIGHT_HOLLOW;
+                        if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.TWILIGHT_HOLLOW).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case TIDAL_PALACE:
+                        c = TIDAL_PALACE;
+                        if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case OBSERVATORY:
+                        c = OBSERVATORY;
+                        if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.OBSERVATORY).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case LOST_LAGOON:
+                        c = LOST_LAGOON;
+                        if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.LOST_LAGOON).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    case SHADOW_CAVE:
+                        c = SHADOW_CAVE;
+                        if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.NORMAL)){
+                            c.setBackgroundColor(gameGreen);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.FLOODED)){
+                            c.setBackgroundColor(Color.BLUE);
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.SUNK)){
+                            c.setBackgroundColor(Color.GRAY);
+                        }
+                        break;
+                    default:
+                        c = null;
+                }
+            }
+
+            floodView.setText("Flood Meter: "+gameState.getFloodMeter());
         }
     }
 
