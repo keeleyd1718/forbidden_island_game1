@@ -14,7 +14,6 @@ import com.example.actions.FiShoreUpAction;
 import com.example.game.GameFramework.LocalGame;
 import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.players.GamePlayer;
-import com.example.game.GameFramework.utilities.Logger;
 
 public class FiLocalGame extends LocalGame {
 

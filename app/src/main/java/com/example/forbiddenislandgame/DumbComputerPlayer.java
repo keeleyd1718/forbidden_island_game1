@@ -51,8 +51,8 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                     game.sendAction(new FiCaptureTreasureAction(this));
                 }
                 else{//sets player chosen to the player whose turn is next
-                    if(this.playerNum++ > gameState.numPlayers){
-                        gameState.setPlayerChosen(1);
+                    if(this.playerNum++ >= gameState.numPlayers){
+                        gameState.setPlayerChosen(0);
                     }
                     else{
                         gameState.setPlayerChosen(this.playerNum++);

@@ -166,7 +166,7 @@ public class FiGameState extends GameState {
         this.humanPlayerHand = new ArrayList<>();
         this.dumbAiHand = new ArrayList<>();
         this.smartAiHand = new ArrayList<>();
-        playerTurn = 1; // sets player 1 at start of game;
+        playerTurn = 0; // sets player 1 at start of game;
         numPlayers = 3;//starts with 3 players: human player, dumb ai, smart ai
         floodMeter = 0;
         actionsRemaining = 3;
@@ -255,13 +255,13 @@ public class FiGameState extends GameState {
     @Override
     public String toString(){
         String result = "Player's Turn: ";
-        if (playerTurn == 1) {
+        if (playerTurn == 0) {
             result += "Player 1's Turn";
-        } else if (playerTurn == 2) {
+        } else if (playerTurn == 1) {
             result += "Player 2's Turn";
 
         }
-        else if (playerTurn == 3) {
+        else if (playerTurn == 2) {
             result += "Player 3's Turn";
         }
 
@@ -294,13 +294,13 @@ public class FiGameState extends GameState {
             return false;
         }
         else{
-            if(playerTurn == 1){
+            if(playerTurn == 0){
                 player1Location = t;
             }
-            else if (playerTurn == 2){
+            else if (playerTurn == 1){
                 player2Location = t;
             }
-            else if (playerTurn == 3){
+            else if (playerTurn == 2){
                 player3Location = t;
             }
             actionsRemaining--;
@@ -322,72 +322,30 @@ public class FiGameState extends GameState {
 
     //Choose a player to give a treasure card to
     public boolean giveCard(int playerTurn, int playerId, TreasureCards card){ //player's whose turn it is, player to give card to, card to give away
-        if(actionsRemaining < 1 || playerId == 0){
+        if(actionsRemaining < 1){
             return false;
         }
         //choose card from array, remove, and add to another player's hand array
-        if(playerTurn == 1 && humanPlayerHand.contains(card)) {
-            humanPlayerHand.remove(card);
-            if(playerId == 2) {
-                dumbAiHand.add(card);
-            }
-            else if(playerId == 3) {
-                smartAiHand.add(card);
-            }
-            else {
-                return false;
-            }
+        if(getPlayerTurn() == playerTurn && getPlayerTurnHand(getPlayerTurn()).contains(card)){
+            getPlayerTurnHand(playerId).add(card);
+            getPlayerTurnHand(getPlayerTurn()).remove(card);
             actionsRemaining--;
             return true;
         }
-        else if(playerTurn == 2 && dumbAiHand.contains(card)) {
-            dumbAiHand.remove(card);
-            if(playerId == 1) {
-                humanPlayerHand.add(card);
-            }
-            else if(playerId == 3) {
-                smartAiHand.add(card);
-            }
-            else {
-                return false;
-            }
-            actionsRemaining--;
-            return true;
+        else{
+            return false;
         }
-        else if(playerTurn == 3 && smartAiHand.contains(card)){
-            smartAiHand.remove(card);
-            if(playerId == 2) {
-                dumbAiHand.add(card);
-            }
-            else if(playerId == 1) {
-                humanPlayerHand.add(card);
-            }
-            else {
-                return false;
-            }
-            actionsRemaining--;
-            return true;
-        }
-        return false;
     }//end of giveCard
 
     public boolean discard(int playerTurn, TreasureCards card){
-        if(playerTurn == 1){
-            humanPlayerHand.remove(card);
+        if(getPlayerTurn() == playerTurn){
+            getPlayerTurnHand(playerTurn).remove(card);
             discardTreasureDeck.add(card);
             return true;
         }
-        else if(playerTurn == 2){
-            dumbAiHand.remove(card);
-            discardTreasureDeck.add(card);
-            return true;
+        else{
+            return false;
         }
-        else if(playerTurn == 3){
-            smartAiHand.remove(card);
-            discardTreasureDeck.add(card);
-            return true;
-        }
-        return false;
     }//end of discard
 
     public boolean captureTreasure(int playerTurn, ArrayList<TreasureCards> a, TileName t){
@@ -703,6 +661,9 @@ public class FiGameState extends GameState {
     public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
     public ArrayList<FloodCards> getDiscardFloodDeck(){return this.discardFloodDeck;}
     public ArrayList<TreasureCards> getDiscardTreasureDeck(){return this.discardTreasureDeck;}
+    public int getDiscardTreasureDeckSize() {
+        return discardTreasureDeck.size();
+    }
 
     public String getHand(ArrayList<TreasureCards> a) {
         String str = "";
@@ -713,10 +674,10 @@ public class FiGameState extends GameState {
     }
 
     public ArrayList<TreasureCards> getPlayerTurnHand(int playerTurn){//get the hand of whoever's turn it is
-        if(playerTurn == 1){
+        if(playerTurn == 0){
             return this.humanPlayerHand;
         }
-        else if(playerTurn == 2){
+        else if(playerTurn == 1){
             return this.dumbAiHand;
         }
         else{
@@ -724,11 +685,13 @@ public class FiGameState extends GameState {
         }
     }
     public TileName getPlayerLocation(int playerTurn) {
-        if (playerTurn == 1) {
+        if (playerTurn == 0) {
             return this.player1Location;
-        } else if (playerTurn == 2) {
+        }
+        else if (playerTurn == 1) {
             return this.player2Location;
-        } else {
+        }
+        else {
             return this.player3Location;
         }
     }

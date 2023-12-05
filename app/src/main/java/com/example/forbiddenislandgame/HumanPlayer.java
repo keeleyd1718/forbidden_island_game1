@@ -117,73 +117,73 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             OBSERVATORY.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
 
             //set the image buttons to display what cards are in player 1's hand
-            for(int i = 0; i < gameState.getPlayerTurnHand(1).size(); i++){
-                FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(1).get(i);
+            for(int i = 0; i < gameState.getPlayerTurnHand(0).size(); i++){
+                FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(0).get(i);
 
-                if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
+                if(gameState.getPlayerTurnHand(0).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
                     player1Cards[i].setImageResource(R.drawable.tc_sandbag);
                 }
-                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
+                else if(gameState.getPlayerTurnHand(0).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
                     player1Cards[i].setImageResource(R.drawable.tc_helicopter_lift);
                 }
-                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.EARTH_STONE1) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
+                else if(gameState.getPlayerTurnHand(0).get(i).equals(FiGameState.TreasureCards.EARTH_STONE1) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
                     player1Cards[i].setImageResource(R.drawable.tc_earth_stone);
                 }
-                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || tc.equals(FiGameState.TreasureCards.WIND_STATUE2) || tc.equals(FiGameState.TreasureCards.WIND_STATUE3) || tc.equals(FiGameState.TreasureCards.WIND_STATUE4) || tc.equals(FiGameState.TreasureCards.WIND_STATUE5)){
+                else if(gameState.getPlayerTurnHand(0).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || tc.equals(FiGameState.TreasureCards.WIND_STATUE2) || tc.equals(FiGameState.TreasureCards.WIND_STATUE3) || tc.equals(FiGameState.TreasureCards.WIND_STATUE4) || tc.equals(FiGameState.TreasureCards.WIND_STATUE5)){
                     player1Cards[i].setImageResource(R.drawable.tc_wind_statue);
                 }
-                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
+                else if(gameState.getPlayerTurnHand(0).get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
                     player1Cards[i].setImageResource(R.drawable.tc_fire_crystal);
                 }
-                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
+                else if(gameState.getPlayerTurnHand(0).get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
                     player1Cards[i].setImageResource(R.drawable.tc_ocean_chalice);
                 }
             }
 
             //set the image buttons to display what cards are in player 2's hand
-            for(int i = 0; i < gameState.getPlayerTurnHand(2).size(); i++){
-                FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(2).get(i);
+            for(int i = 0; i < gameState.getPlayerTurnHand(1).size(); i++){
+                FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(1).get(i);
 
-                if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
+                if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
                     player2Cards[i].setImageResource(R.drawable.tc_sandbag);
                 }
-                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
+                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
                     player2Cards[i].setImageResource(R.drawable.tc_helicopter_lift);
                 }
-                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.EARTH_STONE1) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
+                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.EARTH_STONE1) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
                     player2Cards[i].setImageResource(R.drawable.tc_earth_stone);
                 }
-                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || tc.equals(FiGameState.TreasureCards.WIND_STATUE2) || tc.equals(FiGameState.TreasureCards.WIND_STATUE3) || tc.equals(FiGameState.TreasureCards.WIND_STATUE4) || tc.equals(FiGameState.TreasureCards.WIND_STATUE5)){
+                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || tc.equals(FiGameState.TreasureCards.WIND_STATUE2) || tc.equals(FiGameState.TreasureCards.WIND_STATUE3) || tc.equals(FiGameState.TreasureCards.WIND_STATUE4) || tc.equals(FiGameState.TreasureCards.WIND_STATUE5)){
                     player2Cards[i].setImageResource(R.drawable.tc_wind_statue);
                 }
-                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
+                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
                     player2Cards[i].setImageResource(R.drawable.tc_fire_crystal);
                 }
-                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
+                else if(gameState.getPlayerTurnHand(1).get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
                     player2Cards[i].setImageResource(R.drawable.tc_ocean_chalice);
                 }
             }
 
             //set the image buttons to display what cards are in player 3's hand
-            for(int i = 0; i < gameState.getPlayerTurnHand(3).size(); i++){
-                FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(3).get(i);
+            for(int i = 0; i < gameState.getPlayerTurnHand(2).size(); i++){
+                FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(2).get(i);
 
-                if(gameState.getPlayerTurnHand(3).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
+                if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
                     player3Cards[i].setImageResource(R.drawable.tc_sandbag);
                 }
-                else if(gameState.getPlayerTurnHand(3).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
+                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
                     player3Cards[i].setImageResource(R.drawable.tc_helicopter_lift);
                 }
-                else if(gameState.getPlayerTurnHand(3).get(i).equals(FiGameState.TreasureCards.EARTH_STONE1) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
+                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.EARTH_STONE1) || tc.equals(FiGameState.TreasureCards.EARTH_STONE2) || tc.equals(FiGameState.TreasureCards.EARTH_STONE3) || tc.equals(FiGameState.TreasureCards.EARTH_STONE4) || tc.equals(FiGameState.TreasureCards.EARTH_STONE5)){
                     player3Cards[i].setImageResource(R.drawable.tc_earth_stone);
                 }
-                else if(gameState.getPlayerTurnHand(3).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || tc.equals(FiGameState.TreasureCards.WIND_STATUE2) || tc.equals(FiGameState.TreasureCards.WIND_STATUE3) || tc.equals(FiGameState.TreasureCards.WIND_STATUE4) || tc.equals(FiGameState.TreasureCards.WIND_STATUE5)){
+                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || tc.equals(FiGameState.TreasureCards.WIND_STATUE2) || tc.equals(FiGameState.TreasureCards.WIND_STATUE3) || tc.equals(FiGameState.TreasureCards.WIND_STATUE4) || tc.equals(FiGameState.TreasureCards.WIND_STATUE5)){
                     player3Cards[i].setImageResource(R.drawable.tc_wind_statue);
                 }
-                else if(gameState.getPlayerTurnHand(3).get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
+                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.FIRE_CRYSTAL1) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL2) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL3) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL4) || tc.equals(FiGameState.TreasureCards.FIRE_CRYSTAL5)){
                     player3Cards[i].setImageResource(R.drawable.tc_fire_crystal);
                 }
-                else if(gameState.getPlayerTurnHand(3).get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
+                else if(gameState.getPlayerTurnHand(2).get(i).equals(FiGameState.TreasureCards.OCEAN_CHALICE1) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE2) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE3) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE4) || tc.equals(FiGameState.TreasureCards.OCEAN_CHALICE5)){
                     player3Cards[i].setImageResource(R.drawable.tc_ocean_chalice);
                 }
             }
@@ -643,13 +643,13 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         }
         else if(view.getId() == R.id.giveCardButton){
             if(view.getId() == R.id.giveCardToP1){
-                FiGameState.playerChosen = 1;
+                FiGameState.playerChosen = 0;
             }
             else if(view.getId() == R.id.giveCardToP2){
-                FiGameState.playerChosen = 2;
+                FiGameState.playerChosen = 1;
             }
             else if(view.getId() == R.id.giveCardToP3){
-                FiGameState.playerChosen = 3;
+                FiGameState.playerChosen = 2;
             }
             if(view.getId() == R.id.player1Card1){
                 playerCardsClicked[0] = true;
