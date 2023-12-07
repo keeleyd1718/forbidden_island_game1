@@ -19,20 +19,25 @@ public class FiGameState extends GameState {
     int playerTurn;//whose turn it is
     int floodMeter;//keeps track of the flood meter level
     int actionsRemaining;//can have up to 3 per turn
-    int actionChoices;// which of 4 actions they choose: move, shore up, capture treasure, give card
     static int playerChosen;//to use for giveCard method
 
     //true if that treasure has been captures; false if not
-    boolean earthStoneTreasure;
-    boolean fireCrystalTreasure;
-    boolean windStatueTreasure;
-    boolean oceanChaliceTreasure;
+    boolean isCapturedEarthStone;
+    boolean isCapturedFireCrystal;
+    boolean isCapturedOceanChalice;
+    boolean isCapturedWindStatue;
 
     //number of treasure cards in each player's hand
-    int[] numEarthStoneCards;
-    int[] numFireCrystalCards;
-    int[] numWindStatueCards;
-    int[] numOceanChaliceCards;
+    int[] numEarthStoneCardsInHand;
+    int[] numFireCrystalCardsInHand;
+    int[] numWindStatueCardsInHand;
+    int[] numOceanChaliceCardsInHand;
+
+    //arrays for the treasure cards to make methods easier
+    TreasureCards[] earthStoneTreasureCards;
+    TreasureCards[] fireCrystalTreasureCards;
+    TreasureCards[] windStatueTreasureCards;
+    TreasureCards[] oceanChaliceTreasureCards;
 
     //keep track of tiles that the players pawn's are on
     TileName player1Location;
@@ -171,25 +176,52 @@ public class FiGameState extends GameState {
         floodMeter = 0;
         actionsRemaining = 3;
         playerChosen = 0;
-        earthStoneTreasure = false;
-        fireCrystalTreasure = false;
-        windStatueTreasure = false;
-        oceanChaliceTreasure = false;
+        isCapturedEarthStone = false;
+        isCapturedFireCrystal= false;
+        isCapturedWindStatue = false;
+        isCapturedOceanChalice = false;
 
         //initialize the treasure card counts for the players
-        numEarthStoneCards = new int[numPlayers];
-        numFireCrystalCards = new int[numPlayers];
-        numWindStatueCards = new int[numPlayers];
-        numOceanChaliceCards = new int[numPlayers];
+        numEarthStoneCardsInHand = new int[numPlayers];
+        numFireCrystalCardsInHand = new int[numPlayers];
+        numWindStatueCardsInHand = new int[numPlayers];
+        numOceanChaliceCardsInHand = new int[numPlayers];
 
         //set treasure card counts for the players to 0
         for(int i = 0; i < numPlayers; i++){
-            numEarthStoneCards[i] = 0;
-            numFireCrystalCards[i] = 0;
-            numWindStatueCards[i] = 0;
-            numOceanChaliceCards[i] = 0;
+            numEarthStoneCardsInHand[i] = 0;
+            numFireCrystalCardsInHand[i] = 0;
+            numWindStatueCardsInHand[i] = 0;
+            numOceanChaliceCardsInHand[i] = 0;
         }
-        actionChoices = 1; // defaults to move
+
+        //initializing and setting the array of each type of treasure card to make methods simpler
+        TreasureCards[] earthStoneTreasureCards = new TreasureCards[5];
+        TreasureCards[] fireCrystalTreasureCards = new TreasureCards[5];
+        TreasureCards[] windStatueTreasureCards = new TreasureCards[5];
+        TreasureCards[] oceanChaliceTreasureCards = new TreasureCards[5];
+
+        earthStoneTreasureCards[0] = TreasureCards.EARTH_STONE1;
+        earthStoneTreasureCards[1] = TreasureCards.EARTH_STONE2;
+        earthStoneTreasureCards[2] = TreasureCards.EARTH_STONE3;
+        earthStoneTreasureCards[3] = TreasureCards.EARTH_STONE4;
+        earthStoneTreasureCards[4] = TreasureCards.EARTH_STONE5;
+        fireCrystalTreasureCards[0] = TreasureCards.FIRE_CRYSTAL1;
+        fireCrystalTreasureCards[1] = TreasureCards.FIRE_CRYSTAL2;
+        fireCrystalTreasureCards[2] = TreasureCards.FIRE_CRYSTAL3;
+        fireCrystalTreasureCards[3] = TreasureCards.FIRE_CRYSTAL4;
+        fireCrystalTreasureCards[4] = TreasureCards.FIRE_CRYSTAL5;
+        windStatueTreasureCards[0] = TreasureCards.WIND_STATUE1;
+        windStatueTreasureCards[1] = TreasureCards.WIND_STATUE2;
+        windStatueTreasureCards[2] = TreasureCards.WIND_STATUE3;
+        windStatueTreasureCards[3] = TreasureCards.WIND_STATUE4;
+        windStatueTreasureCards[4] = TreasureCards.WIND_STATUE5;
+        oceanChaliceTreasureCards[0] = TreasureCards.OCEAN_CHALICE1;
+        oceanChaliceTreasureCards[1] = TreasureCards.OCEAN_CHALICE2;
+        oceanChaliceTreasureCards[2] = TreasureCards.OCEAN_CHALICE3;
+        oceanChaliceTreasureCards[3] = TreasureCards.OCEAN_CHALICE4;
+        oceanChaliceTreasureCards[4] = TreasureCards.OCEAN_CHALICE5;
+
         player1Location = TileName.ABANDONED_CLIFFS;
         player2Location = TileName.DECEPTION_DUNES;
         player3Location = TileName.OBSERVATORY;
@@ -233,15 +265,18 @@ public class FiGameState extends GameState {
         this.smartAiHand = other.smartAiHand;
         this.actionsRemaining = other.actionsRemaining;
         this.playerChosen = other.playerChosen;
-        this.earthStoneTreasure = other.earthStoneTreasure;
-        this.fireCrystalTreasure = other.fireCrystalTreasure;
-        this.windStatueTreasure = other.windStatueTreasure;
-        this.oceanChaliceTreasure = other.oceanChaliceTreasure;
-        this.numOceanChaliceCards = other.numOceanChaliceCards;
-        this.numEarthStoneCards = other.numEarthStoneCards;
-        this.numFireCrystalCards = other.numFireCrystalCards;
-        this.numWindStatueCards = other.numWindStatueCards;
-        this.actionChoices = other.actionChoices;
+        isCapturedEarthStone = other.isCapturedEarthStone;
+        isCapturedFireCrystal = other.isCapturedFireCrystal;
+        isCapturedOceanChalice = other.isCapturedOceanChalice;
+        isCapturedWindStatue = other.isCapturedWindStatue;
+        int[] numEarthStoneCardsInHand;
+        int[] numFireCrystalCardsInHand;
+        int[] numWindStatueCardsInHand;
+        int[] numOceanChaliceCardsInHand;
+        TreasureCards[] earthStoneTreasureCards;
+        TreasureCards[] fireCrystalTreasureCards;
+        TreasureCards[] windStatueTreasureCards;
+        TreasureCards[] oceanChaliceTreasureCards;
         this.player1Location = other.player1Location;
         this.player2Location = other.player2Location;
         this.player3Location = other.player3Location;
@@ -267,8 +302,8 @@ public class FiGameState extends GameState {
 
         return "Turn = "+playerTurn+
                 " Flood = "+floodMeter+
-                " Remaining Actions = "+actionsRemaining+
-                " Player 1's Earth Stone Cards = "+numEarthStoneCards[0]+
+                " Remaining Actions = "+actionsRemaining;//+
+            /*    " Player 1's Earth Stone Cards = "+numEarthStoneCards[0]+
                 " Player 1's Fire Crystal Cards = "+numFireCrystalCards[0]+
                 " Player 1's Wind Statue Cards = "+numWindStatueCards[0]+
                 " Player 1's Ocean Chalice Cards = "+numOceanChaliceCards[0]+
@@ -279,8 +314,7 @@ public class FiGameState extends GameState {
                 " Player 3's Earth Stone Cards = "+numEarthStoneCards[2]+
                 " Player 3's Fire Crystal Cards = "+numFireCrystalCards[2]+
                 " Player 3's Wind Statue Cards = "+numWindStatueCards[2]+
-                " Player 3's Ocean Chalice Cards = "+numOceanChaliceCards[2]+
-                " Action Choices = "+actionChoices + result;
+                " Player 3's Ocean Chalice Cards = "+numOceanChaliceCards[2]+ result;*/
     }
 
     //action methods
@@ -313,10 +347,13 @@ public class FiGameState extends GameState {
         if(actionsRemaining < 1){
             return false;
         }
-        else{
+        else if(getPlayerTurn() == playerTurn){
             map.put(t, Value.NORMAL);
             actionsRemaining--;
             return true;
+        }
+        else{
+            return false;
         }
     }//end of shoreUp
 
@@ -359,152 +396,94 @@ public class FiGameState extends GameState {
         boolean windStatueTile = (t.equals(TileName.HOWLING_GARDEN) || t.equals(TileName.WHISPERING_GARDENS));
 
         //removing four earth stone cards from the player's hand and capturing the treasure
-        for(int i = 1; i <= numPlayers; i++){
+        for(int i = 0; i < numPlayers; i++){
             if(playerTurn == i && earthStoneTile) {//if its player 1's turn and they are on the correct tile
-                if (a.contains(numEarthStoneCards[i - 1] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
+                if (a.contains(numEarthStoneCardsInHand[i] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
                     int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
-                    if (a.contains(TreasureCards.EARTH_STONE1)) {
-                        discardTreasureDeck.add(TreasureCards.EARTH_STONE1);
-                        a.remove(TreasureCards.EARTH_STONE1);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.EARTH_STONE2)) {
-                        discardTreasureDeck.add(TreasureCards.EARTH_STONE2);
-                        a.remove(TreasureCards.EARTH_STONE2);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.EARTH_STONE3)) {
-                        discardTreasureDeck.add(TreasureCards.EARTH_STONE3);
-                        a.remove(TreasureCards.EARTH_STONE3);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.EARTH_STONE4)) {
-                        discardTreasureDeck.add(TreasureCards.EARTH_STONE4);
-                        a.remove(TreasureCards.EARTH_STONE4);
-                        count++;
-                    }
-                    if (count != 4) {
-                        if (a.contains(TreasureCards.EARTH_STONE5)) {
-                            discardTreasureDeck.add(TreasureCards.EARTH_STONE5);
-                            a.remove(TreasureCards.EARTH_STONE5);
+                    for(int j = 0; j < earthStoneTreasureCards.length; j++){
+                        if(count == 4){
+                            numEarthStoneCardsInHand[i] -= 4;//change the player's individual treasure card count
+                            isCapturedEarthStone = true;//they captured the earth stone treasure
+                            actionsRemaining--;
+                            return true;
+                        }
+                        if (a.contains(earthStoneTreasureCards[j])){
+                            count += tryRemoveCard(a, earthStoneTreasureCards[j]);
                         }
                     }
-                    numEarthStoneCards[i - 1] -= 4;//change the player's individual treasure card count
-                    earthStoneTreasure = true;//they captured the earth stone treasure
-                    actionsRemaining--;
-                    return true;
                 }
             }
             else if(playerTurn == i && fireCrystalTile) {
-                if (a.contains(numFireCrystalCards[i - 1] >= 4)) {
+                if (a.contains(numFireCrystalCardsInHand[i] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
                     int count = 0;
-                    if (a.contains(TreasureCards.FIRE_CRYSTAL1)) {
-                        discardTreasureDeck.add(TreasureCards.FIRE_CRYSTAL1);
-                        a.remove(TreasureCards.FIRE_CRYSTAL1);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.FIRE_CRYSTAL2)) {
-                        discardTreasureDeck.add(TreasureCards.FIRE_CRYSTAL2);
-                        a.remove(TreasureCards.FIRE_CRYSTAL2);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.FIRE_CRYSTAL3)) {
-                        discardTreasureDeck.add(TreasureCards.FIRE_CRYSTAL3);
-                        a.remove(TreasureCards.FIRE_CRYSTAL3);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.FIRE_CRYSTAL4)) {
-                        discardTreasureDeck.add(TreasureCards.FIRE_CRYSTAL4);
-                        a.remove(TreasureCards.FIRE_CRYSTAL4);
-                        count++;
-                    }
-                    if (count != 4) {
-                        if (a.contains(TreasureCards.FIRE_CRYSTAL5)) {
-                            discardTreasureDeck.add(TreasureCards.FIRE_CRYSTAL5);
-                            a.remove(TreasureCards.FIRE_CRYSTAL5);
+
+                    //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
+                    for(int j = 0; j < fireCrystalTreasureCards.length; j++){
+                        if(count == 4){
+                            numFireCrystalCardsInHand[i] -= 4;//change the player's individual treasure card count
+                            isCapturedFireCrystal = true;//they captured the earth stone treasure
+                            actionsRemaining--;
+                            return true;
+                        }
+                        if (a.contains(fireCrystalTreasureCards[j])){
+                            count += tryRemoveCard(a, fireCrystalTreasureCards[j]);
                         }
                     }
-                    numFireCrystalCards[i - 1] -= 4;
-                    fireCrystalTreasure = true;
-                    actionsRemaining--;
-                    return true;
                 }
             }
             else if(playerTurn == i && windStatueTile) {
-                if (a.contains(numWindStatueCards[i - 1] >= 4)) {
+                if (a.contains(numWindStatueCardsInHand[i] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
                     int count = 0;
-                    if (a.contains(TreasureCards.WIND_STATUE1)) {
-                        discardTreasureDeck.add(TreasureCards.WIND_STATUE1);
-                        a.remove(TreasureCards.WIND_STATUE1);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.WIND_STATUE2)) {
-                        discardTreasureDeck.add(TreasureCards.WIND_STATUE2);
-                        a.remove(TreasureCards.WIND_STATUE2);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.WIND_STATUE3)) {
-                        discardTreasureDeck.add(TreasureCards.WIND_STATUE3);
-                        a.remove(TreasureCards.WIND_STATUE3);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.WIND_STATUE4)) {
-                        discardTreasureDeck.add(TreasureCards.WIND_STATUE4);
-                        a.remove(TreasureCards.WIND_STATUE4);
-                        count++;
-                    }
-                    if (count != 4) {
-                        if (a.contains(TreasureCards.WIND_STATUE5)) {
-                            discardTreasureDeck.add(TreasureCards.WIND_STATUE5);
-                            a.remove(TreasureCards.WIND_STATUE5);
+
+                    //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
+                    for(int j = 0; j < windStatueTreasureCards.length; j++){
+                        if(count == 4){
+                            numWindStatueCardsInHand[i] -= 4;//change the player's individual treasure card count
+                            isCapturedWindStatue = true;//they captured the earth stone treasure
+                            actionsRemaining--;
+                            return true;
+                        }
+                        if (a.contains(windStatueTreasureCards[j])){
+                            count += tryRemoveCard(a, windStatueTreasureCards[j]);
                         }
                     }
-                    numWindStatueCards[i - 1] -= 4;
-                    windStatueTreasure = true;
-                    actionsRemaining--;
-                    return true;
                 }
             }
             else if(playerTurn == i && oceanChaliceTile) {
-                if (a.contains(numOceanChaliceCards[i - 1] >= 4)) {
+                if (a.contains(numOceanChaliceCardsInHand[i] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
                     int count = 0;
-                    if (a.contains(TreasureCards.OCEAN_CHALICE1)) {
-                        discardTreasureDeck.add(TreasureCards.OCEAN_CHALICE1);
-                        a.remove(TreasureCards.OCEAN_CHALICE1);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.OCEAN_CHALICE2)) {
-                        discardTreasureDeck.add(TreasureCards.OCEAN_CHALICE2);
-                        a.remove(TreasureCards.OCEAN_CHALICE2);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.OCEAN_CHALICE3)) {
-                        discardTreasureDeck.add(TreasureCards.OCEAN_CHALICE3);
-                        a.remove(TreasureCards.OCEAN_CHALICE3);
-                        count++;
-                    }
-                    if (a.contains(TreasureCards.OCEAN_CHALICE4)) {
-                        discardTreasureDeck.add(TreasureCards.OCEAN_CHALICE4);
-                        a.remove(TreasureCards.OCEAN_CHALICE4);
-                        count++;
-                    }
-                    if (count != 4) {
-                        if (a.contains(TreasureCards.OCEAN_CHALICE5)) {
-                            discardTreasureDeck.add(TreasureCards.OCEAN_CHALICE5);
-                            a.remove(TreasureCards.OCEAN_CHALICE5);
+
+                    //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
+                    for(int j = 0; j < oceanChaliceTreasureCards.length; j++){
+                        if(count == 4){
+                            numOceanChaliceCardsInHand[i] -= 4;//change the player's individual treasure card count
+                            isCapturedOceanChalice = true;//they captured the earth stone treasure
+                            actionsRemaining--;
+                            return true;
+                        }
+                        if (a.contains(oceanChaliceTreasureCards[j])){
+                            count += tryRemoveCard(a, oceanChaliceTreasureCards[j]);
                         }
                     }
-                    numOceanChaliceCards[i - 1] -= 4;
-                    oceanChaliceTreasure = true;
-                    actionsRemaining--;
-                    return true;
                 }
             }
         }
         return false;
     }//end of captureTreasure
+
+    //method to try to remove a card from a player's hand and if it works return 1
+    int tryRemoveCard(ArrayList<TreasureCards> a, TreasureCards c){
+        if(a.contains(c)){
+            discardTreasureDeck.add(c);
+            a.remove(c);
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }//end of tryRemoveCard
 
     public void drawTreasure(ArrayList<TreasureCards> a) {
         //check if the treasure deck is empty and is so add the cards from the discard pile back into the treasure deck
@@ -525,48 +504,20 @@ public class FiGameState extends GameState {
             a.remove(card1);
             discardTreasureDeck.add(card1);
         }
-        else if(card1.equals(TreasureCards.EARTH_STONE1) || card1.equals(TreasureCards.EARTH_STONE2) || card1.equals(TreasureCards.EARTH_STONE3) || card1.equals(TreasureCards.EARTH_STONE4) || card1.equals(TreasureCards.EARTH_STONE5)){
-            if(a.equals(humanPlayerHand)){
-                numEarthStoneCards[0]++;
-            }
-            else if(a.equals(dumbAiHand)){
-                numEarthStoneCards[1]++;
-            }
-            else if(a.equals(smartAiHand)){
-                numEarthStoneCards[2]++;
-            }
-        }
-        else if(card1.equals(TreasureCards.FIRE_CRYSTAL1) || card1.equals(TreasureCards.FIRE_CRYSTAL2) || card1.equals(TreasureCards.FIRE_CRYSTAL3) || card1.equals(TreasureCards.FIRE_CRYSTAL4) || card1.equals(TreasureCards.FIRE_CRYSTAL5)){
-            if(a.equals(humanPlayerHand)){
-                numFireCrystalCards[0]++;
-            }
-            else if(a.equals(dumbAiHand)){
-                numFireCrystalCards[1]++;
-            }
-            else if(a.equals(smartAiHand)){
-                numFireCrystalCards[2]++;
-            }
-        }
-        else if(card1.equals(TreasureCards.WIND_STATUE1) || card1.equals(TreasureCards.WIND_STATUE2) || card1.equals(TreasureCards.WIND_STATUE3) || card1.equals(TreasureCards.WIND_STATUE4) || card1.equals(TreasureCards.WIND_STATUE5)){
-            if(a.equals(humanPlayerHand)){
-                numWindStatueCards[0]++;
-            }
-            else if(a.equals(dumbAiHand)){
-                numWindStatueCards[1]++;
-            }
-            else if(a.equals(smartAiHand)){
-                numWindStatueCards[2]++;
-            }
-        }
-        else if(card1.equals(TreasureCards.OCEAN_CHALICE1) || card1.equals(TreasureCards.OCEAN_CHALICE2) || card1.equals(TreasureCards.OCEAN_CHALICE3) || card1.equals(TreasureCards.OCEAN_CHALICE4) || card1.equals(TreasureCards.OCEAN_CHALICE5)){
-            if(a.equals(humanPlayerHand)){
-                numOceanChaliceCards[0]++;
-            }
-            else if(a.equals(dumbAiHand)){
-                numOceanChaliceCards[1]++;
-            }
-            else if(a.equals(smartAiHand)){
-                numOceanChaliceCards[2]++;
+        else{
+            for(int i = 0; i < 5; i++){
+                if(card1.equals(earthStoneTreasureCards[i])){
+                    numEarthStoneCardsInHand[playerTurn]++;
+                }
+                else if(card1.equals(fireCrystalTreasureCards[i])){
+                    numFireCrystalCardsInHand[playerTurn]++;
+                }
+                else if(card1.equals(windStatueTreasureCards[i])){
+                    numWindStatueCardsInHand[playerTurn]++;
+                }
+                else if(card1.equals(oceanChaliceTreasureCards[i])){
+                    numOceanChaliceCardsInHand[playerTurn]++;
+                }
             }
         }
 
@@ -580,48 +531,20 @@ public class FiGameState extends GameState {
             a.remove(card2);
             discardTreasureDeck.add(card2);
         }
-        else if(card2.equals(TreasureCards.EARTH_STONE1) || card2.equals(TreasureCards.EARTH_STONE2) || card2.equals(TreasureCards.EARTH_STONE3) || card2.equals(TreasureCards.EARTH_STONE4) || card2.equals(TreasureCards.EARTH_STONE5)){
-            if(a.equals(humanPlayerHand)){
-                numEarthStoneCards[0]++;
-            }
-            else if(a.equals(dumbAiHand)){
-                numEarthStoneCards[1]++;
-            }
-            else if(a.equals(smartAiHand)){
-                numEarthStoneCards[2]++;
-            }
-        }
-        else if(card2.equals(TreasureCards.FIRE_CRYSTAL1) || card2.equals(TreasureCards.FIRE_CRYSTAL2) || card2.equals(TreasureCards.FIRE_CRYSTAL3) || card2.equals(TreasureCards.FIRE_CRYSTAL4) || card2.equals(TreasureCards.FIRE_CRYSTAL5)){
-            if(a.equals(humanPlayerHand)){
-                numFireCrystalCards[0]++;
-            }
-            else if(a.equals(dumbAiHand)){
-                numFireCrystalCards[1]++;
-            }
-            else if(a.equals(smartAiHand)){
-                numFireCrystalCards[2]++;
-            }
-        }
-        else if(card2.equals(TreasureCards.WIND_STATUE1) || card2.equals(TreasureCards.WIND_STATUE2) || card2.equals(TreasureCards.WIND_STATUE3) || card2.equals(TreasureCards.WIND_STATUE4) || card2.equals(TreasureCards.WIND_STATUE5)){
-            if(a.equals(humanPlayerHand)){
-                numWindStatueCards[0]++;
-            }
-            else if(a.equals(dumbAiHand)){
-                numWindStatueCards[1]++;
-            }
-            else if(a.equals(smartAiHand)){
-                numWindStatueCards[2]++;
-            }
-        }
-        else if(card2.equals(TreasureCards.OCEAN_CHALICE1) || card2.equals(TreasureCards.OCEAN_CHALICE2) || card2.equals(TreasureCards.OCEAN_CHALICE3) || card2.equals(TreasureCards.OCEAN_CHALICE4) || card2.equals(TreasureCards.OCEAN_CHALICE5)){
-            if(a.equals(humanPlayerHand)){
-                numOceanChaliceCards[0]++;
-            }
-            else if(a.equals(dumbAiHand)){
-                numOceanChaliceCards[1]++;
-            }
-            else if(a.equals(smartAiHand)){
-                numOceanChaliceCards[2]++;
+        else{
+            for(int i = 0; i < 5; i++){
+                if(card2.equals(earthStoneTreasureCards[i])){
+                    numEarthStoneCardsInHand[playerTurn]++;
+                }
+                else if(card1.equals(fireCrystalTreasureCards[i])){
+                    numFireCrystalCardsInHand[playerTurn]++;
+                }
+                else if(card1.equals(windStatueTreasureCards[i])){
+                    numWindStatueCardsInHand[playerTurn]++;
+                }
+                else if(card1.equals(oceanChaliceTreasureCards[i])){
+                    numOceanChaliceCardsInHand[playerTurn]++;
+                }
             }
         }
     }//end of drawTreasure

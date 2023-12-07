@@ -346,6 +346,7 @@ public class FiLocalGame extends LocalGame {
                 checkIfGameOver();
                 return true;
             }
+
         }
         return false;
     }
