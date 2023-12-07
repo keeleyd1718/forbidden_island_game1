@@ -72,9 +72,6 @@ public class FiLocalGame extends LocalGame {
         Log.e("zzz makeMove", "received move!");
         //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
         if(canMove(getPlayerIdx(action.getPlayer()))) {
-            //always start the player's turn by drawing treasure cards
-            gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));
-
             if(action instanceof FiMoveAction) {
                 FiMoveAction a = (FiMoveAction) action;//create an instance of a move action
                 FiGameState.TileName t = a.getTileName();//get the tile the player pressed
@@ -95,6 +92,10 @@ public class FiLocalGame extends LocalGame {
                 gs.captureTreasure(gs.getPlayerTurn(), gs.getPlayerTurnHand(gs.playerTurn), gs.getPlayerLocation(gs.getPlayerTurn()));
             }
             else if(action instanceof FiEndTurnAction){//if a player skips their turn
+                gs.drawFlood(gs.getDrawnFloodCards());
+                gs.endTurn();
+                gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
+                return true;
             }
             else if (action instanceof FiGameOverAction) {
                 checkIfGameOver();
@@ -103,6 +104,7 @@ public class FiLocalGame extends LocalGame {
             //always end the turn by drawing flood cards and switching whose turn it is
             gs.drawFlood(gs.getDrawnFloodCards());
             gs.endTurn();
+            gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
             return true;
         }
         return false;
