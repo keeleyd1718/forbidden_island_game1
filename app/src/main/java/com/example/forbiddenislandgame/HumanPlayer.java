@@ -20,6 +20,7 @@ import com.example.game.GameFramework.GameMainActivity;
 import com.example.game.GameFramework.infoMessage.GameInfo;
 import com.example.game.GameFramework.players.GameHumanPlayer;
 import com.example.game.GameFramework.utilities.Logger;
+import com.example.game.GameFramework.utilities.MessageBox;
 
 public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener {
     private int layoutId;
@@ -758,6 +759,8 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         //when the player presses the discard button
         if(discardButtonClicked)
         {
+            String msg = "Please choose a card to discard";
+            MessageBox.popUpMessage(msg, myActivity);
             //go through the playerCardsClicked array to see what card the player pressed and send the discard action with the card in that place
             for(int i = 0; i < player1Cards.length; i++){
                 if(playerCardsClicked[i]) {
