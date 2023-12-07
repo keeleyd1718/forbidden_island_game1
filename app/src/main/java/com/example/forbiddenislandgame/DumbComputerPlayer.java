@@ -1,8 +1,6 @@
 package com.example.forbiddenislandgame;
 
 import com.example.actions.FiCaptureTreasureAction;
-import com.example.actions.FiDrawFloodAction;
-import com.example.actions.FiDrawTreasureAction;
 import com.example.actions.FiEndTurnAction;
 import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
@@ -30,7 +28,6 @@ public class DumbComputerPlayer extends GameComputerPlayer {
             FiGameState.TileName t;
 
             if(this.playerNum == gameState.getPlayerTurn()){//checking if it is dumb ai's turn
-                game.sendAction(new FiDrawTreasureAction(this));//if it is then draw two cards from the treasure deck
                 int randomNum = (int) (Math.random() * 4);//generate a random number 1-4
 
                 if(randomNum == 1){//moves the dumb ai to a random tile
@@ -64,8 +61,6 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                     //gives the first card in the dumb ai's hand to the player whose turn it is next
                     game.sendAction(new FiGiveCardAction(this, gameState.playerChosen, tc));
                 }
-                game.sendAction(new FiDrawFloodAction(this));//then the dumb ai draws two flood cards
-                game.sendAction(new FiEndTurnAction(this));//end their turn
             }
         }
     }

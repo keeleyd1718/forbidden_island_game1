@@ -1,10 +1,13 @@
 package com.example.forbiddenislandgame;
 
+import com.example.actions.FiDiscardAction;
+import com.example.actions.FiEndTurnAction;
 import com.example.game.GameFramework.infoMessage.GameState;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class FiGameState extends GameState {
     private ArrayList<TreasureCards> treasureDeck;//arraylist for the treasure deck
@@ -34,10 +37,11 @@ public class FiGameState extends GameState {
     int[] numOceanChaliceCardsInHand;
 
     //arrays for the treasure cards to make methods easier
-    TreasureCards[] earthStoneTreasureCards;
-    TreasureCards[] fireCrystalTreasureCards;
-    TreasureCards[] windStatueTreasureCards;
-    TreasureCards[] oceanChaliceTreasureCards;
+    private ArrayList<TreasureCards> earthStoneTreasureCards;
+    private ArrayList<TreasureCards> fireCrystalTreasureCards;
+    private ArrayList<TreasureCards> windStatueTreasureCards;
+    private ArrayList<TreasureCards> oceanChaliceTreasureCards;
+    private ArrayList<TreasureCards> helicopterLiftCards;
 
     //keep track of tiles that the players pawn's are on
     TileName player1Location;
@@ -195,32 +199,35 @@ public class FiGameState extends GameState {
             numOceanChaliceCardsInHand[i] = 0;
         }
 
-        //initializing and setting the array of each type of treasure card to make methods simpler
-        TreasureCards[] earthStoneTreasureCards = new TreasureCards[5];
-        TreasureCards[] fireCrystalTreasureCards = new TreasureCards[5];
-        TreasureCards[] windStatueTreasureCards = new TreasureCards[5];
-        TreasureCards[] oceanChaliceTreasureCards = new TreasureCards[5];
+        this.earthStoneTreasureCards = new ArrayList<>();
+        this.windStatueTreasureCards = new ArrayList<>();
+        this.oceanChaliceTreasureCards = new ArrayList<>();
+        this.fireCrystalTreasureCards = new ArrayList<>();
+        this.helicopterLiftCards = new ArrayList<>();
 
-        earthStoneTreasureCards[0] = TreasureCards.EARTH_STONE1;
-        earthStoneTreasureCards[1] = TreasureCards.EARTH_STONE2;
-        earthStoneTreasureCards[2] = TreasureCards.EARTH_STONE3;
-        earthStoneTreasureCards[3] = TreasureCards.EARTH_STONE4;
-        earthStoneTreasureCards[4] = TreasureCards.EARTH_STONE5;
-        fireCrystalTreasureCards[0] = TreasureCards.FIRE_CRYSTAL1;
-        fireCrystalTreasureCards[1] = TreasureCards.FIRE_CRYSTAL2;
-        fireCrystalTreasureCards[2] = TreasureCards.FIRE_CRYSTAL3;
-        fireCrystalTreasureCards[3] = TreasureCards.FIRE_CRYSTAL4;
-        fireCrystalTreasureCards[4] = TreasureCards.FIRE_CRYSTAL5;
-        windStatueTreasureCards[0] = TreasureCards.WIND_STATUE1;
-        windStatueTreasureCards[1] = TreasureCards.WIND_STATUE2;
-        windStatueTreasureCards[2] = TreasureCards.WIND_STATUE3;
-        windStatueTreasureCards[3] = TreasureCards.WIND_STATUE4;
-        windStatueTreasureCards[4] = TreasureCards.WIND_STATUE5;
-        oceanChaliceTreasureCards[0] = TreasureCards.OCEAN_CHALICE1;
-        oceanChaliceTreasureCards[1] = TreasureCards.OCEAN_CHALICE2;
-        oceanChaliceTreasureCards[2] = TreasureCards.OCEAN_CHALICE3;
-        oceanChaliceTreasureCards[3] = TreasureCards.OCEAN_CHALICE4;
-        oceanChaliceTreasureCards[4] = TreasureCards.OCEAN_CHALICE5;
+        earthStoneTreasureCards.add(TreasureCards.EARTH_STONE1);
+        earthStoneTreasureCards.add(TreasureCards.EARTH_STONE2);
+        earthStoneTreasureCards.add(TreasureCards.EARTH_STONE3);
+        earthStoneTreasureCards.add(TreasureCards.EARTH_STONE4);
+        earthStoneTreasureCards.add(TreasureCards.EARTH_STONE5);
+        fireCrystalTreasureCards.add(TreasureCards.FIRE_CRYSTAL1);
+        fireCrystalTreasureCards.add(TreasureCards.FIRE_CRYSTAL2);
+        fireCrystalTreasureCards.add(TreasureCards.FIRE_CRYSTAL3);
+        fireCrystalTreasureCards.add(TreasureCards.FIRE_CRYSTAL4);
+        fireCrystalTreasureCards.add(TreasureCards.FIRE_CRYSTAL5);
+        windStatueTreasureCards.add(TreasureCards.WIND_STATUE1);
+        windStatueTreasureCards.add(TreasureCards.WIND_STATUE2);
+        windStatueTreasureCards.add(TreasureCards.WIND_STATUE3);
+        windStatueTreasureCards.add(TreasureCards.WIND_STATUE4);
+        windStatueTreasureCards.add(TreasureCards.WIND_STATUE5);
+        oceanChaliceTreasureCards.add(TreasureCards.OCEAN_CHALICE1);
+        oceanChaliceTreasureCards.add(TreasureCards.OCEAN_CHALICE2);
+        oceanChaliceTreasureCards.add(TreasureCards.OCEAN_CHALICE3);
+        oceanChaliceTreasureCards.add(TreasureCards.OCEAN_CHALICE4);
+        oceanChaliceTreasureCards.add(TreasureCards.OCEAN_CHALICE5);
+        helicopterLiftCards.add(TreasureCards.HELICOPTER_LIFT1);
+        helicopterLiftCards.add(TreasureCards.HELICOPTER_LIFT2);
+        helicopterLiftCards.add(TreasureCards.HELICOPTER_LIFT3);
 
         player1Location = TileName.ABANDONED_CLIFFS;
         player2Location = TileName.DECEPTION_DUNES;
@@ -402,15 +409,15 @@ public class FiGameState extends GameState {
                     int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
-                    for(int j = 0; j < earthStoneTreasureCards.length; j++){
+                    for(int j = 0; j < earthStoneTreasureCards.size(); j++){
                         if(count == 4){
                             numEarthStoneCardsInHand[i] -= 4;//change the player's individual treasure card count
                             isCapturedEarthStone = true;//they captured the earth stone treasure
                             actionsRemaining--;
                             return true;
                         }
-                        if (a.contains(earthStoneTreasureCards[j])){
-                            count += tryRemoveCard(a, earthStoneTreasureCards[j]);
+                        if (a.contains(earthStoneTreasureCards.get(j))){
+                            count += tryRemoveCard(a, earthStoneTreasureCards.get(j));
                         }
                     }
                 }
@@ -420,15 +427,15 @@ public class FiGameState extends GameState {
                     int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
-                    for(int j = 0; j < fireCrystalTreasureCards.length; j++){
+                    for(int j = 0; j < fireCrystalTreasureCards.size(); j++){
                         if(count == 4){
                             numFireCrystalCardsInHand[i] -= 4;//change the player's individual treasure card count
                             isCapturedFireCrystal = true;//they captured the earth stone treasure
                             actionsRemaining--;
                             return true;
                         }
-                        if (a.contains(fireCrystalTreasureCards[j])){
-                            count += tryRemoveCard(a, fireCrystalTreasureCards[j]);
+                        if (a.contains(fireCrystalTreasureCards.get(j))){
+                            count += tryRemoveCard(a, fireCrystalTreasureCards.get(j));
                         }
                     }
                 }
@@ -438,15 +445,15 @@ public class FiGameState extends GameState {
                     int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
-                    for(int j = 0; j < windStatueTreasureCards.length; j++){
+                    for(int j = 0; j < windStatueTreasureCards.size(); j++){
                         if(count == 4){
                             numWindStatueCardsInHand[i] -= 4;//change the player's individual treasure card count
                             isCapturedWindStatue = true;//they captured the earth stone treasure
                             actionsRemaining--;
                             return true;
                         }
-                        if (a.contains(windStatueTreasureCards[j])){
-                            count += tryRemoveCard(a, windStatueTreasureCards[j]);
+                        if (a.contains(windStatueTreasureCards.get(j))){
+                            count += tryRemoveCard(a, windStatueTreasureCards.get(j));
                         }
                     }
                 }
@@ -456,15 +463,15 @@ public class FiGameState extends GameState {
                     int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
-                    for(int j = 0; j < oceanChaliceTreasureCards.length; j++){
+                    for(int j = 0; j < oceanChaliceTreasureCards.size(); j++){
                         if(count == 4){
                             numOceanChaliceCardsInHand[i] -= 4;//change the player's individual treasure card count
                             isCapturedOceanChalice = true;//they captured the earth stone treasure
                             actionsRemaining--;
                             return true;
                         }
-                        if (a.contains(oceanChaliceTreasureCards[j])){
-                            count += tryRemoveCard(a, oceanChaliceTreasureCards[j]);
+                        if (a.contains(oceanChaliceTreasureCards.get(j))){
+                            count += tryRemoveCard(a, oceanChaliceTreasureCards.get(j));
                         }
                     }
                 }
@@ -506,16 +513,16 @@ public class FiGameState extends GameState {
         }
         else{
             for(int i = 0; i < 5; i++){
-                if(card1.equals(earthStoneTreasureCards[i])){
+                if(card1.equals(earthStoneTreasureCards.get(i))){
                     numEarthStoneCardsInHand[playerTurn]++;
                 }
-                else if(card1.equals(fireCrystalTreasureCards[i])){
+                else if(card1.equals(fireCrystalTreasureCards.get(i))){
                     numFireCrystalCardsInHand[playerTurn]++;
                 }
-                else if(card1.equals(windStatueTreasureCards[i])){
+                else if(card1.equals(windStatueTreasureCards.get(i))){
                     numWindStatueCardsInHand[playerTurn]++;
                 }
-                else if(card1.equals(oceanChaliceTreasureCards[i])){
+                else if(card1.equals(oceanChaliceTreasureCards.get(i))){
                     numOceanChaliceCardsInHand[playerTurn]++;
                 }
             }
@@ -533,16 +540,16 @@ public class FiGameState extends GameState {
         }
         else{
             for(int i = 0; i < 5; i++){
-                if(card2.equals(earthStoneTreasureCards[i])){
+                if(card2.equals(earthStoneTreasureCards.get(i))){
                     numEarthStoneCardsInHand[playerTurn]++;
                 }
-                else if(card1.equals(fireCrystalTreasureCards[i])){
+                else if(card1.equals(fireCrystalTreasureCards.get(i))){
                     numFireCrystalCardsInHand[playerTurn]++;
                 }
-                else if(card1.equals(windStatueTreasureCards[i])){
+                else if(card1.equals(windStatueTreasureCards.get(i))){
                     numWindStatueCardsInHand[playerTurn]++;
                 }
-                else if(card1.equals(oceanChaliceTreasureCards[i])){
+                else if(card1.equals(oceanChaliceTreasureCards.get(i))){
                     numOceanChaliceCardsInHand[playerTurn]++;
                 }
             }
@@ -550,20 +557,267 @@ public class FiGameState extends GameState {
     }//end of drawTreasure
 
     public void drawFlood(ArrayList<FloodCards> a) {
-        //check if the flood deck is empty and is so add the cards from the discard pile back into the flood deck
+        //check if the flood deck is empty and if so add the cards from the discard pile back into the flood deck and shuffle
         if(floodDeck.isEmpty()){
             for(int i = 0; i < discardFloodDeck.size(); i++){
-                FloodCards card = getDiscardFloodDeck().get(i);
-                floodDeck.add(card);
+                floodDeck.add(getDiscardFloodDeck().get(i));
             }
             Collections.shuffle(floodDeck);
         }
-        //deals flood cards up to the number on the flood meter to the drawnFloodDeck which immediately flips the tiles over
+
+        //deals flood cards up to the number on the flood meter to the drawnFloodDeck
         for(int i = 0; i < floodMeter; i++) {
-            FloodCards card = floodDeck.remove(i);//remove the top card from the flood deck
-            a.add(card);//add that card to the drawnFloodCards array which should be passed in
+            a.add(floodDeck.remove(i));//remove a card from the floodDeck and add it to the drawnFloodCards array which should be passed in
         }
+
+        changeFloodValue();//change the value of the tile to match the drawn flood cards
     }//end of drawFlood
+
+    public void changeFloodValue() {
+        for(int i = 0; i < getDrawnFloodCards().size(); i++){
+            if(getDrawnFloodCards().get(i).equals(FloodCards.ABANDONED_CLIFFS) || getDrawnFloodCards().get(i).equals(FloodCards.ABANDONED_CLIFFS1)){
+                //if the value of the tile was normal change it to flooded
+                if(map.get(TileName.ABANDONED_CLIFFS).equals(Value.NORMAL)){
+                    map.put(TileName.ABANDONED_CLIFFS, Value.FLOODED);
+                }
+                //if the value of the tile was flooded change it to sunk
+                else if(map.get(TileName.ABANDONED_CLIFFS).equals(Value.FLOODED)){
+                    map.put(TileName.ABANDONED_CLIFFS, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.FOOLS_LANDING1) || getDrawnFloodCards().get(i).equals(FloodCards.FOOLS_LANDING)){
+                if(map.get(TileName.FOOLS_LANDING).equals(Value.NORMAL)){
+                    map.put(TileName.FOOLS_LANDING, Value.FLOODED);
+                }
+                else if(map.get(TileName.FOOLS_LANDING).equals(Value.FLOODED)){
+                    map.put(TileName.FOOLS_LANDING, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.BRONZE_GATE) || getDrawnFloodCards().get(i).equals(FloodCards.BRONZE_GATE1)){
+                if(map.get(TileName.BRONZE_GATE).equals(Value.NORMAL)){
+                    map.put(TileName.BRONZE_GATE, Value.FLOODED);
+                }
+                else if(map.get(TileName.BRONZE_GATE).equals(Value.FLOODED)){
+                    map.put(TileName.BRONZE_GATE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.GOLD_GATE) || getDrawnFloodCards().get(i).equals(FloodCards.GOLD_GATE1)){
+                if(map.get(TileName.GOLD_GATE).equals(Value.NORMAL)){
+                    map.put(TileName.GOLD_GATE, Value.FLOODED);
+                }
+                else if(map.get(TileName.GOLD_GATE).equals(Value.FLOODED)){
+                    map.put(TileName.GOLD_GATE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.CORAL_PALACE) || getDrawnFloodCards().get(i).equals(FloodCards.CORAL_PALACE1)){
+                if(map.get(TileName.CORAL_PALACE).equals(Value.NORMAL)){
+                    map.put(TileName.CORAL_PALACE, Value.FLOODED);
+                }
+                else if(map.get(TileName.CORAL_PALACE).equals(Value.FLOODED)){
+                    map.put(TileName.CORAL_PALACE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.SUN_TEMPLE) || getDrawnFloodCards().get(i).equals(FloodCards.SUN_TEMPLE1)){
+                if(map.get(TileName.SUN_TEMPLE).equals(Value.NORMAL)){
+                    map.put(TileName.SUN_TEMPLE, Value.FLOODED);
+                }
+                else if(map.get(TileName.SUN_TEMPLE).equals(Value.FLOODED)){
+                    map.put(TileName.SUN_TEMPLE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.SILVER_GATE) || getDrawnFloodCards().get(i).equals(FloodCards.SILVER_GATE1)){
+                if(map.get(TileName.SILVER_GATE).equals(Value.NORMAL)){
+                    map.put(TileName.SILVER_GATE, Value.FLOODED);
+                }
+                else if(map.get(TileName.SILVER_GATE).equals(Value.FLOODED)){
+                    map.put(TileName.SILVER_GATE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.PHANTOM_ROCK) || getDrawnFloodCards().get(i).equals(FloodCards.PHANTOM_ROCK1)){
+                if(map.get(TileName.PHANTOM_ROCK).equals(Value.NORMAL)){
+                    map.put(TileName.PHANTOM_ROCK, Value.FLOODED);
+                }
+                else if(map.get(TileName.PHANTOM_ROCK).equals(Value.FLOODED)){
+                    map.put(TileName.PHANTOM_ROCK, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.WATCHTOWER) || getDrawnFloodCards().get(i).equals(FloodCards.WATCHTOWER1)){
+                if(map.get(TileName.WATCHTOWER).equals(Value.NORMAL)){
+                    map.put(TileName.WATCHTOWER, Value.FLOODED);
+                }
+                else if(map.get(TileName.WATCHTOWER).equals(Value.FLOODED)){
+                    map.put(TileName.WATCHTOWER, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.COPPER_GATE) || getDrawnFloodCards().get(i).equals(FloodCards.COPPER_GATE1)){
+                if(map.get(TileName.COPPER_GATE).equals(Value.NORMAL)){
+                    map.put(TileName.COPPER_GATE, Value.FLOODED);
+                }
+                else if(map.get(TileName.COPPER_GATE).equals(Value.FLOODED)){
+                    map.put(TileName.COPPER_GATE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.WHISPERING_GARDENS) || getDrawnFloodCards().get(i).equals(FloodCards.WHISPERING_GARDENS1)){
+                if(map.get(TileName.WHISPERING_GARDENS).equals(Value.NORMAL)){
+                    map.put(TileName.WHISPERING_GARDENS, Value.FLOODED);
+                }
+                else if(map.get(TileName.WHISPERING_GARDENS).equals(Value.FLOODED)){
+                    map.put(TileName.WHISPERING_GARDENS, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.SHADOW_CAVE) || getDrawnFloodCards().get(i).equals(FloodCards.SHADOW_CAVE1)){
+                if(map.get(TileName.SHADOW_CAVE).equals(Value.NORMAL)){
+                    map.put(TileName.SHADOW_CAVE, Value.FLOODED);
+                }
+                else if(map.get(TileName.SHADOW_CAVE).equals(Value.FLOODED)){
+                    map.put(TileName.SHADOW_CAVE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.LOST_LAGOON) || getDrawnFloodCards().get(i).equals(FloodCards.LOST_LAGOON1)){
+                if(map.get(TileName.LOST_LAGOON).equals(Value.NORMAL)){
+                    map.put(TileName.LOST_LAGOON, Value.FLOODED);
+                }
+                else if(map.get(TileName.LOST_LAGOON).equals(Value.FLOODED)){
+                    map.put(TileName.LOST_LAGOON, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.MOON_TEMPLE) || getDrawnFloodCards().get(i).equals(FloodCards.MOON_TEMPLE1)){
+                if(map.get(TileName.MOON_TEMPLE).equals(Value.NORMAL)){
+                    map.put(TileName.MOON_TEMPLE, Value.FLOODED);
+                }
+                else if(map.get(TileName.MOON_TEMPLE).equals(Value.FLOODED)){
+                    map.put(TileName.MOON_TEMPLE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.DECEPTION_DUNES) || getDrawnFloodCards().get(i).equals(FloodCards.DECEPTION_DUNES1)){
+                if(map.get(TileName.DECEPTION_DUNES).equals(Value.NORMAL)){
+                    map.put(TileName.DECEPTION_DUNES, Value.FLOODED);
+                }
+                else if(map.get(TileName.DECEPTION_DUNES).equals(Value.FLOODED)){
+                    map.put(TileName.DECEPTION_DUNES, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.TWILIGHT_HOLLOW) || getDrawnFloodCards().get(i).equals(FloodCards.TWILIGHT_HOLLOW1)){
+                if(map.get(TileName.TWILIGHT_HOLLOW).equals(Value.NORMAL)){
+                    map.put(TileName.TWILIGHT_HOLLOW, Value.FLOODED);
+                }
+                else if(map.get(TileName.TWILIGHT_HOLLOW).equals(Value.FLOODED)){
+                    map.put(TileName.TWILIGHT_HOLLOW, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.EMBER_CAVE) || getDrawnFloodCards().get(i).equals(FloodCards.EMBER_CAVE1)){
+                if(map.get(TileName.EMBER_CAVE).equals(Value.NORMAL)){
+                    map.put(TileName.EMBER_CAVE, Value.FLOODED);
+                }
+                else if(map.get(TileName.EMBER_CAVE).equals(Value.FLOODED)){
+                    map.put(TileName.EMBER_CAVE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.TIDAL_PALACE) || getDrawnFloodCards().get(i).equals(FloodCards.TIDAL_PALACE1)){
+                if(map.get(TileName.TIDAL_PALACE).equals(Value.NORMAL)){
+                    map.put(TileName.TIDAL_PALACE, Value.FLOODED);
+                }
+                else if(map.get(TileName.TIDAL_PALACE).equals(Value.FLOODED)){
+                    map.put(TileName.TIDAL_PALACE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.OBSERVATORY) || getDrawnFloodCards().get(i).equals(FloodCards.OBSERVATORY1)){
+                if(map.get(TileName.OBSERVATORY).equals(Value.NORMAL)){
+                    map.put(TileName.OBSERVATORY, Value.FLOODED);
+                }
+                else if(map.get(TileName.OBSERVATORY).equals(Value.FLOODED)){
+                    map.put(TileName.OBSERVATORY, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.IRON_GATE) || getDrawnFloodCards().get(i).equals(FloodCards.IRON_GATE1)){
+                if(map.get(TileName.IRON_GATE).equals(Value.NORMAL)){
+                    map.put(TileName.IRON_GATE, Value.FLOODED);
+                }
+                else if(map.get(TileName.IRON_GATE).equals(Value.FLOODED)){
+                    map.put(TileName.IRON_GATE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.CRIMSON_FOREST) || getDrawnFloodCards().get(i).equals(FloodCards.CRIMSON_FOREST1)){
+                if(map.get(TileName.CRIMSON_FOREST).equals(Value.NORMAL)){
+                    map.put(TileName.CRIMSON_FOREST, Value.FLOODED);
+                }
+                else if(map.get(TileName.CRIMSON_FOREST).equals(Value.FLOODED)){
+                    map.put(TileName.CRIMSON_FOREST, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.MISTY_MARSH) || getDrawnFloodCards().get(i).equals(FloodCards.MISTY_MARSH1)){
+                if(map.get(TileName.MISTY_MARSH).equals(Value.NORMAL)){
+                    map.put(TileName.MISTY_MARSH, Value.FLOODED);
+                }
+                else if(map.get(TileName.MISTY_MARSH).equals(Value.FLOODED)){
+                    map.put(TileName.MISTY_MARSH, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.BREAKERS_BRIDGE) || getDrawnFloodCards().get(i).equals(FloodCards.BREAKERS_BRIDGE1)){
+                if(map.get(TileName.BREAKERS_BRIDGE).equals(Value.NORMAL)){
+                    map.put(TileName.BREAKERS_BRIDGE, Value.FLOODED);
+                }
+                else if(map.get(TileName.BREAKERS_BRIDGE).equals(Value.FLOODED)){
+                    map.put(TileName.BREAKERS_BRIDGE, Value.SUNK);
+                }
+            }
+            else if(getDrawnFloodCards().get(i).equals(FloodCards.HOWLING_GARDEN) || getDrawnFloodCards().get(i).equals(FloodCards.HOWLING_GARDEN1)){
+                if(map.get(TileName.HOWLING_GARDEN).equals(Value.NORMAL)){
+                    map.put(TileName.HOWLING_GARDEN, Value.FLOODED);
+                }
+                else if(map.get(TileName.HOWLING_GARDEN).equals(Value.FLOODED)){
+                    map.put(TileName.HOWLING_GARDEN, Value.SUNK);
+                }
+            }
+        }
+        emptyDrawnFloodCards();//empty the drawnFloodCards arrayList
+    }//end of changeFloodValue
+
+    //change whose turn it and reset their actionsRemaining back to 3 for their turn
+    public void endTurn(){
+        if (numPlayers > 2) {
+            if (getPlayerTurn() == 0) {
+                setPlayerTurn(1);
+            }
+            else if(getPlayerTurn() == 1) {
+                setPlayerTurn(2);
+            }
+            else if(getPlayerTurn() == 2) {
+                setPlayerTurn(0);
+            }
+        }
+        else {
+            if(getPlayerTurn() == 0) {
+                setPlayerTurn(1);
+            }
+            else if(getPlayerTurn() == 1) {
+                setPlayerTurn(0);
+            }
+        }
+        setActionsRemaining(3);
+    }//end of endTurn method
+
+    public boolean areTreasuresCaptured(){
+        if(isCapturedEarthStone && isCapturedFireCrystal && isCapturedWindStatue && isCapturedOceanChalice){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }//end of areTreasuresCaptured
+
+    public boolean drawTreasureLimitCheck(){
+        for(int j = 0; j < numPlayers; j++){
+            if(getPlayerTurnHand(j).size() > 5){
+                int removeAmount = getPlayerTurnHand(j).size() - 5;
+                for(int i = 0; i < removeAmount - 1; i++){
+                    getPlayerTurnHand(j).remove(i);
+                }
+            }
+            return true;
+        }
+        return false;
+    }//end of drawTreasureLimitCheck
 
 
     //setter methods
@@ -618,4 +872,30 @@ public class FiGameState extends GameState {
             return this.player3Location;
         }
     }
+
+    public ArrayList<TreasureCards> getEarthStoneTreasureCards(){
+        return this.earthStoneTreasureCards;
+    }
+    public ArrayList<TreasureCards> getOceanChaliceTreasureCards(){
+        return this.oceanChaliceTreasureCards;
+    }
+    public ArrayList<TreasureCards> getWindStatueTreasureCards(){
+        return this.windStatueTreasureCards;
+    }
+    public ArrayList<TreasureCards> getFireCrystalTreasureCards(){
+        return this.fireCrystalTreasureCards;
+    }
+    public ArrayList<TreasureCards> getHelicopterLiftCards(){
+        return this.helicopterLiftCards;
+    }
+        
+    
+          /*  else if (action instanceof FiDiscardAction) {
+        //add the card the player chose to the discard treasure deck
+        FiDiscardAction a = (FiDiscardAction) action;
+        TreasureCards t = a.getTreasureCardName();
+        if(getPlayerTurnHand(playerTurn).size() > 5){
+            discard(getPlayerTurn(), t);
+        }
+    }*/
 }
