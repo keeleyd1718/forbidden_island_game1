@@ -554,6 +554,7 @@ public class FiGameState extends GameState {
                 }
             }
         }
+        drawTreasureLimitCheck();
     }//end of drawTreasure
 
     public void drawFlood(ArrayList<FloodCards> a) {
