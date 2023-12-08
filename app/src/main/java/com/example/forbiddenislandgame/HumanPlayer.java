@@ -879,18 +879,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         player1Cards[3].setOnClickListener(this);
         player1Cards[4].setOnClickListener(this);
         player1Cards[5].setOnClickListener(this);
-        player2Cards[0].setOnClickListener(this);
-        player2Cards[1].setOnClickListener(this);
-        player2Cards[2].setOnClickListener(this);
-        player2Cards[3].setOnClickListener(this);
-        player2Cards[4].setOnClickListener(this);
-        player2Cards[5].setOnClickListener(this);
-        player3Cards[0].setOnClickListener(this);
-        player3Cards[1].setOnClickListener(this);
-        player3Cards[2].setOnClickListener(this);
-        player3Cards[3].setOnClickListener(this);
-        player3Cards[4].setOnClickListener(this);
-        player3Cards[5].setOnClickListener(this);
 
         //call the onClickListener when tile buttons are clicked
         FOOLS_LANDING.setOnClickListener(this);
