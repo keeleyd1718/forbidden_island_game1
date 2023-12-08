@@ -856,6 +856,14 @@ public class FiGameState extends GameState {
     public int getDiscardTreasureDeckSize() {
         return discardTreasureDeck.size();
     }
+    public int getActionsRemaining() {return this.actionsRemaining;}
+    public ArrayList<TreasureCards> getEarthStoneTreasureCards(){return this.earthStoneTreasureCards;}
+    public ArrayList<TreasureCards> getOceanChaliceTreasureCards(){return this.oceanChaliceTreasureCards;}
+    public ArrayList<TreasureCards> getWindStatueTreasureCards(){return this.windStatueTreasureCards;}
+    public ArrayList<TreasureCards> getFireCrystalTreasureCards(){return this.fireCrystalTreasureCards;}
+    public ArrayList<TreasureCards> getHelicopterLiftCards(){
+        return this.helicopterLiftCards;
+    }
 
     public String getHand(ArrayList<TreasureCards> a) {
         String str = "";
@@ -886,21 +894,5 @@ public class FiGameState extends GameState {
         else {
             return this.player3Location;
         }
-    }
-
-    public ArrayList<TreasureCards> getEarthStoneTreasureCards(){
-        return this.earthStoneTreasureCards;
-    }
-    public ArrayList<TreasureCards> getOceanChaliceTreasureCards(){
-        return this.oceanChaliceTreasureCards;
-    }
-    public ArrayList<TreasureCards> getWindStatueTreasureCards(){
-        return this.windStatueTreasureCards;
-    }
-    public ArrayList<TreasureCards> getFireCrystalTreasureCards(){
-        return this.fireCrystalTreasureCards;
-    }
-    public ArrayList<TreasureCards> getHelicopterLiftCards(){
-        return this.helicopterLiftCards;
     }
 }

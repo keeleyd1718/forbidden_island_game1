@@ -70,6 +70,7 @@ public class FiLocalGame extends LocalGame {
     }
     protected boolean makeMove(GameAction action){
         Log.e("zzz makeMove", "received move!");
+
         //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
         if(canMove(getPlayerIdx(action.getPlayer()))) {
             if(action instanceof FiMoveAction) {
@@ -101,11 +102,13 @@ public class FiLocalGame extends LocalGame {
                 checkIfGameOver();
             }
 
-            //always end the turn by drawing flood cards and switching whose turn it is
-            gs.drawFlood(gs.getDrawnFloodCards());
-            gs.endTurn();
-            gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
-            return true;
+            if(gs.getActionsRemaining() < 1){
+                //always end the turn by drawing flood cards and switching whose turn it is
+                gs.drawFlood(gs.getDrawnFloodCards());
+                gs.endTurn();
+                gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
+                return true;
+            }
         }
         return false;
     }
