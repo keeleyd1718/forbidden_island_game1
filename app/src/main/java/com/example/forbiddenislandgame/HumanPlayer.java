@@ -37,30 +37,30 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button shoreUpButton = null;
     private Button giveCardButton = null;
     private Button captureTreasureButton = null;
-    private Button FOOLS_LANDING = null;
-    private Button BRONZE_GATE = null;
-    private Button GOLD_GATE = null;
-    private Button CORAL_PALACE = null;
-    private Button SUN_TEMPLE = null;
-    private Button SILVER_GATE = null;
-    private Button PHANTOM_ROCK = null;
-    private Button WATCHTOWER = null;
-    private Button COPPER_GATE = null;
-    private Button ABANDONED_CLIFFS = null;
-    private Button WHISPERING_GARDENS = null;
-    private Button SHADOW_CAVE = null;
-    private Button LOST_LAGOON = null;
-    private Button MOON_TEMPLE = null;
-    private Button DECEPTION_DUNES = null;
-    private Button TWILIGHT_HOLLOW = null;
-    private Button EMBER_CAVE = null;
-    private Button TIDAL_PALACE = null;
-    private Button OBSERVATORY = null;
-    private Button IRON_GATE = null;
-    private Button CRIMSON_FOREST = null;
-    private Button MISTY_MARSH = null;
-    private Button BREAKERS_BRIDGE = null;
-    private Button HOWLING_GARDEN = null;
+    private Button FOOLS_LANDING_B = null;
+    private Button BRONZE_GATE_B = null;
+    private Button GOLD_GATE_B = null;
+    private Button CORAL_PALACE_B = null;
+    private Button SUN_TEMPLE_B = null;
+    private Button SILVER_GATE_B = null;
+    private Button PHANTOM_ROCK_B = null;
+    private Button WATCHTOWER_B = null;
+    private Button COPPER_GATE_B = null;
+    private Button ABANDONED_CLIFFS_B = null;
+    private Button WHISPERING_GARDENS_B = null;
+    private Button SHADOW_CAVE_B = null;
+    private Button LOST_LAGOON_B = null;
+    private Button MOON_TEMPLE_B = null;
+    private Button DECEPTION_DUNES_B = null;
+    private Button TWILIGHT_HOLLOW_B = null;
+    private Button EMBER_CAVE_B = null;
+    private Button TIDAL_PALACE_B = null;
+    private Button OBSERVATORY_B = null;
+    private Button IRON_GATE_B = null;
+    private Button CRIMSON_FOREST_B = null;
+    private Button MISTY_MARSH_B = null;
+    private Button BREAKERS_BRIDGE_B = null;
+    private Button HOWLING_GARDEN_B = null;
 
     //buttons to use for the give card action
     private Button giveCardToP1 = null;
@@ -75,7 +75,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     //keep track of if that button was clicked
     private boolean moveButtonClicked = false;
     private boolean shoreUpButtonClicked = false;
-    private boolean selectionChosen = false;
     private boolean discardButtonClicked = false;
     private boolean giveCardButtonClicked = false;
 
@@ -95,7 +94,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     @Override
     public View getTopView() {
         return null;
-        //return myActivity.findViewbyId(R.id.top_gui_layout);
     }
 
     //method to know what player's hand to display the Treasure cards
@@ -119,9 +117,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             FiGameState gameState = (FiGameState) info;
 
             //setting the initial start locations for the player's pawns
-            ABANDONED_CLIFFS.setText("ABANDONED_CLIFFS" + System.getProperty("line.separator") + "player 1");
-            DECEPTION_DUNES.setText("DECEPTION_DUNES" + System.getProperty("line.separator") + "player 2");
-            OBSERVATORY.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
+            ABANDONED_CLIFFS_B.setText("ABANDONED_CLIFFS" + System.getProperty("line.separator") + "player 1");
+            DECEPTION_DUNES_B.setText("DECEPTION_DUNES" + System.getProperty("line.separator") + "player 2");
+            OBSERVATORY_B.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
 
             //set the image buttons to display what cards are in player 1, 2 and 3's hands
             for(int i = 0; i < gameState.numPlayers; i++){//loop to go through each player; i is for player's turn
@@ -156,14 +154,14 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             treasures[3].setImageResource(R.drawable.wind_statue);
 
             //set the tile player's must be on to capture certain treasures
-            CORAL_PALACE.setText("CORAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
-            TIDAL_PALACE.setText("TIDAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
-            SHADOW_CAVE.setText("SHADOW_CAVE" + System.getProperty("line.separator") + "Fire Crystal Treasure");
-            EMBER_CAVE.setText("EMBER_CAVE" + System.getProperty("line.separator") + "Fire Crystal Treasure");
-            MOON_TEMPLE.setText("MOON_TEMPLE" + System.getProperty("line.separator") + "Earth Stone Treasure");
-            SUN_TEMPLE.setText("SUN_TEMPLE" + System.getProperty("line.separator") + "Earth Stone Treasure");
-            HOWLING_GARDEN.setText("HOWLING_GARDEN" + System.getProperty("line.separator") + "Wind Statue Treasure");
-            WHISPERING_GARDENS.setText("WHISPERING_GARDENS" + System.getProperty("line.separator") + "Wind Statue Treasure");
+            CORAL_PALACE_B.setText("CORAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
+            TIDAL_PALACE_B.setText("TIDAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
+            SHADOW_CAVE_B.setText("SHADOW_CAVE" + System.getProperty("line.separator") + "Fire Crystal Treasure");
+            EMBER_CAVE_B.setText("EMBER_CAVE" + System.getProperty("line.separator") + "Fire Crystal Treasure");
+            MOON_TEMPLE_B.setText("MOON_TEMPLE" + System.getProperty("line.separator") + "Earth Stone Treasure");
+            SUN_TEMPLE_B.setText("SUN_TEMPLE" + System.getProperty("line.separator") + "Earth Stone Treasure");
+            HOWLING_GARDEN_B.setText("HOWLING_GARDEN" + System.getProperty("line.separator") + "Wind Statue Treasure");
+            WHISPERING_GARDENS_B.setText("WHISPERING_GARDENS" + System.getProperty("line.separator") + "Wind Statue Treasure");
 
             Button playerLocation = null;//to store the button to update a player's location
 
@@ -365,54 +363,54 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.giveCardToP3 = activity.findViewById(R.id.giveCardToP3);
 
         //initializing tile buttons and putting them into the buttonMap HashMap
-        this.FOOLS_LANDING = activity.findViewById(R.id.FOOLS_LANDING);
+        this.FOOLS_LANDING_B = activity.findViewById(R.id.FOOLS_LANDING);
         buttonMap.put(activity.findViewById(R.id.FOOLS_LANDING), FiGameState.TileName.FOOLS_LANDING);
 
-        this.BRONZE_GATE = activity.findViewById(R.id.BRONZE_GATE);
+        this.BRONZE_GATE_B = activity.findViewById(R.id.BRONZE_GATE);
         buttonMap.put(activity.findViewById(R.id.BRONZE_GATE), FiGameState.TileName.BRONZE_GATE);
-        this.GOLD_GATE = activity.findViewById(R.id.GOLD_GATE);
+        this.GOLD_GATE_B = activity.findViewById(R.id.GOLD_GATE);
         buttonMap.put(activity.findViewById(R.id.GOLD_GATE), FiGameState.TileName.GOLD_GATE);
-        this.CORAL_PALACE = activity.findViewById(R.id.CORAL_PALACE);
+        this.CORAL_PALACE_B = activity.findViewById(R.id.CORAL_PALACE);
         buttonMap.put(activity.findViewById(R.id.CORAL_PALACE), FiGameState.TileName.CORAL_PALACE);
-        this.SUN_TEMPLE = activity.findViewById(R.id.SUN_TEMPLE);
+        this.SUN_TEMPLE_B = activity.findViewById(R.id.SUN_TEMPLE);
         buttonMap.put(activity.findViewById(R.id.SUN_TEMPLE), FiGameState.TileName.SUN_TEMPLE);
-        this.SILVER_GATE = activity.findViewById(R.id.SILVER_GATE);
+        this.SILVER_GATE_B = activity.findViewById(R.id.SILVER_GATE);
         buttonMap.put(activity.findViewById(R.id.SILVER_GATE), FiGameState.TileName.SILVER_GATE);
-        this.PHANTOM_ROCK = activity.findViewById(R.id.PHANTOM_ROCK);
+        this.PHANTOM_ROCK_B = activity.findViewById(R.id.PHANTOM_ROCK);
         buttonMap.put(activity.findViewById(R.id.PHANTOM_ROCK), FiGameState.TileName.PHANTOM_ROCK);
-        this.WATCHTOWER = activity.findViewById(R.id.WATCHTOWER);
+        this.WATCHTOWER_B = activity.findViewById(R.id.WATCHTOWER);
         buttonMap.put(activity.findViewById(R.id.WATCHTOWER), FiGameState.TileName.WATCHTOWER);
-        this.COPPER_GATE = activity.findViewById(R.id.COPPER_GATE);
+        this.COPPER_GATE_B = activity.findViewById(R.id.COPPER_GATE);
         buttonMap.put(activity.findViewById(R.id.COPPER_GATE), FiGameState.TileName.COPPER_GATE);
-        this.ABANDONED_CLIFFS = activity.findViewById(R.id.ABANDONED_CLIFFS);
+        this.ABANDONED_CLIFFS_B = activity.findViewById(R.id.ABANDONED_CLIFFS);
         buttonMap.put(activity.findViewById(R.id.ABANDONED_CLIFFS), FiGameState.TileName.ABANDONED_CLIFFS);
-        this.WHISPERING_GARDENS = activity.findViewById(R.id.WHISPERING_GARDENS);
+        this.WHISPERING_GARDENS_B = activity.findViewById(R.id.WHISPERING_GARDENS);
         buttonMap.put(activity.findViewById(R.id.WHISPERING_GARDENS), FiGameState.TileName.WHISPERING_GARDENS);
-        this.SHADOW_CAVE = activity.findViewById(R.id.SHADOW_CAVE);
+        this.SHADOW_CAVE_B = activity.findViewById(R.id.SHADOW_CAVE);
         buttonMap.put(activity.findViewById(R.id.SHADOW_CAVE), FiGameState.TileName.SHADOW_CAVE);
-        this.LOST_LAGOON = activity.findViewById(R.id.LOST_LAGOON);
+        this.LOST_LAGOON_B = activity.findViewById(R.id.LOST_LAGOON);
         buttonMap.put(activity.findViewById(R.id.LOST_LAGOON), FiGameState.TileName.LOST_LAGOON);
-        this.MOON_TEMPLE = activity.findViewById(R.id.MOON_TEMPLE);
+        this.MOON_TEMPLE_B = activity.findViewById(R.id.MOON_TEMPLE);
         buttonMap.put(activity.findViewById(R.id.MOON_TEMPLE), FiGameState.TileName.MOON_TEMPLE);
-        this.DECEPTION_DUNES = activity.findViewById(R.id.DECEPTION_DUNES);
+        this.DECEPTION_DUNES_B = activity.findViewById(R.id.DECEPTION_DUNES);
         buttonMap.put(activity.findViewById(R.id.DECEPTION_DUNES), FiGameState.TileName.DECEPTION_DUNES);
-        this.TWILIGHT_HOLLOW = activity.findViewById(R.id.TWILIGHT_HOLLOW);
+        this.TWILIGHT_HOLLOW_B = activity.findViewById(R.id.TWILIGHT_HOLLOW);
         buttonMap.put(activity.findViewById(R.id.TWILIGHT_HOLLOW), FiGameState.TileName.TWILIGHT_HOLLOW);
-        this.EMBER_CAVE = activity.findViewById(R.id.EMBER_CAVE);
+        this.EMBER_CAVE_B = activity.findViewById(R.id.EMBER_CAVE);
         buttonMap.put(activity.findViewById(R.id.EMBER_CAVE), FiGameState.TileName.EMBER_CAVE);
-        this.TIDAL_PALACE = activity.findViewById(R.id.TIDAL_PALACE);
+        this.TIDAL_PALACE_B = activity.findViewById(R.id.TIDAL_PALACE);
         buttonMap.put(activity.findViewById(R.id.TIDAL_PALACE), FiGameState.TileName.TIDAL_PALACE);
-        this.OBSERVATORY = activity.findViewById(R.id.OBSERVATORY);
+        this.OBSERVATORY_B = activity.findViewById(R.id.OBSERVATORY);
         buttonMap.put(activity.findViewById(R.id.OBSERVATORY), FiGameState.TileName.OBSERVATORY);
-        this.IRON_GATE = activity.findViewById(R.id.IRON_GATE);
+        this.IRON_GATE_B = activity.findViewById(R.id.IRON_GATE);
         buttonMap.put(activity.findViewById(R.id.IRON_GATE), FiGameState.TileName.IRON_GATE);
-        this.CRIMSON_FOREST = activity.findViewById(R.id.CRIMSON_FOREST);
+        this.CRIMSON_FOREST_B = activity.findViewById(R.id.CRIMSON_FOREST);
         buttonMap.put(activity.findViewById(R.id.CRIMSON_FOREST), FiGameState.TileName.CRIMSON_FOREST);
-        this.MISTY_MARSH = activity.findViewById(R.id.MISTY_MARSH);
+        this.MISTY_MARSH_B = activity.findViewById(R.id.MISTY_MARSH);
         buttonMap.put(activity.findViewById(R.id.MISTY_MARSH), FiGameState.TileName.MISTY_MARSH);
-        this.BREAKERS_BRIDGE = activity.findViewById(R.id.BREAKERS_BRIDGE);
+        this.BREAKERS_BRIDGE_B = activity.findViewById(R.id.BREAKERS_BRIDGE);
         buttonMap.put(activity.findViewById(R.id.BREAKERS_BRIDGE), FiGameState.TileName.BREAKERS_BRIDGE);
-        this.HOWLING_GARDEN = activity.findViewById(R.id.HOWLING_GARDEN);
+        this.HOWLING_GARDEN_B = activity.findViewById(R.id.HOWLING_GARDEN);
         buttonMap.put(activity.findViewById(R.id.HOWLING_GARDEN), FiGameState.TileName.HOWLING_GARDEN);
 
         //initializing card hand image buttons
@@ -460,29 +458,29 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         player1Cards[5].setOnClickListener(this);
 
         //call the onClickListener when tile buttons are clicked
-        FOOLS_LANDING.setOnClickListener(this);
-        BRONZE_GATE.setOnClickListener(this);
-        GOLD_GATE.setOnClickListener(this);
-        CORAL_PALACE.setOnClickListener(this);
-        SUN_TEMPLE.setOnClickListener(this);
-        SILVER_GATE.setOnClickListener(this);
-        PHANTOM_ROCK.setOnClickListener(this);
-        WATCHTOWER.setOnClickListener(this);
-        COPPER_GATE.setOnClickListener(this);
-        ABANDONED_CLIFFS.setOnClickListener(this);
-        WHISPERING_GARDENS.setOnClickListener(this);
-        SHADOW_CAVE.setOnClickListener(this);
-        LOST_LAGOON.setOnClickListener(this);
-        MOON_TEMPLE.setOnClickListener(this);
-        DECEPTION_DUNES.setOnClickListener(this);
-        TWILIGHT_HOLLOW.setOnClickListener(this);
-        EMBER_CAVE.setOnClickListener(this);
-        TIDAL_PALACE.setOnClickListener(this);
-        OBSERVATORY.setOnClickListener(this);
-        IRON_GATE.setOnClickListener(this);
-        CRIMSON_FOREST.setOnClickListener(this);
-        MISTY_MARSH.setOnClickListener(this);
-        BREAKERS_BRIDGE.setOnClickListener(this);
-        HOWLING_GARDEN.setOnClickListener(this);
+        FOOLS_LANDING_B.setOnClickListener(this);
+        BRONZE_GATE_B.setOnClickListener(this);
+        GOLD_GATE_B.setOnClickListener(this);
+        CORAL_PALACE_B.setOnClickListener(this);
+        SUN_TEMPLE_B.setOnClickListener(this);
+        SILVER_GATE_B.setOnClickListener(this);
+        PHANTOM_ROCK_B.setOnClickListener(this);
+        WATCHTOWER_B.setOnClickListener(this);
+        COPPER_GATE_B.setOnClickListener(this);
+        ABANDONED_CLIFFS_B.setOnClickListener(this);
+        WHISPERING_GARDENS_B.setOnClickListener(this);
+        SHADOW_CAVE_B.setOnClickListener(this);
+        LOST_LAGOON_B.setOnClickListener(this);
+        MOON_TEMPLE_B.setOnClickListener(this);
+        DECEPTION_DUNES_B.setOnClickListener(this);
+        TWILIGHT_HOLLOW_B.setOnClickListener(this);
+        EMBER_CAVE_B.setOnClickListener(this);
+        TIDAL_PALACE_B.setOnClickListener(this);
+        OBSERVATORY_B.setOnClickListener(this);
+        IRON_GATE_B.setOnClickListener(this);
+        CRIMSON_FOREST_B.setOnClickListener(this);
+        MISTY_MARSH_B.setOnClickListener(this);
+        BREAKERS_BRIDGE_B.setOnClickListener(this);
+        HOWLING_GARDEN_B.setOnClickListener(this);
     }
 }
