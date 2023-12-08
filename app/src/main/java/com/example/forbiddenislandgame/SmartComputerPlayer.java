@@ -12,8 +12,6 @@ import com.example.game.GameFramework.players.GameComputerPlayer;
 import java.util.Random;
 
 public class SmartComputerPlayer extends GameComputerPlayer {
-    private FiGameState gameState;
-
     /**
      * constructor
      *
@@ -41,17 +39,24 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                 else if(gameState.map.get(gameState.getPlayerLocation(gameState.getPlayerTurn())).equals(FiGameState.Value.FLOODED)) {//if the tile the player is on is flooded shore it up
                     game.sendAction(new FiShoreUpAction(this, gameState.getPlayerLocation(gameState.getPlayerTurn())));
                 }
-                else if(gameState.numWindStatueCardsInHand[gameState.getPlayerTurn()] == 3 && gameState.numWindStatueCardsInHand[gameState.getPlayerTurn()] > 1){
-                    FiGameState.TreasureCards t = null;
+                else if(gameState.numWindStatueCardsInHand[gameState.getPlayerTurn()] == 3){
 
                     //check if other players have 3 of the same card && player has that card
-                    for(int i = 0; i < gameState.getPlayerTurnHand(gameState.getPlayerTurn()).size(); i++){
-                        if(gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(i).equals(FiGameState.TreasureCards.WIND_STATUE1) || gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(i).equals(FiGameState.TreasureCards.WIND_STATUE2) || gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(i).equals(FiGameState.TreasureCards.WIND_STATUE3) || gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(i).equals(FiGameState.TreasureCards.WIND_STATUE4) || gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(i).equals(FiGameState.TreasureCards.WIND_STATUE5)){
-                            t = gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(i);
+                    for(int i = 0; i < gameState.getPlayerTurnHand(gameState.getPlayerTurn()).size(); i++) {
+                        FiGameState.TreasureCards card = gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(i);
+
+                        if(gameState.getWindStatueTreasureCards().contains(card) && gameState.numWindStatueCardsInHand[gameState.getPlayerTurn()] > 1){
+                            game.sendAction(new FiGiveCardAction(this, gameState.getPlayerTurn(), card));
                         }
-                    }
-                    if(t != null){
-                        game.sendAction(new FiGiveCardAction(this, gameState.getPlayerTurn(), t));
+                        else if(gameState.getFireCrystalTreasureCards().contains(card) && gameState.numFireCrystalCardsInHand[gameState.getPlayerTurn()] > 1){
+                            game.sendAction(new FiGiveCardAction(this, gameState.getPlayerTurn(), card));
+                        }
+                        else if(gameState.getEarthStoneTreasureCards().contains(card) && gameState.numEarthStoneCardsInHand[gameState.getPlayerTurn()] > 1){
+                            game.sendAction(new FiGiveCardAction(this, gameState.getPlayerTurn(), card));
+                        }
+                        else if(gameState.getOceanChaliceTreasureCards().contains(card) && gameState.numOceanChaliceCardsInHand[gameState.getPlayerTurn()] > 1){
+                            game.sendAction(new FiGiveCardAction(this, gameState.getPlayerTurn(), card));
+                        }
                     }
                 }
                 else if(gameState.numWindStatueCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 treasure cards
@@ -62,7 +67,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                     //if they are not on the correct tile move to a correct tile
                     game.sendAction(new FiMoveAction(this, FiGameState.TileName.HOWLING_GARDEN));
                 }
-                else if(gameState.numOceanChaliceCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 treasure cards
+                else if(gameState.numOceanChaliceCardsInHand[gameState.getPlayerTurn()] >= 4){
                     if(gameState.getPlayerLocation(gameState.getPlayerTurn()).equals(FiGameState.TileName.CORAL_PALACE) || gameState.getPlayerLocation(gameState.getPlayerTurn()).equals(FiGameState.TileName.TIDAL_PALACE)){
                         //and they are on the correct tile capture the treasure
                         game.sendAction(new FiCaptureTreasureAction(this));
@@ -88,34 +93,9 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                 }
                 else{//move to a random tile
                     FiGameState.TileName t = FiGameState.TileName.values()[new Random().nextInt(FiGameState.TileName.values().length)];
-
-                    //if the TileName enum value is randomly set to the TileName none they stay where they are
-                    if(t == FiGameState.TileName.NONE){
-                        t = gameState.getPlayerLocation(gameState.getPlayerTurn());
-                    }
                     game.sendAction(new FiMoveAction(this, t));
                 }
             }
         }
     }
 }
-
-/*
-        if all 4 treasures have been captured, the ai is on the fools landing tile, and the ai has a helicopter lift card
-            send game over action
-        if all 4 treasures have been captured
-            the ai moves to the FOOLS_LANDING tile
-        if the ai has 4 treasure cards
-            if the ai is on the correct tile
-                send captureTreasureAction
-            move to the correct tile
-
-            FINISH FOR 3 OTHER TREASURE CARDS AND FOR OTHER PLAYER (7)
-        if other players have 3 of the same card and the ai has that card
-            give the card to the player
-
-        if the tile the ai is on is flooded
-            shore it up and flip it over
-        else
-            move to a random tile
- */

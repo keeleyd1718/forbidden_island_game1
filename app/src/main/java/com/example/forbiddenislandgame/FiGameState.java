@@ -19,7 +19,7 @@ public class FiGameState extends GameState {
     private ArrayList<TreasureCards> dumbAiHand;//arraylist for dumb computer's hand
     private ArrayList<TreasureCards> smartAiHand;//arraylist for smart computer's hand
     int numPlayers;//how many players are playing
-    int playerTurn;//whose turn it is
+    int playerTurn;//player whose turn it is
     int floodMeter;//keeps track of the flood meter level
     int actionsRemaining;//can have up to 3 per turn
     static int playerChosen;//to use for giveCard method
@@ -36,7 +36,7 @@ public class FiGameState extends GameState {
     int[] numWindStatueCardsInHand;
     int[] numOceanChaliceCardsInHand;
 
-    //arrays for the treasure cards to make methods easier
+    //arrayLists for the treasure cards to make methods easier
     private ArrayList<TreasureCards> earthStoneTreasureCards;
     private ArrayList<TreasureCards> fireCrystalTreasureCards;
     private ArrayList<TreasureCards> windStatueTreasureCards;
@@ -47,7 +47,7 @@ public class FiGameState extends GameState {
     TileName player1Location;
     TileName player2Location;
     TileName player3Location;
-    HashMap<TileName, Value> map;//hashmap to hold the tile names and tile values (normal, flooded or sunk)
+    HashMap<TileName, Value> map;//hashmap to hold the tile names (treasureCards enum) and tile values (normal, flooded or sunk)
 
     public enum TreasureCards {//enum for treasure deck
         EARTH_STONE1,
@@ -71,14 +71,14 @@ public class FiGameState extends GameState {
         OCEAN_CHALICE4,
         OCEAN_CHALICE5,
         SANDBAG1,
-        SANDBAG2,//can shore up a tile by discarding instead of using an action to shore up
+        SANDBAG2,//can shore up a tile by discarding this instead of using an action to shore up
         HELICOPTER_LIFT1,//needed for end of game to win
         HELICOPTER_LIFT2,
         HELICOPTER_LIFT3,
         WATERS_RISE1,
         WATERS_RISE2,
         WATERS_RISE3
-    }
+    }//TreasureCards enum
     public enum FloodCards {//enum for flood deck
         FOOLS_LANDING1,
         BRONZE_GATE1,
@@ -128,42 +128,40 @@ public class FiGameState extends GameState {
         MISTY_MARSH,
         BREAKERS_BRIDGE,
         HOWLING_GARDEN
-    }
+    }//FloodCards enum
 
     public enum Value {//enum for the values of the tiles
         NORMAL,
         FLOODED,
-        SUNK,
-        NONE
-    }//Value
+        SUNK
+    }//Value enum
 
     public enum TileName {//enum for the names of the tiles
-        FOOLS_LANDING,//none
-        BRONZE_GATE,//none
-        GOLD_GATE,//none
-        CORAL_PALACE,//ocean chalice
-        SUN_TEMPLE,//earth stone
-        SILVER_GATE,//none
-        PHANTOM_ROCK,//none
-        WATCHTOWER,//none
-        COPPER_GATE,//none
-        ABANDONED_CLIFFS,//none
-        WHISPERING_GARDENS,//wind statue
-        SHADOW_CAVE,//fire crystal
-        LOST_LAGOON,//none
-        MOON_TEMPLE,//earth stone
-        DECEPTION_DUNES,//none
-        TWILIGHT_HOLLOW,//none
-        EMBER_CAVE,//fire crystal
-        TIDAL_PALACE,//ocean chalice
-        OBSERVATORY,//none
-        IRON_GATE,//none
-        CRIMSON_FOREST,//none
-        MISTY_MARSH,//none
-        BREAKERS_BRIDGE,//none
-        HOWLING_GARDEN,//wind statue
-        NONE
-    }
+        FOOLS_LANDING,
+        BRONZE_GATE,
+        GOLD_GATE,
+        CORAL_PALACE,
+        SUN_TEMPLE,
+        SILVER_GATE,
+        PHANTOM_ROCK,
+        WATCHTOWER,
+        COPPER_GATE,
+        ABANDONED_CLIFFS,
+        WHISPERING_GARDENS,
+        SHADOW_CAVE,
+        LOST_LAGOON,
+        MOON_TEMPLE,
+        DECEPTION_DUNES,
+        TWILIGHT_HOLLOW,
+        EMBER_CAVE,
+        TIDAL_PALACE,
+        OBSERVATORY,
+        IRON_GATE,
+        CRIMSON_FOREST,
+        MISTY_MARSH,
+        BREAKERS_BRIDGE,
+        HOWLING_GARDEN,
+    }//TileName enum
 
     /** Default constructor for the game state */
     public FiGameState(){
@@ -191,7 +189,7 @@ public class FiGameState extends GameState {
         numWindStatueCardsInHand = new int[numPlayers];
         numOceanChaliceCardsInHand = new int[numPlayers];
 
-        //set treasure card counts for the players to 0
+        //set treasure card counts for each of the players to 0
         for(int i = 0; i < numPlayers; i++){
             numEarthStoneCardsInHand[i] = 0;
             numFireCrystalCardsInHand[i] = 0;
@@ -199,6 +197,7 @@ public class FiGameState extends GameState {
             numOceanChaliceCardsInHand[i] = 0;
         }
 
+        //initialize the arrayLists of treasure cards types
         this.earthStoneTreasureCards = new ArrayList<>();
         this.windStatueTreasureCards = new ArrayList<>();
         this.oceanChaliceTreasureCards = new ArrayList<>();
@@ -276,14 +275,15 @@ public class FiGameState extends GameState {
         isCapturedFireCrystal = other.isCapturedFireCrystal;
         isCapturedOceanChalice = other.isCapturedOceanChalice;
         isCapturedWindStatue = other.isCapturedWindStatue;
-        int[] numEarthStoneCardsInHand;
-        int[] numFireCrystalCardsInHand;
-        int[] numWindStatueCardsInHand;
-        int[] numOceanChaliceCardsInHand;
-        TreasureCards[] earthStoneTreasureCards;
-        TreasureCards[] fireCrystalTreasureCards;
-        TreasureCards[] windStatueTreasureCards;
-        TreasureCards[] oceanChaliceTreasureCards;
+        numEarthStoneCardsInHand = other.numEarthStoneCardsInHand;
+        numFireCrystalCardsInHand = other.numFireCrystalCardsInHand;
+        numWindStatueCardsInHand = other.numWindStatueCardsInHand;
+        numOceanChaliceCardsInHand = other.numOceanChaliceCardsInHand;
+        earthStoneTreasureCards = other.earthStoneTreasureCards;
+        fireCrystalTreasureCards = other.fireCrystalTreasureCards;
+        windStatueTreasureCards = other.windStatueTreasureCards;
+        oceanChaliceTreasureCards = other.oceanChaliceTreasureCards;
+        helicopterLiftCards = other.helicopterLiftCards;
         this.player1Location = other.player1Location;
         this.player2Location = other.player2Location;
         this.player3Location = other.player3Location;
@@ -329,12 +329,13 @@ public class FiGameState extends GameState {
     //modify the game state to reflect a given player has taken that action
     //each method should require that the player id of the player who is taking that action be passed in as the first parameter, might need other parameters
 
-    public boolean move(int playerTurn, TileName t){//takes tile to move to and player whose turn it is
+    public boolean move(int playerId, TileName t){//takes tile to move to and player whose turn it is
         // check if tile is empty
+
         if(actionsRemaining < 1){
             return false;
         }
-        else{
+        else if (getPlayerTurn() == playerId){
             if(playerTurn == 0){
                 player1Location = t;
             }
@@ -347,14 +348,17 @@ public class FiGameState extends GameState {
             actionsRemaining--;
             return true;
         }
+        else{
+            return false;
+        }
     }//end of move
 
     //A player can flip over any of the 4 adjacent tiles or the tile they are on if it has been flipped to flooded previously
-    public boolean shoreUp(int playerTurn, TileName t) {//
+    public boolean shoreUp(int playerId, TileName t) {//
         if(actionsRemaining < 1){
             return false;
         }
-        else if(getPlayerTurn() == playerTurn){
+        else if(getPlayerTurn() == playerId && map.get(t) != Value.SUNK){
             map.put(t, Value.NORMAL);
             actionsRemaining--;
             return true;
@@ -365,13 +369,13 @@ public class FiGameState extends GameState {
     }//end of shoreUp
 
     //Choose a player to give a treasure card to
-    public boolean giveCard(int playerTurn, int playerId, TreasureCards card){ //player's whose turn it is, player to give card to, card to give away
+    public boolean giveCard(int playerId, int chosenPlayer, TreasureCards card){ //player's whose turn it is, player to give card to, card to give away
         if(actionsRemaining < 1){
             return false;
         }
         //choose card from array, remove, and add to another player's hand array
-        if(getPlayerTurn() == playerTurn && getPlayerTurnHand(getPlayerTurn()).contains(card)){
-            getPlayerTurnHand(playerId).add(card);
+        if(getPlayerTurn() == playerId && getPlayerTurnHand(getPlayerTurn()).contains(card)){
+            getPlayerTurnHand(chosenPlayer).add(card);
             getPlayerTurnHand(getPlayerTurn()).remove(card);
             actionsRemaining--;
             return true;
@@ -381,8 +385,8 @@ public class FiGameState extends GameState {
         }
     }//end of giveCard
 
-    public boolean discard(int playerTurn, TreasureCards card){
-        if(getPlayerTurn() == playerTurn){
+    public boolean discard(int playerId, TreasureCards card){
+        if(getPlayerTurn() == playerId){
             getPlayerTurnHand(playerTurn).remove(card);
             discardTreasureDeck.add(card);
             return true;
@@ -392,21 +396,24 @@ public class FiGameState extends GameState {
         }
     }//end of discard
 
-    public boolean captureTreasure(int playerTurn, ArrayList<TreasureCards> a, TileName t){
+    public boolean captureTreasure(int playerId, ArrayList<TreasureCards> a, TileName t){
         if(actionsRemaining < 1){
             return false;
         }
+
         //create boolean variables to check if the player is on one of the correct tiles
         boolean earthStoneTile = t.equals(TileName.MOON_TEMPLE) || t.equals(TileName.SUN_TEMPLE);
         boolean fireCrystalTile = (t.equals(TileName.SHADOW_CAVE) || t.equals(TileName.EMBER_CAVE));
         boolean oceanChaliceTile = (t.equals(TileName.CORAL_PALACE) || t.equals(TileName.TIDAL_PALACE));
         boolean windStatueTile = (t.equals(TileName.HOWLING_GARDEN) || t.equals(TileName.WHISPERING_GARDENS));
 
+        int count = 0;//keep track of how many treasure cards we have removed so if they have 5 treasure cards we leave 1
+
         //removing four earth stone cards from the player's hand and capturing the treasure
         for(int i = 0; i < numPlayers; i++){
-            if(playerTurn == i && earthStoneTile) {//if its player 1's turn and they are on the correct tile
+            if(playerId == i && earthStoneTile) {//if its player 1's turn and they are on the correct tile
+
                 if (a.contains(numEarthStoneCardsInHand[i] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
-                    int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
                     for(int j = 0; j < earthStoneTreasureCards.size(); j++){
@@ -416,15 +423,14 @@ public class FiGameState extends GameState {
                             actionsRemaining--;
                             return true;
                         }
-                        if (a.contains(earthStoneTreasureCards.get(j))){
+                        else if(a.contains(earthStoneTreasureCards.get(j))){
                             count += tryRemoveCard(a, earthStoneTreasureCards.get(j));
                         }
                     }
                 }
             }
-            else if(playerTurn == i && fireCrystalTile) {
+            else if(playerId == i && fireCrystalTile) {
                 if (a.contains(numFireCrystalCardsInHand[i] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
-                    int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
                     for(int j = 0; j < fireCrystalTreasureCards.size(); j++){
@@ -434,7 +440,7 @@ public class FiGameState extends GameState {
                             actionsRemaining--;
                             return true;
                         }
-                        if (a.contains(fireCrystalTreasureCards.get(j))){
+                        else if(a.contains(fireCrystalTreasureCards.get(j))){
                             count += tryRemoveCard(a, fireCrystalTreasureCards.get(j));
                         }
                     }
@@ -442,7 +448,6 @@ public class FiGameState extends GameState {
             }
             else if(playerTurn == i && windStatueTile) {
                 if (a.contains(numWindStatueCardsInHand[i] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
-                    int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
                     for(int j = 0; j < windStatueTreasureCards.size(); j++){
@@ -452,7 +457,7 @@ public class FiGameState extends GameState {
                             actionsRemaining--;
                             return true;
                         }
-                        if (a.contains(windStatueTreasureCards.get(j))){
+                        else if(a.contains(windStatueTreasureCards.get(j))){
                             count += tryRemoveCard(a, windStatueTreasureCards.get(j));
                         }
                     }
@@ -460,7 +465,6 @@ public class FiGameState extends GameState {
             }
             else if(playerTurn == i && oceanChaliceTile) {
                 if (a.contains(numOceanChaliceCardsInHand[i] >= 4)) {//check if player one has the correct 4 treasure cards in their hand
-                    int count = 0;
 
                     //remove the four (or four of if they have 5) treasure cards from their hand and add them to the discard pile
                     for(int j = 0; j < oceanChaliceTreasureCards.size(); j++){
@@ -470,7 +474,7 @@ public class FiGameState extends GameState {
                             actionsRemaining--;
                             return true;
                         }
-                        if (a.contains(oceanChaliceTreasureCards.get(j))){
+                        else if(a.contains(oceanChaliceTreasureCards.get(j))){
                             count += tryRemoveCard(a, oceanChaliceTreasureCards.get(j));
                         }
                     }
@@ -493,7 +497,7 @@ public class FiGameState extends GameState {
     }//end of tryRemoveCard
 
     public void drawTreasure(ArrayList<TreasureCards> a) {
-        //check if the treasure deck is empty and is so add the cards from the discard pile back into the treasure deck
+        //check if the treasure deck is empty and if so add the cards from the discard pile back into the treasure deck
         if(treasureDeck.isEmpty()){
             for(int i = 0; i < discardTreasureDeck.size(); i++){
                 treasureDeck.add(getDiscardTreasureDeck().get(i));
@@ -554,8 +558,30 @@ public class FiGameState extends GameState {
                 }
             }
         }
-        drawTreasureLimitCheck();
+        drawTreasureLimitCheck();//check if any player has over the 5 card limit in their hand
     }//end of drawTreasure
+
+    //check if any player has over the 5 card limit in their hand and if so remove cards for them to get back to 5
+    public void drawTreasureLimitCheck(){
+        for(int j = 0; j < numPlayers; j++){
+            if(getPlayerTurnHand(j).size() > 5){
+                int removeAmount = getPlayerTurnHand(j).size() - 5;
+                for(int i = 0; i < removeAmount; i++){
+                    discardTreasureDeck.add(getPlayerTurnHand(j).remove(i));//remove those cards from their hand and add to the discardTreasure deck
+                }
+            }
+        }
+    }//end of drawTreasureLimitCheck
+
+
+    /*else if (action instanceof FiDiscardAction) {
+        //add the card the player chose to the discard treasure deck
+        FiDiscardAction a = (FiDiscardAction) action;
+        TreasureCards t = a.getTreasureCardName();
+        if(getPlayerTurnHand(playerTurn).size() > 5){
+            discard(getPlayerTurn(), t);
+        }
+    }*/
 
     public void drawFlood(ArrayList<FloodCards> a) {
         //check if the flood deck is empty and if so add the cards from the discard pile back into the flood deck and shuffle
@@ -774,8 +800,13 @@ public class FiGameState extends GameState {
         emptyDrawnFloodCards();//empty the drawnFloodCards arrayList
     }//end of changeFloodValue
 
-    //change whose turn it and reset their actionsRemaining back to 3 for their turn
-    public void endTurn(){
+    public void emptyDrawnFloodCards(){
+        for(int i = 0; i < drawnFloodCards.size(); i++){
+            discardFloodDeck.add(drawnFloodCards.remove(i));
+        }
+    }//end of emptyDrawnFloodCards
+
+    public void endTurn(){//change whose turn it is
         if (numPlayers > 2) {
             if (getPlayerTurn() == 0) {
                 setPlayerTurn(1);
@@ -795,10 +826,11 @@ public class FiGameState extends GameState {
                 setPlayerTurn(0);
             }
         }
-        setActionsRemaining(3);
-    }//end of endTurn method
 
-    public boolean areTreasuresCaptured(){
+        setActionsRemaining(3);//set the next player's actionsRemaining back to 3
+    }//end of endTurn
+
+    public boolean areTreasuresCaptured(){//method to check if all four treasures have been captured
         if(isCapturedEarthStone && isCapturedFireCrystal && isCapturedWindStatue && isCapturedOceanChalice){
             return true;
         }
@@ -807,34 +839,16 @@ public class FiGameState extends GameState {
         }
     }//end of areTreasuresCaptured
 
-    public boolean drawTreasureLimitCheck(){
-        for(int j = 0; j < numPlayers; j++){
-            if(getPlayerTurnHand(j).size() > 5){
-                int removeAmount = getPlayerTurnHand(j).size() - 5;
-                for(int i = 0; i < removeAmount - 1; i++){
-                    getPlayerTurnHand(j).remove(i);
-                }
-            }
-            return true;
-        }
-        return false;
-    }//end of drawTreasureLimitCheck
-
 
     //setter methods
     public void setPlayerTurn(int playerTurn){this.playerTurn = playerTurn;}
     public void setPlayerChosen(int playerChosen){this.playerChosen = playerChosen;}
     public void setActionsRemaining(int actionsRemaining) {this.actionsRemaining = actionsRemaining;}
-    public void emptyDrawnFloodCards(){
-        for(int i = 0; i < drawnFloodCards.size(); i++){
-            discardFloodDeck.add(drawnFloodCards.remove(i));
-        }
-    }
 
     //getter methods
     public int getFloodMeter() {return this.floodMeter;}
     public int getPlayerTurn(){return this.playerTurn;}
-    public int getActionsRemaining(){return this.actionsRemaining;}
+    public int getPlayerChosen(){return this.playerChosen;}
     public int getNumberOfCardsInHand(ArrayList<TreasureCards> a) {return a.size();}
     public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
     public ArrayList<FloodCards> getDiscardFloodDeck(){return this.discardFloodDeck;}
@@ -889,14 +903,4 @@ public class FiGameState extends GameState {
     public ArrayList<TreasureCards> getHelicopterLiftCards(){
         return this.helicopterLiftCards;
     }
-        
-    
-          /*  else if (action instanceof FiDiscardAction) {
-        //add the card the player chose to the discard treasure deck
-        FiDiscardAction a = (FiDiscardAction) action;
-        TreasureCards t = a.getTreasureCardName();
-        if(getPlayerTurnHand(playerTurn).size() > 5){
-            discard(getPlayerTurn(), t);
-        }
-    }*/
 }

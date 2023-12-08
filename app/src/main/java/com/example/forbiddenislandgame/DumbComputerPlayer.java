@@ -33,11 +33,6 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                 if(randomNum == 1){//moves the dumb ai to a random tile
                     //gets a random tile to move to from the enum list
                     t = FiGameState.TileName.values()[new Random().nextInt(FiGameState.TileName.values().length)];
-
-                    //if the TileName enum value is randomly set to the TileName none they stay where they are
-                    if(t == FiGameState.TileName.NONE){
-                        t = gameState.getPlayerLocation(gameState.getPlayerTurn());
-                    }
                     game.sendAction(new FiMoveAction(this, t));
                 }
                 else if(randomNum == 2){//shores up the tile they are on if it's possible
@@ -59,7 +54,7 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                     FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(0);
 
                     //gives the first card in the dumb ai's hand to the player whose turn it is next
-                    game.sendAction(new FiGiveCardAction(this, gameState.playerChosen, tc));
+                    game.sendAction(new FiGiveCardAction(this, gameState.getPlayerChosen(), tc));
                 }
             }
         }

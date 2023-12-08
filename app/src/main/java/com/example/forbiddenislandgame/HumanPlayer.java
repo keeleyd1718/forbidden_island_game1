@@ -27,8 +27,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private GameMainActivity myActivity;
     int gameGreen = Color.rgb(63, 179, 66);//color for the tiles when they're normal
     private TextView floodView = null;//to display the flood meter
-    HashMap<Button, FiGameState.TileName> buttonMap = new HashMap<>();
-    Button playerLocation;//to store the button to update a player's location
+    HashMap<Button, FiGameState.TileName> buttonMap = new HashMap<>();//hashmap to connect the buttons to the tile names
 
     // all the buttons on the ui that can be pressed; action buttons and tile buttons
     private Button quitButton = null;
@@ -76,10 +75,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     //keep track of if that button was clicked
     private boolean moveButtonClicked = false;
     private boolean shoreUpButtonClicked = false;
+    private boolean selectionChosen = false;
     private boolean discardButtonClicked = false;
     private boolean giveCardButtonClicked = false;
 
-    //to keep track of when the player's cards are pressed
+    //to keep track of which of the player's cards was pressed
     private int playerCardsClicked;
 
     /**
@@ -98,7 +98,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         //return myActivity.findViewbyId(R.id.top_gui_layout);
     }
 
-    //method to know what player's hand to display the Treasure cards on
+    //method to know what player's hand to display the Treasure cards
     public ImageButton[] setPlayerCards(int playerTurn){
         if(playerTurn == 0){
             return player1Cards;
@@ -118,32 +118,34 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         if(info instanceof FiGameState){
             FiGameState gameState = (FiGameState) info;
 
-            //setting the initial start places for the players
+            //setting the initial start locations for the player's pawns
             ABANDONED_CLIFFS.setText("ABANDONED_CLIFFS" + System.getProperty("line.separator") + "player 1");
             DECEPTION_DUNES.setText("DECEPTION_DUNES" + System.getProperty("line.separator") + "player 2");
             OBSERVATORY.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
 
-            //set the image buttons to display what cards are in player 1's hand
-            for(int i = 0; i < gameState.getPlayerTurnHand(0).size(); i++){
-                FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(0).get(i);
+            //set the image buttons to display what cards are in player 1, 2 and 3's hands
+            for(int i = 0; i < gameState.numPlayers; i++){//loop to go through each player; i is for player's turn
+                for(int j = 0; j < gameState.getPlayerTurnHand(i).size(); j++){//loop to go through the cards in the player's hand; j is for the card
+                    FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(i).get(j);
 
-                if(gameState.getPlayerTurnHand(0).get(i).equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
-                    setPlayerCards(i)[i].setImageResource(R.drawable.tc_helicopter_lift);
-                }
-                else if(gameState.getPlayerTurnHand(0).get(i).equals(FiGameState.TreasureCards.HELICOPTER_LIFT1) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT2) || tc.equals(FiGameState.TreasureCards.HELICOPTER_LIFT3)){
-                    setPlayerCards(i)[i].setImageResource(R.drawable.tc_helicopter_lift);
-                }
-                else if(gameState.getEarthStoneTreasureCards().contains(gameState.getPlayerTurnHand(0).get(i))){
-                    setPlayerCards(i)[i].setImageResource(R.drawable.tc_earth_stone);
-                }
-                else if(gameState.getWindStatueTreasureCards().contains(gameState.getPlayerTurnHand(0).get(i))){
-                    setPlayerCards(i)[i].setImageResource(R.drawable.tc_wind_statue);
-                }
-                else if(gameState.getFireCrystalTreasureCards().contains(gameState.getPlayerTurnHand(0).get(i))){
-                    setPlayerCards(i)[i].setImageResource(R.drawable.tc_fire_crystal);
-                }
-                else if(gameState.getOceanChaliceTreasureCards().contains(gameState.getPlayerTurnHand(0).get(i))){
-                    setPlayerCards(i)[i].setImageResource(R.drawable.tc_ocean_chalice);
+                    if(tc.equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
+                        setPlayerCards(i)[j].setImageResource(R.drawable.tc_sandbag);
+                    }
+                    else if(gameState.getHelicopterLiftCards().contains(tc)){
+                        setPlayerCards(i)[j].setImageResource(R.drawable.tc_helicopter_lift);
+                    }
+                    else if(gameState.getEarthStoneTreasureCards().contains(tc)){
+                        setPlayerCards(i)[j].setImageResource(R.drawable.tc_earth_stone);
+                    }
+                    else if(gameState.getWindStatueTreasureCards().contains(tc)){
+                        setPlayerCards(i)[j].setImageResource(R.drawable.tc_wind_statue);
+                    }
+                    else if(gameState.getFireCrystalTreasureCards().contains(tc)){
+                        setPlayerCards(i)[j].setImageResource(R.drawable.tc_fire_crystal);
+                    }
+                    else if(gameState.getOceanChaliceTreasureCards().contains(tc)){
+                        setPlayerCards(i)[j].setImageResource(R.drawable.tc_ocean_chalice);
+                    }
                 }
             }
 
@@ -163,20 +165,25 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             HOWLING_GARDEN.setText("HOWLING_GARDEN" + System.getProperty("line.separator") + "Wind Statue Treasure");
             WHISPERING_GARDENS.setText("WHISPERING_GARDENS" + System.getProperty("line.separator") + "Wind Statue Treasure");
 
+            Button playerLocation = null;//to store the button to update a player's location
+
             //changing the text on a button to show where the pawns are
-            FiGameState.TileName tileLocation = gameState.getPlayerLocation(gameState.getPlayerTurn());
+            FiGameState.TileName tileLocation = gameState.getPlayerLocation(gameState.getPlayerTurn());//get the tile the player should be on
             for(Map.Entry<Button, FiGameState.TileName> entry : buttonMap.entrySet()){
-                if(entry.getValue().equals(tileLocation)){
-                    playerLocation = entry.getKey();
+                if(entry.getValue().equals(tileLocation)){//if the buttonMap value is equal to the tile the player should be on...
+                    playerLocation = entry.getKey();//...store the corresponding key in the button playerLocation
                 }
             }
-            playerLocation.setTextSize(6);
-            playerLocation.setText(tileLocation + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn());
+            if(playerLocation != null){
+                playerLocation.setTextSize(6);
+                playerLocation.setText(tileLocation + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn());
+            }
 
             //coloring the tiles the color of their value in the hashmap (normal = green, flooded = blue, sunk = gray)
             for(Button c : buttonMap.keySet()){
                 FiGameState.TileName theTile = buttonMap.get(c);
                 FiGameState.Value floodState = gameState.map.get(theTile);
+
                 if(floodState.equals(FiGameState.Value.NORMAL)){
                     c.setBackgroundColor(gameGreen);//normal
                 }
@@ -191,13 +198,14 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             floodView.setText("Flood Meter: "+gameState.getFloodMeter());
         }
         else {
-            Log.e("zzz recieve", "other msg");
+            Log.e("zzz receive", "other msg");
         }
     }
 
     @Override
     public void onClick(View view) {
-        Log.e("zzz onClick", "clicked! "+view.getId());
+        Log.e("zzz onClick", "clicked! " + view.getId());
+
         //will decide what move the player made based on the button they clicked
         if(view.getId() == R.id.quitButton){
             game.sendAction(new FiGameOverAction(this));
@@ -230,7 +238,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
         //when the player presses the discard button
         if(discardButtonClicked) {
-            if (view.getId() == R.id.player1Card1) {
+            if(view.getId() == R.id.player1Card1) {
                 playerCardsClicked = 0;
             }
             else if (view.getId() == R.id.player1Card2) {
@@ -248,10 +256,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             else if (view.getId() == R.id.player1Card6) {
                 playerCardsClicked = 5;
             }
+
             String msg = "Please choose a card to discard";
             MessageBox.popUpMessage(msg, myActivity);
-            //go through the playerCardsClicked array to see what card the player pressed and send the discard action with the card in that place
 
+            //go through the playerCardsClicked array to see what card the player pressed and send the discard action with the card in that place
             if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_helicopter_lift)) {
                 game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.HELICOPTER_LIFT1));
             }
@@ -273,10 +282,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             discardButtonClicked = false;
             playerCardsClicked = 1;
         }
-
-        //when the player presses the give card button
-        else if(giveCardButtonClicked)
-        {
+        else if(giveCardButtonClicked) {//when the player presses the give card button
             if(view.getId() == R.id.giveCardToP1){
                 FiGameState.playerChosen = 0;
             }
@@ -305,7 +311,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 playerCardsClicked = 5;
             }
 
-            //go through the playerCardsClicked array to see what card the player pressed and send the discard action with the card in that place
+            //go through the playerCardsClicked array to see what card the player pressed and send the giveCard action with the card in that place
             if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_helicopter_lift)){
                 game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.HELICOPTER_LIFT1));
             }
@@ -327,15 +333,13 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             giveCardButtonClicked = false;
             playerCardsClicked = 1;
         }
-        if(moveButtonClicked && selection != FiGameState.TileName.NONE)
-        {
-            game.sendAction(new FiMoveAction(this, selection));
+        else if(moveButtonClicked){
             moveButtonClicked = false;
+            game.sendAction(new FiMoveAction(this, selection));
         }
-        else if(shoreUpButtonClicked && selection != FiGameState.TileName.NONE)
-        {
-            game.sendAction(new FiShoreUpAction(this, selection));
+        else if(shoreUpButtonClicked){
             shoreUpButtonClicked = false;
+            game.sendAction(new FiShoreUpAction(this, selection));
         }
     }
 
@@ -360,33 +364,56 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.giveCardToP2 = activity.findViewById(R.id.giveCardToP2);
         this.giveCardToP3 = activity.findViewById(R.id.giveCardToP3);
 
-        //initializing tile buttons
+        //initializing tile buttons and putting them into the buttonMap HashMap
         this.FOOLS_LANDING = activity.findViewById(R.id.FOOLS_LANDING);
         buttonMap.put(activity.findViewById(R.id.FOOLS_LANDING), FiGameState.TileName.FOOLS_LANDING);
+
         this.BRONZE_GATE = activity.findViewById(R.id.BRONZE_GATE);
         buttonMap.put(activity.findViewById(R.id.BRONZE_GATE), FiGameState.TileName.BRONZE_GATE);
         this.GOLD_GATE = activity.findViewById(R.id.GOLD_GATE);
+        buttonMap.put(activity.findViewById(R.id.GOLD_GATE), FiGameState.TileName.GOLD_GATE);
         this.CORAL_PALACE = activity.findViewById(R.id.CORAL_PALACE);
+        buttonMap.put(activity.findViewById(R.id.CORAL_PALACE), FiGameState.TileName.CORAL_PALACE);
         this.SUN_TEMPLE = activity.findViewById(R.id.SUN_TEMPLE);
+        buttonMap.put(activity.findViewById(R.id.SUN_TEMPLE), FiGameState.TileName.SUN_TEMPLE);
         this.SILVER_GATE = activity.findViewById(R.id.SILVER_GATE);
+        buttonMap.put(activity.findViewById(R.id.SILVER_GATE), FiGameState.TileName.SILVER_GATE);
         this.PHANTOM_ROCK = activity.findViewById(R.id.PHANTOM_ROCK);
+        buttonMap.put(activity.findViewById(R.id.PHANTOM_ROCK), FiGameState.TileName.PHANTOM_ROCK);
         this.WATCHTOWER = activity.findViewById(R.id.WATCHTOWER);
+        buttonMap.put(activity.findViewById(R.id.WATCHTOWER), FiGameState.TileName.WATCHTOWER);
         this.COPPER_GATE = activity.findViewById(R.id.COPPER_GATE);
+        buttonMap.put(activity.findViewById(R.id.COPPER_GATE), FiGameState.TileName.COPPER_GATE);
         this.ABANDONED_CLIFFS = activity.findViewById(R.id.ABANDONED_CLIFFS);
+        buttonMap.put(activity.findViewById(R.id.ABANDONED_CLIFFS), FiGameState.TileName.ABANDONED_CLIFFS);
         this.WHISPERING_GARDENS = activity.findViewById(R.id.WHISPERING_GARDENS);
+        buttonMap.put(activity.findViewById(R.id.WHISPERING_GARDENS), FiGameState.TileName.WHISPERING_GARDENS);
         this.SHADOW_CAVE = activity.findViewById(R.id.SHADOW_CAVE);
+        buttonMap.put(activity.findViewById(R.id.SHADOW_CAVE), FiGameState.TileName.SHADOW_CAVE);
         this.LOST_LAGOON = activity.findViewById(R.id.LOST_LAGOON);
+        buttonMap.put(activity.findViewById(R.id.LOST_LAGOON), FiGameState.TileName.LOST_LAGOON);
         this.MOON_TEMPLE = activity.findViewById(R.id.MOON_TEMPLE);
+        buttonMap.put(activity.findViewById(R.id.MOON_TEMPLE), FiGameState.TileName.MOON_TEMPLE);
         this.DECEPTION_DUNES = activity.findViewById(R.id.DECEPTION_DUNES);
+        buttonMap.put(activity.findViewById(R.id.DECEPTION_DUNES), FiGameState.TileName.DECEPTION_DUNES);
         this.TWILIGHT_HOLLOW = activity.findViewById(R.id.TWILIGHT_HOLLOW);
+        buttonMap.put(activity.findViewById(R.id.TWILIGHT_HOLLOW), FiGameState.TileName.TWILIGHT_HOLLOW);
         this.EMBER_CAVE = activity.findViewById(R.id.EMBER_CAVE);
+        buttonMap.put(activity.findViewById(R.id.EMBER_CAVE), FiGameState.TileName.EMBER_CAVE);
         this.TIDAL_PALACE = activity.findViewById(R.id.TIDAL_PALACE);
+        buttonMap.put(activity.findViewById(R.id.TIDAL_PALACE), FiGameState.TileName.TIDAL_PALACE);
         this.OBSERVATORY = activity.findViewById(R.id.OBSERVATORY);
+        buttonMap.put(activity.findViewById(R.id.OBSERVATORY), FiGameState.TileName.OBSERVATORY);
         this.IRON_GATE = activity.findViewById(R.id.IRON_GATE);
+        buttonMap.put(activity.findViewById(R.id.IRON_GATE), FiGameState.TileName.IRON_GATE);
         this.CRIMSON_FOREST = activity.findViewById(R.id.CRIMSON_FOREST);
+        buttonMap.put(activity.findViewById(R.id.CRIMSON_FOREST), FiGameState.TileName.CRIMSON_FOREST);
         this.MISTY_MARSH = activity.findViewById(R.id.MISTY_MARSH);
+        buttonMap.put(activity.findViewById(R.id.MISTY_MARSH), FiGameState.TileName.MISTY_MARSH);
         this.BREAKERS_BRIDGE = activity.findViewById(R.id.BREAKERS_BRIDGE);
+        buttonMap.put(activity.findViewById(R.id.BREAKERS_BRIDGE), FiGameState.TileName.BREAKERS_BRIDGE);
         this.HOWLING_GARDEN = activity.findViewById(R.id.HOWLING_GARDEN);
+        buttonMap.put(activity.findViewById(R.id.HOWLING_GARDEN), FiGameState.TileName.HOWLING_GARDEN);
 
         //initializing card hand image buttons
         player1Cards[0] = activity.findViewById(R.id.player1Card1);
