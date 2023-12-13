@@ -72,8 +72,8 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                 }
                 else{//first check if smart ai can give a card away otherwise default to move
                     for(int i = 0; i < gameState.getNumPlayers(); i++) {//check if other players have 3 of the same card and smart ai has that card
-                        for(int j = 0; j < gameState.getPlayerTurnHand(gameState.getPlayerTurn()).size(); j++) {
-                            FiGameState.TreasureCards card = gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(j);
+                        for(int j = 0; j < gameState.getPlayerHand(gameState.getPlayerTurn()).size(); j++) {
+                            FiGameState.TreasureCards card = gameState.getPlayerHand(gameState.getPlayerTurn()).get(j);
 
                             while (i != gameState.getPlayerTurn()) {
                                 if (gameState.numWindStatueCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){

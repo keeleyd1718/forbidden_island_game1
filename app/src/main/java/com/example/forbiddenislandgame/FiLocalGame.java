@@ -28,12 +28,10 @@ public class FiLocalGame extends LocalGame {
 
     //check if the game is over. if it is return the name of the winner (our game is a team game so no name is returned)
     protected String checkIfGameOver() {
-        //If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost (need to do still or not include this part of the game)
-
-        //the game is won if all 4 treasures have been captured, the player whose turn it is has a helicopter lift card and they are on the FOOLS_LANDING tile
+        //the game is won if all 4 treasures have been captured, the player whose turn it is has a helicopter lift card, and they are on the FOOLS_LANDING tile
         if(gs.areTreasuresCaptured()){
-            for(int i = 0; i < gs.getPlayerTurnHand(gs.getPlayerTurn()).size(); i++){
-                if((gs.getHelicopterLiftCards().contains(gs.getPlayerTurnHand(gs.getPlayerTurn()).get(i))) && gs.getPlayerLocation(gs.getPlayerTurn()).equals(FiGameState.TileName.FOOLS_LANDING)) {
+            for(int i = 0; i < gs.getPlayerHand(gs.getPlayerTurn()).size(); i++){
+                if((gs.getHelicopterLiftCards().contains(gs.getPlayerHand(gs.getPlayerTurn()).get(i))) && gs.getPlayerLocation(gs.getPlayerTurn()).equals(FiGameState.TileName.FOOLS_LANDING)) {
                     return "Congrats you guys have won the game!!";
                 }
             }
@@ -60,11 +58,12 @@ public class FiLocalGame extends LocalGame {
 
         //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
         if(canMove(getPlayerIdx(action.getPlayer()))) {
+            gs.drawTreasure(gs.getPlayerHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
+
             if(gs.getActionsRemaining() < 1){
                 //always end the turn by drawing flood cards and switching whose turn it is
                 gs.drawFlood(gs.getDrawnFloodCards());
                 gs.endTurn();
-                gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
                 return true;
             }
             else if(action instanceof FiMoveAction) {
@@ -85,7 +84,7 @@ public class FiLocalGame extends LocalGame {
                 gs.giveCard(gs.getPlayerTurn(), playerChosen, index);//call the giveCard() method to give the card at the index in their hand to the playerChosen
             }
             else if (action instanceof FiCaptureTreasureAction) {
-                gs.captureTreasure(gs.getPlayerTurn(), gs.getPlayerTurnHand(gs.getPlayerTurn()), gs.getPlayerLocation(gs.getPlayerTurn()));
+                gs.captureTreasure(gs.getPlayerTurn(), gs.getPlayerHand(gs.getPlayerTurn()), gs.getPlayerLocation(gs.getPlayerTurn()));
             }
             else if (action instanceof FiDiscardAction) {
                 FiDiscardAction a = (FiDiscardAction) action;
@@ -95,7 +94,6 @@ public class FiLocalGame extends LocalGame {
             else if(action instanceof FiEndTurnAction){//if a player skips their turn
                 gs.drawFlood(gs.getDrawnFloodCards());
                 gs.endTurn();
-                gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
                 return true;
             }
             else if (action instanceof FiGameOverAction) {

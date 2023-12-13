@@ -340,20 +340,24 @@ public class FiGameState extends GameState {
     //each method should require that the player id of the player who is taking that action be passed in as the first parameter, might need other parameters
 
     public boolean move(int playerId, TileName t){//takes tile to move to and player whose turn it is
-        // check if tile is empty
-
         if(actionsRemaining < 1){
             return false;
         }
-        else if (getPlayerTurn() == playerId){
-            if(playerTurn == 0){
-                player1Location = t;
+        else if (getPlayerTurn() == playerId){//if it is that player's turn
+            if(getPlayerTurn() == 0){
+                if(getPlayerLocation(1) != t && getPlayerLocation(2) != t){//if the other player's aren't on that tile already
+                    player1Location = t;//set the player's location to the tile they clicked
+                }
             }
-            else if (playerTurn == 1){
-                player2Location = t;
+            else if (getPlayerTurn() == 1){
+                if(getPlayerLocation(2) != t && getPlayerLocation(0) != t){
+                    player2Location = t;
+                }
             }
-            else if (playerTurn == 2){
-                player3Location = t;
+            else if (getPlayerTurn() == 2){
+                if(getPlayerLocation(0) != t && getPlayerLocation(1) != t){
+                    player3Location = t;
+                }
             }
             actionsRemaining--;
             return true;
@@ -380,13 +384,13 @@ public class FiGameState extends GameState {
 
     //Choose a player to give a treasure card to
     public boolean giveCard(int playerId, int chosenPlayer, int index){
-        if(actionsRemaining < 1 || getPlayerTurnHand(chosenPlayer).size() >= 5){//don't give the card away if the recipient has too many cards
+        if(actionsRemaining < 1 || getPlayerHand(chosenPlayer).size() >= 5){//don't give the card away if the recipient has too many cards
             return false;
         }
 
         if(getPlayerTurn() == playerId && chosenPlayer != getPlayerTurn()){
-            TreasureCards card = getPlayerTurnHand(playerTurn).remove(index);//remove the card the player clicked from their hand
-            getPlayerTurnHand(chosenPlayer).add(card);//add the card to the chosen player's hand
+            TreasureCards card = getPlayerHand(getPlayerTurn()).remove(index);//remove the card the player clicked from their hand
+            getPlayerHand(chosenPlayer).add(card);//add the card to the chosen player's hand
             actionsRemaining--;
             return true;
         }
@@ -397,7 +401,7 @@ public class FiGameState extends GameState {
 
     public boolean discard(int playerId, int index){
         if(getPlayerTurn() == playerId){
-            TreasureCards card = getPlayerTurnHand(playerTurn).remove(index);//remove the card the player clicked from their hand
+            TreasureCards card = getPlayerHand(getPlayerTurn()).remove(index);//remove the card the player clicked from their hand
             discardTreasureDeck.add(card);//add the card to the discard pile
             return true;
         }
@@ -406,7 +410,7 @@ public class FiGameState extends GameState {
         }
     }//end of discard
 
-    public boolean captureTreasure(int playerId, ArrayList<TreasureCards> a, TileName t){
+    public boolean captureTreasure(int playerId, ArrayList<TreasureCards> a, TileName t){//takes the player whose turn it is, their hand and their location
         if(actionsRemaining < 1){
             return false;
         }
@@ -574,10 +578,10 @@ public class FiGameState extends GameState {
     //check if any player has over the 5 card limit in their hand and if so remove cards for them to get back to 5
     public void drawTreasureLimitCheck(){
         for(int j = 0; j < numPlayers; j++){
-            if(getPlayerTurnHand(j).size() > 5){
-                int removeAmount = getPlayerTurnHand(j).size() - 5;
+            if(getPlayerHand(j).size() > 5){
+                int removeAmount = getPlayerHand(j).size() - 5;
                 for(int i = 0; i < removeAmount; i++){
-                    discardTreasureDeck.add(getPlayerTurnHand(j).remove(i));//remove those cards from their hand and add to the discardTreasure deck
+                    discardTreasureDeck.add(getPlayerHand(j).remove(i));//remove those cards from their hand and add to the discardTreasure deck
                 }
             }
         }
@@ -783,8 +787,8 @@ public class FiGameState extends GameState {
     }//end of isGameLost
 
     //setter methods
-    public void setPlayerTurn(int playerTurn){this.playerTurn = playerTurn;}
-    public void setActionsRemaining(int actionsRemaining) {this.actionsRemaining = actionsRemaining;}
+    public void setPlayerTurn(int playerId){this.playerTurn = playerId;}
+    public void setActionsRemaining(int aR) {this.actionsRemaining = aR;}
 
     //getter methods
     public int getFloodMeter() {return this.floodMeter;}
@@ -793,9 +797,7 @@ public class FiGameState extends GameState {
     public ArrayList<FloodCards> getDrawnFloodCards(){return this.drawnFloodCards;}
     public ArrayList<FloodCards> getDiscardFloodDeck(){return this.discardFloodDeck;}
     public ArrayList<TreasureCards> getDiscardTreasureDeck(){return this.discardTreasureDeck;}
-    public int getDiscardTreasureDeckSize() {
-        return discardTreasureDeck.size();
-    }
+    public int getDiscardTreasureDeckSize() {return discardTreasureDeck.size();}
     public int getActionsRemaining() {return this.actionsRemaining;}
     public ArrayList<TreasureCards> getEarthStoneTreasureCards(){return this.earthStoneTreasureCards;}
     public ArrayList<TreasureCards> getOceanChaliceTreasureCards(){return this.oceanChaliceTreasureCards;}
@@ -806,7 +808,7 @@ public class FiGameState extends GameState {
     }
     public int getNumPlayers() {return this.numPlayers;}
 
-    public String getHand(ArrayList<TreasureCards> a) {
+    public String getHand(ArrayList<TreasureCards> a) {//returns the hand of the arrayList passed as a string
         String str = "";
         for(int i = 0; i < a.size(); i++){
             str += a.get(i) + " ";
@@ -814,25 +816,25 @@ public class FiGameState extends GameState {
         return str;
     }
 
-    public ArrayList<TreasureCards> getPlayerTurnHand(int playerTurn){//get the hand of whoever's turn it is
-        if(playerTurn == 0){
+    public ArrayList<TreasureCards> getPlayerHand(int playerId){//get the hand of the player passed in as a parameter
+        if(playerId == 0){
             return this.humanPlayerHand;
         }
-        else if(playerTurn == 1){
+        else if(playerId == 1){
             return this.dumbAiHand;
         }
         else{
             return this.smartAiHand;
         }
     }
-    public TileName getPlayerLocation(int playerTurn) {
-        if (playerTurn == 0) {
+    public TileName getPlayerLocation(int playerId){//returns the location of the player passed in as a parameter
+        if(playerId == 0) {
             return this.player1Location;
         }
-        else if (playerTurn == 1) {
+        else if(playerId == 1) {
             return this.player2Location;
         }
-        else {
+        else{
             return this.player3Location;
         }
     }

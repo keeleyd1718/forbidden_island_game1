@@ -21,6 +21,7 @@ import com.example.game.GameFramework.utilities.MessageBox;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener {
     private int layoutId;
@@ -114,14 +115,14 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             FiGameState gameState = (FiGameState) info;
 
             //setting the initial start locations for the player's pawns
-            ABANDONED_CLIFFS_B.setText("ABANDONED_CLIFFS" + System.getProperty("line.separator") + "player 1");
-            DECEPTION_DUNES_B.setText("DECEPTION_DUNES" + System.getProperty("line.separator") + "player 2");
-            OBSERVATORY_B.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
+            ABANDONED_CLIFFS_B.setText(buttonMap.get(ABANDONED_CLIFFS_B) + System.getProperty("line.separator") + "player 1");
+            DECEPTION_DUNES_B.setText(buttonMap.get(DECEPTION_DUNES_B) + System.getProperty("line.separator") + "player 2");
+            OBSERVATORY_B.setText(buttonMap.get(OBSERVATORY_B) + System.getProperty("line.separator") + "player 3");
 
             //set the image buttons to display what cards are in player 1, 2 and 3's hands
             for(int i = 0; i < gameState.getNumPlayers(); i++){//loop to go through each player; i is for player's turn
-                for(int j = 0; j < gameState.getPlayerTurnHand(i).size(); j++){//loop to go through the cards in the player's hand; j is for the card
-                    FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(i).get(j);
+                for(int j = 0; j < gameState.getPlayerHand(i).size(); j++){//loop to go through the cards in the player's hand; j is for the card
+                    FiGameState.TreasureCards tc = gameState.getPlayerHand(i).get(j);
 
                     if(tc.equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
                         setPlayerCards(i)[j].setImageResource(R.drawable.tc_sandbag);
@@ -157,14 +158,14 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             treasures[3].setImageResource(R.drawable.wind_statue);
 
             //set the tile player's must be on to capture certain treasures
-            CORAL_PALACE_B.setText("CORAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
-            TIDAL_PALACE_B.setText("TIDAL_PALACE" + System.getProperty("line.separator") + "Ocean Chalice Treasure");
-            SHADOW_CAVE_B.setText("SHADOW_CAVE" + System.getProperty("line.separator") + "Fire Crystal Treasure");
-            EMBER_CAVE_B.setText("EMBER_CAVE" + System.getProperty("line.separator") + "Fire Crystal Treasure");
-            MOON_TEMPLE_B.setText("MOON_TEMPLE" + System.getProperty("line.separator") + "Earth Stone Treasure");
-            SUN_TEMPLE_B.setText("SUN_TEMPLE" + System.getProperty("line.separator") + "Earth Stone Treasure");
-            HOWLING_GARDEN_B.setText("HOWLING_GARDEN" + System.getProperty("line.separator") + "Wind Statue Treasure");
-            WHISPERING_GARDENS_B.setText("WHISPERING_GARDENS" + System.getProperty("line.separator") + "Wind Statue Treasure");
+            CORAL_PALACE_B.setText(buttonMap.get(CORAL_PALACE_B) + System.getProperty("line.separator") + "Ocean Chalice Treasure");
+            TIDAL_PALACE_B.setText(buttonMap.get(TIDAL_PALACE_B) + System.getProperty("line.separator") + "Ocean Chalice Treasure");
+            SHADOW_CAVE_B.setText(buttonMap.get(SHADOW_CAVE_B) + System.getProperty("line.separator") + "Fire Crystal Treasure");
+            EMBER_CAVE_B.setText(buttonMap.get(EMBER_CAVE_B) + System.getProperty("line.separator") + "Fire Crystal Treasure");
+            MOON_TEMPLE_B.setText(buttonMap.get(MOON_TEMPLE_B) + System.getProperty("line.separator") + "Earth Stone Treasure");
+            SUN_TEMPLE_B.setText(buttonMap.get(SUN_TEMPLE_B) + System.getProperty("line.separator") + "Earth Stone Treasure");
+            HOWLING_GARDEN_B.setText(buttonMap.get(HOWLING_GARDEN_B) + System.getProperty("line.separator") + "Wind Statue Treasure");
+            WHISPERING_GARDENS_B.setText(buttonMap.get(WHISPERING_GARDENS_B) + System.getProperty("line.separator") + "Wind Statue Treasure");
 
             Button playerLocation = null;//to store the button to update a player's location
 
