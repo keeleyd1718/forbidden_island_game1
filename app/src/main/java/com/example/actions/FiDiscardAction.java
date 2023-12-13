@@ -5,19 +5,19 @@ import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.players.GamePlayer;
 
 public class FiDiscardAction extends GameAction {
-    private FiGameState.TreasureCards t;
+    private int index;
     /**
      * constructor for GameAction
      *
      * @param player the player who created the action
-     * @param sel
+     * @param indexOfCard the index of the card the player clicked to discard
      */
-    public FiDiscardAction(GamePlayer player, FiGameState.TreasureCards sel) {
+    public FiDiscardAction(GamePlayer player, int indexOfCard) {
         super(player);
-        t = sel;
+        index = indexOfCard;
     }
 
-    public FiGameState.TreasureCards getTreasureCardName() {
-        return t;
+    public int getIndexOfCard() {
+        return index;
     }
 }

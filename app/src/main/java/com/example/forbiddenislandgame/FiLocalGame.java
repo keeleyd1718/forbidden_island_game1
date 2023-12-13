@@ -26,7 +26,7 @@ public class FiLocalGame extends LocalGame {
         super.start(players);
     }
 
-    //check if the game is over. if it is return the name of the winner (our game is a team game)
+    //check if the game is over. if it is return the name of the winner (our game is a team game so no name is returned)
     protected String checkIfGameOver() {
         //If a pawn is on a tile that sinks that player is prompted to “Choose an Adjacent Tile” but if there is no available tile then the pawn sinks and the game is lost (need to do still or not include this part of the game)
 
@@ -38,22 +38,9 @@ public class FiLocalGame extends LocalGame {
                 }
             }
         }
+        //check if the game was lost
+        gs.isGameLost();
 
-        if (gs.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.SUNK)) {
-            return "Game Over! You lost because Fools Landing sunk!";
-        }
-        if (gs.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.TIDAL_PALACE).equals(FiGameState.Value.SUNK) && (!gs.isCapturedOceanChalice)) { //Ocean Chalice Tiles
-            return "Game Over! You lost because your Ocean tiles sunk before you collected the treasure!";
-        }
-        if (gs.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SHADOW_CAVE).equals(FiGameState.Value.SUNK) && (!gs.isCapturedFireCrystal)){ //Fire Crystal Tiles
-            return "Game Over! You lost because your Fire Crystal tiles sunk before you collected the treasure!";
-        }
-        if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK) && (!gs.isCapturedEarthStone)) { //Earth Stone Tiles
-            return "Game Over! You lost because your Earth Stone tiles sunk before you collected the treasure!";
-        }
-        if (gs.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.SUNK) && gs.map.get(FiGameState.TileName.SUN_TEMPLE).equals(FiGameState.Value.SUNK) && (!gs.isCapturedWindStatue)) { //Wind Statues
-            return "Game Over! You lost because your Wind Statue tiles sunk before you collected the treasure!";
-        }
         return null;
     }
 
@@ -73,7 +60,14 @@ public class FiLocalGame extends LocalGame {
 
         //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
         if(canMove(getPlayerIdx(action.getPlayer()))) {
-            if(action instanceof FiMoveAction) {
+            if(gs.getActionsRemaining() < 1){
+                //always end the turn by drawing flood cards and switching whose turn it is
+                gs.drawFlood(gs.getDrawnFloodCards());
+                gs.endTurn();
+                gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
+                return true;
+            }
+            else if(action instanceof FiMoveAction) {
                 FiMoveAction a = (FiMoveAction) action;//create an instance of a move action
                 FiGameState.TileName t = a.getTileName();//get the tile the player pressed
                 gs.move(gs.getPlayerTurn(), t);//call the move() method
@@ -86,11 +80,17 @@ public class FiLocalGame extends LocalGame {
             }
             else if (action instanceof FiGiveCardAction) {
                 FiGiveCardAction a = (FiGiveCardAction) action;
-                FiGameState.TreasureCards t = a.getTreasureCardName();//get the card they want to give away
-                gs.giveCard(gs.getPlayerTurn(), gs.playerChosen, t);//call the giveCard() method to give the card (t) to the playerChosen
+                int index = a.getIndexOfCard();
+                int playerChosen = a.getPlayerChosen();
+                gs.giveCard(gs.getPlayerTurn(), playerChosen, index);//call the giveCard() method to give the card at the index in their hand to the playerChosen
             }
             else if (action instanceof FiCaptureTreasureAction) {
-                gs.captureTreasure(gs.getPlayerTurn(), gs.getPlayerTurnHand(gs.playerTurn), gs.getPlayerLocation(gs.getPlayerTurn()));
+                gs.captureTreasure(gs.getPlayerTurn(), gs.getPlayerTurnHand(gs.getPlayerTurn()), gs.getPlayerLocation(gs.getPlayerTurn()));
+            }
+            else if (action instanceof FiDiscardAction) {
+                FiDiscardAction a = (FiDiscardAction) action;
+                int index = a.getIndexOfCard();//get the card they want to discard
+                gs.discard(gs.getPlayerTurn(), index);
             }
             else if(action instanceof FiEndTurnAction){//if a player skips their turn
                 gs.drawFlood(gs.getDrawnFloodCards());
@@ -100,13 +100,6 @@ public class FiLocalGame extends LocalGame {
             }
             else if (action instanceof FiGameOverAction) {
                 checkIfGameOver();
-            }
-
-            if(gs.getActionsRemaining() < 1){
-                //always end the turn by drawing flood cards and switching whose turn it is
-                gs.drawFlood(gs.getDrawnFloodCards());
-                gs.endTurn();
-                gs.drawTreasure(gs.getPlayerTurnHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
                 return true;
             }
         }

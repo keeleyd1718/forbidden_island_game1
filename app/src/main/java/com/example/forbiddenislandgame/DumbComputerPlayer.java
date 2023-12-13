@@ -11,6 +11,7 @@ import com.example.game.GameFramework.players.GameComputerPlayer;
 import java.util.Random;
 
 public class DumbComputerPlayer extends GameComputerPlayer {
+    private int playerChosen = 0;//defaults to player 1
     /**
      * constructor
      *
@@ -22,7 +23,6 @@ public class DumbComputerPlayer extends GameComputerPlayer {
 
     //dumb ai only does 1 random action
     protected void receiveInfo(GameInfo info){
-        //message gets the state from LocalGame and decides what move it's making; needs to call game.sendAction at some point
         if(info instanceof FiGameState) {
             FiGameState gameState = (FiGameState) info;
             FiGameState.TileName t;
@@ -42,19 +42,14 @@ public class DumbComputerPlayer extends GameComputerPlayer {
                 else if(randomNum == 3){//captures a treasure if they are able to
                     game.sendAction(new FiCaptureTreasureAction(this));
                 }
-                else{//sets player chosen to the player whose turn is next
-                    if(this.playerNum++ >= gameState.numPlayers){
-                        gameState.setPlayerChosen(0);
-                    }
-                    else{
-                        gameState.setPlayerChosen(this.playerNum++);
+                else{//gives a card to the next player
+                    if(this.playerNum++ <= gameState.getNumPlayers()){//sets player chosen to the player whose turn is next
+                        playerChosen++;
                     }
 
-                    //getting the first card in the dumb ai's hand
-                    FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(gameState.getPlayerTurn()).get(0);
-
-                    //gives the first card in the dumb ai's hand to the player whose turn it is next
-                    game.sendAction(new FiGiveCardAction(this, gameState.getPlayerChosen(), tc));
+                    if(playerChosen != playerNum){//if the chosen player isn't themself
+                        game.sendAction(new FiGiveCardAction(this, playerChosen, 0));
+                    }
                 }
             }
         }

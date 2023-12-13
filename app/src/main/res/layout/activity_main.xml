@@ -27,37 +27,6 @@
                 android:textSize="6sp" />
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Give Card to:"
-                android:textSize="12sp" />
-
-            <Button
-                android:id="@+id/giveCardToP1"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Player 1"
-                android:textColor="#000000"
-                android:textSize="8sp" />
-
-            <Button
-                android:id="@+id/giveCardToP2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Player 2"
-                android:textColor="#000000"
-                android:textSize="8sp" />
-
-            <Button
-                android:id="@+id/giveCardToP3"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Player 3"
-                android:textColor="#000000"
-                android:textSize="8sp" />
-
-            <TextView
                 android:id="@+id/floodView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -623,6 +592,7 @@
                         android:contentDescription="NULL"
                         android:src="@android:drawable/btn_star" />
                 </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -676,16 +646,6 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/giveCardButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#6E9FB5"
-                        android:text="Give Card"
-                        android:textColor="#000000"
-                        android:textSize="6sp" />
-
-                    <Button
                         android:id="@+id/captureTreasureButton"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -695,6 +655,39 @@
                         android:textColor="#000000"
                         android:textSize="5sp" />
 
+                    <Button
+                        android:id="@+id/giveCardToP1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Give Card to P1"
+                        android:textColor="#000000"
+                        android:textSize="6sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/giveCardToP3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Give Card to P3"
+                        android:textColor="#000000"
+                        android:textSize="6sp" />
+
+                    <Button
+                        android:id="@+id/giveCardToP2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Give Card to P2"
+                        android:textColor="#000000"
+                        android:textSize="6sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -720,27 +713,6 @@
                         android:text="Skip Turn"
                         android:textColor="#000000"
                         android:textSize="6sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
 
                 </LinearLayout>
 

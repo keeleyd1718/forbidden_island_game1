@@ -35,8 +35,10 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button discardButton = null;
     private Button moveButton = null;
     private Button shoreUpButton = null;
-    private Button giveCardButton = null;
     private Button captureTreasureButton = null;
+    private Button giveCardToP1Button = null;
+    private Button giveCardToP2Button = null;
+    private Button giveCardToP3Button = null;
     private Button FOOLS_LANDING_B = null;
     private Button BRONZE_GATE_B = null;
     private Button GOLD_GATE_B = null;
@@ -62,11 +64,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private Button BREAKERS_BRIDGE_B = null;
     private Button HOWLING_GARDEN_B = null;
 
-    //buttons to use for the give card action
-    private Button giveCardToP1 = null;
-    private Button giveCardToP2 = null;
-    private Button giveCardToP3 = null;
-
     private ImageButton[] player1Cards = new ImageButton[6];//image buttons for the player's hand
     private ImageButton[] player2Cards = new ImageButton[6];//image buttons for the dumb ai's hand
     private ImageButton[] player3Cards = new ImageButton[6];//image buttons for the smart ai's hand
@@ -76,10 +73,10 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     private boolean moveButtonClicked = false;
     private boolean shoreUpButtonClicked = false;
     private boolean discardButtonClicked = false;
-    private boolean giveCardButtonClicked = false;
-
-    //to keep track of which of the player's cards was pressed
-    private int playerCardsClicked;
+    private boolean giveCardToP1Clicked = false;
+    private boolean giveCardToP2Clicked = false;
+    private boolean giveCardToP3Clicked = false;
+    private int playerChosen = 0;
 
     /**
      * constructor
@@ -122,7 +119,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             OBSERVATORY_B.setText("OBSERVATORY" + System.getProperty("line.separator") + "player 3");
 
             //set the image buttons to display what cards are in player 1, 2 and 3's hands
-            for(int i = 0; i < gameState.numPlayers; i++){//loop to go through each player; i is for player's turn
+            for(int i = 0; i < gameState.getNumPlayers(); i++){//loop to go through each player; i is for player's turn
                 for(int j = 0; j < gameState.getPlayerTurnHand(i).size(); j++){//loop to go through the cards in the player's hand; j is for the card
                     FiGameState.TreasureCards tc = gameState.getPlayerTurnHand(i).get(j);
 
@@ -223,19 +220,31 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             shoreUpButtonClicked = true;
             return;
         }
-        else if(view.getId() == R.id.giveCardButton){
-            giveCardButtonClicked = true;
+        else if(view.getId() == R.id.giveCardToP2){
+            giveCardToP2Clicked = true;
+            return;
+        }
+        else if(view.getId() == R.id.giveCardToP3){
+            giveCardToP3Clicked = true;
             return;
         }
         else if(view.getId() == R.id.captureTreasureButton){
             game.sendAction(new FiCaptureTreasureAction(this));
         }
 
-        //to know what tile they pressed for the move and shore up methods
-        FiGameState.TileName selection = buttonMap.get(view);
+        //when the player presses the discard button or one of the give card buttons
+        if(discardButtonClicked || giveCardToP2Clicked || giveCardToP3Clicked) {
 
-        //when the player presses the discard button
-        if(discardButtonClicked) {
+            if(giveCardToP2Clicked){
+                playerChosen = 1;//setting the player they chose to give a card to, to player 2
+            }
+            else if(giveCardToP3Clicked){
+                playerChosen = 2;//setting the player they chose to give a card to, to player 3
+            }
+
+            //to keep track of which of the player's cards was pressed
+            int playerCardsClicked = 6;
+
             if(view.getId() == R.id.player1Card1) {
                 playerCardsClicked = 0;
             }
@@ -255,87 +264,34 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 playerCardsClicked = 5;
             }
 
-            String msg = "Please choose a card to discard";
-            MessageBox.popUpMessage(msg, myActivity);
+            if(playerCardsClicked < 6){//if the card they clicked was a valid card
+                if(giveCardToP2Clicked && playerChosen != 0){
+                    giveCardToP2Clicked = false;
+                    game.sendAction(new FiGiveCardAction(this, playerChosen, playerCardsClicked));
+                }
+                else if(giveCardToP3Clicked && playerChosen != 0){
+                    giveCardToP3Clicked = false;
+                    game.sendAction(new FiGiveCardAction(this, playerChosen, playerCardsClicked));
+                }
+                else if(discardButtonClicked){
+                    discardButtonClicked = false;
+                    game.sendAction(new FiDiscardAction(this, playerCardsClicked));//send the index of the card the player clicked
+                }
 
-            //go through the playerCardsClicked array to see what card the player pressed and send the discard action with the card in that place
-            if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_helicopter_lift)) {
-                game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.HELICOPTER_LIFT1));
-            }
-            else if (player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_sandbag)) {
-                game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.SANDBAG1));
-            }
-            else if (player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_earth_stone)) {
-                game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.EARTH_STONE1));
-            }
-            else if (player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_fire_crystal)) {
-                game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.FIRE_CRYSTAL1));
-            }
-            else if (player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_wind_statue)) {
-                game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.WIND_STATUE1));
-            }
-            else if (player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_ocean_chalice)) {
-                game.sendAction(new FiDiscardAction(this, FiGameState.TreasureCards.OCEAN_CHALICE1));
-            }
-            discardButtonClicked = false;
-            playerCardsClicked = 1;
-        }
-        else if(giveCardButtonClicked) {//when the player presses the give card button
-            if(view.getId() == R.id.giveCardToP1){
-                FiGameState.playerChosen = 0;
-            }
-            else if(view.getId() == R.id.giveCardToP2){
-                FiGameState.playerChosen = 1;
-            }
-            else if(view.getId() == R.id.giveCardToP3){
-                FiGameState.playerChosen = 2;
-            }
-            if (view.getId() == R.id.player1Card1) {
-                playerCardsClicked = 0;
-            }
-            else if (view.getId() == R.id.player1Card2) {
-                playerCardsClicked = 1;
-            }
-            else if (view.getId() == R.id.player1Card3) {
-                playerCardsClicked = 2;
-            }
-            else if (view.getId() == R.id.player1Card4) {
-                playerCardsClicked = 3;
-            }
-            else if (view.getId() == R.id.player1Card5) {
-                playerCardsClicked = 4;
-            }
-            else if (view.getId() == R.id.player1Card6) {
-                playerCardsClicked = 5;
             }
 
-            //go through the playerCardsClicked array to see what card the player pressed and send the giveCard action with the card in that place
-            if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_helicopter_lift)){
-                game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.HELICOPTER_LIFT1));
-            }
-            else if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_sandbag)){
-                game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.SANDBAG1));
-            }
-            else if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_earth_stone)){
-                game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.EARTH_STONE1));
-            }
-            else if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_fire_crystal)){
-                game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.FIRE_CRYSTAL1));
-            }
-            else if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_wind_statue)){
-                game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.WIND_STATUE1));
-            }
-            else if(player1Cards[playerCardsClicked].getBackground().equals(R.drawable.tc_ocean_chalice)){
-                game.sendAction(new FiGiveCardAction(this, FiGameState.playerChosen, FiGameState.TreasureCards.OCEAN_CHALICE1));
-            }
-            giveCardButtonClicked = false;
-            playerCardsClicked = 1;
+            //String msg = "Please choose a card to discard";
+            //MessageBox.popUpMessage(msg, myActivity);
         }
         else if(moveButtonClicked){
+            //to know what tile they pressed
+            FiGameState.TileName selection = buttonMap.get(view);
             moveButtonClicked = false;
             game.sendAction(new FiMoveAction(this, selection));
         }
         else if(shoreUpButtonClicked){
+            //to know what tile they pressed
+            FiGameState.TileName selection = buttonMap.get(view);
             shoreUpButtonClicked = false;
             game.sendAction(new FiShoreUpAction(this, selection));
         }
@@ -356,11 +312,10 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         this.discardButton = activity.findViewById(R.id.discard);
         this.moveButton = activity.findViewById(R.id.moveButton);
         this.shoreUpButton = activity.findViewById(R.id.shoreUpButton);
-        this.giveCardButton = activity.findViewById(R.id.giveCardButton);
         this.captureTreasureButton = activity.findViewById(R.id.captureTreasureButton);
-        this.giveCardToP1 = activity.findViewById(R.id.giveCardToP1);
-        this.giveCardToP2 = activity.findViewById(R.id.giveCardToP2);
-        this.giveCardToP3 = activity.findViewById(R.id.giveCardToP3);
+        this.giveCardToP1Button = activity.findViewById(R.id.giveCardToP1);
+        this.giveCardToP2Button = activity.findViewById(R.id.giveCardToP2);
+        this.giveCardToP3Button = activity.findViewById(R.id.giveCardToP3);
 
         //initializing tile buttons and putting them into the buttonMap HashMap
         this.FOOLS_LANDING_B = activity.findViewById(R.id.FOOLS_LANDING);
@@ -444,18 +399,17 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         skipTurnButton.setOnClickListener(this);
         moveButton.setOnClickListener(this);
         shoreUpButton.setOnClickListener(this);
-        giveCardButton.setOnClickListener(this);
         discardButton.setOnClickListener(this);
         captureTreasureButton.setOnClickListener(this);
-        giveCardToP1.setOnClickListener(this);
-        giveCardToP2.setOnClickListener(this);
-        giveCardToP3.setOnClickListener(this);
+        giveCardToP2Button.setOnClickListener(this);
+        giveCardToP3Button.setOnClickListener(this);
         player1Cards[0].setOnClickListener(this);
         player1Cards[1].setOnClickListener(this);
         player1Cards[2].setOnClickListener(this);
         player1Cards[3].setOnClickListener(this);
         player1Cards[4].setOnClickListener(this);
         player1Cards[5].setOnClickListener(this);
+        //the other player cards and giveCardToP1 shouldn't be pressed by the human player so they don't need to set the onClickListener
 
         //call the onClickListener when tile buttons are clicked
         FOOLS_LANDING_B.setOnClickListener(this);
