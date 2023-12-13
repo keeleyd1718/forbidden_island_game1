@@ -429,7 +429,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player1Card2"
@@ -437,7 +438,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player1Card3"
@@ -445,7 +447,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player1Card4"
@@ -453,7 +456,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player1Card5"
@@ -461,7 +465,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player1Card6"
@@ -469,7 +474,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                 </LinearLayout>
 
@@ -490,7 +496,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player2Card2"
@@ -498,7 +505,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player2Card3"
@@ -506,7 +514,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player2Card4"
@@ -514,7 +523,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player2Card5"
@@ -522,7 +532,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player2Card6"
@@ -530,7 +541,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
                 </LinearLayout>
 
                 <TextView
@@ -550,7 +562,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player3Card2"
@@ -558,7 +571,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player3Card3"
@@ -566,7 +580,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player3Card4"
@@ -574,7 +589,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player3Card5"
@@ -582,7 +598,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
 
                     <ImageButton
                         android:id="@+id/player3Card6"
@@ -590,7 +607,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="NULL"
-                        android:src="@android:drawable/btn_star" />
+                        android:src="@android:drawable/btn_star"
+                        android:tag="false" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -660,6 +678,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:background="#6E9FB5"
                         android:text="Give Card to P1"
                         android:textColor="#000000"
                         android:textSize="6sp" />
@@ -676,6 +695,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:background="#6E9FB5"
                         android:text="Give Card to P3"
                         android:textColor="#000000"
                         android:textSize="6sp" />
@@ -685,6 +705,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:background="#6E9FB5"
                         android:text="Give Card to P2"
                         android:textColor="#000000"
                         android:textSize="6sp" />
@@ -700,6 +721,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="#6E9FB5"
                         android:text="Discard"
                         android:textColor="#000000"
                         android:textSize="6sp"
@@ -710,6 +732,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="#6E9FB5"
                         android:text="Skip Turn"
                         android:textColor="#000000"
                         android:textSize="6sp" />

@@ -104,7 +104,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         else{
             return player3Cards;
         }
-    }
+    }//end of setPlayerCards
 
     //our view in the model/view/controller sense; in charge of the user interface
     public void receiveInfo(GameInfo info){
@@ -125,21 +125,27 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
                     if(tc.equals(FiGameState.TreasureCards.SANDBAG1) || tc.equals(FiGameState.TreasureCards.SANDBAG2)){
                         setPlayerCards(i)[j].setImageResource(R.drawable.tc_sandbag);
+                        setPlayerCards(i)[j].setTag(true);
                     }
                     else if(gameState.getHelicopterLiftCards().contains(tc)){
                         setPlayerCards(i)[j].setImageResource(R.drawable.tc_helicopter_lift);
+                        setPlayerCards(i)[j].setTag(true);
                     }
                     else if(gameState.getEarthStoneTreasureCards().contains(tc)){
                         setPlayerCards(i)[j].setImageResource(R.drawable.tc_earth_stone);
+                        setPlayerCards(i)[j].setTag(true);
                     }
                     else if(gameState.getWindStatueTreasureCards().contains(tc)){
                         setPlayerCards(i)[j].setImageResource(R.drawable.tc_wind_statue);
+                        setPlayerCards(i)[j].setTag(true);
                     }
                     else if(gameState.getFireCrystalTreasureCards().contains(tc)){
                         setPlayerCards(i)[j].setImageResource(R.drawable.tc_fire_crystal);
+                        setPlayerCards(i)[j].setTag(true);
                     }
                     else if(gameState.getOceanChaliceTreasureCards().contains(tc)){
                         setPlayerCards(i)[j].setImageResource(R.drawable.tc_ocean_chalice);
+                        setPlayerCards(i)[j].setTag(true);
                     }
                 }
             }
@@ -245,22 +251,22 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             //to keep track of which of the player's cards was pressed
             int playerCardsClicked = 6;
 
-            if(view.getId() == R.id.player1Card1) {
+            if(view.getId() == R.id.player1Card1 && (Boolean)player1Cards[0].getTag()){
                 playerCardsClicked = 0;
             }
-            else if (view.getId() == R.id.player1Card2) {
+            else if (view.getId() == R.id.player1Card2 && (Boolean)player1Cards[1].getTag()) {
                 playerCardsClicked = 1;
             }
-            else if (view.getId() == R.id.player1Card3) {
+            else if (view.getId() == R.id.player1Card3 && (Boolean)player1Cards[2].getTag()) {
                 playerCardsClicked = 2;
             }
-            else if (view.getId() == R.id.player1Card4) {
+            else if (view.getId() == R.id.player1Card4 && (Boolean)player1Cards[3].getTag()) {
                 playerCardsClicked = 3;
             }
-            else if (view.getId() == R.id.player1Card5) {
+            else if (view.getId() == R.id.player1Card5 && (Boolean)player1Cards[4].getTag()) {
                 playerCardsClicked = 4;
             }
-            else if (view.getId() == R.id.player1Card6) {
+            else if (view.getId() == R.id.player1Card6 && (Boolean)player1Cards[5].getTag()) {
                 playerCardsClicked = 5;
             }
 
