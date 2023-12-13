@@ -176,10 +176,19 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                     playerLocation = entry.getKey();//...store the corresponding key in the button playerLocation
                 }
             }
-            if(playerLocation != null){
+            if(playerLocation != null) {
                 playerLocation.setTextSize(6);
                 playerLocation.setText(tileLocation + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn());
             }
+
+            /*//go through the buttonMap HashMap and check all the other tiles to erase where the player used to be
+            for(Map.Entry<Button, FiGameState.TileName> entry : buttonMap.entrySet()){
+                while(entry.getKey() != playerLocation){//not including the tile they are moving to
+                    if(entry.getKey().getText().equals(entry.getValue() + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn()) ){
+                        entry.getKey().setText(entry.getValue() + System.getProperty("line.separator"));
+                    }
+                }
+            }*/
 
             //coloring the tiles the color of their value in the hashmap (normal = green, flooded = blue, sunk = gray)
             for(Button c : buttonMap.keySet()){

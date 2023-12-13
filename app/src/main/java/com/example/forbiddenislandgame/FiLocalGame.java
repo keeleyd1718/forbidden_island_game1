@@ -46,6 +46,7 @@ public class FiLocalGame extends LocalGame {
         //sends the GameState to a player. this is needed so the player can make a move
         p.sendInfo(new FiGameState((gs)));
     }
+
     protected boolean canMove(int playerIdx){
         //return true if the player can make a move
         if(gs instanceof FiGameState){
@@ -53,6 +54,7 @@ public class FiLocalGame extends LocalGame {
         }
         return false;
     }
+
     protected boolean makeMove(GameAction action){
         Log.e("zzz makeMove", "received move!");
 
