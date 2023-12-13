@@ -1,6 +1,7 @@
 package com.example.forbiddenislandgame;
 
 import com.example.actions.FiCaptureTreasureAction;
+import com.example.actions.FiDiscardAction;
 import com.example.actions.FiEndTurnAction;
 import com.example.actions.FiGiveCardAction;
 import com.example.actions.FiMoveAction;
@@ -28,27 +29,30 @@ public class DumbComputerPlayer extends GameComputerPlayer {
             FiGameState.TileName t;
 
             if(this.playerNum == gameState.getPlayerTurn()){//checking if it is dumb ai's turn
-                int randomNum = (int) (Math.random() * 4);//generate a random number 1-4
+                int randomNum = (int) Math.random()*2;//generate a random number 0-1
 
-                if(randomNum == 1){//moves the dumb ai to a random tile
-                    //gets a random tile to move to from the enum list
-                    t = FiGameState.TileName.values()[new Random().nextInt(FiGameState.TileName.values().length)];
-                    game.sendAction(new FiMoveAction(this, t));
-                }
-                else if(randomNum == 2){//shores up the tile they are on if it's possible
-                    t = gameState.getPlayerLocation(gameState.getPlayerTurn());
-                    game.sendAction(new FiShoreUpAction(this, t));
-                }
-                else if(randomNum == 3){//captures a treasure if they are able to
+                //gets a random tile to move to from the enum list
+                t = FiGameState.TileName.values()[new Random().nextInt(FiGameState.TileName.values().length)];
+                game.sendAction(new FiMoveAction(this, t));
+
+                //captures treasure if able to
+                if(gameState.getEarthStoneTreasureCards().size() <= 4 || gameState.getOceanChaliceTreasureCards().size() <= 4 || gameState.getWindStatueTreasureCards().size() <=4 || gameState.getFireCrystalTreasureCards().size() <= 4){
                     game.sendAction(new FiCaptureTreasureAction(this));
                 }
-                else{//gives a card to the next player
-                    if(this.playerNum++ <= gameState.getNumPlayers()){//sets player chosen to the player whose turn is next
-                        playerChosen++;
-                    }
 
-                    if(playerChosen != playerNum){//if the chosen player isn't themself
-                        game.sendAction(new FiGiveCardAction(this, playerChosen, 0));
+                //if too many cards, will discard or give a card at random
+                if(gameState.getPlayerHand(gameState.getPlayerTurn()).size() >= 5){//gives a card to the next player
+                    if(randomNum == 0) {
+                        if (this.playerNum++ <= gameState.getNumPlayers()) {//sets player chosen to the player whose turn is next
+                            playerChosen++;
+                        }
+
+                        if (playerChosen != playerNum) {//if the chosen player isn't themself
+                            game.sendAction(new FiGiveCardAction(this, playerChosen, 0));
+                        }
+                    }
+                    if(randomNum == 1){
+                        game.sendAction(new FiDiscardAction(this, 0));
                     }
                 }
             }
