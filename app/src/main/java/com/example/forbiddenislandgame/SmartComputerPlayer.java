@@ -39,10 +39,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                         //else move to fools landing tile
                         game.sendAction(new FiMoveAction(this, FiGameState.TileName.FOOLS_LANDING));
                     }
-                    else if(gameState.map.get(gameState.getPlayerLocation(gameState.getPlayerTurn())).equals(FiGameState.Value.FLOODED)) {//if the tile the player is on is flooded shore it up
-                        game.sendAction(new FiShoreUpAction(this, gameState.getPlayerLocation(gameState.getPlayerTurn())));
-                    }
-                    else if(gameState.numWindStatueCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 treasure cards
+                    else if(gameState.numWindStatueCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 wind statue treasure cards
                         if(gameState.isOnCorrectWSTile()){//and they are on the correct tile
                             game.sendAction(new FiCaptureTreasureAction(this));//capture the treasure
                         }
@@ -50,7 +47,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                         //if they are not on the correct tile move to a correct tile
                         game.sendAction(new FiMoveAction(this, FiGameState.TileName.HOWLING_GARDEN));
                     }
-                    else if(gameState.numOceanChaliceCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 treasure cards
+                    else if(gameState.numOceanChaliceCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 ocean chalice treasure cards
                         if(gameState.isOnCorrectOCTile()){//and they are on the correct tile
                             game.sendAction(new FiCaptureTreasureAction(this));//capture the treasure
                         }
@@ -58,7 +55,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                         //if they are not on the correct tile move to a correct tile
                         game.sendAction(new FiMoveAction(this, FiGameState.TileName.CORAL_PALACE));
                     }
-                    else if(gameState.numFireCrystalCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 treasure cards
+                    else if(gameState.numFireCrystalCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 fire crystal treasure cards
                         if(gameState.isOnCorrectFCTile()){//and they are on the correct tile
                             game.sendAction(new FiCaptureTreasureAction(this));//capture the treasure
                         }
@@ -66,7 +63,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                         //if they are not on the correct tile move to a correct tile
                         game.sendAction(new FiMoveAction(this, FiGameState.TileName.EMBER_CAVE));
                     }
-                    else if(gameState.numEarthStoneCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 treasure cards
+                    else if(gameState.numEarthStoneCardsInHand[gameState.getPlayerTurn()] >= 4){//if the smart ai has 4 earth stone treasure cards
                         if(gameState.isOnCorrectESTile()){//and they are on the correct tile
                             game.sendAction(new FiCaptureTreasureAction(this));//capture the treasure
                         }
@@ -91,6 +88,25 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                                     }
                                 }
                             }
+                        }
+
+                        if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.FLOODED)) {//if fool's landing is flooded shore it up
+                            game.sendAction(new FiShoreUpAction(this, FiGameState.TileName.FOOLS_LANDING));
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.HOWLING_GARDEN).equals(FiGameState.Value.FLOODED)) {//if wind statue treasure tile is flooded shore it up
+                            game.sendAction(new FiShoreUpAction(this, FiGameState.TileName.HOWLING_GARDEN));
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.CORAL_PALACE).equals(FiGameState.Value.FLOODED)) {//if the ocean chalice treasure tile is flooded shore it up
+                            game.sendAction(new FiShoreUpAction(this, FiGameState.TileName.CORAL_PALACE));
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.EMBER_CAVE).equals(FiGameState.Value.FLOODED)) {//if fire crystal treasure tile is flooded shore it up
+                            game.sendAction(new FiShoreUpAction(this, FiGameState.TileName.EMBER_CAVE));
+                        }
+                        else if(gameState.map.get(FiGameState.TileName.MOON_TEMPLE).equals(FiGameState.Value.FLOODED)) {//if earth stone treasure tile is flooded shore it up
+                            game.sendAction(new FiShoreUpAction(this, FiGameState.TileName.MOON_TEMPLE));
+                        }
+                        else if(gameState.map.get(gameState.getPlayerLocation(gameState.getPlayerTurn())).equals(FiGameState.Value.FLOODED)) {//if the tile the player is on is flooded shore it up
+                            game.sendAction(new FiShoreUpAction(this, gameState.getPlayerLocation(gameState.getPlayerTurn())));
                         }
 
                         //move to a random tile
