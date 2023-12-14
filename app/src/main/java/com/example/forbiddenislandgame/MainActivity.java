@@ -1,9 +1,5 @@
 package com.example.forbiddenislandgame;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import com.example.game.GameFramework.GameMainActivity;
 import com.example.game.GameFramework.LocalGame;
 import com.example.game.GameFramework.gameConfiguration.GameConfig;

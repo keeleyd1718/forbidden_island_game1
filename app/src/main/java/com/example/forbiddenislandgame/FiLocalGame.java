@@ -1,7 +1,5 @@
 package com.example.forbiddenislandgame;
 
-import android.util.Log;
-
 import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDiscardAction;
 import com.example.actions.FiEndTurnAction;

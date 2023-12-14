@@ -1,12 +1,5 @@
 package com.example.forbiddenislandgame;
 
-import android.graphics.Color;
-import android.widget.Button;
-
-import com.example.actions.FiCaptureTreasureAction;
-import com.example.actions.FiDiscardAction;
-import com.example.actions.FiEndTurnAction;
-import com.example.actions.FiMoveAction;
 import com.example.game.GameFramework.infoMessage.GameState;
 
 import java.util.ArrayList;
