@@ -18,6 +18,8 @@ import java.util.Map;
     Tags
     @author - Keeley Dockter
     @author - De'Ante Agleham
+    @author - Olivia Sendelbach
+    @author - Elias Marcelin
 
     A lot of help from Dr. Libby and Dr. Tribelhorn
  */
