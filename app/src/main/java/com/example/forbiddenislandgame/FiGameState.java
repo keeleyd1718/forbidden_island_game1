@@ -1,5 +1,8 @@
 package com.example.forbiddenislandgame;
 
+import android.graphics.Color;
+import android.widget.Button;
+
 import com.example.actions.FiCaptureTreasureAction;
 import com.example.actions.FiDiscardAction;
 import com.example.actions.FiEndTurnAction;
@@ -598,7 +601,9 @@ public class FiGameState extends GameState {
 
         //deals flood cards up to the number on the flood meter to the drawnFloodDeck
         for(int i = 0; i < floodMeter; i++) {
-            a.add(floodDeck.remove(i));//remove a card from the floodDeck and add it to the drawnFloodCards array which should be passed in
+            if(floodDeck.size() > 0){
+                a.add(floodDeck.remove(i));//remove a card from the floodDeck and add it to the drawnFloodCards array which should be passed in
+            }
         }
 
         goThroughDrawnFloodCards();//change the value of the tile to match the drawn flood cards
@@ -732,7 +737,6 @@ public class FiGameState extends GameState {
         }
     }//end of areTreasuresCaptured
 
-
     TileName locationToCheck = getPlayerLocation(getPlayerTurn());
     public boolean isOnCorrectWSTile(){//method to check if smart ai is on one of the correct tiles to capture a treasure
         if(locationToCheck.equals(FiGameState.TileName.WHISPERING_GARDENS) || locationToCheck.equals(FiGameState.TileName.HOWLING_GARDEN)){
@@ -767,8 +771,27 @@ public class FiGameState extends GameState {
         }
     }//end of isOnCorrectESTile
 
+    public boolean areAllTilesSunk(){
+        int count = 0;//keep track of how many tiles are sunk
+
+        //go through the Tiles and count how many tiles have the value: sunk
+        TileName values[] = TileName.values();
+        for(TileName value: values){
+            if(map.get(value).equals(Value.SUNK)){
+                count++;
+            }
+        }
+
+        if(count == 24){//if all the tiles have sunk
+            return true;
+        }
+        else{
+            return false;
+        }
+    }//end of areAllTilesSunk
+
     public String isGameLost(){//method to check possible ways the game could be lost
-        if (map.get(TileName.FOOLS_LANDING).equals(Value.SUNK)) {
+        if(map.get(TileName.FOOLS_LANDING).equals(Value.SUNK)) {
             return "Game Over! You lost because Fools Landing sunk!";
         }
         else if(map.get(TileName.CORAL_PALACE).equals(Value.SUNK) && map.get(TileName.TIDAL_PALACE).equals(Value.SUNK) && !isCapturedOceanChalice){
@@ -782,6 +805,9 @@ public class FiGameState extends GameState {
         }
         else if (map.get(TileName.MOON_TEMPLE).equals(Value.SUNK) && map.get(TileName.SUN_TEMPLE).equals(Value.SUNK) && !isCapturedWindStatue){
             return "Game Over! You lost because your Wind Statue tiles sunk before you collected the treasure!";
+        }
+        else if(areAllTilesSunk()){
+            return "Game Over! You lost because all the tiles sunk before you collected the treasures!";
         }
         return null;
     }//end of isGameLost

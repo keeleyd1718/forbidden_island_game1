@@ -60,8 +60,6 @@ public class FiLocalGame extends LocalGame {
 
         //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
         if(canMove(getPlayerIdx(action.getPlayer()))) {
-            checkIfGameOver();
-
             if(gs.getPlayerHand(gs.getPlayerTurn()).size() < 5){
                 gs.drawTreasure(gs.getPlayerHand(gs.getPlayerTurn()));//always start the player's turn by drawing treasure cards
             }
