@@ -228,7 +228,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
         else if(t.equals(FiGameState.TileName.HOWLING_GARDEN) || t.equals(FiGameState.TileName.WHISPERING_GARDENS)) {
             return "Wind Statue Treasure";
         }
-        return "";
+        else{
+            return "";
+        }
     }//end of treasureTiles
 
     @Override
