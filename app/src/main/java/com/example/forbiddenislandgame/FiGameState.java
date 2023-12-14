@@ -17,6 +17,8 @@ import java.util.Map;
 /*
     Tags
     @author - Keeley Dockter
+    @author - Elias Marcelin
+    @author - Olivia Sendelbach
 
     A lot of help from Dr. Libby and Dr. Tribelhorn
  */

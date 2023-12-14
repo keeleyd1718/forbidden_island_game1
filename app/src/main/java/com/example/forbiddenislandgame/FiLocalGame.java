@@ -16,6 +16,7 @@ import com.example.game.GameFramework.players.GamePlayer;
 /*
     Tags
     @author - Keeley Dockter
+    @author - Olivia Sendelbach
 
     A lot of help from Dr. Libby and Dr. Tribelhorn
  */
