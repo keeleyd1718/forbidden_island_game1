@@ -264,10 +264,8 @@ public class FiGameState extends GameState {
 
     /** Copy Constructor */
     public FiGameState(FiGameState other){
-        this.treasureDeck = new ArrayList<>();
-        for(TreasureCards card : other.treasureDeck){
-            treasureDeck.add(card);
-        }
+        this.treasureDeck = other.treasureDeck;
+        Collections.copy(treasureDeck, other.treasureDeck);
         this.discardTreasureDeck = other.discardTreasureDeck;
         Collections.copy(discardTreasureDeck, other.discardTreasureDeck);
         this.floodDeck = other.floodDeck;
