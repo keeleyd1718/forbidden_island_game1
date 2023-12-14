@@ -274,21 +274,13 @@ public class FiGameState extends GameState {
     /** Copy Constructor */
     public FiGameState(FiGameState other){
         this.treasureDeck = other.treasureDeck;
-        //Collections.copy(treasureDeck, other.treasureDeck);
         this.discardTreasureDeck = other.discardTreasureDeck;
-        //Collections.copy(discardTreasureDeck, other.discardTreasureDeck);
         this.floodDeck = other.floodDeck;
-        //Collections.copy(floodDeck, other.floodDeck);
         this.drawnFloodCards= other.drawnFloodCards;
-        //Collections.copy(drawnFloodCards, other.drawnFloodCards);
         this.discardFloodDeck = other.discardFloodDeck;
-        //Collections.copy(discardFloodDeck, other.discardFloodDeck);
         this.humanPlayerHand = other.humanPlayerHand;
-        //Collections.copy(humanPlayerHand, other.humanPlayerHand);
         this.dumbAiHand = other.dumbAiHand;
-        //Collections.copy(dumbAiHand, other.dumbAiHand);
         this.smartAiHand = other.smartAiHand;
-        //Collections.copy(smartAiHand, other.smartAiHand);
         this.numPlayers = other.numPlayers;
         this.playerTurn = other.playerTurn;
         this.floodMeter = other.floodMeter;
@@ -298,25 +290,15 @@ public class FiGameState extends GameState {
         this.isCapturedOceanChalice = other.isCapturedOceanChalice;
         this.isCapturedWindStatue = other.isCapturedWindStatue;
         this.numEarthStoneCardsInHand = other.numEarthStoneCardsInHand;
-        //
         this.numFireCrystalCardsInHand = other.numFireCrystalCardsInHand;
-        //
         this.numOceanChaliceCardsInHand = other.numOceanChaliceCardsInHand;
-        //
         this.numWindStatueCardsInHand = other.numWindStatueCardsInHand;
-        //
         this.numHelicopterLiftCardsInHand = other.numHelicopterLiftCardsInHand;
-        //
         this.earthStoneTreasureCards = other.earthStoneTreasureCards;
-        //Collections.copy(earthStoneTreasureCards, other.earthStoneTreasureCards);
         this.fireCrystalTreasureCards = other.fireCrystalTreasureCards;
-        //Collections.copy(fireCrystalTreasureCards, other.fireCrystalTreasureCards);
         this.oceanChaliceTreasureCards = other.oceanChaliceTreasureCards;
-        //Collections.copy(oceanChaliceTreasureCards, other.oceanChaliceTreasureCards);
         this.windStatueTreasureCards = other.windStatueTreasureCards;
-        //Collections.copy(windStatueTreasureCards, other.windStatueTreasureCards);
         this.helicopterLiftCards = other.helicopterLiftCards;
-        //Collections.copy(helicopterLiftCards, other.helicopterLiftCards);
         this.player1Location = other.player1Location;
         this.player2Location = other.player2Location;
         this.player3Location = other.player3Location;
@@ -370,10 +352,7 @@ public class FiGameState extends GameState {
                 " Player 3's Location = "+player3Location+ result;
     }
 
-    //action methods
-    //should all have boolean return value; false if illegal move for the current game state
-    //modify the game state to reflect a given player has taken that action
-    //each method should require that the player id of the player who is taking that action be passed in as the first parameter, might need other parameters
+    //action methods that should modify the game state to reflect a given player has taken that action
 
     public boolean move(int playerId, TileName t){//takes tile to move to and player whose turn it is
         if(actionsRemaining < 1){
@@ -404,8 +383,7 @@ public class FiGameState extends GameState {
     }//end of move
 
 
-
-    //A player can flip over any of the 4 adjacent tiles or the tile they are on if it has been flipped to flooded previously
+    //A player can flip over a tile if it has been flipped to flooded previously
     public boolean shoreUp(int playerId, TileName t) {//
         if(actionsRemaining < 1){
             return false;
