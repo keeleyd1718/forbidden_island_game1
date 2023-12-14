@@ -21,7 +21,6 @@ import com.example.game.GameFramework.utilities.MessageBox;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener {
     private int layoutId;
@@ -178,13 +177,13 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             }
             if(playerLocation != null) {
                 playerLocation.setTextSize(6);
-                playerLocation.setText(tileLocation + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn());
+                playerLocation.setText(tileLocation + System.getProperty("line.separator") + treasureTiles(tileLocation) + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn());
             }
 
             //go through the buttonMap HashMap and check all the other tiles to erase where the players used to be
             for(Map.Entry<Button, FiGameState.TileName> entry : buttonMap.entrySet()){
                 if((entry.getValue() != gameState.getPlayerLocation(0)) && (entry.getValue() != gameState.getPlayerLocation(1)) && (entry.getValue() != gameState.getPlayerLocation(2))){
-                    entry.getKey().setText(entry.getValue() + System.getProperty("line.separator"));//reset the tile they used to be on back to normal
+                    entry.getKey().setText(entry.getValue() + System.getProperty("line.separator") + treasureTiles(entry.getValue()));//reset the tile they used to be on back to normal
                 }
             }
 
@@ -215,6 +214,22 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             Log.e("zzz receive", "other msg");
         }
     }
+
+    private String treasureTiles(FiGameState.TileName t) {//add an extra line to the treasure tiles so the player's know which tiles they are
+        if(t.equals(FiGameState.TileName.CORAL_PALACE) || t.equals(FiGameState.TileName.TIDAL_PALACE)){
+            return "Ocean Chalice Treasure";
+        }
+        else if(t.equals(FiGameState.TileName.SHADOW_CAVE) || t.equals(FiGameState.TileName.EMBER_CAVE)){
+            return "Fire Crystal Treasure";
+        }
+        else if(t.equals(FiGameState.TileName.SUN_TEMPLE) || t.equals(FiGameState.TileName.MOON_TEMPLE)){
+            return "Earth Stone Treasure";
+        }
+        else if(t.equals(FiGameState.TileName.HOWLING_GARDEN) || t.equals(FiGameState.TileName.WHISPERING_GARDENS)) {
+            return "Wind Statue Treasure";
+        }
+        return "";
+    }//end of treasureTiles
 
     @Override
     public void onClick(View view) {

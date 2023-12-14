@@ -71,25 +71,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                         //if they are not on the correct tile move to a correct tile
                         game.sendAction(new FiMoveAction(this, FiGameState.TileName.MOON_TEMPLE));
                     }
-                    else{//first check if smart ai can give a card away otherwise default to move
-                        for(int i = 0; i < gameState.getNumPlayers(); i++) {//check if other players have 3 of the same card and smart ai has that card
-                            for(int j = 0; j < gameState.getPlayerHand(gameState.getPlayerTurn()).size(); j++) {
-                                FiGameState.TreasureCards card = gameState.getPlayerHand(gameState.getPlayerTurn()).get(j);
-
-                                while (i != gameState.getPlayerTurn()) {
-                                    if (gameState.numWindStatueCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){
-                                        game.sendAction(new FiGiveCardAction(this, i, j));
-                                    } else if (gameState.numFireCrystalCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){
-                                        game.sendAction(new FiGiveCardAction(this, i, j));
-                                    } else if (gameState.numEarthStoneCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){
-                                        game.sendAction(new FiGiveCardAction(this, i, j));
-                                    } else if (gameState.numOceanChaliceCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){
-                                        game.sendAction(new FiGiveCardAction(this, i, j));
-                                    }
-                                }
-                            }
-                        }
-
+                    else{//first check if smart ai can shore up important tiles, then if smart ai can give a card away otherwise default to move
                         if(gameState.map.get(FiGameState.TileName.FOOLS_LANDING).equals(FiGameState.Value.FLOODED)) {//if fool's landing is flooded shore it up
                             game.sendAction(new FiShoreUpAction(this, FiGameState.TileName.FOOLS_LANDING));
                         }
@@ -107,6 +89,24 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                         }
                         else if(gameState.map.get(gameState.getPlayerLocation(gameState.getPlayerTurn())).equals(FiGameState.Value.FLOODED)) {//if the tile the player is on is flooded shore it up
                             game.sendAction(new FiShoreUpAction(this, gameState.getPlayerLocation(gameState.getPlayerTurn())));
+                        }
+
+                        for(int i = 0; i < gameState.getNumPlayers(); i++) {//check if other players have 3 of the same card and smart ai has that card
+                            for(int j = 0; j < gameState.getPlayerHand(gameState.getPlayerTurn()).size(); j++) {
+                                FiGameState.TreasureCards card = gameState.getPlayerHand(gameState.getPlayerTurn()).get(j);
+
+                                while (i != gameState.getPlayerTurn()) {
+                                    if (gameState.numWindStatueCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){
+                                        game.sendAction(new FiGiveCardAction(this, i, j));
+                                    } else if (gameState.numFireCrystalCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){
+                                        game.sendAction(new FiGiveCardAction(this, i, j));
+                                    } else if (gameState.numEarthStoneCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){
+                                        game.sendAction(new FiGiveCardAction(this, i, j));
+                                    } else if (gameState.numOceanChaliceCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)){
+                                        game.sendAction(new FiGiveCardAction(this, i, j));
+                                    }
+                                }
+                            }
                         }
 
                         //move to a random tile
