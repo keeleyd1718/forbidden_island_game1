@@ -22,6 +22,13 @@ import com.example.game.GameFramework.utilities.MessageBox;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+    Tags
+    @author - Keeley Dockter
+
+    A lot of help from Dr. Libby and Dr. Tribelhorn
+ */
+
 public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener {
     private int layoutId;
     private GameMainActivity myActivity;

@@ -13,6 +13,12 @@ import com.example.game.GameFramework.players.GamePlayer;
 
 import java.util.ArrayList;
 
+/*
+    Tags
+    @author - Keeley Dockter
+    @author - Elias Marcelin
+ */
+
 public class MainActivity extends GameMainActivity{
     //The port number to be used IF network implementation is made
     private static final int PORT_NUMBER = 8080;

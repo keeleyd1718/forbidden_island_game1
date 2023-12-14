@@ -14,6 +14,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+    Tags
+    @author - Keeley Dockter
+
+    A lot of help from Dr. Libby and Dr. Tribelhorn
+ */
+
 public class FiGameState extends GameState {
     private ArrayList<TreasureCards> treasureDeck;//arraylist for the treasure deck
     private ArrayList<TreasureCards> discardTreasureDeck;//arraylist for the treasure deck discard pile

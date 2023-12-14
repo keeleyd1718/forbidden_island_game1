@@ -11,6 +11,12 @@ import com.example.game.GameFramework.players.GameComputerPlayer;
 
 import java.util.Random;
 
+/*
+    Tags
+    @author - Keeley Dockter
+
+ */
+
 public class DumbComputerPlayer extends GameComputerPlayer {
     private int playerChosen = 0;//defaults to player 1
     /**

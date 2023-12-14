@@ -13,6 +13,13 @@ import com.example.game.GameFramework.LocalGame;
 import com.example.game.GameFramework.actionMessage.GameAction;
 import com.example.game.GameFramework.players.GamePlayer;
 
+/*
+    Tags
+    @author - Keeley Dockter
+
+    A lot of help from Dr. Libby and Dr. Tribelhorn
+ */
+
 public class FiLocalGame extends LocalGame {
 
     FiGameState gs;
