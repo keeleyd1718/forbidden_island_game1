@@ -311,10 +311,10 @@ public class FiGameState extends GameState {
         this.player1Location = other.player1Location;
         this.player2Location = other.player2Location;
         this.player3Location = other.player3Location;
-        HashMap<TileName, Value> copy = new HashMap<>();
+        /*HashMap<TileName, Value> copy = new HashMap<>();
         for(Map.Entry<TileName, Value> entry : this.map.entrySet()){
             copy.put(entry.getKey(), entry.getValue());
-        }
+        }*/
     }
 
     /**
