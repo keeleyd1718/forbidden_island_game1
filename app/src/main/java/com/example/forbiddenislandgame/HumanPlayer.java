@@ -183,7 +183,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
             //go through the buttonMap HashMap and check all the other tiles to erase where the players used to be
             for(Map.Entry<Button, FiGameState.TileName> entry : buttonMap.entrySet()){
-                while(entry.getValue() != gameState.getPlayerLocation(0) && entry.getValue() != gameState.getPlayerLocation(1) && entry.getValue() != gameState.getPlayerLocation(2)){
+                if(entry.getValue() != gameState.getPlayerLocation(0) && entry.getValue() != gameState.getPlayerLocation(1) && entry.getValue() != gameState.getPlayerLocation(2)){
                     entry.getKey().setText(entry.getValue() + System.getProperty("line.separator"));//reset the tile they used to be on back to normal
                 }
             }

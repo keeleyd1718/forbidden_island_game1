@@ -265,35 +265,56 @@ public class FiGameState extends GameState {
     /** Copy Constructor */
     public FiGameState(FiGameState other){
         this.treasureDeck = other.treasureDeck;
+        Collections.copy(treasureDeck, other.treasureDeck);
         this.discardTreasureDeck = other.discardTreasureDeck;
+        Collections.copy(discardTreasureDeck, other.discardTreasureDeck);
         this.floodDeck = other.floodDeck;
+        Collections.copy(floodDeck, other.floodDeck);
         this.drawnFloodCards= other.drawnFloodCards;
+        Collections.copy(drawnFloodCards, other.drawnFloodCards);
         this.discardFloodDeck = other.discardFloodDeck;
+        Collections.copy(discardFloodDeck, other.discardFloodDeck);
         this.humanPlayerHand = other.humanPlayerHand;
+        Collections.copy(humanPlayerHand, other.humanPlayerHand);
         this.dumbAiHand = other.dumbAiHand;
+        Collections.copy(dumbAiHand, other.dumbAiHand);
         this.smartAiHand = other.smartAiHand;
+        Collections.copy(smartAiHand, other.smartAiHand);
         this.numPlayers = other.numPlayers;
         this.playerTurn = other.playerTurn;
         this.floodMeter = other.floodMeter;
         this.actionsRemaining = other.actionsRemaining;
-        isCapturedEarthStone = other.isCapturedEarthStone;
-        isCapturedFireCrystal = other.isCapturedFireCrystal;
-        isCapturedOceanChalice = other.isCapturedOceanChalice;
-        isCapturedWindStatue = other.isCapturedWindStatue;
-        numEarthStoneCardsInHand = other.numEarthStoneCardsInHand;
-        numFireCrystalCardsInHand = other.numFireCrystalCardsInHand;
-        numOceanChaliceCardsInHand = other.numOceanChaliceCardsInHand;
-        numWindStatueCardsInHand = other.numWindStatueCardsInHand;
-        numHelicopterLiftCardsInHand = other.numHelicopterLiftCardsInHand;
-        earthStoneTreasureCards = other.earthStoneTreasureCards;
-        fireCrystalTreasureCards = other.fireCrystalTreasureCards;
-        oceanChaliceTreasureCards = other.oceanChaliceTreasureCards;
-        windStatueTreasureCards = other.windStatueTreasureCards;
-        helicopterLiftCards = other.helicopterLiftCards;
+        this.isCapturedEarthStone = other.isCapturedEarthStone;
+        this.isCapturedFireCrystal = other.isCapturedFireCrystal;
+        this.isCapturedOceanChalice = other.isCapturedOceanChalice;
+        this.isCapturedWindStatue = other.isCapturedWindStatue;
+        this.numEarthStoneCardsInHand = other.numEarthStoneCardsInHand;
+
+        this.numFireCrystalCardsInHand = other.numFireCrystalCardsInHand;
+
+        this.numOceanChaliceCardsInHand = other.numOceanChaliceCardsInHand;
+
+        this.numWindStatueCardsInHand = other.numWindStatueCardsInHand;
+
+        this.numHelicopterLiftCardsInHand = other.numHelicopterLiftCardsInHand;
+
+        this.earthStoneTreasureCards = other.earthStoneTreasureCards;
+        Collections.copy(earthStoneTreasureCards, other.earthStoneTreasureCards);
+        this.fireCrystalTreasureCards = other.fireCrystalTreasureCards;
+        Collections.copy(fireCrystalTreasureCards, other.fireCrystalTreasureCards);
+        this.oceanChaliceTreasureCards = other.oceanChaliceTreasureCards;
+        Collections.copy(oceanChaliceTreasureCards, other.oceanChaliceTreasureCards);
+        this.windStatueTreasureCards = other.windStatueTreasureCards;
+        Collections.copy(windStatueTreasureCards, other.windStatueTreasureCards);
+        this.helicopterLiftCards = other.helicopterLiftCards;
+        Collections.copy(helicopterLiftCards, other.helicopterLiftCards);
         this.player1Location = other.player1Location;
         this.player2Location = other.player2Location;
         this.player3Location = other.player3Location;
-        this.map = other.map;
+        HashMap<TileName, Value> copy = new HashMap<>();
+        for(Map.Entry<TileName, Value> entry : this.map.entrySet()){
+            copy.put(entry.getKey(), entry.getValue());
+        }
     }
 
     /**
