@@ -182,11 +182,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             }
 
             //go through the buttonMap HashMap and check all the other tiles to erase where the players used to be
-            /*for(Map.Entry<Button, FiGameState.TileName> entry : buttonMap.entrySet()){
-                if(entry.getValue() != gameState.getPlayerLocation(0) && entry.getValue() != gameState.getPlayerLocation(1) && entry.getValue() != gameState.getPlayerLocation(2)){
+            for(Map.Entry<Button, FiGameState.TileName> entry : buttonMap.entrySet()){
+                if((entry.getValue() != gameState.getPlayerLocation(0)) && (entry.getValue() != gameState.getPlayerLocation(1)) && (entry.getValue() != gameState.getPlayerLocation(2))){
                     entry.getKey().setText(entry.getValue() + System.getProperty("line.separator"));//reset the tile they used to be on back to normal
                 }
-            }*/
+            }
 
             //coloring the tiles the color of their value in the hashmap (normal = green, flooded = blue, sunk = gray)
             for(Button c : buttonMap.keySet()){

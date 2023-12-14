@@ -52,6 +52,9 @@ public class FiGameState extends GameState {
     private TileName player1Location;
     private TileName player2Location;
     private TileName player3Location;
+    private TileName previousPlayer1Location;
+    private TileName previousPlayer2Location;
+    private TileName previousPlayer3Location;
     HashMap<TileName, Value> map;//hashmap to hold the tile names (treasureCards enum) and tile values (normal, flooded or sunk)
 
     public enum TreasureCards {//enum for treasure deck
@@ -237,6 +240,9 @@ public class FiGameState extends GameState {
         player1Location = TileName.ABANDONED_CLIFFS;
         player2Location = TileName.DECEPTION_DUNES;
         player3Location = TileName.OBSERVATORY;
+        previousPlayer1Location = TileName.ABANDONED_CLIFFS;
+        previousPlayer2Location = TileName.DECEPTION_DUNES;
+        previousPlayer3Location = TileName.OBSERVATORY;
         this.map = new HashMap<>();
 
         //adding the tile name enum values to the hashmap with all of the values set as normal
@@ -265,21 +271,21 @@ public class FiGameState extends GameState {
     /** Copy Constructor */
     public FiGameState(FiGameState other){
         this.treasureDeck = other.treasureDeck;
-        Collections.copy(treasureDeck, other.treasureDeck);
+        //Collections.copy(treasureDeck, other.treasureDeck);
         this.discardTreasureDeck = other.discardTreasureDeck;
-        Collections.copy(discardTreasureDeck, other.discardTreasureDeck);
+        //Collections.copy(discardTreasureDeck, other.discardTreasureDeck);
         this.floodDeck = other.floodDeck;
-        Collections.copy(floodDeck, other.floodDeck);
+        //Collections.copy(floodDeck, other.floodDeck);
         this.drawnFloodCards= other.drawnFloodCards;
-        Collections.copy(drawnFloodCards, other.drawnFloodCards);
+        //Collections.copy(drawnFloodCards, other.drawnFloodCards);
         this.discardFloodDeck = other.discardFloodDeck;
-        Collections.copy(discardFloodDeck, other.discardFloodDeck);
+        //Collections.copy(discardFloodDeck, other.discardFloodDeck);
         this.humanPlayerHand = other.humanPlayerHand;
-        Collections.copy(humanPlayerHand, other.humanPlayerHand);
+        //Collections.copy(humanPlayerHand, other.humanPlayerHand);
         this.dumbAiHand = other.dumbAiHand;
-        Collections.copy(dumbAiHand, other.dumbAiHand);
+        //Collections.copy(dumbAiHand, other.dumbAiHand);
         this.smartAiHand = other.smartAiHand;
-        Collections.copy(smartAiHand, other.smartAiHand);
+        //Collections.copy(smartAiHand, other.smartAiHand);
         this.numPlayers = other.numPlayers;
         this.playerTurn = other.playerTurn;
         this.floodMeter = other.floodMeter;
@@ -299,18 +305,21 @@ public class FiGameState extends GameState {
         this.numHelicopterLiftCardsInHand = other.numHelicopterLiftCardsInHand;
         //
         this.earthStoneTreasureCards = other.earthStoneTreasureCards;
-        Collections.copy(earthStoneTreasureCards, other.earthStoneTreasureCards);
+        //Collections.copy(earthStoneTreasureCards, other.earthStoneTreasureCards);
         this.fireCrystalTreasureCards = other.fireCrystalTreasureCards;
-        Collections.copy(fireCrystalTreasureCards, other.fireCrystalTreasureCards);
+        //Collections.copy(fireCrystalTreasureCards, other.fireCrystalTreasureCards);
         this.oceanChaliceTreasureCards = other.oceanChaliceTreasureCards;
-        Collections.copy(oceanChaliceTreasureCards, other.oceanChaliceTreasureCards);
+        //Collections.copy(oceanChaliceTreasureCards, other.oceanChaliceTreasureCards);
         this.windStatueTreasureCards = other.windStatueTreasureCards;
-        Collections.copy(windStatueTreasureCards, other.windStatueTreasureCards);
+        //Collections.copy(windStatueTreasureCards, other.windStatueTreasureCards);
         this.helicopterLiftCards = other.helicopterLiftCards;
-        Collections.copy(helicopterLiftCards, other.helicopterLiftCards);
+        //Collections.copy(helicopterLiftCards, other.helicopterLiftCards);
         this.player1Location = other.player1Location;
         this.player2Location = other.player2Location;
         this.player3Location = other.player3Location;
+        this.previousPlayer1Location = other.previousPlayer1Location;
+        this.previousPlayer2Location = other.previousPlayer2Location;
+        this.previousPlayer3Location = other.previousPlayer3Location;
         this.map = new HashMap<>();
         for(Map.Entry<TileName, Value> entry : other.map.entrySet()){
             map.put(entry.getKey(), entry.getValue());
@@ -390,6 +399,8 @@ public class FiGameState extends GameState {
             return false;
         }
     }//end of move
+
+
 
     //A player can flip over any of the 4 adjacent tiles or the tile they are on if it has been flipped to flooded previously
     public boolean shoreUp(int playerId, TileName t) {//
