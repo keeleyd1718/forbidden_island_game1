@@ -11,6 +11,13 @@ import com.example.game.GameFramework.players.GameComputerPlayer;
 
 import java.util.Random;
 
+/*
+    Tags
+    @author - Keeley Dockter
+
+    A lot of help from Dr. Libby and Dr. Tribelhorn
+ */
+
 public class SmartComputerPlayer extends GameComputerPlayer {
     /**
      * constructor
