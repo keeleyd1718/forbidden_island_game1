@@ -103,7 +103,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                                 for (int j = 0; j < gameState.getPlayerHand(gameState.getPlayerTurn()).size(); j++) {
                                     FiGameState.TreasureCards card = gameState.getPlayerHand(gameState.getPlayerTurn()).get(j);
 
-                                    /*while (i != gameState.getPlayerTurn()) {
+                                    if(i != gameState.getPlayerTurn()) {
                                         if (gameState.numWindStatueCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)) {
                                             game.sendAction(new FiGiveCardAction(this, i, j));
                                         } else if (gameState.numFireCrystalCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)) {
@@ -113,7 +113,7 @@ public class SmartComputerPlayer extends GameComputerPlayer {
                                         } else if (gameState.numOceanChaliceCardsInHand[i] == 3 && gameState.getWindStatueTreasureCards().contains(card)) {
                                             game.sendAction(new FiGiveCardAction(this, i, j));
                                         }
-                                    }*/
+                                    }
                                 }
                             }
 

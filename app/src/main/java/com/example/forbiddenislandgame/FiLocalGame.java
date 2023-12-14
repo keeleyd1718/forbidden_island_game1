@@ -64,8 +64,6 @@ public class FiLocalGame extends LocalGame {
     }
 
     protected boolean makeMove(GameAction action){
-        Log.e("zzz makeMove", "received move!");
-
         //actually makes a move. the players don't make moves, the players tell LocalGame to make a move
         if(canMove(getPlayerIdx(action.getPlayer()))) {
             if(gs.getPlayerHand(gs.getPlayerTurn()).size() < 5 && gs.getActionsRemaining() == 3){

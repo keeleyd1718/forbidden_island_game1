@@ -118,7 +118,7 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
     //our view in the model/view/controller sense; in charge of the user interface
     public void receiveInfo(GameInfo info){
         //should decide what move to make; just needs to update the user interface; drawing happens here
-        Log.e("zzz recieve", "msg");
+
         if(info instanceof FiGameState){
             FiGameState gameState = (FiGameState) info;
 
@@ -219,9 +219,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 MessageBox.popUpMessage(msg, myActivity);
             }
         }
-        else {
-            Log.e("zzz receive", "other msg");
-        }
     }
 
     private String treasureTiles(FiGameState.TileName t) {//add an extra line to the treasure tiles so the player's know which tiles they are
@@ -244,7 +241,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        Log.e("zzz onClick", "clicked! " + view.getId());
 
         //will decide what move the player made based on the button they clicked
         if(view.getId() == R.id.quitButton){
