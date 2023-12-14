@@ -407,6 +407,7 @@ public class FiGameState extends GameState {
         if(getPlayerTurn() == playerId && chosenPlayer != getPlayerTurn()){
             TreasureCards card = getPlayerHand(getPlayerTurn()).remove(index);//remove the card the player clicked from their hand
             getPlayerHand(chosenPlayer).add(card);//add the card to the chosen player's hand
+            getPlayerHand(getPlayerTurn()).remove(index);
             actionsRemaining--;
             return true;
         }
