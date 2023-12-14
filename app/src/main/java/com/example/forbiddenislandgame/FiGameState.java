@@ -815,6 +815,17 @@ public class FiGameState extends GameState {
     //setter methods
     public void setPlayerTurn(int playerId){this.playerTurn = playerId;}
     public void setActionsRemaining(int aR) {this.actionsRemaining = aR;}
+    public void setPlayerLocation(int playerId, TileName t){//returns the location of the player passed in as a parameter
+        if(playerId == 0) {
+            this.player1Location = t;
+        }
+        else if(playerId == 1) {
+            this.player2Location = t;
+        }
+        else{
+            this.player3Location = t;
+        }
+    }
 
     //getter methods
     public int getFloodMeter() {return this.floodMeter;}

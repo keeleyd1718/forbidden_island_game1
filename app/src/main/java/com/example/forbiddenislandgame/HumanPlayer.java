@@ -115,9 +115,9 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             FiGameState gameState = (FiGameState) info;
 
             //setting the initial start locations for the player's pawns
-            ABANDONED_CLIFFS_B.setText(buttonMap.get(ABANDONED_CLIFFS_B) + System.getProperty("line.separator") + "player 1");
-            DECEPTION_DUNES_B.setText(buttonMap.get(DECEPTION_DUNES_B) + System.getProperty("line.separator") + "player 2");
-            OBSERVATORY_B.setText(buttonMap.get(OBSERVATORY_B) + System.getProperty("line.separator") + "player 3");
+            ABANDONED_CLIFFS_B.setText(buttonMap.get(ABANDONED_CLIFFS_B) + System.getProperty("line.separator") + "player 0");
+            DECEPTION_DUNES_B.setText(buttonMap.get(DECEPTION_DUNES_B) + System.getProperty("line.separator") + "player 1");
+            OBSERVATORY_B.setText(buttonMap.get(OBSERVATORY_B) + System.getProperty("line.separator") + "player 2");
 
             //set the image buttons to display what cards are in player 1, 2 and 3's hands
             for(int i = 0; i < gameState.getNumPlayers(); i++){//loop to go through each player; i is for player's turn
@@ -181,14 +181,12 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 playerLocation.setText(tileLocation + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn());
             }
 
-            /*//go through the buttonMap HashMap and check all the other tiles to erase where the player used to be
+            //go through the buttonMap HashMap and check all the other tiles to erase where the players used to be
             for(Map.Entry<Button, FiGameState.TileName> entry : buttonMap.entrySet()){
-                while(entry.getKey() != playerLocation){//not including the tile they are moving to
-                    if(entry.getKey().getText().equals(entry.getValue() + System.getProperty("line.separator") + "player " + gameState.getPlayerTurn()) ){
-                        entry.getKey().setText(entry.getValue() + System.getProperty("line.separator"));
-                    }
+                while(entry.getValue() != gameState.getPlayerLocation(0) && entry.getValue() != gameState.getPlayerLocation(1) && entry.getValue() != gameState.getPlayerLocation(2)){
+                    entry.getKey().setText(entry.getValue() + System.getProperty("line.separator"));//reset the tile they used to be on back to normal
                 }
-            }*/
+            }
 
             //coloring the tiles the color of their value in the hashmap (normal = green, flooded = blue, sunk = gray)
             for(Button c : buttonMap.keySet()){
