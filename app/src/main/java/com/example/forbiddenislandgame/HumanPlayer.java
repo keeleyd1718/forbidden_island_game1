@@ -207,6 +207,11 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
             }
 
             floodView.setText("Flood Meter: "+gameState.getFloodMeter());
+
+            String msg = gameState.isGameLost();
+            if(msg != null){
+                MessageBox.popUpMessage(msg, myActivity);
+            }
         }
         else {
             Log.e("zzz receive", "other msg");
@@ -295,9 +300,6 @@ public class HumanPlayer extends GameHumanPlayer implements View.OnClickListener
                 }
 
             }
-
-            //String msg = "Please choose a card to discard";
-            //MessageBox.popUpMessage(msg, myActivity);
         }
         else if(moveButtonClicked){
             //to know what tile they pressed
